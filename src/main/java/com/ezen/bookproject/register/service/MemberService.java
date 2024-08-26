@@ -17,7 +17,7 @@ public class MemberService {
 	    private static final String PASSWORD = "1234";
 
 	    public void registerMember(MemberDTO memberDTO) {
-	        String sql = "INSERT INTO MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONENO, " +
+	        String sql = "INSERT INTO MEMBERS (MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONENO, " +
 	                     "MEMBER_ADDR, MEMBER_DETAIL_ADDR, NAVER_LOGIN_CD, KAKAO_LOGIN_CD, MEMBER_DATE) " +
 	                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE)";
 
