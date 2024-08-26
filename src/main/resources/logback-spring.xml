@@ -39,8 +39,4 @@
 	<logger name="jdbc.sqltiming" level="INFO"/>
 	<logger name="jdbc.resultsettable" level="INFO"/>
 	
-	<root level="INFO">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="FILE" />
-	</root>	
 </configuration>
