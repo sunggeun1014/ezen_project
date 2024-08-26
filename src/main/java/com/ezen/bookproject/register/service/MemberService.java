@@ -13,7 +13,7 @@ import com.ezen.bookproject.register.dto.MemberDTO;
 public class MemberService {
 	
 	  private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	    private static final String USERNAME = "book";
+	    private static final String USERNAME = "test1";
 	    private static final String PASSWORD = "1234";
 
 	    public void registerMember(MemberDTO memberDTO) {
