@@ -33,4 +33,9 @@ public class MemberController {
         memberService.registerMember(memberDTO);
         return "redirect:/login";
     }
+
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login"; // templates/login.html을 반환
+    }
 }
