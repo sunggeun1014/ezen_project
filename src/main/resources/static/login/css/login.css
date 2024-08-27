@@ -1,0 +1,108 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 수직 중앙 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 550px;
+    height: 550px; /* 최대 높이 설정 */
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+.icon {
+    font-size: 35px; /* 아이콘 크기 조정 */
+}
+
+form > div {
+    width: 100%; /* div가 폼 너비에 맞게 조정 */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 수평 중앙 정렬 */
+}
+
+form > div:first-of-type {
+    margin-bottom: 5px; /* 상단 텍스트와의 간격 조정 */
+    font-size: 25px; /* 상단 텍스트 크기 조정 */
+    color: rgb(55, 42, 0);
+    font-weight: bold; /* 상단 텍스트 두껍게 설정 */
+    text-align: center; /* 중앙 정렬 */
+}
+
+form > div:nth-of-type(2) {
+    margin-bottom: 60px; /* 두 번째 텍스트와의 간격 조정 */
+    font-size: 21px; /* 두 번째 텍스트 크기 조정 */
+    text-align: center; /* 중앙 정렬 */
+    font-weight: bold;
+}
+
+form > div:nth-of-type(3),
+form > div:nth-of-type(4) {
+    margin-bottom: 15px; /* 라벨과 입력 필드, 버튼 사이의 간격 설정 */
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 7px;
+    text-align: left;
+    width: 70%; /* 라벨이 div의 전체 너비를 사용하도록 설정 */
+    max-width: 400px; /* 최대 너비 설정 */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 70%; /* 입력 필드가 div의 너비에 맞게 조정 */
+    max-width: 400px; /* 최대 너비 설정 */
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 70%; /* 버튼이 div의 너비에 맞게 조정 */
+    max-width: 400px; /* 최대 너비 설정 */
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1700px; /* 폼의 너비보다 조금 더 크게 설정 */
+    height: 100%; /* 화면 높이에 맞게 설정 */
+    background-color: rgb(248, 249, 253); /* 밝은 파란색 배경 */
+    transform: translateX(-50%);
+    z-index: 0; /* 폼 뒤에 배경이 오도록 설정 */
+}
+
+
