@@ -1,49 +1,51 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
+	<link rel="stylesheet" href="/login/css/register.css">	
     <meta charset="UTF-8" />
     <title>Register</title>
 </head>
 <body>
     <h2>Register</h2>
     <form action="/register" method="post">
+    	<h2>회원가입창입니다</h2>
         <div>
-            <label for="memberId">ID:</label>
-            <input type="text" id="memberId" name="memberId">
+            <label for="memberId">아이디:</label>
+            <input type="text" id="memberId" name="memberId" placeholder="4 ~ 20자의 영문, 숫자와 특수문자 '_'사용가능">
         </div>
         <div>
-            <label for="memberPw">Password:</label>
-            <input type="password" id="memberPw" name="memberPw">
+            <label for="memberPw">비밀번호:</label>
+            <input type="password" id="memberPw" name="memberPw" placeholder="8~16자리 영문 대소문자, 숫자, 특수문자">
         </div>
         <div>
-            <label for="memberName">Name:</label>
-            <input type="text" id="memberName" name="memberName">
+            <label for="memberName">이름:</label>
+            <input type="text" id="memberName" name="memberName" placeholder="이름 입력">
         </div>
         <div>
-            <label for="memberEmail">Email:</label>
-            <input type="email" id="memberEmail" name="memberEmail">
+            <label for="memberEmail">이메일:</label>
+            <input type="email" id="memberEmail" name="memberEmail" placeholder="사용하시는 메일을 입력해주세요">
         </div>
         <div>
-            <label for="memberPhoneNo">Phone Number:</label>
-            <input type="text" id="memberPhoneNo" name="memberPhoneNo">
+            <label for="memberPhoneNo">전화번호:</label>
+            <input type="text" id="memberPhoneNo" name="memberPhoneNo" placeholder="'-' 없이 숫자만 입력">
         </div>
         <div>
-            <label for="memberAddr">Address:</label>
-            <input type="text" id="memberAddr" name="memberAddr">
+            <label for="memberAddr">주소:</label>
+            <input type="text" id="memberAddr" name="memberAddr" placeholder="시/군/구">
         </div>
         <div>
-            <label for="memberDetailAddr">Detail Address:</label>
+            <label for="memberDetailAddr">상세주소:</label>
             <input type="text" id="memberDetailAddr" name="memberDetailAddr">
         </div>
         <div>
-            <label for="naverLoginCd">Naver Login Code:</label>
+            <label for="naverLoginCd">네이버 로그인 코드:</label>
             <input type="text" id="naverLoginCd" name="naverLoginCd">
         </div>
         <div>
-            <label for="kakaoLoginCd">Kakao Login Code:</label>
+            <label for="kakaoLoginCd">카카오 로그인 코드:</label>
             <input type="text" id="kakaoLoginCd" name="kakaoLoginCd">
         </div>
-        <button type="submit">Register</button>
+        <button type="submit">회원가입</button>
     </form>
 </body>
 </html>
