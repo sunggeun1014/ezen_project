@@ -1,0 +1,151 @@
+body {
+	font-family: 'SUIT Variable', sans-serif;
+}
+
+.container {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	width: 1fr;
+	background: #FFFFFF;
+	border-radius: 20px;
+	padding: 20px 26px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-container {
+	margin-top: 280px;
+	margin-left: 20px;
+	background: #FFFFFF;
+	border-radius: 20px;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 24px;
+	color: #000000;
+	margin-bottom: 12px;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.search-filter, .search-bar-group {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.filter-group, .search-bar-group {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+}
+
+.label {
+	font-size: 16px;
+	line-height: 24px;
+	color: #000000;
+}
+
+.date-picker {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.input-box {
+	display: flex;
+	align-items: center;
+	width: 200px;
+	height: 40px;
+	padding: 0 10px;
+	background: #FFFFFF;
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+}
+
+.input-box .placeholder {
+	border : none;
+	font-size: 14px;
+	color: #CCCCCC;
+}
+
+.date-options {
+	display: flex;
+	flex-direction: row;
+	gap: 0;
+}
+
+.date-option {
+	width: 55px;
+	height: 40px;
+	border: 1px solid #C0C0C0;
+	font-size: 14px;
+	text-align: center;
+	line-height: 40px;
+	cursor: pointer;
+}
+
+.date-option.today {
+	background: #4777F6;
+	color: #FFFFFF;
+}
+
+.search-bar {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 300px;
+	height: 40px;
+	padding: 0 10px;
+	background: #FFFFFF;
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+}
+
+.input-group {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+}
+
+.input-group input {
+	border: none;
+	outline: none;
+	width: 100%;
+	font-size: 16px;
+	color: #000000;
+}
+
+.input-group .search-icon {
+	width: 24px;
+	height: 24px;
+	background: url('path/to/your/search-icon.png') no-repeat center;
+	
+}
+
+.reset {
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 24px;
+	text-align: right;
+	color: #000000;
+	cursor: pointer;
+}
+
+.select{
+	width: 100px;
+	height: 40px;
+	border-radius: 5px;
+	border: 1px solid #C0C0C0;
+	
+}

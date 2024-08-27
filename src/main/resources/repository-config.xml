@@ -4,5 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <!-- window > Preferences > Maven > download artifact javadoc 체크 -->
 <configuration>
-
+	<typeAliases>
+ 		<typeAlias type="com.ezen.bookproject.member_mgnt.dto.MembersDTO" alias="member"/>
+ 	</typeAliases>
 </configuration>
