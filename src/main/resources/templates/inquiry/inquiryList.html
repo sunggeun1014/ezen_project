@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div>
+		<div>1:1문의 조회</div>
+		<span>작성일</span>
+		<input id="start-date" type="date" />
+		<span>-</span>
+		<input id="end-date" type="date" />
+		<button id="today-btn">오늘</button>
+		<button id="one-week-btn">1주일</button>
+		<button id="one-month-btn">1개월</button>
+		<button id="one-year-btn">1년</button>
+		<br>
+		<span>처리상태</span>
+		<select name="" id="">
+			<option value="1">상품 문의</option>
+			<option value="2">배송 문의</option>
+			<option value="3">결제 문의</option>
+			<option value="4">반품 문의</option>
+			<option value="5">기타</option>
+		</select>
+		<input id="total" name="state" value="0" type="radio" />
+		<label for="total">전체</label>
+		<input id="uncompleted" name="state" value="1" type="radio" />
+		<label for="uncompleted">미답변</label>
+		<input id="completed" name="state" value="2" type="radio" />
+		<label for="completed">답변완료</label>
+		<br>
+		<a href="">초기화</a>
+	</div>
+	<div>
+		<div>총 10건</div>
+		<table>
+			<thead>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>NO</td>
+					<td>문의제목</td>
+					<td>문의분류</td>
+					<td>회원ID</td>
+					<td>작성일</td>
+					<td>답변일</td>
+					<td>처리상태</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="/inquiry/js/inquiryList.js"></script>
+</body>
+</html>
