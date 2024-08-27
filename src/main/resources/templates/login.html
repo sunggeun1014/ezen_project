@@ -12,6 +12,12 @@
     		<i class="fa-solid fa-book-open icon"> Book Store</i>
     	</div>
     	<div>관리자페이지로그인</div>
+    	
+    	<!-- 경고 메시지 출력 부분 -->
+        <div th:if="${loginError}" style="color: red; text-align: center;">
+            <p th:text="${loginError}"></p>
+        </div>
+    	
         <div>
             <label for="username">아이디</label>
             <input type="text" id="username" name="username" required>
