@@ -18,4 +18,9 @@ public class ReviewRepository {
 
 		return sql.selectList("Reviews.getAll");
 	}
+	
+	
+	public void deleteAllByIdIn(List<Integer> reviewIds) {
+		sql.delete("Reviews.deleteReviews", reviewIds);
+	}
 }

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Table Example</title>
+ 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.1/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.bulma.css">
@@ -52,7 +53,12 @@
     .modal-footer .button {
       margin-left: 5px;
     }
-
+	 /* Center the DataTable pagination controls */
+    #example_wrapper > .dt-paging {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   </style>
   <link rel="stylesheet" href="/common/reviews/css/reviews.css" />
 </head>
@@ -106,7 +112,7 @@
   </div>
 	
   <div class="table-container">
-     <button id="delete-button" class="button is-link" style="float: right;">삭제</button>
+     <button id="delete-button" class="button is-danger" style="float: right;">삭제</button>
     <table id="example" class="table is-striped" style="width: 100%">
       <thead>
         <tr>
@@ -136,7 +142,7 @@
     
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
-  <script src="https://cdn.datatables.net/2.1.4/js/dataTables.bulma.js"></script>
+  <script src="https://cdn.datatables.net/2.1.4/js/dataTables.bulma.js"></script>  
 
   <script src="/common/reviews/js/reviews.js"></script>
 </body>

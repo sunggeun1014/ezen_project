@@ -34,8 +34,8 @@ $(document).ready(function() {
                     if (type === 'display' || type === 'filter') {
                         var date = new Date(data);
                         var formattedDate = date.toISOString().split('T')[0];
-                        var formattedTime = date.toTimeString().split(' ')[0].substring(0, 5);
-                        return formattedDate + ' ' + formattedTime;
+                        // var formattedTime = date.toTimeString().split(' ')[0].substring(0, 5);
+                        return formattedDate; // + ' ' + formattedTime;
                     }
                     return data; // Keep the original format for sorting purposes
                 }
@@ -71,11 +71,11 @@ $(document).ready(function() {
         var rows = table.rows({ 'search': 'applied' }).nodes();
         $('input[type="checkbox"]', rows).prop('checked', this.checked);
     });
-
+ 
     $('#example tbody').on('change', '.row-checkbox', function() {
         if (!this.checked) {
             $('#select-all').prop('checked', false);
-        } else {
+        } else { 
             if ($('.row-checkbox:checked').length === $('.row-checkbox').length) {
                 $('#select-all').prop('checked', true);
             }
@@ -96,14 +96,23 @@ $(document).ready(function() {
         });
 
         if (selectedIds.length > 0) {
-            modal.style.display = "block"; // 모달 표시
             // 메시지를 기본 메시지로 리셋
-            document.querySelector('#myModal .modal-content p').textContent = '정말로 삭제하시겠습니까?';
-        } else {
-            // alert 대신 모달 메시지 변경
-            document.querySelector('#myModal .modal-content p').textContent = '삭제할 항목을 선택하세요.';
-            modal.style.display = "block";
-        }
+			document.querySelector('#myModal .modal-content p').textContent = `${selectedIds.length}개의 항목을 삭제하시겠습니까?`;
+			
+			// Yes와 No 버튼을 보이게 설정
+			document.getElementById('confirm-delete').style.display = "inline-block";
+			document.getElementById('cancel-delete').style.display = "inline-block";
+            modal.style.display = "block"; // 모달 표시
+		} else {
+			// alert 대신 모달 메시지 변경
+			document.querySelector('#myModal .modal-content p').textContent = '삭제할 항목을 선택하세요.';
+			
+			
+			document.getElementById('confirm-delete').style.display = "none";
+			document.getElementById('cancel-delete').style.display = "none";
+			
+			modal.style.display = "block";
+		}
     });
 
     // 모달 외부 클릭 시 닫기
@@ -113,24 +122,37 @@ $(document).ready(function() {
         }
     };
 
-    // 삭제 확인 버튼
-    confirmDeleteButton.onclick = function() {
-        $.ajax({
-            url: '/reviews/delete',  // 서버의 삭제 처리 URL
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(selectedIds),  // 선택된 리뷰 번호들을 JSON으로 전송
-            success: function(response) {
-                // alert 대신 모달 메시지 변경
-                document.querySelector('#myModal .modal-content p').textContent = '삭제가 완료되었습니다.';
-                $('#example').DataTable().ajax.reload();  // 테이블 새로고침
-            },
-            error: function(error) {
-                // alert 대신 모달 메시지 변경
-                document.querySelector('#myModal .modal-content p').textContent = '삭제 중 오류가 발생했습니다.';
-            }
-        });
-    };
+	// 삭제 확인 버튼
+	   confirmDeleteButton.onclick = function() {
+	       var selectedIds = [];
+	       $('#example').DataTable().$('.row-checkbox:checked').each(function() {
+	           var rowData = $('#example').DataTable().row($(this).closest('tr')).data();
+	           selectedIds.push(rowData.review_num);
+	       });
+
+	       $.ajax({
+	           url: '/reviews/delete',  // 서버의 삭제 처리 URL
+	           type: 'POST',
+	           contentType: 'application/json',
+	           data: JSON.stringify(selectedIds),  // 선택된 리뷰 번호들을 JSON으로 전송
+	           success: function(response) {
+					modal.style.display = "none";
+					document.querySelector('#myModal .modal-content p').textContent = '삭제가 완료되었습니다.';		   
+	               $('#example').DataTable().ajax.reload();  // 테이블 새로고침
+	           },
+	           error: function(error) {
+				   document.getElementById('confirm-delete').style.display = "none";
+				   document.getElementById('cancel-delete').style.display = "none";
+	               
+				   document.querySelector('#myModal .modal-content p').textContent = '삭제 중 오류가 발생했습니다.';
+				   setTimeout(function() {
+					   modal.style.display = "none";
+					   document.getElementById('confirm-delete').style.display = "inline-block";
+					   document.getElementById('cancel-delete').style.display = "inline-block";
+				   }, 3000);
+			   }
+	       });
+	   };
 
     // 삭제 취소 버튼
     cancelDeleteButton.onclick = function() {

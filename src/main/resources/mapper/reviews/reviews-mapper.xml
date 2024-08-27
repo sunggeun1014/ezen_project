@@ -25,10 +25,13 @@
 	ON 
 	    c.book_isbn = b.book_isbn
 	</select>
-	<delete id="delete" parameterType="Integer">
-	 DELETE  
-	 FROM
-	 	reviews
-	 WHERE review_num = #{review_num}
-	</delete>
+	
+	<!-- 여러 리뷰를 삭제하는 SQL -->
+    <delete id="deleteReviews" parameterType="java.util.List">
+        DELETE FROM Reviews
+        WHERE review_num IN
+        <foreach item="num" collection="list" open="(" separator="," close=")">
+            #{num}
+        </foreach>
+    </delete>
 </mapper>
