@@ -3,6 +3,7 @@ package com.ezen.bookproject.register.service;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.stereotype.Service;
@@ -39,5 +40,26 @@ public class MemberService {
 	            e.printStackTrace();
 	        }
 	    }
-	
+	    
+	    public boolean validateUser(String username, String password) {
+	        String sql = "SELECT MEMBER_PW FROM MEMBERS WHERE MEMBER_ID = ?";
+	        
+	        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+	             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+	            pstmt.setString(1, username);
+
+	            try (ResultSet rs = pstmt.executeQuery()) {
+	                if (rs.next()) {
+	                    String storedPassword = rs.getString("MEMBER_PW");
+	                    // 비밀번호 비교 (여기서는 단순 비교, 실제로는 해싱된 비밀번호를 비교하는 것이 안전함)
+	                    return storedPassword.equals(password);
+	                }
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return false;
+	    }
 }
