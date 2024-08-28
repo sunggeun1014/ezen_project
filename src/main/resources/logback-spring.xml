@@ -39,4 +39,10 @@
 	<logger name="jdbc.sqltiming" level="INFO"/>
 	<logger name="jdbc.resultsettable" level="INFO"/>
 	
+	<!-- 루트 로거에 Appender 참조 추가 -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+	
 </configuration>
