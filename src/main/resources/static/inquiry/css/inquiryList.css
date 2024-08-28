@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#menu {
+	background-color: white;
+	width: 1185px;
+	height: 220px;
+	border-radius: 20px;
+	border: 1px solid black;
+}
+
+#show-inquiries {
+	width: 1133px;
+	height: 24px;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 24px;
+}

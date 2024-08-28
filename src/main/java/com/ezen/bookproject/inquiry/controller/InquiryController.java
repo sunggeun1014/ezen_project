@@ -15,13 +15,13 @@ public class InquiryController {
 		return "/inquiry/inquiryList";
 	}
 	
-	@GetMapping("/reply")
+	@GetMapping("/answer")
 	public String reply() {
-		return "/inquiry/replyForm";
+		return "/inquiry/answerForm";
 	}
 	
 	@GetMapping("/modify")
 	public String modify() {
-		return "/inquiry/replyModificationForm";
+		return "/inquiry/answerModifyForm";
 	}	
 }

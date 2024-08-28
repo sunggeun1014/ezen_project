@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/inquiry/css/inquiryList.css" />
 </head>
 <body>
-	<div>
-		<div>1:1문의 조회</div>
+	<div id="menu">
+		<div id="show-inquiries">1:1문의 조회</div>
 		<span>작성일</span>
 		<input id="start-date" type="date" />
 		<span>-</span>
@@ -19,17 +20,18 @@
 		<br>
 		<span>처리상태</span>
 		<select name="" id="">
-			<option value="1">상품 문의</option>
-			<option value="2">배송 문의</option>
-			<option value="3">결제 문의</option>
-			<option value="4">반품 문의</option>
-			<option value="5">기타</option>
+			<option>문의분류</option>
+			<option value="01">상품 문의</option>
+			<option value="02">배송 문의</option>
+			<option value="03">결제 문의</option>
+			<option value="04">반품 문의</option>
+			<option value="05">기타</option>
 		</select>
-		<input id="total" name="state" value="0" type="radio" />
+		<input id="total" name="state" value="total" type="radio" checked />
 		<label for="total">전체</label>
-		<input id="uncompleted" name="state" value="1" type="radio" />
+		<input id="uncompleted" name="state" value="01" type="radio" />
 		<label for="uncompleted">미답변</label>
-		<input id="completed" name="state" value="2" type="radio" />
+		<input id="completed" name="state" value="02" type="radio" />
 		<label for="completed">답변완료</label>
 		<br>
 		<a href="">초기화</a>
@@ -50,15 +52,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				<tr th:each="inquiry : ${inquiries}">
 					<td><input type="checkbox" /></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td th:text="${inquiries.inquiry_num}"></td>
+					<td th:switch="${inquiries.inquiry_answer_status}">
+						<a th:case="01" th:href="@{/inquiry/answerForm(inquiry_num=${inquiries.inquiry_num})}" th:text="${inquiries.inquiry_title}"></a>
+						<a th:case="02" th:href="@{/inquiry/answerModifyForm(inquiry_num=${inquiries.inquiry_num})}" th:text="${inquiries.inquiry_title}"></a>
+					</td>
+					<td th:text="${inquiries.inquiry_type}"></td>
+					<td th:text="${inquiries.member_id}"></td>
+					<td th:text="${inquiries.inquiry_write_date}"></td>
+					<td th:text="${inquiries_answer.answer_write_date}"></td>
+					<td th:text="${inquiries.inquiry_answer_status}"></td>
 				</tr>
 			</tbody>
 		</table>
