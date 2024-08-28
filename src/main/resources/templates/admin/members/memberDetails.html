@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Member Details</title>
+<link rel="stylesheet" href="/admin/members/css/memberDetails.css" />
+</head>
+<body>
+	<h1>Member Details</h1>
+	<p>
+		Member ID: <span th:text="${member_details.member_id}"></span>
+	</p>
+	<p>
+		Member Name: <span th:text="${member_details.member_name}"></span>
+	</p>
+	<p>
+		Member Password: <input type="password" th:value="${member_details.member_pw}" readonly>
+	</p>
+	<p>
+		Member Date: <span th:text="${member_details.member_date}"></span>
+	</p>
+	<p>
+		네이버 연동여부: <label class="switch"> <input type="checkbox" th:checked="${member_details.naver_login_cd != null and !member_details.naver_login_cd.isEmpty()}"
+			disabled /> <span class="slider"></span>
+		</label>
+	</p>
+	<p>
+		카카오 연동여부: <label class="switch"> <input type="checkbox"
+			th:checked="${member_details.kakao_login_cd != null and !member_details.kakao_login_cd.isEmpty()}"
+			disabled /> <span class="slider"></span>
+		</label>
+	</p>
+	<hr>
+
+	<!-- 이메일 입력 영역 -->
+	<form th:action="@{./update}" method="POST">
+		<input type="hidden" name="member_id" th:value="${member_details.member_id}" />
+		<p>
+			Member Email: 
+			<input type="text" id="emailUser" name="emailUser" th:value="${emailUser}" /> 
+			@ 				
+			<select id="emailDomain" name="emailDomain" th:value="${emailDomain}">
+				<option value="naver.com" th:selected="${emailDomain == 'naver.com'}">naver.com</option>
+				<option value="gmail.com" th:selected="${emailDomain == 'gmail.com'}">gmail.com</option>
+				<option value="daum.net" th:selected="${emailDomain == 'daum.net'}">daum.net</option>
+				<option value="yahoo.com" th:selected="${emailDomain == 'yahoo.com'}">yahoo.com</option>
+			</select>
+		</p>
+
+		<p>
+			Phone Number: 
+			<select id="countryNum" name="countryNum" th:value="${countryNum}">
+				<option value="010" th:selected="${countryNum == '010'}">010</option>
+				<option value="011" th:selected="${countryNum == '011'}">011</option>
+				<option value="016" th:selected="${countryNum == '016'}">016</option>
+				<option value="017" th:selected="${countryNum == '017'}">017</option>
+				<option value="018" th:selected="${countryNum == '018'}">018</option>
+				<option value="019" th:selected="${countryNum == '019'}">019</option>
+			</select>
+			-
+			<input type="number" id="userPart1" name="userPart1" min="0" max="9999" th:value="${userPart1}" title="4자리 숫자를 입력해주세요" required oninput="limitLength(this, 4)" />
+		  	- 
+		  	<input type="number" id="userPart2" name="userPart2" min="0" max="9999" th:value="${userPart2}" title="4자리 숫자를 입력해주세요" required oninput="limitLength(this, 4)" />
+		</p>
+		
+		<p>
+			Member Addr: <input type="text" id="address_kakao" name="member_addr" th:value="${member_details.member_addr}" readonly />
+		</p>
+		
+		<p>
+			Member Detail Addr: <input type="text" name="member_detail_addr" th:value="${member_details.member_detail_addr}" />
+		</p>
+
+		<button type="submit">수정 요청</button>
+	</form>
+
+	<script src="/admin/members/js/memberDetails.js"></script>
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	window.onload = function(){
+	    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+	        //카카오 지도 발생
+	        new daum.Postcode({
+	            oncomplete: function(data) { //선택시 입력값 세팅
+	                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+	                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+	            }
+	        }).open();
+	    });
+	}
+	</script>
+</body>
+</html>
