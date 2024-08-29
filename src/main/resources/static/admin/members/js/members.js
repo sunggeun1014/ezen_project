@@ -4,7 +4,7 @@ $(document).ready(function() {
 	table = $('#member').DataTable({
 		ajax: {
 			// 값을 받아오는 url, data타입 작성
-			url: '/members',
+			url: '/admin/members',
 			dataSrc: 'data'
 		},
 		
@@ -158,7 +158,7 @@ function postToDetailPage(data) {
     // 폼 생성
     var form = $('<form>', {
         method: 'POST',
-        action: '/members/details'  // 서버의 상세 페이지 URL로 설정
+        action: '/admin/members/details'  // 서버의 상세 페이지 URL로 설정
     });
 
     // 데이터를 숨김 필드로 추가
