@@ -23,14 +23,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 @Controller
-@RequestMapping("/members")
+@RequestMapping("/admin/members")
 public class MgntController {
 
 	private final MgntService mgntService;
 
 	@GetMapping(produces = MediaType.TEXT_HTML_VALUE)
-	public String table() {
-		return "/admin/members/members";
+	public String table(Model model, String path) {
+	    model.addAttribute("template", path);
+	    return "/admin/index";
 	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,8 +45,8 @@ public class MgntController {
 		return response;
 	}
 	
-	@GetMapping("/details")
-	public String showReviewDetails(@RequestParam("member_id") String memberID, Model model) {
+	@PostMapping("/details")
+	public String showMemberDetails(@RequestParam("member_id") String memberID, Model model) {
 	    MembersDTO memberDetails = mgntService.detailList(memberID);
 
 	    String[] emailParts = memberDetails.getMember_email().split("@");
@@ -65,11 +66,6 @@ public class MgntController {
 	    model.addAttribute("userPart2", userPart2);
 
 	    return "/admin/members/memberDetails";
-	}
-
-	@PostMapping("/details")
-	public String showReviewDetailsPost(@RequestParam("member_id") String memberID, Model model) {
-		return showReviewDetails(memberID, model);
 	}
 	
 	@PostMapping("/update")
