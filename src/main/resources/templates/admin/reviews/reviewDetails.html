@@ -4,40 +4,18 @@
 <meta charset="UTF-8">
 <title>Review Details</title>
 <!-- Bulma CSS 추가 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
-<!-- Font Awesome 추가 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-.container {
-	margin-top: 20px;
-}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-.back-button {
-	margin-bottom: 20px;
-}
+<link rel="stylesheet" href="/admin/reviews/css/reviews.css" />
 
-.box {
-	padding: 20px;
-}
-
-.stars {
-	font-size: 20px; /* 별 크기 조정 */
-	color: #4777F6;
-}
-
-.empty-stars {
-	font-size: 20px; /* 빈 별 크기 조정 */
-	color: lightgray; /* 빈 별 색상 */
-}
-</style>
 </head>
 <body>
 	<div class="container">
 		<!-- 뒤로가기 버튼 -->
 		<div class="back-button">
-			<a href="/reviews" class="button is-link">뒤로가기</a>
+			<a href="/admin/reviews?path=admin/reviews/reviews" class="button is-link">뒤로가기</a>
 		</div>
 
 		<!-- 리뷰 상세 정보 박스 -->
@@ -68,9 +46,7 @@
 		</div>
 	</div>
 
-	<!-- Bulma JS, 필요하다면 추가 -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/js/bulma.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/js/bulma.min.js"></script>
 	<script>
         // JavaScript로 별점 표시하기
         document.addEventListener("DOMContentLoaded", function() {
@@ -84,10 +60,10 @@
 
             // 채워진 별과 빈 별 아이콘으로 변경
             for (var i = 0; i < reviewRating; i++) {
-                starHtml += '<i class="fas fa-star stars"></i>'; // 채워진 별
+                starHtml += '<span class="fas fa-star stars"></span>'; // 채워진 별
             }
             for (var i = reviewRating; i < 5; i++) {
-                starHtml += '<i class="far fa-star empty-stars"></i>'; // 빈 별
+                starHtml += '<span class="far fa-star empty-stars"></span>'; // 빈 별
             }
 
             // 별점 HTML 요소에 출력

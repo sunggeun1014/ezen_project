@@ -182,16 +182,25 @@ input:focus {
 
 .stars {
 	font-size: 20px; /* 별 크기 조정 */
-	color: #4777F6;; /* 채워진 별 색상 */
+	color: #4777F6;
 }
 
-.stars .empty {
+.empty-stars {
+	font-size: 20px; /* 빈 별 크기 조정 */
 	color: lightgray; /* 빈 별 색상 */
 }
 
-#example td, #example th {
+#reviews td, #reviews th {
 	text-align: center; /* 텍스트 가운데 정렬 */
 	vertical-align: middle; /* 수직 가운데 정렬 */
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }
 /* 모달 스타일 추가 */
 .modal {
@@ -225,7 +234,13 @@ input:focus {
 	margin-left: 5px;
 }
 /* Center the DataTable pagination controls */
-#example_wrapper>.dt-paging {
+#reviews_wrapper>.dt-paging {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#members_wrapper>.dt-paging {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -233,4 +248,9 @@ input:focus {
 
 table.dataTable.is-striped > tbody > tr:nth-child(2n) > * {
 	box-shadow: none;
+}
+
+/* */
+.box {
+	padding: 20px;
 }

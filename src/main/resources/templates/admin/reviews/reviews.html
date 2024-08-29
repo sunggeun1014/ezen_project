@@ -5,14 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Table Example</title>
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.1/css/bulma.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/2.1.4/css/dataTables.bulma.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.1/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.bulma.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 <link rel="stylesheet" href="/admin/reviews/css/reviews.css" />
+
 </head>
 <body>
 <div>
@@ -20,7 +19,7 @@
 		<div class="header">
 			<h1>리뷰글 조회</h1>
 		</div>
-
+	
 		<div class="content">
 			<div class="search-filter">
 				<div class="filter-group">
@@ -29,12 +28,14 @@
 						<div class="input-box">
 							<input type="text" id="startDate" class="placeholder"
 								placeholder="yyyy-mm-dd" />
+								<span class="material-symbols-outlined">calendar_month</span>
 							<div class="calendar-icon"></div>
 						</div>
+						<div class="calendar-slash">-</div>
 						<div class="input-box">
 							<input type="text" id="endDate" class="placeholder"
 								placeholder="yyyy-mm-dd" />
-							<div class="calendar-icon"></div>
+							<span class="material-symbols-outlined">calendar_month</span>
 						</div>
 					</div>
 					<div class="date-options">
@@ -56,13 +57,11 @@
 				<div class="search-bar">
 					<div class="input-group">
 						<input type="text" id="searchKeyword" placeholder="조회할 값을 입력" />
-						<div class="search-icon"></div>
+				<button id="searchButton"><span class="material-symbols-outlined">search</span></button>
 					</div>
 				</div>
-				<button id="searchButton" class="button">검색</button>
-				<!-- 검색 버튼 추가 -->
 
-				<div class="button" onclick="resetFilters()">초기화</div>
+				<div id="reset-button" onclick="resetFilters()">초기화</div>
 			</div>
 		</div>
 	</div>
@@ -70,7 +69,7 @@
 	<div class="table-container">
 		<button id="delete-button" class="button is-danger"
 			style="float: right;">삭제</button>
-		<table id="example" class="table is-striped" style="width: 100%">
+		<table id="reviews" class="table is-striped" style="width: 100%">
 			<thead>
 				<tr>
 					<th><input type="checkbox" id="select-all"></th>
