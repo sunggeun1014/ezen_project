@@ -8,7 +8,7 @@ $(document).ready(function() {
 			],
 			order: [[6, 'desc']], // 리뷰 작성 날짜 컬럼을 최신 날짜순으로 정렬 (내림차순)
             ajax: {
-                url: '/admin/json',
+                url: '/admin/reviews/json',
                 dataSrc: function(json) {
                     console.log(json.size);
                     return json.data;
@@ -18,7 +18,7 @@ $(document).ready(function() {
                 {
                     data: null,
                     render: function(data, type, row) {
-                        return '<input type="checkbox" class="row-checkbox">';
+                        return '<input type="checkbox" id="data-check" class="row-checkbox"><label for="data-check"></label>';
                     },
                     orderable: false,
                 },
@@ -165,8 +165,6 @@ $(document).ready(function() {
     };
 	
 	
-	
-	
 	// 검색 버튼 클릭 이벤트 핸들러
 	    $('#searchButton').on('click', function() {
 	        var selectedColumn = $('#searchColumn').val();
@@ -285,3 +283,5 @@ function setActive(element) {
     // 클릭된 요소에 'active' 클래스를 추가
     element.classList.add('active');
 }
+
+datepicker("startDate", "endDate");

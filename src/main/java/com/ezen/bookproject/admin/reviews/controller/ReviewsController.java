@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/admin")
+@RequestMapping("/admin/reviews")
 @Controller
 public class ReviewsController {
 
@@ -37,12 +37,12 @@ public class ReviewsController {
 	
 	
 	
-	@GetMapping("/reviews")
-    public String table(Model model, String path) {
-		model.addAttribute("template", path);
-		
-        return "admin/index";
-    }
+//	@GetMapping("/reviews")
+//    public String table(Model model, String path) {
+//		model.addAttribute("template", path);
+//		
+//        return "admin/index";
+//    }
 
     @GetMapping(value= "/json", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -61,7 +61,7 @@ public class ReviewsController {
     
     
     
-    @PostMapping("/reviews/details")
+    @PostMapping("/details")
     public String showReviewDetails(
     		  @RequestParam("review_num") String reviewNum,
               @RequestParam("review_content") String reviewContent,
@@ -99,7 +99,7 @@ public class ReviewsController {
     
     
 
-    @PostMapping("/reviews/delete")
+    @PostMapping("/delete")
     public ResponseEntity<String> deleteReviews(@RequestBody List<Integer> reviewIds) {
         try {
             // 리뷰 삭제를 서비스에 위임

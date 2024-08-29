@@ -3,10 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Review Details</title>
-<!-- Bulma CSS 추가 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <link rel="stylesheet" href="/admin/reviews/css/reviews.css" />
 
@@ -14,12 +10,13 @@
 <body>
 	<div class="container">
 		<!-- 뒤로가기 버튼 -->
-		<div class="back-button">
-			<a href="/admin/reviews?path=admin/reviews/reviews" class="button is-link">뒤로가기</a>
-		</div>
+	    <button class="back-btn" onclick="location.href='/admin/index?path=admin/reviews/reviews'">
+	      <i class="fa-solid fa-chevron-left"></i>
+	      <span>뒤로가기</span>
+	    </button>
 
 		<!-- 리뷰 상세 정보 박스 -->
-		<div class="box">
+		<div class="white-frame">
 			<h1>리뷰번호: [[${reviewNum}]]</h1>
 			<p>
 				<strong>작성자:</strong> <span th:text="${memberId}"></span>
@@ -46,7 +43,6 @@
 		</div>
 	</div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/js/bulma.min.js"></script>
 	<script>
         // JavaScript로 별점 표시하기
         document.addEventListener("DOMContentLoaded", function() {
