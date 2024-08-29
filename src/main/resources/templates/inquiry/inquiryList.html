@@ -7,35 +7,47 @@
 <link rel="stylesheet" href="/inquiry/css/inquiryList.css" />
 </head>
 <body>
-	<div id="menu">
-		<div id="show-inquiries">1:1문의 조회</div>
-		<span>작성일</span>
-		<input id="start-date" type="date" />
-		<span>-</span>
-		<input id="end-date" type="date" />
-		<button id="today-btn">오늘</button>
-		<button id="one-week-btn">1주일</button>
-		<button id="one-month-btn">1개월</button>
-		<button id="one-year-btn">1년</button>
-		<br>
-		<span>처리상태</span>
-		<select name="" id="">
-			<option>문의분류</option>
-			<option value="01">상품 문의</option>
-			<option value="02">배송 문의</option>
-			<option value="03">결제 문의</option>
-			<option value="04">반품 문의</option>
-			<option value="05">기타</option>
-		</select>
-		<input id="total" name="state" value="total" type="radio" checked />
-		<label for="total">전체</label>
-		<input id="uncompleted" name="state" value="01" type="radio" />
-		<label for="uncompleted">미답변</label>
-		<input id="completed" name="state" value="02" type="radio" />
-		<label for="completed">답변완료</label>
-		<br>
-		<a href="">초기화</a>
-	</div>
+	<table id="menu">
+		<tr id="show-inquiries">
+			<td colspan="2">1:1문의 조회</td>
+		</tr>
+		<tr>
+			<td>작성일</td>
+			<td>
+				<input id="start-date" type="date" />
+				-
+				<input id="end-date" type="date" />
+				<button id="today-btn">오늘</button>
+				<button id="one-week-btn">1주일</button>
+				<button id="one-month-btn">1개월</button>
+				<button id="one-year-btn">1년</button>
+			</td>
+		</tr>
+		<tr>
+			<td>처리상태</td>
+			<td>
+				<select name="" id="">
+					<option>문의분류</option>
+					<option value="01">상품 문의</option>
+					<option value="02">배송 문의</option>
+					<option value="03">결제 문의</option>
+					<option value="04">반품 문의</option>
+					<option value="05">기타</option>
+				</select>
+				<input id="all" name="state" value="all" type="radio" checked />
+				<label for="all">전체</label>
+				<input id="uncompleted" name="state" value="01" type="radio" />
+				<label for="uncompleted">미답변</label>
+				<input id="completed" name="state" value="02" type="radio" />
+				<label for="completed">답변완료</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<a href="">초기화</a>
+			</td>
+		</tr>
+	</table>
 	<div>
 		<div>총 10건</div>
 		<table>

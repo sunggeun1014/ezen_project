@@ -13,7 +13,7 @@ public class InquiryDTO {
 	private Date inquiry_write_date;
 	private String inquiry_answer_status;
 	private String inquiry_type;
-	private int order_num;
+	private Integer order_num;
 	private String inquiries_original;
 	private String inquiries_changed;
 }
