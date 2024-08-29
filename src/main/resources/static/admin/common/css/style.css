@@ -1,8 +1,8 @@
 .inner {
   margin: 0 auto;
   width: 1440px;
-  height: 100vh;
-  background-color: #EBECF0;
+  height: auto; /* 자동으로 높이 설정 */
+  min-height: 100vh; /* 최소 높이를 뷰포트의 높이로 설정 */  background-color: #EBECF0;
   display: grid;
   grid-template-columns: 310px auto;
 }
@@ -120,7 +120,7 @@
 
 /* 헤더 */
 .content-wrap {
-	padding: 30px 20px 0 20px;
+   padding: 30px 20px 0 20px;
 }
 
 #header {

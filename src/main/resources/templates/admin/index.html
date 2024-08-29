@@ -21,21 +21,21 @@
 <title>fragment 연습</title>
 </head>
 <body>
-	<div class="inner">
-	
-		<div th:insert="~{admin/sidebar :: sidebar}"></div>
-		
-		<div class="content-wrap">
-			<div th:insert="~{admin/header :: header}"></div>
-		
-			<div th:if="${template} != null">
-				<div th:replace="~{${template}}"></div>
-			</div>
-		</div>
-		
-	
-	</div>
-	
+   <div class="inner">
+   
+      <div th:insert="~{admin/sidebar :: sidebar}"></div>
+      
+      <div class="content-wrap">
+         <div th:insert="~{admin/header :: header}"></div>
+      
+         <div th:if="${template} != null">
+            <div th:replace="~{${template}}"></div>
+         </div>
+      </div>
+      
+   
+   </div>
+   <script src="/admin/common/js/main.js"></script>
 
     
 </body>
