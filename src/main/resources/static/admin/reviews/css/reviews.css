@@ -1,19 +1,7 @@
 table.dataTable tbody tr {
     background-color: white !important;
 }
-.container {
-   display: flex;
-   flex-direction: column;
-   height: 100%; /* 전체 높이 */
-}
 
-.filter_container {
-   background: #FFFFFF;
-   border-radius: 20px;
-   padding: 20px 26px;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   
-}
 
 .table-container {
    margin-top : 20px;

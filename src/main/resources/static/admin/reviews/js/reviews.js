@@ -189,7 +189,7 @@ $(document).ready(function() {
 			function(settings, data, dataIndex) {
 				var startDate = $('#startDate').val();
 				var endDate = $('#endDate').val();
-				var memberDate = data[4];
+				var memberDate = data[6];
 
 				// 날짜 형식을 Date 객체로 변환
 				var start = startDate ? new Date(startDate) : null;
