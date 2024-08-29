@@ -44,7 +44,7 @@ public class ReviewsController {
         return "admin/index";
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value= "/json", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Map<String, Object> tableData() {
         List<ReviewsDTO> tables = reviewService.list();
@@ -86,7 +86,11 @@ public class ReviewsController {
           model.addAttribute("reviewWriteDate", formattedDate); // 포맷팅된 날짜 문자열 전달
           model.addAttribute("reviewRating", reviewRating); // 정수로 변환된 리뷰 별점 전달
           
-        return "/admin/reviews/reviewDetails";
+          
+          String templatePath = "/admin/reviews/reviewDetails";
+          model.addAttribute("template", templatePath);  // 경로를 template로 전달
+       
+          return "admin/index";
     }
     
     
