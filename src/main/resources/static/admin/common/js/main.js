@@ -90,6 +90,31 @@ function getClocks() {
   clock.innerText = `${days} ${hours}:${minutes}:${seconds}`
 }
 
+function datepicker(start, end) {
+	const checkDates = () => {
+	   const startDate = startDatePicker.selectedDates[0];
+	   const endDate = endDatePicker.selectedDates[0];
+
+	   if (startDate && endDate && startDate > endDate) {
+	       startDatePicker.clear();
+	   }
+	}
+   
+   const startDatePicker = flatpickr(`#${start}`, {
+        dateFormat: "Y-m-d",
+        enableTime: false,
+        defaultDate: null,
+      	onChange: checkDates
+    });
+   
+   const endDatePicker = flatpickr(`#${end}`, {
+        dateFormat: "Y-m-d",
+        enableTime: false,
+       	defaultDate: null,
+      	onChange: checkDates
+    });
+
+}
 
 getClocks();
 setInterval(getClocks, 1000)
