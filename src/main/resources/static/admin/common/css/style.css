@@ -1,7 +1,8 @@
 .inner {
   margin: 0 auto;
   width: 1440px;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   background-color: #EBECF0;
   display: grid;
   grid-template-columns: 310px auto;

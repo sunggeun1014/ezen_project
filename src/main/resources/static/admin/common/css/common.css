@@ -228,6 +228,10 @@ input[type=text], input[type="number"], select {
 	position: relative;
 }
 
+.input-date {
+	width: 100%;
+}
+
 .fa-calendar-days {
 	position: absolute;
 	font-size: 19px;
