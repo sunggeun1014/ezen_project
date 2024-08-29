@@ -1,0 +1,190 @@
+body {
+	font-family: 'SUIT Variable', sans-serif;
+	margin: 0;
+	padding: 0;
+	height: 100vh; /* 화면 전체 높이를 차지 */
+	display: flex;
+	flex-direction: column;
+}
+table.dataTable tbody tr {
+    background-color: white !important;
+}
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100%; /* 전체 높이 */
+}
+
+.filter_container {
+	height: 30%; /* 화면의 상단 30% */
+	background: #FFFFFF;
+	border-radius: 20px;
+	padding: 20px 26px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	
+}
+
+.table-container {
+	margin-top : 20px;
+	height: 70%; /* 화면의 하단 70% */
+	background: #FFFFFF;
+	border-radius: 20px;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	overflow-y: auto; /* 테이블 내용이 넘칠 경우 스크롤 */
+}
+
+.header h1 {
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 24px;
+	color: #000000;
+	margin-bottom: 20px;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.search-filter, .search-bar-group {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.filter-group, .search-bar-group {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+	border-bottom: 1px solid #D8D8D8;
+	padding-bottom: 8px;
+}
+
+.label {
+	font-size: 16px;
+	line-height: 24px;
+	color: #000000;
+	margin-left: 40px;
+	margin-right: 60px;
+}
+
+.date-picker {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.input-box {
+	display: flex;
+	align-items: center;
+	width: 210px;
+	height: 40px;
+	padding: 0 10px;
+	background: #FFFFFF;
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+}
+
+.input-box .placeholder {
+	border: none;
+	font-size: 14px;
+	color: #CCCCCC;
+}
+
+.date-options {
+	display: flex;
+	flex-direction: row;
+	gap: 0;
+	border: 1px solid #C0C0C0;	
+	border-radius: 5px;
+}
+
+.date-option {
+    width: 55px;
+    height: 40px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    border-right: 1px solid #C0C0C0;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.date-option:nth-child(4) {
+    border-right: none;
+}
+
+.date-option.active {
+    background-color: #4777F6;
+    color: #FFFFFF;
+    border: 1px solid #4777F6;
+    border-radius: 5px;
+}
+
+
+.search-bar {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 300px;
+	height: 40px;
+	padding: 0 10px;
+	background: #FFFFFF;
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+}
+
+.input-group {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+}
+
+.input-group input {
+	border: none;
+	outline: none;
+	width: 100%;
+	font-size: 16px;
+	color: #000000;
+}
+
+
+.reset {
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 24px;
+	text-align: right;
+	color: #000000;
+	cursor: pointer;
+}
+
+#searchColumn {
+	width: 100px;
+	height: 40px;
+	border-radius: 5px;
+	border: 1px solid #C0C0C0;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.calendar-slash {
+	margin-top: 8px;
+}
+
+#reset-button {
+    cursor: pointer;
+}
+
+div.dt-container div.dt-paging ul {
+    justify-content: center;
+    list-style: none;
+    margin-top: 20px;
+}

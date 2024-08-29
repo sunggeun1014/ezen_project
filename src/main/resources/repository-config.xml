@@ -5,6 +5,7 @@
 <!-- window > Preferences > Maven > download artifact javadoc 체크 -->
 <configuration>
 	<typeAliases>
- 		<typeAlias type="com.ezen.bookproject.member_mgnt.dto.MembersDTO" alias="member"/>
+ 		<typeAlias type="com.ezen.bookproject.admin.members.dto.MembersDTO" alias="member"/>
+ 		<typeAlias type="com.ezen.bookproject.admin.reviews.dto.ReviewsDTO" alias="reviews"/>
  	</typeAliases>
 </configuration>

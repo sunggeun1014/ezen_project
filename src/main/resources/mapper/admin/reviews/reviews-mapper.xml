@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Reviews">
+	
+	<select id="getAll" resultType="reviews">
+	 SELECT 
+	    r.review_num, 
+	    r.member_id, 
+	    r.order_detail_num, 
+	    r.review_content, 
+	    r.review_rating, 
+	    r.review_write_date, 
+	    c.book_isbn,
+	    b.book_name
+	FROM 
+	    Reviews r
+	JOIN 
+	    Customer_Order_Details c 
+	ON 
+	    r.order_detail_num = c.order_detail_num
+	JOIN 
+	    Books b
+	ON 
+	    c.book_isbn = b.book_isbn
+	</select>
+	
+	<!-- 여러 리뷰를 삭제하는 SQL -->
+    <delete id="deleteReviews" parameterType="java.util.List">
+        DELETE FROM Reviews
+        WHERE review_num IN
+        <foreach item="num" collection="list" open="(" separator="," close=")">
+            #{num}
+        </foreach>
+    </delete>
+</mapper>

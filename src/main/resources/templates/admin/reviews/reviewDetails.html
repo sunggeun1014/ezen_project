@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Review Details</title>
+<!-- Bulma CSS 추가 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<link rel="stylesheet" href="/admin/reviews/css/reviews.css" />
+
+</head>
+<body>
+	<div class="container">
+		<!-- 뒤로가기 버튼 -->
+		<div class="back-button">
+			<a href="/admin/reviews?path=admin/reviews/reviews" class="button is-link">뒤로가기</a>
+		</div>
+
+		<!-- 리뷰 상세 정보 박스 -->
+		<div class="box">
+			<h1>리뷰번호: [[${reviewNum}]]</h1>
+			<p>
+				<strong>작성자:</strong> <span th:text="${memberId}"></span>
+			</p>
+			<p>
+				<strong>작성일:</strong> <span th:text="${reviewWriteDate}"></span>
+			</p>
+			<p>
+				<strong>책 제목:</strong> <span th:text="${bookName}"></span>
+			</p>
+			<p>
+				<strong>ISBN:</strong> <span th:text="${bookIsbn}"></span>
+			</p>
+			<!-- reviewRating을 data 속성에 삽입 -->
+			<p>
+				<strong>별점:</strong> <span id="starRating"
+					th:data-rating="${reviewRating}"></span>
+			</p>
+			<hr>
+			<p>
+				<strong>내용:</strong>
+			</p>
+			<p th:text="${reviewContent}"></p>
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/js/bulma.min.js"></script>
+	<script>
+        // JavaScript로 별점 표시하기
+        document.addEventListener("DOMContentLoaded", function() {
+            // HTML에서 data 속성으로 전달된 값을 JavaScript로 읽어오기
+            var reviewRating = document.getElementById('starRating').getAttribute('data-rating');
+            
+            // 데이터가 문자열로 들어오므로, 정수형으로 변환
+            reviewRating = parseInt(reviewRating, 10);
+            
+            var starHtml = '';
+
+            // 채워진 별과 빈 별 아이콘으로 변경
+            for (var i = 0; i < reviewRating; i++) {
+                starHtml += '<span class="fas fa-star stars"></span>'; // 채워진 별
+            }
+            for (var i = reviewRating; i < 5; i++) {
+                starHtml += '<span class="far fa-star empty-stars"></span>'; // 빈 별
+            }
+
+            // 별점 HTML 요소에 출력
+            document.getElementById("starRating").innerHTML = starHtml;
+        });
+    </script>
+</body>
+</html>
