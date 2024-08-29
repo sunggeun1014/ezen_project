@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Review Details</title>
-
 <link rel="stylesheet" href="/admin/reviews/css/reviews.css" />
-
+<link rel="stylesheet" href="/admin/reviews/css/reviewDetails.css" />
 </head>
 <body>
 	<div class="container">
@@ -16,55 +15,37 @@
 	    </button>
 
 		<!-- 리뷰 상세 정보 박스 -->
-		<div class="white-frame">
-			<h1>리뷰번호: [[${reviewNum}]]</h1>
-			<p>
-				<strong>작성자:</strong> <span th:text="${memberId}"></span>
-			</p>
-			<p>
-				<strong>작성일:</strong> <span th:text="${reviewWriteDate}"></span>
-			</p>
-			<p>
-				<strong>책 제목:</strong> <span th:text="${bookName}"></span>
-			</p>
-			<p>
-				<strong>ISBN:</strong> <span th:text="${bookIsbn}"></span>
-			</p>
-			<!-- reviewRating을 data 속성에 삽입 -->
-			<p>
-				<strong>별점:</strong> <span id="starRating"
-					th:data-rating="${reviewRating}"></span>
-			</p>
-			<hr>
-			<p>
-				<strong>내용:</strong>
-			</p>
-			<p th:text="${reviewContent}"></p>
+		<div class="white-frame" style="min-height: 100vh; height:auto;">
+			<div class="text-title">
+				<span th:utext="'리뷰번호 : ' + ${reviewNum}"></span>
+			</div>
+			<div class="text-group">
+				<span class="search-list-subject">작성자</span>
+				<span th:text="${memberId}"></span>
+			</div>
+			<div class="text-group">
+				<span class="search-list-subject">작성일</span>
+				<span th:text="${reviewWriteDate}"></span>
+			</div>
+			<div class="text-group">
+				<span class="search-list-subject">책 제목</span>
+				<span th:text="${bookName}"></span>
+			</div>
+			<div class="text-group">
+				<span class="search-list-subject">ISBN</span>
+				<span th:text="${bookIsbn}"></span>
+			</div>
+			<div class="text-group">
+				<span class="search-list-subject">별점</span>
+				<span id="starRating" th:data-rating="${reviewRating}"></span>
+			</div>
+			<div class="text-group">
+				<span class="search-list-subject">내용</span>
+				<span th:text="${reviewContent}"></span>
+			</div>
 		</div>
 	</div>
 
-	<script>
-        // JavaScript로 별점 표시하기
-        document.addEventListener("DOMContentLoaded", function() {
-            // HTML에서 data 속성으로 전달된 값을 JavaScript로 읽어오기
-            var reviewRating = document.getElementById('starRating').getAttribute('data-rating');
-            
-            // 데이터가 문자열로 들어오므로, 정수형으로 변환
-            reviewRating = parseInt(reviewRating, 10);
-            
-            var starHtml = '';
-
-            // 채워진 별과 빈 별 아이콘으로 변경
-            for (var i = 0; i < reviewRating; i++) {
-                starHtml += '<span class="fas fa-star stars"></span>'; // 채워진 별
-            }
-            for (var i = reviewRating; i < 5; i++) {
-                starHtml += '<span class="far fa-star empty-stars"></span>'; // 빈 별
-            }
-
-            // 별점 HTML 요소에 출력
-            document.getElementById("starRating").innerHTML = starHtml;
-        });
-    </script>
+	<script src="/admin/reviews/js/reviewDetails.js"></script>
 </body>
 </html>

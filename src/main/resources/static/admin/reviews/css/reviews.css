@@ -165,13 +165,15 @@ table.dataTable tbody tr {
 
 .modal-footer {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
+	align-items:center;
 	padding-top: 10px;
 }
 
 .modal-footer .button {
 	margin-left: 5px;
 }
+
 
 /* Center the DataTable pagination controls */
 #reviews_wrapper>.dt-paging {

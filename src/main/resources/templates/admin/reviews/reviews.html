@@ -3,16 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Table Example</title>
+<title>Reviews</title>
 
-<!--
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.1/css/bulma.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.bulma.css">
- -->
 <link rel="stylesheet" href="/admin/reviews/css/reviews.css" />
 
-  <!-- DataPicker -->
+<!-- DataPicker -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
@@ -63,27 +58,14 @@
       				<button id="searchButton"><span class="material-symbols-outlined">search</span></button>	
     			</div>
 
-				<!--
-				<div class="search-container">
-				
-					<div class="input-group">
-						<input type="text" id="searchKeyword" placeholder="조회할 값을 입력" />
-				<button id="searchButton"><span class="material-symbols-outlined">search</span></button>
-					</div>
-				</div>
-				 -->
-				
-				<!-- 
-					<div id="reset-button" onclick="resetFilters()">초기화</div>
-				 -->
 				<button id="reset-button" onclick="resetFilters()">초기화</button>			
 			</div>
 		</div>
 	</div>
 
 	<div class="table-container white-frame">
-		<button id="delete-button" class="button is-danger"
-			style="float: right;">삭제</button>
+		<span id="total-row" class="table-column-head-txt"></span>
+		<button id="delete-button" class="button is-danger" style="float: right;">삭제</button>
 		<table id="reviews" class="table is-striped" style="width: 100%">
 			<thead>
 				<tr>
@@ -91,7 +73,6 @@
 						<input type="checkbox" id="select-all">
 						<label for="select-all"></label>
 					</th>
-					<!-- 전체 선택 체크박스 -->
 					<th>NO</th>
 					<th>내용</th>
 					<th>책 제목</th>
@@ -110,7 +91,8 @@
 			<p>정말로 삭제하시겠습니까?</p>
 			<div class="modal-footer">
 				<button id="confirm-delete" class="default-btn">Yes</button>
-				<button id="cancel-delete" class="button is-light">No</button>
+				&nbsp;
+				<button id="cancel-delete" class="default-btn cancle">No</button>
 			</div>
 		</div>
 	</div>

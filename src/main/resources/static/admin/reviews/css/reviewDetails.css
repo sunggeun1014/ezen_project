@@ -1,0 +1,16 @@
+.text-title {
+	font-size: 24px;
+   	font-weight: 800;
+	margin-bottom: 50px;
+
+}
+.text-group {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+	border-bottom: 1px solid #D8D8D8;
+	margin-bottom: 30px;
+	margin-top: 10px;
+	padding-bottom: 20px;
+}
