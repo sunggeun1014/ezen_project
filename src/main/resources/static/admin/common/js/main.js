@@ -67,6 +67,40 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     });
+	
+	// 하위 메뉴 클릭 이벤트 처리
+	document.querySelectorAll('.sub-menu-list li').forEach(subMenuItem => {
+	  subMenuItem.addEventListener('click', function(e) {
+	    e.stopPropagation(); // 상위 메뉴로의 이벤트 전파 방지
+
+	    // 모든 하위 메뉴 항목에서 'selected' 클래스 제거
+	    document.querySelectorAll('.sub-menu-list li').forEach(item => {
+	      item.classList.remove('selected');
+	    });
+
+	    // 클릭된 하위 메뉴 항목에 'selected' 클래스 추가
+	    this.classList.add('selected');
+
+	    // 로컬 스토리지에 선택된 하위 메뉴 상태 저장
+	    const parentIndex = Array.from(menuItems).indexOf(this.closest('.menu-items'));
+	    const subMenuIndex = Array.from(this.parentNode.children).indexOf(this);
+	    localStorage.setItem(`selected-submenu-${parentIndex}`, subMenuIndex);
+	  });
+	});
+
+	// 페이지 로드 시 선택된 하위 메뉴 상태 복원
+	menuItems.forEach((item, index) => {
+	  const selectedSubMenuIndex = localStorage.getItem(`selected-submenu-${index}`);
+	  if (selectedSubMenuIndex !== null) {
+	    const subMenuList = item.querySelector('.sub-menu-list');
+	    if (subMenuList) {
+	      const subMenuItem = subMenuList.children[selectedSubMenuIndex];
+	      if (subMenuItem) {
+	        subMenuItem.classList.add('selected');
+	      }
+	    }
+	  }
+	});
 });
 
 
