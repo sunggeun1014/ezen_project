@@ -35,10 +35,9 @@
 	gap: 10px;
 }
 
-.book-title-link  {
+.book-isbn-link  {
 	display: block;
 	text-decoration: underline;
-	width: 150px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

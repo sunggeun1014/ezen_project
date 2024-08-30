@@ -1,6 +1,9 @@
 package com.ezen.bookproject.admin.products.dto;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -8,7 +11,6 @@ import lombok.Data;
 
 @Data
 public class ProductsDTO {
-	private int rownum;
 	private String book_isbn;
 	private String book_name;
 	private Integer book_price;

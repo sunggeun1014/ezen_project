@@ -25,21 +25,31 @@ $(document).ready(function() {
                     },
                     orderable: false,
                 },
-				{
+                {
 		            data: null,  // 이 컬럼은 데이터베이스에서 가져오는 데이터를 사용하지 않음
 		            render: function(data, type, row, meta) {
 		               return meta.row + 1;  // meta.row는 0부터 시작하는 행 인덱스이므로 +1 해줌
 		            },
 		            orderable: false,  // 이 컬럼에 대해 정렬을 비활성화
-		            searchable: false  // 이 컬럼에 대해 검색을 비활성화
 		         },
                 {
-                    data: 'book_name',
+                    data: 'book_isbn',
                     render: function(data, type, row) {
-                        return '<a href="/admin/index?path=admin/products/editProducts" class="book-title-link">' + data + '</a>';
+                        let url = '/admin/index?path=/admin/products/editProduct&book_isbn=' + encodeURIComponent(data);
+                        return '<a href="' + url + '" class="book-isbn-link" data-isbn="' + data + '">' + data + '</a>';
                     }
                 },
-                { data: 'book_isbn' },
+                {
+                    data: 'book_name',
+                    className: 'text-ellipsis',
+                    render: function(data) {
+                        if (data.length > 10) {
+                            return data.substring(0, 10) + '...';
+                        } else {
+                            return data;
+                        }
+                    }
+                },
 				{
 				    data: 'book_country_type',
 				    render: function(data) {
@@ -100,10 +110,10 @@ $(document).ready(function() {
 				  data: 'book_state',
 				  render: function(data, type, row) {
 				    const onClass = data === '01' ? ' on' : '';
-				    const offClass = data === '02' ? ' on' : '';
+				    const offClass = data === '02' ? ' off' : '';
 				    return '<div class="status-btn-wrap">' +
-				           '<button class="status-btn' + onClass + '" data-state="01">판매중</button>' +
-				           '<button class="status-btn' + offClass + '" data-state="02">판매중지</button>' +
+				           '<button class="status-btn' + onClass + '">판매중</button>' +
+				           '<button class="status-btn' + offClass + '">판매중지</button>' +
 				           '</div>';
 				  }
 				}
@@ -113,20 +123,33 @@ $(document).ready(function() {
             lengthChange: false,
             dom: 'lrtip',
             rowCallback: function(row, data) {
-                $(row).attr('data-id', data.review_num); // 각 행에 고유 ID 설정
+                $(row).attr('data-id', data.book_isbn); // 각 행에 고유 ID 설정
 
                 // 제목 컬럼의 링크 클릭 이벤트 추가
-                $(row).find('.book-title-link').on('click', function(event) {
+                $(row).find('.book-isbn-link').on('click', function(event) {
                     event.preventDefault(); // 링크 기본 동작 방지
                     postToDetailPage(data); // 폼 생성 및 제출 함수 호출
                 });
             }
         });
-
-        // 전체 행 조회
-        //var totalRows = table.rows().count();
-        //console.log("전체 행 수 :", totalRows);
     }
+
+
+    function postToDetailPage(data) {
+        // 폼 생성
+        var form = $('<form>', {
+            method: 'POST',
+            action: '/admin/products/editProduct'  // 서버의 상세 페이지 URL로 설정
+        });
+
+        // 데이터를 숨김 필드로 추가
+        form.append($('<input>', { type: 'hidden', name: 'book_isbn', value: data.book_isbn }));
+
+        // 폼을 body에 추가하고 제출
+        form.appendTo('body').submit();
+    }
+
+
 
     $('#check-all').on('click', function() {
         var rows = $('#product').DataTable().rows({ 'search': 'applied' }).nodes();
@@ -153,7 +176,7 @@ $(document).ready(function() {
         var selectedIds = [];
         $('#product').DataTable().$('.row-checkbox:checked').each(function() {
             var rowData = $('#product').DataTable().row($(this).closest('tr')).data();
-            selectedIds.push(rowData.review_num); // 삭제할 리뷰 번호 수집
+            selectedIds.push(rowData.book_isbn); // 삭제할 리뷰 번호 수집
         });
 
         if (selectedIds.length > 0) {
@@ -275,27 +298,6 @@ $(document).ready(function() {
 		});
 	
 });
-
-function postToDetailPage(data) {
-    // 폼 생성
-    var form = $('<form>', {
-        method: 'POST',
-        action: '/admin/products/editProduct'  // 서버의 상세 페이지 URL로 설정
-    });
-
-    // 데이터를 숨김 필드로 추가
-    form.append($('<input>', { type: 'hidden', name: 'book_name', value: data.book_name }));
-    form.append($('<input>', { type: 'hidden', name: 'book_isbn', value: data.book_isbn }));
-    form.append($('<input>', { type: 'hidden', name: 'book_country_type', value: data.book_country_type }));
-    form.append($('<input>', { type: 'hidden', name: 'book_author', value: data.book_author }));
-    form.append($('<input>', { type: 'hidden', name: 'book_publisher', value: data.book_publisher }));
-    form.append($('<input>', { type: 'hidden', name: 'book_price', value: data.book_price }));
-    form.append($('<input>', { type: 'hidden', name: 'book_register_date', value: data.book_register_date }));
-    form.append($('<input>', { type: 'hidden', name: 'book_state', value: data.book_state }));
-
-    // 폼을 body에 추가하고 제출
-    form.appendTo('body').submit();
-}
 
 function setToday() {
 	var today = new Date().toISOString().split('T')[0];

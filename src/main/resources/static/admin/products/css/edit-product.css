@@ -1,0 +1,88 @@
+.search-list-title {
+    margin-bottom: 20px;
+}
+
+.product-info, .book-price, .book-qty, .filter-wrap, .radio-filter {
+    display: flex;
+    align-items: center;
+}
+
+.filter-wrap, .radio-filter {
+    gap: 10px;
+}
+
+.book-search {
+    margin-bottom: 30px;
+}
+
+.search-list-subject {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.important {
+    display: inline-block;
+    height: 30px;
+    color: #E54F53;
+}
+
+input[type=text]:not(.placeholder, .search-input, .input-price) {
+    width: 400px;
+    padding-right: 10px;
+}
+
+.search-input {
+    width: 450px;
+}
+
+#searchButton {
+    right: -135px;
+}
+
+.product-info {
+    height: 60px;
+    padding-left: 20px;
+    border-bottom: 1px solid #D8D8D8;
+}
+
+.book-price {
+    margin-right: 150px;
+}
+
+.input-price {
+    width: 140px;
+    padding-right: 10px;
+}
+
+.file-container p {
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: #7E7E7E;
+}
+
+.thumbnail-wrap {
+    height: 150px;
+}
+
+.book-info {
+    height: 320px;
+}
+
+.custom-textarea {
+    width: 90%;
+    height: 280px;
+    padding: 10px;
+    border: 1px solid #7E7E7E;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+}
+
+.button-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}

@@ -4,8 +4,6 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Products">
 	<select id="getAll" resultType="products">
-		
-	
      SELECT
          book_isbn,
          book_name,
@@ -20,7 +18,34 @@
          book_thumbnail
      FROM
          books
-	    
-			
 	</select>
+
+    <select id="getDetail" parameterType="String" resultType="products">
+        SELECT
+            book_isbn,
+            book_name,
+            book_price,
+            book_publisher,
+            book_author,
+            book_qty,
+            book_intro,
+            book_country_type,
+            book_category,
+            book_state,
+            book_thumbnail
+        FROM
+            books
+        WHERE
+            book_isbn = #{book_isbn}
+    </select>
+
+    <update id="updateSaleStatus" parameterType="String">
+        UPDATE
+            books
+        SET
+            book_state = #{book_state}
+        WHERE
+            book_isbn = #{book_isbn}
+    </update>
+
 </mapper>

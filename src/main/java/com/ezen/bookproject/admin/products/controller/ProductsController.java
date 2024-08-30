@@ -1,14 +1,15 @@
 package com.ezen.bookproject.admin.products.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ezen.bookproject.admin.members.dto.MembersDTO;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import com.ezen.bookproject.admin.products.dto.ProductsDTO;
 import com.ezen.bookproject.admin.products.service.ProductService;
@@ -35,11 +36,18 @@ public class ProductsController {
 
         return response;
     }
-    
-    @GetMapping("/edit-product")
-    public String editProduct() {
-    	return "/admin/products/editProduct";
-    }
-    
 
+    @PostMapping("/editProduct")
+    public String getBookDetail(@RequestParam("book_isbn") String bookISBN, Model model) {
+        log.info("Received request for book ISBN: {}", bookISBN);
+        ProductsDTO productDetail = productService.detailList(bookISBN);
+        log.info("Retrieved product detail: {}", productDetail);
+
+        model.addAttribute("product_detail", productDetail);
+
+        String templatePath = "/admin/products/editProduct";
+        model.addAttribute("template", templatePath);
+
+        return "admin/index";
+    }
 }

@@ -2,6 +2,7 @@ package com.ezen.bookproject.admin.products.service;
 
 import java.util.List;
 
+import com.ezen.bookproject.admin.members.dto.MembersDTO;
 import org.springframework.stereotype.Service;
 
 import com.ezen.bookproject.admin.products.dto.ProductsDTO;
@@ -18,6 +19,10 @@ public class ProductService {
 	public List<ProductsDTO> list(){
 		// DB에서 모든 주문 목록을 꺼내와야 한다
 		return productRepository.getlist();
+	}
+
+	public ProductsDTO detailList(String bookISBN){
+		return productRepository.getBookDetail(bookISBN);
 	}
 
 }

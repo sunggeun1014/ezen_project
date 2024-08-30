@@ -20,7 +20,7 @@ table.dataTable.is-striped > tbody > tr:nth-child(2n) > *,
 	font-weight: 700;
 }
 
-.default-btn.cancle {
+.default-btn.cancel {
 	background-color: #fff;
 	border: 2px solid #c0c0c0;
 	color: #666666;
@@ -176,11 +176,11 @@ input[type=checkbox]:checked+label {
 	color: #000;
 }
 
-/* .status-btn.off {
+.status-btn.off {
   background-color: #fff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   color: #E54F53;
-} */
+}
 
 /* 라디오 */
 
@@ -230,6 +230,7 @@ input[type=text], input[type="number"], select {
 
 .input-date {
 	width: 100%;
+	padding-right: 40px;
 }
 
 .fa-calendar-days {
@@ -326,6 +327,7 @@ select::-ms-expand {
 
 .input-qty {
 	width: 100%;
+	padding-right: 30px;
 }
 
 .input-qty-container::after {
