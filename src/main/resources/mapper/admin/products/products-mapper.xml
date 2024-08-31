@@ -5,20 +5,61 @@
 <mapper namespace="Products">
 	<select id="getAll" resultType="products">
      SELECT
-         book_isbn,
-         book_name,
-         book_price,
-         book_publisher,
-         book_author,
-         book_qty,
-         book_intro,
-         book_country_type,
-         book_category,
-         book_state,
-         book_thumbnail
+        book_isbn,
+        book_name,
+        book_price,
+        book_publisher,
+        book_author,
+        book_qty,
+        book_intro,
+        book_country_type,
+        book_category,
+        book_state,
+        book_thumbnail,
+        book_publish_date,
+        book_register_date
      FROM
          books
 	</select>
+
+    <select id="findByCondition" resultType="products">
+        SELECT
+            book_isbn,
+            book_name,
+            book_price,
+            book_publisher,
+            book_author,
+            book_qty,
+            book_intro,
+            book_country_type,
+            book_category,
+            book_state,
+            book_thumbnail,
+            book_publish_date,
+            book_register_date
+        FROM
+            books
+        WHERE 1=1
+        <if test="bookState != null and bookState != ''">
+            AND book_state = #{bookState}
+        </if>
+        <if test="startDate != null">
+            AND book_register_date >= #{startDate}
+        </if>
+        <if test="endDate != null">
+            AND book_register_date &lt;= #{endDate}
+        </if>
+        <if test="searchColumn != null and searchColumn != '' and searchKeyword != null and searchKeyword != ''">
+            <choose>
+                <when test="searchColumn == 'bookIsbn'">
+                    AND book_isbn LIKE CONCAT('%', #{searchKeyword}, '%')
+                </when>
+                <when test="searchColumn == 'bookName'">
+                    AND book_name LIKE CONCAT('%', #{searchKeyword}, '%')
+                </when>
+            </choose>
+        </if>
+    </select>
 
     <select id="getDetail" parameterType="String" resultType="products">
         SELECT
@@ -32,14 +73,56 @@
             book_country_type,
             book_category,
             book_state,
-            book_thumbnail
+            book_thumbnail,
+            book_publish_date,
+            book_register_date
         FROM
             books
         WHERE
             book_isbn = #{book_isbn}
     </select>
 
-    <update id="updateSaleStatus" parameterType="String">
+    <select id="getBookState" parameterType="String" resultType="products">
+        SELECT
+            book_isbn,
+            book_name,
+            book_price,
+            book_publisher,
+            book_author,
+            book_qty,
+            book_intro,
+            book_country_type,
+            book_category,
+            book_state,
+            book_thumbnail,
+            book_publish_date,
+            book_register_date
+        FROM
+            books
+        WHERE
+            book_state = #{book_state}
+    </select>
+
+    <update id="updateBookInfo" parameterType="products">
+        UPDATE
+            books
+        SET
+            book_name = #{book_name},
+            book_price = #{book_price},
+            book_publisher = #{book_publisher},
+            book_author = #{book_author},
+            book_qty = #{book_qty},
+            book_intro = #{book_intro},
+            book_country_type = #{book_country_type},
+            book_category = #{book_category},
+            book_state = #{book_state},
+            book_thumbnail = #{book_thumbnail},
+            book_publish_date = #{book_publish_date}
+        WHERE
+           book_isbn = #{book_isbn}
+    </update>
+
+    <update id="updateBookState" parameterType="products">
         UPDATE
             books
         SET

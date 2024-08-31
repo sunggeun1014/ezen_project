@@ -5,7 +5,7 @@ table.dataTable.is-striped > tbody > tr:nth-child(2n) > *,
 }
 
 
-.blue-btn, .back-btn, .toggle-btn label, .date-btn {
+.default-btn, .back-btn, .toggle-btn label, .date-btn {
 	cursor: pointer;
 }
 

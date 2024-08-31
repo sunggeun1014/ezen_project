@@ -1,111 +1,110 @@
 <!doctype html>
 <html lang="ko" xmlns="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8" />
-	<title>상품관리</title>
-	<link rel="stylesheet" href="/admin/products/css/products.css" />
-	
-	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-	
-	<!-- datatalbes -->
-	<script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
-	<script src="https://cdn.datatables.net/2.1.4/js/dataTables.bulma.js"></script>	
+    <meta charset="UTF-8"/>
+    <title>상품관리</title>
+    <link rel="stylesheet" href="/admin/products/css/products.css"/>
 </head>
 <body>
 
-	<div class="filter-container white-frame">
-		<h3 class="search-list-title">상품목록조회</h3>
-		<div class="filter-info">
-			<p class="search-list-subject">등록일</p>
-			<div class="filter-wrap date-filter">
-				<div class="date-picker">
-					<div class="input-date-box">
-						<input type="text" id="startDate" class="placeholder input-date"
-							placeholder="YYYY-MM-DD" /> <i class="fa-solid fa-calendar-days"></i>
-					</div>
-					<div class="calendar-slash">-</div>
-					<div class="input-date-box">
-						<input type="text" id="endDate" class="placeholder input-date"
-							placeholder="YYYY-MM-DD" /> <i class="fa-solid fa-calendar-days"></i>
-					</div>
-				</div>
+<div class="filter-container white-frame">
+    <h3 class="search-list-title">상품목록조회</h3>
+    <div class="filter-info">
+        <p class="search-list-subject">등록일</p>
+        <div class="filter-wrap date-filter">
+            <div class="date-picker">
+                <div class="input-date-box">
+                    <input type="text" id="startDate" class="placeholder input-date"
+                           placeholder="YYYY-MM-DD"/> <i class="fa-solid fa-calendar-days"></i>
+                </div>
+                <div class="calendar-slash">-</div>
+                <div class="input-date-box">
+                    <input type="text" id="endDate" class="placeholder input-date"
+                           placeholder="YYYY-MM-DD"/> <i class="fa-solid fa-calendar-days"></i>
+                </div>
+            </div>
 
-				<div class="date-pick-btn">
-					<button class="today-btn date-btn">오늘</button>
-					<button class="week-btn date-btn">1주일</button>
-					<button class="month-btn date-btn">1개월</button>
-					<button class="year-btn date-btn">1년</button>
-				</div>
-			</div>
-		</div>
+            <div class="date-pick-btn">
+                <button class="today-btn date-btn active">오늘</button>
+                <button class="week-btn date-btn">1주일</button>
+                <button class="month-btn date-btn">1개월</button>
+                <button class="year-btn date-btn">1년</button>
+            </div>
+        </div>
+    </div>
 
-		<div class="filter-info">
-			<p class="search-list-subject">상품상태</p>
+    <div class="filter-info">
+        <p class="search-list-subject">상품상태</p>
 
-			<div class="filter-wrap radio-filter">
-				<input type="radio" name="filter-radio" id="whole" />
-				<label for="whole">전체</label>
-				<input type="radio" name="filter-radio" id="onsale" />
-				<label for="onsale">판매중</label>
-				<input type="radio" name="filter-radio" id="stopsale" />
-				<label for="stopsale">판매중지</label>
-			</div>
-		</div>
+        <div class="filter-wrap radio-filter">
+            <input type="radio" name="bookState" id="whole" value="" checked/>
+            <label for="whole">전체</label>
+            <input type="radio" name="bookState" id="onsale" value="01"/>
+            <label for="onsale">판매중</label>
+            <input type="radio" name="bookState" id="stopsale" value="02"/>
+            <label for="stopsale">판매중지</label>
+        </div>
+    </div>
 
-		<div class="filter-info">
-			<p class="search-list-subject">검색어</p>
-			<div class="filter-wrap search-bar">
-				<div class="select-wrap">
-					<select id="select-lists">
-						<option value="">ISBN</option>
-						<option value="">책제목</option>
-					</select>
-					<div class="select-arrow-down"></div>
-				</div>
-				<div class="search-container">
-					<input type="text" id="search-keyword" class="search-input"
-						placeholder="검색할 내용 입력" />
-					<button id="searchButton">
-						<span class="material-symbols-outlined">search</span>
-					</button>
-				</div>
-				<button id="reset-button" onclick="resetFilters()">초기화</button>
-			</div>
-		</div>
-	</div>
+    <div class="filter-info">
+        <p class="search-list-subject">검색어</p>
+        <div class="filter-wrap search-bar">
+            <div class="select-wrap">
+                <select id="select-lists">
+                    <option value="book_isbn">ISBN</option>
+                    <option value="book_name">책제목</option>
+                </select>
+                <div class="select-arrow-down"></div>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search-keyword" class="search-input"
+                       placeholder="검색할 내용 입력"/>
+                <button id="searchButton">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+            </div>
+            <button id="reset-button" onclick="resetFilters()">초기화</button>
+        </div>
+    </div>
+</div>
 
-	<div class="table-container white-frame">
-		<div class="table-title-wrap">
-			<h3 class="table-data-cnt-txt">총10건</h3>
-			<div class="button-wrap">
-				<button id="delete-button">삭제</button>
-				<button class="default-btn">등록</button>
-			</div>
-		</div>
-		<table id="product" class="table table-center" style="width: 100%">
-			<thead class="table-head">
-				<tr class="table-column-head">
-					<th>
-						<input type="checkbox" id="check-all"> 
-						<label for="check-all"></label>
-					</th>
-					
-					<th class="table-column-head-txt">NO</th>
-					<th class="table-column-head-txt">ISBN</th>
-					<th class="table-column-head-txt">책제목</th>
-					<th class="table-column-head-txt">국내/국외</th>
-					<th class="table-column-head-txt">저자</th>
-					<th class="table-column-head-txt">출판사</th>
-					<th class="table-column-head-txt">가격</th>
-					<th class="table-column-head-txt">등록날짜</th>
-					<th class="table-column-head-txt">상품상태</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
-	</div>
-	
-	<script src="/admin/products/js/products.js"></script>
+<div class="table-container white-frame">
+    <div class="table-title-wrap">
+        <h3 class="table-data-cnt-txt">총10건</h3>
+        <div class="button-wrap">
+            <button id="delete-button">삭제</button>
+            <button class="default-btn">등록</button>
+        </div>
+    </div>
+    <table id="product" class="table table-center" style="width: 100%">
+        <thead class="table-head">
+        <tr class="table-column-head">
+            <th>
+                <input type="checkbox" id="check-all">
+                <label for="check-all"></label>
+            </th>
+
+            <th class="table-column-head-txt">NO</th>
+            <th class="table-column-head-txt">ISBN</th>
+            <th class="table-column-head-txt">책제목</th>
+            <th class="table-column-head-txt">국내/국외</th>
+            <th class="table-column-head-txt">저자</th>
+            <th class="table-column-head-txt">출판사</th>
+            <th class="table-column-head-txt">가격</th>
+            <th class="table-column-head-txt">등록날짜</th>
+            <th class="table-column-head-txt">상품상태</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+<!-- datatalbes -->
+<script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.1.4/js/dataTables.bulma.js"></script>
+<script src="/admin/products/js/products.js"></script>
 </body>
 </html>

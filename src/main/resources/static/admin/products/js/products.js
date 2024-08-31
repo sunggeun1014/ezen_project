@@ -3,12 +3,12 @@ $(document).ready(function() {
     // 테이블이 이미 초기화되어 있는지 확인
     if (!$.fn.DataTable.isDataTable('#product')) {
         table = $('#product').DataTable({
-            columnDefs: 
+            columnDefs:
 			[
 				{ targets: 0, orderable: false }, // 첫 번째 컬럼(체크박스 컬럼)에서 정렬 비활성화
 				// 가운데정렬
-				{ 
-				    className: 'table-center', 
+				{
+				    className: 'table-center',
 				    targets: '_all'
 				}
 			],
@@ -16,6 +16,9 @@ $(document).ready(function() {
             ajax: {
                 url: '/admin/products/json',
                 dataSrc: 'data',
+                data: function (d) {
+                    d.bookState = $('input[name="bookState"]:checked').val();
+                }
             },
             columns: [
                 {
@@ -35,7 +38,7 @@ $(document).ready(function() {
                 {
                     data: 'book_isbn',
                     render: function(data, type, row) {
-                        let url = '/admin/index?path=/admin/products/editProduct&book_isbn=' + encodeURIComponent(data);
+                        const url = '/admin/index?path=/admin/products/editProduct&book_isbn=' + encodeURIComponent(data);
                         return '<a href="' + url + '" class="book-isbn-link" data-isbn="' + data + '">' + data + '</a>';
                     }
                 },
@@ -62,7 +65,7 @@ $(document).ready(function() {
 				        }
 				    }
 				},
-				{ 
+				{
 				    data: 'book_author',
 					className: 'text-ellipsis',
 				    render: function(data) {
@@ -73,7 +76,7 @@ $(document).ready(function() {
 				        }
 				    }
 				},
-                { 
+                {
 					data: 'book_publisher',
 					className: 'text-ellipsis',
 					render: function(data) {
@@ -84,7 +87,7 @@ $(document).ready(function() {
 					    }
 					}
 				},
-				{ 
+				{
 				    data: 'book_price',
 				    render: function(data) {
 				        if (data >= 1000) {
@@ -97,15 +100,33 @@ $(document).ready(function() {
                 {
                     data: 'book_register_date',
                     render: function(data, type, row) {
+                        if (!data) {
+                            return '-'; // 데이터가 없을 경우 - 로 표시
+                        }
+
                         if (type === 'display' || type === 'filter') {
                             var date = new Date(data);
-                            var formattedDate = date.toISOString().split('T')[0];
-                            return formattedDate;
+
+                            // Date가 유효한 경우만 처리
+                            if (!isNaN(date.getTime())) {
+                                // 로컬 시간으로 변환
+                                var year = date.getFullYear();
+                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 +1
+                                var day = ('0' + date.getDate()).slice(-2);
+
+                                // yyyy-mm-dd 형식으로 반환
+                                var formattedDate = year + '-' + month + '-' + day;
+                                return formattedDate;
+                            } else {
+                                console.error("Invalid date:", data);
+                                return data; // 잘못된 날짜일 경우 원본 데이터 반환
+                            }
                         }
-                        return data; // Keep the original format for sorting purposes
+
+                        return data; // 소팅을 위한 원본 형식 반환
                     }
                 },
-				
+
 				{
 				  data: 'book_state',
 				  render: function(data, type, row) {
@@ -117,7 +138,7 @@ $(document).ready(function() {
 				           '</div>';
 				  }
 				}
-				
+
             ],
             "info": false,
             lengthChange: false,
@@ -128,41 +149,29 @@ $(document).ready(function() {
                 // 제목 컬럼의 링크 클릭 이벤트 추가
                 $(row).find('.book-isbn-link').on('click', function(event) {
                     event.preventDefault(); // 링크 기본 동작 방지
-                    postToDetailPage(data); // 폼 생성 및 제출 함수 호출
+                    getToDetailPage(data); // 폼 생성 및 제출 함수 호출
                 });
             }
         });
     }
 
-
-    function postToDetailPage(data) {
-        // 폼 생성
-        var form = $('<form>', {
-            method: 'POST',
-            action: '/admin/products/editProduct'  // 서버의 상세 페이지 URL로 설정
-        });
-
-        // 데이터를 숨김 필드로 추가
-        form.append($('<input>', { type: 'hidden', name: 'book_isbn', value: data.book_isbn }));
-
-        // 폼을 body에 추가하고 제출
-        form.appendTo('body').submit();
-    }
+    // 판매중/판매중지 라디오버튼
+    $('input[name="bookState"]').on('change', function () {
+        table.ajax.reload();
+    })
 
 
-
+    // 체크박스
     $('#check-all').on('click', function() {
-        var rows = $('#product').DataTable().rows({ 'search': 'applied' }).nodes();
+        const rows = $('#product').DataTable().rows({ 'search': 'applied' }).nodes();
         $('input[type="checkbox"]', rows).prop('checked', this.checked);
     });
 
     $('#product tbody').on('change', '.row-checkbox', function() {
         if (!this.checked) {
             $('#check-all').prop('checked', false);
-        } else {
-            if ($('.row-checkbox:checked').length === $('.row-checkbox').length) {
-                $('#check-all').prop('checked', true);
-            }
+        } else if ($('.row-checkbox:checked').length === $('.row-checkbox').length) {
+            $('#check-all').prop('checked', true);
         }
     });
 
@@ -238,18 +247,25 @@ $(document).ready(function() {
     cancelDeleteButton.onclick = function() {
         modal.style.display = "none";
     };
-	
-	
+
+
 	// 검색 버튼 클릭 이벤트 핸들러
 	const searchBtn = document.querySelector("#searchButton");
-	    searchBtn.on('click', function() {
-	        let selectLists = $('#select-lists').val();
+	    searchBtn.addEventListener('click', function() {
+	        const columnIndex = $('#select-lists').val();
+            let column = 0;
+            switch (columnIndex) {
+                case 'book_isbn' : column = 2; break;
+                case 'book_name' : column = 3; break;
+                default: column = 0;
+            }
+
 	        let keyword = $('#search-keyword').val();
 	        // 선택된 컬럼과 입력된 키워드로 필터링
-	        table.column(selectLists).search(keyword).draw(); 
+	        table.column(column).search(keyword).draw();
 	    });
 
-	    // searchKeyword에서 Enter 키를 누를 때 searchButton 클릭 이벤트 실행
+	    // search-keyword에서 Enter 키를 누를 때 searchButton 클릭 이벤트 실행
 	    $('#search-keyword').on('keypress', function(event) {
 	        if (event.key === 'Enter') {
 	            searchBtn.click();
@@ -261,25 +277,25 @@ $(document).ready(function() {
 		});
 
 		// 날짜 필터링 로직 추가
-		$.fn.dataTable.ext.search.push(
+		$.fn.DataTable.ext.search.push(
 			function(settings, data, dataIndex) {
 				var startDate = $('#startDate').val();
 				var endDate = $('#endDate').val();
-				var memberDate = data[7];
+				var registerDate = data[8];
 
 				// 날짜 형식을 Date 객체로 변환
 				var start = startDate ? new Date(startDate) : null;
 				var end = endDate ? new Date(endDate) : null;
-				var member = new Date(memberDate);
+				var bookRegister = new Date(registerDate);
 
 				if ((start === null && end === null) ||
-					(start <= member && (end === null || member <= end))) {
+					(start <= bookRegister && (end === null || bookRegister <= end))) {
 					return true;
 				}
 				return false;
 			}
 		);
-		
+
 		document.querySelectorAll('.input-box input').forEach(function(input) {
 			input.addEventListener('focus', function() {
 				// Input 박스를 클릭하면 기존 값을 제거
@@ -287,20 +303,20 @@ $(document).ready(function() {
 			});
 		});
 
-		document.querySelector('[onclick="resetFilters()"]').addEventListener('click', resetFilters);
-		
-		// 모든 date-option (date-btn) 버튼에 클릭 이벤트 리스너 추가
-		const dateBtn = document.ququerySelectorAll('.date-btn');
-		dateBtn.forEach(function(button) {
-			button.addEventListener('click', function() {
-				setActive(this);  // 클릭된 버튼에 'active' 클래스 설정
-			});
-		});
-	
+    document.addEventListener("DOMContentLoaded", function() {
+        const resetButton = document.getElementById('reset-button');
+        if (resetButton) {
+            resetButton.addEventListener('click', resetFilters);
+        }
+    });
 });
 
+pickDateBtn();
+datepicker("startDate", "endDate");
+setToday();
+
 function setToday() {
-	var today = new Date().toISOString().split('T')[0];
+    var today = new Date().toISOString().split('T')[0];
 	$('#startDate').val(today);
 	$('#endDate').val(today).trigger('change');
 }
@@ -314,9 +330,9 @@ function setDateRange(days) {
 
 function resetFilters() {
 	// 검색어 필터 초기화
-	$('#searchKeyword').val('');
+	$('#search-keyword').val('');
 	// 기본 첫 번째 옵션으로 설정 html쪽 select 4번째로 초기화 시켜준다
-	$('#select-lists').val('0');
+	$('#select-lists').prop('selectedIndex', 0)
 
 	// 날짜 필터 초기화
 	$('#startDate').val('');
@@ -329,15 +345,44 @@ function resetFilters() {
 }
 
 
-function setActive(element) {
-    // 모든 date-option 버튼에서 'active' 클래스를 제거
-    let options = document.querySelectorAll('.date-btn');
-    options.forEach(function(option) {
-        option.classList.remove('active');
-    });
+function pickDateBtn() {
+    const dateBtns = document.querySelectorAll(".date-btn");
 
-    // 클릭된 요소에 'active' 클래스를 추가
-    element.classList.add('active');
+    dateBtns.forEach((btn) => {
+        btn.addEventListener("click", function () {
+            dateBtns.forEach((btn) => btn.classList.remove("active"));
+            this.classList.add("active");
+        });
+    });
 }
 
-datepicker("startDate", "endDate");
+function getToDetailPage(data) {
+    // 폼 생성
+    var form = $('<form>', {
+        method: 'GET',
+        action: '/admin/products/editProduct'  // 서버의 상세 페이지 URL로 설정
+    });
+
+    // 데이터를 숨김 필드로 추가
+    form.append($('<input>', { type: 'hidden', name: 'book_isbn', value: data.book_isbn }));
+
+    // 폼을 body에 추가하고 제출
+    form.appendTo('body').submit();
+}
+
+// 보류
+function changeStateBtn() {
+    const statusBtns = document.querySelectorAll(".status-btn");
+
+    statusBtns.forEach((btn) => {
+        btn.addEventListener("click", function () {
+            const isActive = this.textContent === "판매중";
+
+            statusBtns.forEach((otherBtn) => {
+                otherBtn.classList.remove("on", "off");
+            });
+
+            this.classList.add(isActive ? "on" : "off");
+        });
+    });
+}
