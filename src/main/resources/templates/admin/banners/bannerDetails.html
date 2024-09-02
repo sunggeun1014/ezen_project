@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배너 상세</title>
+<link rel="stylesheet" href="/admin/banners/css/banners.css" />
+</head>
+<body>
+	<div class="container">
+		<!-- 뒤로가기 버튼 -->
+
+        <!-- 배너 상세 정보 박스 -->
+        <div class="white-frame">
+            <h1>배너 상세 정보</h1>
+            <p><strong>배너 제목:</strong> <span id="bannerTitle"></span></p>
+            <p><strong>유형:</strong> <span id="bannerPosition"></span></p>
+            <p><strong>노출 기간:</strong> <span id="bannerVisiblePeriod"></span></p>
+            <p><strong>노출 여부:</strong> <span id="bannerVisible"></span></p>
+            <p><strong>등록일:</strong> <span id="bannerDate"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript로 배너 ID를 이용해 데이터를 가져와 상세 정보 출력
+        document.addEventListener("DOMContentLoaded", function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var bannerId = urlParams.get('banner_id');
+            
+            // AJAX 요청으로 배너 정보를 서버에서 가져와서 출력 (이 부분은 실제 데이터 로딩 로직에 맞게 수정 필요)
+            fetch('/admin/banners/details?banner_id=' + bannerId)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('bannerTitle').innerText = data.title;
+                    document.getElementById('bannerPosition').innerText = data.position;
+                    document.getElementById('bannerPeriod').innerText = data.period;
+                    document.getElementById('bannerVisible').innerText = data.visible ? 'Yes' : 'No';
+                    document.getElementById('bannerDate').innerText = data.date;
+                });
+        });
+    </script>
+</body>
+</html>

@@ -7,5 +7,6 @@
 	<typeAliases>
  		<typeAlias type="com.ezen.bookproject.admin.members.dto.MembersDTO" alias="member"/>
  		<typeAlias type="com.ezen.bookproject.admin.reviews.dto.ReviewsDTO" alias="reviews"/>
+ 		<typeAlias type="com.ezen.bookproject.admin.banners.dto.BannersDTO" alias="banners"/>
  	</typeAliases>
 </configuration>

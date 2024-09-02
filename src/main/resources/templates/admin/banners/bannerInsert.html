@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배너 등록</title>
+
+<link rel="stylesheet" href="/admin/banners/css/banners.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+</head>
+<body>
+
+	<div class="form-container white-frame">
+		<div class="header">
+			<h1 class="search-list-title">배너 등록</h1>
+		</div>
+		<form action="/admin/banners/insert" method="post" enctype="multipart/form-data" class="content">
+			<!-- 배너 정보 입력 폼 -->
+			<div class="filter-group">
+				<div class="search-list-subject insert-subject">
+					제목 <label class="required">*</label>
+				</div>
+				<input type="text" class="insert-input" required>
+			</div>
+
+			<div class="radio-group">
+				<div class="search-list-subject insert-subject">
+					유형 <label class="required">*</label>
+				</div>
+				<div class="radio-wrap">
+					<input type="radio" name="banner-position" value="01" id="position-banner" class="radio"> <label for="position-banner">배너</label> 
+					<input type="radio" name="banner-position" value="02" id="position-popup" class="radio"> <label for="position-popup">팝업</label>
+				</div>
+			</div>
+
+			<div class="radio-group">
+				<div class="search-list-subject insert-subject">
+					노출 여부 <label class="required">*</label>
+				</div>
+				<div class="radio-wrap">
+					<input type="radio" name="banner-visible" value="01" id="visible" class="radio"> <label for="visible">노출</label> 
+					<input type="radio" name="banner-visible" value="02" id="hidden" class="radio"> <label for="hidden">비노출</label>
+				</div>
+			</div>
+
+			<div class="filter-group">
+				<div class="search-list-subject insert-subject">
+					노출 기간 <label class="required">*</label>
+				</div>
+				<div class="date-picker">
+						<div class="input-date-box">
+							<input type="text" id="startDate" class="placeholder" placeholder="YYYY-MM-DD" required/> <i class="fa-solid fa-calendar-days"></i>
+						</div>
+						<div class="calendar-slash">-</div>
+						<div class="input-date-box">
+							<input type="text" id="endDate" class="placeholder" placeholder="YYYY-MM-DD" required/> <i class="fa-solid fa-calendar-days"></i>
+						</div>
+				</div>
+			</div>
+					
+			<div class="filter-group image-wrap">
+				<div class="search-list-subject insert-subject">
+					이미지<label class="required">*</label>
+				</div>
+				<div class="img-input-wrap">
+					<label for="input-file" class="input-file-label"> <i class="fa-solid fa-plus"></i> <img src="" alt="" id="preview" />
+					</label> <input type="file" name="banner_image" id="input-file" class="input-img-file" required/>
+				</div>
+			</div>
+			
+			<div class="submit-btns">
+				<button type="submit" class="default-btn">등록</button>
+				<button type="button" class="default-btn cancle" onclick="location.href='/admin/index?path=admin/banners/banners'">취소</button>
+			</div>
+		</form>
+
+	</div>
+	
+	
+				
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="/admin/common/js/main.js"></script>
+	<script src="/admin/banners/js/banners.js"></script>
+
+</body>
+</html>
