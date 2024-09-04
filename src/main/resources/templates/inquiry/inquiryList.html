@@ -7,47 +7,61 @@
 <link rel="stylesheet" href="/inquiry/css/inquiryList.css" />
 </head>
 <body>
-	<table id="menu">
-		<tr id="show-inquiries">
-			<td colspan="2">1:1문의 조회</td>
-		</tr>
-		<tr>
-			<td>작성일</td>
-			<td>
-				<input id="start-date" type="date" />
-				-
-				<input id="end-date" type="date" />
-				<button id="today-btn">오늘</button>
-				<button id="one-week-btn">1주일</button>
-				<button id="one-month-btn">1개월</button>
-				<button id="one-year-btn">1년</button>
-			</td>
-		</tr>
-		<tr>
-			<td>처리상태</td>
-			<td>
-				<select name="" id="">
-					<option>문의분류</option>
-					<option value="01">상품 문의</option>
-					<option value="02">배송 문의</option>
-					<option value="03">결제 문의</option>
-					<option value="04">반품 문의</option>
-					<option value="05">기타</option>
-				</select>
-				<input id="all" name="state" value="all" type="radio" checked />
-				<label for="all">전체</label>
-				<input id="uncompleted" name="state" value="01" type="radio" />
-				<label for="uncompleted">미답변</label>
-				<input id="completed" name="state" value="02" type="radio" />
-				<label for="completed">답변완료</label>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<a href="">초기화</a>
-			</td>
-		</tr>
-	</table>
+	<div id="container">
+		<div id="menu">
+			<div id="show-inquiries">
+				1:1문의 조회
+			</div>
+			<div id="frame1230">
+				<div id="frame1229">
+					<div id="frame1182">
+						<div id="frame1224">
+							<div id="frame1227">
+								<span id="writen-date">작성일</span>
+								<div id="frame1236">
+									<div id="date-search">
+										<input id="start-date" type="date" />
+										<span>-</span>
+										<input id="end-date" type="date" />
+										<div id="period-choice">
+											<button id="today-btn"><span id="today">오늘</span></button>
+											<button id="one-week-btn"><span id="one-week">1주일</span></button>
+											<button id="one-month-btn"><span id="one-month">1개월</span></button>
+											<button id="one-year-btn"><span id="one-year">1년</span></button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="frame1184">
+						<div id="frame1226">
+							<span id="process-state">처리상태</span>
+							<div id="frame1289">
+								<select name="" id="category">
+									<option>문의분류</option>
+									<option value="01">상품 문의</option>
+									<option value="02">배송 문의</option>
+									<option value="03">결제 문의</option>
+									<option value="04">반품 문의</option>
+									<option value="05">기타</option>
+								</select>
+								<input id="all" name="state" value="all" type="radio" checked />
+								<label for="all">전체</label>
+								<input id="uncompleted" name="state" value="01" type="radio" />
+								<label for="uncompleted">미답변</label>
+								<input id="completed" name="state" value="02" type="radio" />
+								<label for="completed">답변완료</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<a id="reset" href="">초기화</a>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div>
 		<div>총 10건</div>
 		<table>

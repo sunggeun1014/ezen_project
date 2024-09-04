@@ -1,10 +1,37 @@
 @charset "UTF-8";
 
-#menu {
-	background-color: white;
+#container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 20px 26px;
+	gap: 10px;
+	
+	position: absolute;
 	width: 1185px;
 	height: 220px;
+	left: 475px;
+	top: 134px;
+	
+	background: #FFFFFF;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 20px;
+}
+
+#menu {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 0px;
+	gap: 12px;
+	
+	width: 1133px;
+	height: 189px;
+	
+	flex: none;
+	order: 0;
+	align-self: stretch;
+	flex-grow: 0;
 }
 
 #show-inquiries {
@@ -13,4 +40,487 @@
 	font-weight: 700;
 	font-size: 18px;
 	line-height: 24px;
+	font-family: 'SUIT Variable';
+	color: #000000;
+	flex: none;
+	order: 0;
+	align-self: stretch;
+	flex-grow: 0;
+}
+
+#frame1230 {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	padding: 0px;
+	gap: 9px;
+	
+	width: 1133px;
+	height: 153px;
+	
+	
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+}
+
+#frame1229 {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 0px;
+	
+	width: 1133px;
+	height: 120px;
+
+	flex: none;
+	order: 0;
+	align-self: stretch;
+	flex-grow: 0;
+}
+
+#frame1182 {
+	box-sizing: border-box;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 10px 20px;
+	gap: 10px;
+	
+	width: 1133px;
+	height: 60px;
+	
+
+	border-bottom: 1px solid #D8D8D8;
+	
+	flex: none;
+	order: 0;
+	align-self: stretch;
+	flex-grow: 0;
+}
+
+#frame1224 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0px;
+	gap: 40px;
+	
+	width: 1093px;
+	height: 40px;
+	
+	flex: none;
+	order: 0;
+	align-self: stretch;
+	flex-grow: 0;
+}
+
+#frame1227 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0px;
+	gap: 10px;
+	
+	width: 100px;
+	height: 24px;
+	
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+}
+
+#writen-date {
+	/* 작성일 */
+	
+	width: 42px;
+	height: 24px;
+	
+	font-family: 'SUIT Variable';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 24px;
+	/* identical to box height, or 150% */
+	
+	color: #000000;
+	
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+
+}
+
+#frame1236 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0px;
+	gap: 10px;
+	
+	width: 660px;
+	height: 40px;
+	
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+}
+
+#date-search {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0px;
+	gap: 10px;
+	
+	width: 430px;
+	height: 40px;
+	
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+}
+
+#start-date {
+	box-sizing: border-box;
+
+	/* Auto layout */
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 0px;
+	
+	width: 200px;
+	height: 40px;
+	
+	background: #FFFFFF;
+	/* input-border */
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+}
+
+#end-date {
+	box-sizing: border-box;
+
+	/* Auto layout */
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 0px;
+	
+	width: 200px;
+	height: 40px;
+	
+	background: #FFFFFF;
+	/* input-border */
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+}
+
+#period-choice {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0px;
+	
+	width: 220px;
+	height: 40px;
+	
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+}
+
+#today-btn {
+	box-sizing: border-box;
+
+	width: 55px;
+	height: 40px;
+	
+	/* main */
+	background: #4777F6;
+	border-width: 1px 0px 1px 1px;
+	border-style: solid;
+	border-color: #4777F6;
+	border-radius: 5px 0px 0px 5px;
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+}
+
+#today {
+	width: 25px;
+	height: 17px;
+	left: 15px;
+	top: 12px;
+	
+	font-family: 'SUIT Variable';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	text-transform: uppercase;
+	
+	color: #FFFFFF;
+}
+
+#one-week-btn {
+	box-sizing: border-box;
+
+	width: 55px;
+	height: 40px;
+	
+	background: #FFFFFF;
+	/* input-border */
+	border-width: 1px 1px 1px 0px;
+	border-style: solid;
+	border-color: #C0C0C0;
+	border-radius: 0px;
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+}
+
+#one-week {
+	width: 30px;
+	height: 17px;
+	left: calc(50% - 30px/2 - 0.5px);
+	top: calc(50% - 17px/2 - 0.5px);
+	
+	font-family: 'SUIT Variable';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	text-transform: uppercase;
+	
+	/* 까만색도아니고회색도아니고 */
+	color: #666666;
+}
+
+#one-month-btn {
+	box-sizing: border-box;
+
+	width: 55px;
+	height: 40px;
+	
+	background: #FFFFFF;
+	/* input-border */
+	border-width: 1px 1px 1px 0px;
+	border-style: solid;
+	border-color: #C0C0C0;
+	border-radius: 0px;
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 2;
+	flex-grow: 0;
+}
+
+#one-month {
+	width: 30px;
+	height: 17px;
+	left: calc(50% - 30px/2 - 0.5px);
+	top: calc(50% - 17px/2 - 0.5px);
+	
+	font-family: 'SUIT Variable';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	text-transform: uppercase;
+	
+	/* 까만색도아니고회색도아니고 */
+	color: #666666;
+}
+
+#one-year-btn {
+	box-sizing: border-box;
+
+	width: 55px;
+	height: 40px;
+	
+	background: #FFFFFF;
+	/* input-border */
+	border-width: 1px 1px 1px 0px;
+	border-style: solid;
+	border-color: #C0C0C0;
+	border-radius: 0px 5px 5px 0px;
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 3;
+	flex-grow: 0;
+}
+
+#one-year {
+	width: 18px;
+	height: 17px;
+	left: calc(50% - 18px/2 - 0.5px);
+	top: calc(50% - 17px/2 - 0.5px);
+	
+	font-family: 'SUIT Variable';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	text-transform: uppercase;
+	
+	/* 까만색도아니고회색도아니고 */
+	color: #666666;
+}
+
+#frame1184 {
+	/* Frame 1184 */
+
+	box-sizing: border-box;
+	
+	/* Auto layout */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 10px 20px;
+	gap: 10px;
+	
+	width: 1133px;
+	height: 60px;
+	
+	/* table-line */
+	border-bottom: 1px solid #D8D8D8;
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	
+}
+
+#frame1226 {
+	/* Frame 1226 */
+
+	/* Auto layout */
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0px;
+	gap: 40px;
+	
+	margin: 0 auto;
+	width: 1093px;
+	height: 40px;
+	
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 0;
+	align-self: stretch;
+	flex-grow: 0;
+	
+}
+
+#process-state {
+	/* Frame 1228 */
+
+	/* Auto layout */
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0px;
+	gap: 10px;
+	
+	width: 100px;
+	height: 20px;
+	
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+	
+}
+
+#frame1289 {
+	/* Frame 1289 */
+
+	/* Auto layout */
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0px;
+	gap: 10px;
+	
+	width: 371px;
+	height: 40px;
+	
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	
+}
+
+#category {
+	/* 셀렉트버튼 (문구랑 갭사이즈는 바꿔서) */
+
+	box-sizing: border-box;
+	
+	/* Auto layout */
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	
+	width: 140px;
+	height: 40px;
+	
+	background: #FFFFFF;
+	/* input-border */
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+	
+	/* Inside auto layout */
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+	
+}
+
+#reset {
+	width: 1133px;
+	height: 24px;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 24px;
+	text-align: right;
 }
