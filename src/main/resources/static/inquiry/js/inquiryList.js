@@ -58,4 +58,3 @@ $("#one-year-btn").click(() => {
 	$("#start-date").val(formattedDate);
 	$("#end-date").val(formattedDate);
 });
-

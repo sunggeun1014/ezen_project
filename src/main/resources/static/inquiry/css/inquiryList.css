@@ -255,6 +255,8 @@
 }
 
 #today-btn {
+	cursor: pointer;
+	
 	box-sizing: border-box;
 
 	width: 55px;
@@ -290,6 +292,8 @@
 }
 
 #one-week-btn {
+	cursor: pointer;
+	
 	box-sizing: border-box;
 
 	width: 55px;
@@ -326,6 +330,8 @@
 }
 
 #one-month-btn {
+	cursor: pointer;
+	
 	box-sizing: border-box;
 
 	width: 55px;
@@ -362,6 +368,8 @@
 }
 
 #one-year-btn {
+	cursor: pointer;
+	
 	box-sizing: border-box;
 
 	width: 55px;
@@ -523,4 +531,6 @@
 	font-size: 16px;
 	line-height: 24px;
 	text-align: right;
+	color: black;
+	text-decoration: none;
 }
