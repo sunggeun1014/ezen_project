@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Home">
+
+    <select id="getProductsCnt" resultType="int">
+        SELECT count(*)
+        FROM books
+        WHERE book_state = '01'
+    </select>
+
+    <select id="getMembersCnt" resultType="int">
+        SELECT count(*)
+        FROM members
+    </select>
+
+    <select id="getTodayOrder" resultType="int">
+        SELECT COUNT(*)
+        FROM customer_orders
+        WHERE ORDER_PAYMENT_STATUS = '01'
+        AND TO_CHAR(order_purchase_date, 'YYYY-MM-DD') = TO_CHAR(current_timestamp, 'YYYY-MM-DD')
+    </select>
+
+
+    <select id="getTodaySales" resultType="int">
+        SELECT SUM(cod.order_detail_price * (cod.order_detail_qty - cod.order_complete_qty))
+        FROM customer_order_details cod
+        INNER JOIN customer_orders co
+        ON cod.order_num = co.order_num
+        WHERE co.ORDER_PAYMENT_STATUS = '01'
+        AND TO_CHAR(co.order_purchase_date, 'YYYY-MM-DD') = TO_CHAR(current_timestamp, 'YYYY-MM-DD')
+    </select>
+
+
+    <!-- 배송전(주문) -->
+    <select id="getAllOrders" resultType="int">
+        SELECT count(*)
+        FROM customer_orders
+        WHERE order_payment_status != '02'
+        AND EXTRACT(MONTH FROM order_purchase_date) = EXTRACT(MONTH FROM SYSDATE)
+        AND EXTRACT(YEAR FROM order_purchase_date) = EXTRACT(YEAR FROM SYSDATE)
+    </select>
+
+
+    <!-- 배송중 -->
+    <select id="getAllDelivering" resultType="int">
+        SELECT count(*)
+        FROM customer_orders
+        WHERE order_delivery_status = '02'
+        AND EXTRACT(MONTH FROM order_purchase_date) = EXTRACT(MONTH FROM SYSDATE)
+        AND EXTRACT(YEAR FROM order_purchase_date) = EXTRACT(YEAR FROM SYSDATE)
+    </select>
+
+    <!-- 배송완료 -->
+    <select id="getAllCompleted" resultType="int">
+        SELECT count(*)
+        FROM customer_orders
+        WHERE order_delivery_status = '03'
+        AND EXTRACT(MONTH FROM order_purchase_date) = EXTRACT(MONTH FROM SYSDATE)
+        AND EXTRACT(YEAR FROM order_purchase_date) = EXTRACT(YEAR FROM SYSDATE)
+    </select>
+
+</mapper>

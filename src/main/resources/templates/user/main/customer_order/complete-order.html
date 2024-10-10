@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/mainLayout}"
+      layout:fragment="Content">
+
+<link rel="stylesheet" href="/user/customer_order/css/complete-order.css">
+
+<div class="inner">
+    <div id="order-container">
+        <!-- 상단제목 -->
+        <section id="pay-header">
+            <div class="order-process">
+                <p>장바구니</p>
+                <img src="/user/customer_order/img/arrow-right=off.svg" alt="화살표">
+                <p class="bold">결제하기</p>
+                <img src="/user/customer_order/img/arrow-right=on.svg" alt="화살표">
+                <p class="order-comp">주문완료</p>
+            </div>
+            <div class="complete-msg">
+                <p>주문이 완료되었습니다.</p>
+                <input type="hidden" name="order_num" id="order_num" th:value="${orderDetail.order_num}">
+                <p>주문번호 [[${orderDetail.order_num}]]</p>
+            </div>
+        </section>
+
+        <!-- 주문 정보 -->
+        <section id="order-info-wrap">
+            <div class="order-info">
+                <p class="sub-title">주문상품</p>
+                <div class="info-head">
+                    <div class="product-text">
+                        <p th:text="${detailList[0].book_name}"></p>
+                        <p th:if="${orderDetail.order_cnt > 1}">외 <strong>[[${orderDetail.order_cnt - 1}]]</strong>개</p>
+                        <p>(총 상품 <strong>[[${orderDetail.order_cnt}]]</strong>개)</p>
+                    </div>
+                    <i class="fa-solid fa-angle-down product-info-arrow"></i>
+                </div>
+                <div class="list-wrap">
+                    <div class="order-list" th:each="list: ${detailList}">
+                        <div class="img-wrap">
+                            <img th:src="${list.book_thumbnail_changed != null ? '/images/books/' + list.book_thumbnail_changed : '/images/books/noimg.png'}" alt="책사진">
+                        </div>
+                        <div class="book-info">
+                            <p class="info-subject">[[${list.book_name}]]</p>
+                            <div class="qty-price">
+                                <p>[[${#numbers.formatInteger(list.order_detail_price, 0, 'COMMA')}]]원</p>
+                                <p> / [[${list.order_detail_qty}]]개</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="order-info">
+                <p class="sub-title">결제금액</p>
+                <div class="info-content payment-info">
+                    <p class="info-subject">최종 결제금액</p>
+                    <div class="price-wrap">
+                        <p>[[${#numbers.formatInteger(orderDetail.order_price_total, 0, 'COMMA')}]]</p>
+                        <p>원</p>
+                    </div>
+                </div>
+            </div>
+            <div class="order-info">
+                <p class="sub-title">배송지 정보</p>
+                <div class="info-content deliver">
+                    <div class="deliver-info">
+                        <p class="info-subject">받는 사람</p>
+                        <div class="person-info">
+                            <p>[[${orderDetail.recipient_name != null ? orderDetail.recipient_name : orderDetail.member_name}]] / [[${orderDetail.recipient_phoneNo != null ? orderDetail.recipient_phoneNo : orderDetail.member_phoneno}]]</p>
+                        </div>
+                    </div>
+                    <div class="deliver-info">
+                        <p class="info-subject">받는 주소</p>
+                        <div class="addr-info">
+                            <p>[[${orderDetail.order_addr}]] [[${orderDetail.order_addr_detail}]]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="btn-wrap">
+            <button class="default-btn border" id="go-main">쇼핑계속</button>
+            <button class="default-btn" id="go-detail">주문/배송상세</button>
+        </div>
+    </div>
+</div>
+
+<script src="/user/customer_order/js/complete-order.js"></script>
+</html>

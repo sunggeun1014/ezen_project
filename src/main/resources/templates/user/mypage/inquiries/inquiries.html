@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/myPageLayout}"
+      layout:fragment="Content">
+      
+      <link rel="stylesheet" href="/user/common/css/pagination.css" />
+      <link rel="stylesheet" href="/user/mypage/inquiries/css/inquiries.css"/>
+      
+<div class="content">
+	<div class="myinfo-content">
+	
+		<p class="myinfo-title">1:1 문의</p>
+		
+		<div class="sub-info-bg">
+      		<div class="date-picker" style="justify-content: space-between;">
+      			<div class="date-picker-plus">
+					<div class="input-date-box">
+						<input type="text" id="startDate" class="placeholder" placeholder="YYYY-MM-DD" />
+						<i class="fa-solid fa-calendar-days"></i>
+					</div>
+					<div class="calendar-slash">~</div>
+					<div class="input-date-box">
+						<input type="text" id="endDate" class="placeholder" placeholder="YYYY-MM-DD" />
+						<i class="fa-solid fa-calendar-days"></i>
+					</div>
+					<div>
+						<button id="searchBtn" class="default-btn border">검색</button>
+					</div>
+      			</div>
+				<div>
+					<button class="default-btn" onclick="location.href='/user/mypage/written-inquiries-page'">1:1문의</button>
+				</div>
+			</div>
+	    </div>
+		
+		<div class="tab-btns-wrap">
+		    <button class="tab-btn active" data-status="">전체</button>
+		    <button class="tab-btn" data-status="01">미답변</button>
+		    <button class="tab-btn" data-status="02">답변완료</button>
+	    </div>
+	    
+	    <div class="result-wrap">
+			<p>!</p>
+			<span>해당 기간에 등록한</span>
+		  	<span>&nbsp;문의 내역이 없습니다.</span>
+		</div>
+	    
+	    <!-- 리스트 뽑아올 곳 -->
+	    <div id="inquiries-list"></div>
+	    
+	    <div id="page-area" class="page-area"></div>
+	</div>
+</div>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="/user/mypage/inquiries/js/inquiries.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+</html>

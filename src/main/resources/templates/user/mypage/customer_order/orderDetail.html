@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/user/common/layout/myPageLayout}" layout:fragment="Content">
+
+<link rel="stylesheet" href="/user/mypage/orderList/css/orderDetail.css" />
+<div class="content">
+	<div class="myinfo-content">
+		<div class="myinfo-title">주문/배송 상세</div>
+		<div class="sub-info-bg order-date-num">
+			<div>
+				<span class="order-purchase-date" th:text="${#dates.format(orderDetails.order_purchase_date, 'yyyy.MM.dd')}"></span>
+			</div>
+			<div class="order-num-wrap">
+				<span>주문번호</span>
+				<div class="order-num" th:text="${orderDetails.order_num}"></div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="order-items-box">
+				<div class="box-title-wrapper">
+					<div class="box-title">
+						<span class="order-delivery-status">주문상품</span>
+					</div>
+					<div class="product-request-btn-area">
+						<!-- 배송 상태에 따라 취소/반품 버튼 -->
+						<button id="cancelButton" class="default-btn border cancel-btn" th:if="${orderDetails.order_delivery_status == '배송전' && not #arrays.isEmpty(detailList.?[order_detail_status == '주문완료'])}" th:data-order-num="${orderDetails.order_num}" onclick="location.href='/' + 'user/mypage/cancelList?orderNum=' + this.dataset.orderNum">취소</button>
+
+						<button id="returnButton" class="default-btn border return-btn" th:if="${orderDetails.order_delivery_status == '배송완료' && not #arrays.isEmpty(detailList.?[order_detail_status == '주문완료']) 
+								&& not #arrays.isEmpty(detailList.?[order_detail_status == '반품요청' || order_detail_status == '반품완료']) == false}" th:data-order-num="${orderDetails.order_num}" th:data-payment-date="${orderDetails.order_purchase_date}" onclick="location.href='/' + 'user/mypage/returnRequest?orderNum=' + this.dataset.orderNum">반품</button>
+
+						<!-- 주문 상태가 취소요청/취소완료일 때 취소상세 버튼 -->
+						<button id="cancelDetailButton" class="small-btn detail" th:if="${not #arrays.isEmpty(detailList.?[order_detail_status == '취소요청']) || not #arrays.isEmpty(detailList.?[order_detail_status == '취소완료'])}" th:data-order-num="${orderDetails.order_num}" onclick="location.href='/' + 'user/mypage/cancelCompletion?orderNum=' + this.dataset.orderNum">
+							취소상세 <i class="fa-solid fa-angle-right"></i>
+						</button>
+
+						<!-- 주문 상태가 반품요청/반품완료일 때 반품상세 버튼 -->
+						<button id="returnDetailButton" class="small-btn detail" th:if="${not #arrays.isEmpty(detailList.?[order_detail_status == '반품요청']) || not #arrays.isEmpty(detailList.?[order_detail_status == '반품완료'])}" th:data-order-num="${orderDetails.order_num}" onclick="location.href='/' + 'user/mypage/returnDetail?orderNum=' + this.dataset.orderNum">
+							반품상세 <i class="fa-solid fa-angle-right"></i>
+						</button>
+					</div>
+				</div>
+				<div class="order-items" th:each="item : ${detailList}">
+
+					<div class="book-info">
+						<a th:href="'/user/products/detail?book_isbn=' + ${item.book_isbn}"> <img class="book-thumbnail" th:src="${item.book_thumbnail_changed != null ? '/images/books/' + item.book_thumbnail_changed : '/images/books/noimg.png'}" alt="책 이미지">
+						</a>
+						<div class="book-name-qty">
+							<a th:href="'/user/products/detail?book_isbn=' + ${item.book_isbn}"><span class="book-name" th:text="${item.book_name}"></span></a> <span class="purchase-qty" th:text="'수량: ' + ${item.order_detail_qty} + '개'"></span>
+						</div>
+
+					</div>
+					<div class="order-price-status">
+						<div class="price-wrap">
+							<span class="order-price" th:text="${#numbers.formatInteger(item.order_detail_price * item.order_detail_qty, 0, 'COMMA')}"></span> <span>원</span>
+						</div>
+						<div class="order-status-wrap">
+							<span class="order-status" th:text="${item.order_detail_status}"></span>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="order-detail-info">
+				<h3 class="delivery-info-title">배송정보</h3>
+				<div class="delivery-info-wrap">
+					<span class="delivery-info-detail">기본정보</span>
+					<div class="recipient-info-wrap">
+						<span th:text="${orderDetails.recipient_name}"></span> <span th:text="${orderDetails.recipient_phoneno}"></span> <span th:text="${orderDetails.order_addr} + ' ' + ${orderDetails.order_addr_detail != null ? orderDetails.order_addr_detail : ''}"></span>
+					</div>
+				</div>
+			</div>
+			<div class="order-detail-info">
+				<h3 class="payment-info-title">결제정보</h3>
+				<div class="payment-info-wrap">
+					<div class="order-price-wrap">
+						<span class="price-title">주문금액</span>
+						<div class="price-wrap">
+							<span class="order-price" th:text="${#numbers.formatInteger(orderDetails.order_price_total, 0, 'COMMA')}"></span>
+							<p>원</p>
+						</div>
+					</div>
+					<div class="payment-price-wrap">
+						<span class="price-title">결제금액</span>
+						<div class="price-wrap">
+							<span class="payment-price" th:text="${#numbers.formatInteger(orderDetails.order_price_total, 0, 'COMMA')}"></span>
+							<p>원</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="order-detail-info">
+				<h3 class="income-deduction-title">도서 소득공제</h3>
+				<div class="income-deduction-wrap">
+					<span class="delivery-info-detail">신용카드, 간편결제</span>
+					<div class="price-wrap">
+						<span class="payment-price" th:text="${#numbers.formatInteger(orderDetails.order_price_total, 0, 'COMMA')}"></span>
+						<p>원</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="btn-area">
+			<button class="default-btn order-list-btn" onclick="location.href='/user/mypage/orderList'">주문/배송 목록</button>
+		</div>
+	</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+</html>

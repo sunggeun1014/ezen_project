@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/admin/common/layout/defaultlayout}"
+      layout:fragment="Content">
+
+    <link rel="stylesheet" href="/admin/home/css/home.css">
+<div class="dashboard-header">
+    <div class="info-wrap home-member" onclick="location.href='/admin/members/list'">
+        <div class="member-cnt txt-wrap">
+            <p>회원수</p>
+            <p>[[${memberCnt}]]</p>
+        </div>
+        <i class="fa-solid fa-users"></i>
+    </div>
+    <div class="info-wrap" onclick="location.href='/admin/products/list'">
+        <div class="items-cnt txt-wrap">
+            <p>판매중인상품</p>
+            <p>[[${productCnt}]]</p>
+        </div>
+        <i class="fa-solid fa-book"></i>
+    </div>
+    <div class="info-wrap" onclick="location.href='/admin/customerOrders/list'">
+        <div class="orders-cnt txt-wrap">
+            <p>오늘 주문건</p>
+            <p>[[${orderCnt}]]</p>
+        </div>
+        <i class="fa-solid fa-clipboard-list"></i>
+    </div>
+    <div class="info-wrap" onclick="location.href='/admin/customerOrders/list'">
+        <div class="sales-cnt txt-wrap">
+            <p>오늘 매출</p>
+            <p th:text="${#numbers.formatInteger(todaySales, 0, 'COMMA')}"></p>
+        </div>
+        <i class="fa-solid fa-money-bill-trend-up"></i>
+    </div>
+</div>
+
+<div class="white-frame dashboard-status">
+    <p class="search-list-title">이번달 주문현황</p>
+    <div class="status-info-wrap">
+        <div class="status-info order">
+            <div class="img-wrap">
+                <img src="/admin/home/imgs/order-list-icon.svg" alt="주문건수" class="img-icon"/>
+            </div>
+            <p>주문</p>
+            <a href="/admin/customerOrders/list">[[${allOrderCnt}]]</a>
+        </div>
+        <div class="arrow">
+            <img src="/admin/home/imgs/dashboard-status-arrow.svg" alt="화살표"/>
+        </div>
+        <div class="status-info deliver">
+            <div class="img-wrap">
+                <img src="/admin/home/imgs/deliver-icon.svg" alt="배송중건수" class="img-icon"/>
+            </div>
+            <p>배송중</p>
+            <a href="/admin/customerOrders/list">[[${allDelivering}]]</a>
+        </div>
+        <div class="arrow">
+            <img src="/admin/home/imgs/dashboard-status-arrow.svg" alt="화살표"/>
+        </div>
+        <div class="status-info complete">
+            <div class="img-wrap">
+                <img src="/admin/home/imgs/complete-deliver.svg" alt="배송완료건수" class="img-icon"/>
+            </div>
+            <p>배송완료</p>
+            <a href="/admin/customerOrders/list">[[${allCompleted}]]</a>
+        </div>
+    </div>
+</div>
+<div class="tables-wrap">
+    <div class="white-frame inquiries-table">
+        <p class="search-list-title">문의내역</p>
+        <table id="inquiries" class="table table-center">
+            <thead class="table-head">
+            <tr class="table-column-head">
+                <th class="table-column-head-txt">NO</th>
+                <th class="table-column-head-txt">제목</th>
+                <th class="table-column-head-txt">분류</th>
+                <th class="table-column-head-txt">문의일</th>
+                <th class="table-column-head-txt">답변여부</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="white-frame inven-status-table">
+        <p class="search-list-title">입출고내역</p>
+        <table id="stock" class="table table-center">
+            <thead class="table-head">
+            <tr class="table-column-head">
+                <th class="table-column-head-txt">NO</th>
+                <th class="table-column-head-txt">입출고번호</th>
+                <th class="table-column-head-txt">상태</th>
+                <th class="table-column-head-txt">작업일</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<!-- datatalbes -->
+<script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.1.4/js/dataTables.bulma.js"></script>
+
+<script src="/admin/home/js/home.js"></script>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WHALE BOOKS</title>
+    <link rel="shortcut icon" th:href="@{/user/common/imgs/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" href="/user/common/css/common.css"/>
+    <link rel="stylesheet" href="/user/common/css/reset.css">
+    <link rel="stylesheet" href="/admin/common/css/modal.css"/>
+    <link rel="stylesheet" href="/user/login/css/login.css"/>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+</head>
+<body>
+<div class="login-frame">
+    <a href="/user/main" class="logo-wrap">
+        <img src="/user/common/imgs/main-logo.svg" alt="메인로고" class="mainlogo"/>
+    </a>
+
+    <form th:action="@{/user/loginProc}" method="POST" class="login-form">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+        <div class="form-list login">
+            <div class="form-item id">
+                <input id="id" type="text" name="username"
+                       placeholder="아이디를 입력하세요"/>
+            </div>
+            <div class="form-item pw">
+                <input id="password" type="password" name="password"
+                       placeholder="비밀번호를 입력하세요"/>
+            </div>
+            <div th:if="${param.usernameError != null or param.passwordError != null}" class="error-msg">
+                <div th:if="${param.usernameError != null}">
+                    <p th:text="${param.usernameError}"></p>
+                </div>
+                <div th:if="${param.passwordError != null}">
+                    <p th:text="${param.passwordError}"></p>
+                </div>
+            </div>
+            <button type="submit" class="default-btn long login" id="loginBtn" disabled>로그인</button>
+            <div class="id-store">
+				<div class="save-wrap">
+					<div class="check-bth">
+						<input type="checkbox" id="saveIdCheckbox" class="check-box"/>
+						<label for="saveIdCheckbox"></label>
+					</div>
+					<p>아이디저장</p>
+				</div>
+                <div class="text">
+                    <a class="find-id" href="/user/members/find_Id">아이디 찾기</a>
+                    <a href="/user/members/find_Pw">비밀번호 찾기</a>
+                </div>
+            </div>
+
+            <div class="join-wrap-social">
+                <div>
+                    <a href="/oauth2/authorization/naver">
+                        <img src="/user/common/imgs/sns-login-btn-naver.png" alt="네이버 소셜 연동" class="social-btn"/>
+                    </a>
+                </div>
+                <div>
+                    <a href="/oauth2/authorization/kakao">
+                        <img src="/user/common/imgs/sns-login-btn-kakao.png" id="kakao_login" alt="카카오 소셜 연동"
+                             class="social-btn"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="default-btn long register" onclick="location.href='/user/members/join'">회원가입
+        </button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/user/common/js/main.js"></script>
+
+<script src="/user/login/js/login.js"></script>
+</body>
+</html>

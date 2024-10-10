@@ -1,0 +1,43 @@
+.info {
+    height: 60px;
+	display: flex;
+    align-items: center;
+    padding-left : 20px;
+    border-bottom: 1px solid #C0C0C0;
+    gap : 10px;
+}
+
+.button-wrap-warehouseDetails {
+	display:flex;
+	align-items: center;
+	padding-top: 15px;
+	justify-content: center;
+	gap: 10px;
+}
+
+input[type=number]{
+	width: 100px;
+}
+
+.input-with-unit {
+    position: relative;
+    display: inline-block;
+}
+
+.unit {
+    position: absolute;
+    right: 10px; /* input의 오른쪽에 위치 */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #333;
+    pointer-events: none; /* 단위 텍스트가 클릭되지 않도록 */
+    font-size: 14px;
+}
+
+.select-wrap.zone_num {
+	width: 100px;
+}
+
+
+
+

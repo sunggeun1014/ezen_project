@@ -4,8 +4,36 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <!-- window > Preferences > Maven > download artifact javadoc 체크 -->
 <configuration>
-	<typeAliases>
- 		<typeAlias type="com.ezen.bookproject.admin.members.dto.MembersDTO" alias="member"/>
- 		<typeAlias type="com.ezen.bookproject.admin.reviews.dto.ReviewsDTO" alias="reviews"/>
- 	</typeAliases>
+	
+	<!-- 스네이크 케이스를 카멜케이스로 자동 매핑 -->
+	<!-- 
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/> 
+	</settings>
+	 -->
+
+   <typeAliases>
+      <typeAlias type="java.util.List" alias="List"/>
+    
+      <typeAlias type="com.ezen.bookproject.admin.customerorders.dto.CustomerOrdersDTO" alias="customerOrders"/>
+      <typeAlias type="com.ezen.bookproject.commons.SearchCondition" alias="condition"/>
+      <typeAlias type="com.ezen.bookproject.admin.members.dto.AdminMembersDTO" alias="member"/>
+      <typeAlias type="com.ezen.bookproject.admin.reviews.dto.ReviewsDTO" alias="reviews"/>
+
+      <typeAlias type="com.ezen.bookproject.admin.products.dto.ProductsDTO" alias="products"/>
+      <typeAlias type="com.ezen.bookproject.admin.products.dto.CategoryDTO" alias="category"/>
+      <typeAlias type="com.ezen.bookproject.admin.products.dto.InventoryDTO" alias="inventory"/>
+	  <typeAlias type="com.ezen.bookproject.admin.warehouse.dto.WarehouseDTO" alias="warehouse"/>
+		
+      <typeAlias type="com.ezen.bookproject.admin.managers.dto.AdminManagersDTO" alias="manager"/>
+      <typeAlias type="com.ezen.bookproject.admin.banners.dto.BannersDTO" alias="banners"/>      
+      <typeAlias type="com.ezen.bookproject.admin.inquiries.dto.InquiriesDTO" alias="inquiries"/>
+      <typeAlias type="com.ezen.bookproject.admin.supplierorders.dto.SupplierOrdersDTO" alias="supplierOrders"/>      
+ 
+ 
+      <typeAlias type="com.ezen.bookproject.admin.notice.dto.NoticeDTO" alias="notice"/>      
+      <typeAlias type="com.ezen.bookproject.admin.inventorylog.dto.InventoryLogDTO" alias="inventoryLog"/>
+      
+   </typeAliases>
+
 </configuration>

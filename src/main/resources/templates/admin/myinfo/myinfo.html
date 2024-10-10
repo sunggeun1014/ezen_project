@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/admin/common/layout/defaultlayout}"
+    layout:fragment="Content">
+    <link rel="stylesheet" href="/admin/myinfo/css/myinfo.css" />
+<div>
+    <div class="white-frame">
+        <!-- th:object를 사용하여 폼의 모든 필드가 manager 객체와 바인딩되도록 설정 -->
+        <form action="/admin/myinfo/update" th:object="${managers}" method="POST" enctype="multipart/form-data" onsubmit="return prepareSubmit()">
+            <h1 class="search-list-title">내 정보 수정</h1>
+
+            <div class="info">
+                <span class="search-list-subject">아이디</span>
+                <div class="text-readonly">
+                    <span th:text="${managers.manager_id}"></span>
+                </div>
+                <input type="hidden" th:field="*{manager_id}"/>
+            </div>
+
+            <!-- 비밀번호 필드 -->
+            <div class="info pw-wrap">
+                <span class="search-list-subject">비밀번호</span>
+                <div>
+                    <input type="password" id="input-pw" class="input-pw" placeholder="새 비밀번호 입력">
+                </div>
+            </div>
+
+            <div class="info">
+                <span class="search-list-subject">비밀번호 확인</span>
+                <div>
+                    <input type="password" id="input-pw-check" class="input-pw" th:field="*{manager_pw}" placeholder="새 비밀번호 확인">
+                    <span class="error-message" id="pwError" style="display: block;">※ 특수문자, 영문자, 숫자 포함, 최소 8자</span>
+                </div>
+                <div>
+                </div>
+            </div>
+
+            <!-- 이메일 필드 -->
+            <div class="info">
+                <span class="search-list-subject">이메일</span>
+                <div class="info-items">
+                    <input type="text" id="emailUser" class="gray-text" th:value="${emailUser}"/>
+                    <span class="search-list-subject-symbol">@</span>
+                    <div class="select-wrap emailDomain">
+                        <select id="emailDomain" name="emailDomain" onchange="toggleCustomDomain()">
+						    <option th:each="domain : ${emailDomainList}"
+						            th:value="${domain}"
+						            th:text="${domain}"
+						            th:selected="${domain == emailDomain}">
+						    </option>         
+						</select>
+                        <div class="select-arrow-down" id="email"></div>
+                    </div>
+                    <input type="text" id="customEmailDomain" style="display:none;"/>
+                </div>
+                <div>
+	                <input type="hidden" id="fullEmail" th:field="*{manager_email}" />
+                </div>
+                <div>
+	                <span class="error-message" id="emailError"></span>
+                </div>
+            </div>
+
+            <!-- 전화번호 필드 -->
+            <div class="info">
+                <span class="search-list-subject">전화번호</span>
+                <div class="info-items">
+                    <div class="select-wrap countryNum">
+                        <select id="countryNum" name="countryNum">
+			                <option value="010" th:selected="${countryNum == '010'}">010</option>
+			                <option value="011" th:selected="${countryNum == '011'}">011</option>
+			                <option value="016" th:selected="${countryNum == '016'}">016</option>
+			                <option value="017" th:selected="${countryNum == '017'}">017</option>
+			                <option value="018" th:selected="${countryNum == '018'}">018</option>
+			                <option value="019" th:selected="${countryNum == '019'}">019</option>
+			            </select>
+                        <div class="select-arrow-down" id="phoneNum"></div>
+                    </div>
+                    <span class="search-list-subject-symbol">-</span>
+                    <input type="number" id="userPart1" class="gray-num" max="9999" step="1" th:value="${userPart1}" />
+                    <span class="search-list-subject-symbol">-</span>
+                    <input type="number" id="userPart2" class="gray-num" max="9999" step="1" th:value="${userPart2}" />
+                </div>
+                <div>
+	                <input type="hidden" id="fullPhone" th:field="*{manager_phoneNo}" />
+                </div>
+                <div>
+	                <span class="error-message" id="phoneError"></span>
+                </div>
+            </div>
+
+            <!-- 주소 필드 -->
+            <div class="info addr-wrap">
+                <span class="search-list-subject">주소</span>
+                <div>
+                    <input type="text" id="address_kakao" th:field="*{manager_addr}" class="gray-text" readonly/>
+                </div>
+            </div>
+
+            <div class="info">
+                <span class="search-list-subject">상세주소</span>
+                <div>
+                    <input type="text" th:field="*{manager_detail_addr}" class="gray-text"/>
+                </div>
+            </div>
+
+            <!-- 부서명 필드 -->
+            <div class="info">
+                <span class="search-list-subject">부서명</span>
+                <div class="text-readonly">
+					<span th:text="
+					    ${managers.manager_dept} == '01' ? '물류팀' :
+					    (${managers.manager_dept} == '02' ? '운영팀' :
+					    (${managers.manager_dept} == '03' ? '인사팀' : '기타'))
+					"></span>
+
+                </div>
+            </div>
+            <!-- 프로필 사진 -->
+            <div class="info" style="border-bottom: none;">
+                <span class="search-list-subject">프로필</span>
+                <div class="info-items">
+                    <div class="img-input-wrap">
+                        <label for="input-file" class="input-file-label">
+                            <input type="file" name="profileImage" id="input-file" class="input-img-file" accept=".jpg, .jpeg, .png" onchange="previewImage(event)"/>
+							<img th:src="${managers.manager_profile_changed != null ? '/images/profiles/' + managers.manager_profile_changed : '/admin/common/img/profile/default_profile.png'}" 
+							     alt="사진" id="preview" style="display: block;" onerror="this.onerror=null; this.src='/admin/common/img/profile/default_profile.png';" />                        
+                        
+                        </label>
+                    </div>
+                    <label>형식 : JPG, JPEG, PNG / 권장 사이즈 500px * 500px</label>
+                </div>
+            </div>
+			<div class="btn-box">
+				<button type="submit" class="default-btn">수정</button>
+				<button type="button" class="default-btn cancel" onclick="location.href='/admin/home'">취소</button>
+			</div>
+		</form>
+    </div>
+    
+    <script src="/admin/myinfo/js/myinfo.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</div>
+</html>

@@ -1,0 +1,162 @@
+.page-title {
+	font-size: 20px;
+	font-weight:  bold;
+}
+
+.order-info-area {
+	display: flex;
+	height: 80px;
+	line-height: 40px;
+	margin: 25px 0;
+	padding: 20px 0;
+	background-color: #FAF8FE;
+	border-radius: 20px;
+}
+
+.request-date {
+	padding-left: 30px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #000000;
+}
+
+.request-date > span {
+	border-right: 1px solid #C0C0C0;
+    margin-right: 20px;
+    padding-right: 20px;
+}
+
+.request-order-num > span {
+	color: #000000;
+	font-weight: 300;
+}
+
+.page-sub-title {
+	font-size: 16px;
+	font-weight: 600;
+	padding: 15px 10px;
+	height: 65px;
+	line-height: 35px;
+	border-top: 1px solid #000000;
+}
+
+.cancel-book-detail {
+	display: flex;
+    align-items: center;
+	padding: 15px 30px 15px 40px;
+	border-top: 1px solid #C0C0C0;
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+	margin-left: 20px;
+	margin-right: auto;
+}
+
+.book-name, .book-price {
+	font-size: 16px;
+	font-weight: 600;
+	color: #000000;
+}
+
+.purchase-qty {
+	font-size: 14px;
+	color: #7E7E7E;
+}
+
+.btn-area {
+	text-align: center;
+}
+
+.cancel-btn {
+	width: 200px;
+	height: 50px;
+	background-color: #845EC2;
+	border-radius: 5px;
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.order_status {
+	color: #845EC2;
+	font-weight: 600;
+	margin-left: 50px;
+}
+
+.cancel-complete-box {
+	margin-top: 60px;
+}
+
+.refund-area {
+	margin: 60px 0 65px 0;
+}
+
+.refund-title-area {
+	border-bottom: 1px solid;	
+}
+
+.refund-title {
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #000000;
+}
+
+.refund-info-area {
+	display: flex;
+	padding: 30px 40px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #000000;
+	border-bottom: 1px solid #C0C0C0; 
+}
+
+.refund-price-area {
+	width: 50%;
+    display: flex;
+    justify-content: space-between;
+    border-right: 1px solid #C0C0C0;
+    padding-right: 30px;
+}
+
+.cancel-price-area {
+	width: 50%;
+	display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+}
+
+.cancel-price .won {
+	font-weight: 400;
+}
+
+.refund-guide-area {
+	background-color: #FAFAFA;
+	padding: 30px 0 30px 20px;
+	margin: 140px 0 120px 0;
+	border-radius: 10px;
+}
+
+.refund-guide-title {
+	font-size: 16px;
+	font-weight: bold;
+	color: #000000;
+	padding-bottom: 20px;
+}
+
+.guide-lines-content {
+	font-size: 16px;
+	font-weight: 400;
+	color: #000000;
+}
+
+.guide-lines-content:before {
+	content: "· ";
+	font-weight: 900;
+	font-size: 18px;
+	padding-left: 5px;
+}

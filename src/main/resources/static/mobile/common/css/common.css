@@ -1,0 +1,414 @@
+.mobile-frame {
+    padding: 1.5rem 1.5rem 0;
+    margin-bottom: 10rem;
+}
+
+.mobile-inner {
+    display: flex;
+    flex-direction: column;
+}
+
+.scroll {
+    overflow: auto;
+}
+
+.elipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+select:focus, input:focus {
+    outline: none;
+    border: 1px solid #666;
+}
+
+.content-list {
+    height: 6rem;
+    padding: 1.5rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    border-bottom: 1px solid #D8D8D8;
+}
+
+.content-list.deliver-state {
+    height: 11rem;
+    /*grid-template-columns: 12rem auto 4.5rem;*/
+    display: block;
+}
+
+.content-text-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.content-text-wrap.top {
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.deliver-info > p:first-child {
+    font-weight: 700;
+    margin-bottom: .5rem;
+}
+
+/* 하단 탭바 */
+#tabbar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    padding: 2rem 1rem 1rem;
+    border-top: 1px solid #ededed;
+}
+
+.menu-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.menu-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: .5rem;
+}
+
+.menu-item p {
+    font-size: 1.4rem;
+    color: #666;
+}
+
+.tab-icon {
+    color: #666;
+}
+
+.tab-icon {
+    font-size: 2.9rem;
+}
+
+.icon-wrap svg {
+    height: 3rem;
+}
+
+.tab-icon.on {
+    color: #4777F6;
+}
+
+.menu-item p.on {
+    color: #4777F6;
+}
+
+/* 버튼 */
+/* 뒤로가기 (입고하기 등등) */
+.back-btn {
+    max-width: 15rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.back-btn .fa-chevron-left {
+    width: auto;
+    font-size: 1.8rem;
+    color: #666;
+}
+
+/* 파란버튼 (입고하기 등등) */
+.default-btn {
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    border: none;
+    border-radius: 1rem;
+    background-color: #4777F6;
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.default-btn svg {
+    width: auto;
+    height: 100%;
+}
+
+.default-btn.cancel {
+    border: 1px solid #C0C0C0;
+    background-color: #fff;
+    color: #666;
+}
+
+/* 인풋박스들 */
+
+/* 검색창 */
+.search-input-box {
+    position: relative;
+    height: 4rem;
+}
+
+#search-input {
+    height: 100%;
+    padding: 1rem 6rem 1rem 5rem;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    font-size: 1.4rem;
+}
+
+.search-input-box .fa-magnifying-glass {
+    position: absolute;
+    width: auto;
+    top: 1rem;
+    left: 1.5rem;
+    font-size: 2rem;
+    color: #666;
+}
+
+.search-input-box .fa-barcode {
+    position: absolute;
+    width: auto;
+    top: 0.4rem;
+    right: 1rem;
+    font-size: 2.5rem;
+    border: 1px solid #C0C0C0;
+    border-radius: .5rem;
+    padding: .3rem;
+}
+
+.search-input-box::after {
+    position: absolute;
+    content: "";
+    top: .5rem;
+    right: 5.4rem;
+    width: .1rem;
+    height: 3rem;
+    background-color: #C0C0C0;
+}
+
+/* 수량입력창 */
+.input-qty-container {
+    position: relative;
+    width: 12rem;
+}
+
+.input-qty {
+    width: 100%;
+    height: 4rem;
+    padding: 0 1rem;
+    border: none;
+    border-radius: .5rem;
+    border: 1px solid #C0C0C0;
+    font-size: 1.4rem;
+}
+
+.input-qty-container::after {
+    position: absolute;
+    content: '개';
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    font-size: 16px;
+    color: #666;
+}
+
+/* 인풋 넘버에 화살표 없애기 */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox  */
+input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: none;
+}
+
+.input-pw-box {
+    min-width: 5rem;
+    width: 100%;
+}
+
+.input-pw {
+	width: 100%;
+    height: 3rem;
+    padding: 0 0.8rem;
+    border: 1px solid #C0C0C0;
+    border-radius: .5rem;
+}
+
+/* 전화번호 셀렉박스 */
+select {
+	min-width: 5rem;
+    height: 3rem;
+    padding: 0 .5rem;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: .5rem;
+    border: 1px solid #C0C0C0;
+}
+
+select::-ms-expand {
+    display : none ;
+}
+
+.select-wrap-und {
+    position: relative;
+}
+
+.search-list-subject-symbol {
+	width: 1rem;
+}
+
+.fa-sort {
+	width: 0.5rem;
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 15px);
+    transform: translateY(-50%);
+}
+
+/* 나머지 전화번호 */
+.phone-num {
+    min-width: 5rem;
+    height: 3rem;
+    padding: 0 .8rem;
+    border: 1px solid #C0C0C0;
+    border-radius: .5rem;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+/* 프레임 */
+.white-frame {
+    width: 100%;
+    padding: 1.5rem 1rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* 홈 입출고 메뉴 버튼 */
+.home-first-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.enter-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.enter-menu i {
+    width: auto;
+    font-size: 1.8rem;
+    color: #666;
+}
+
+.left-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+}
+
+.left-wrap svg {
+    width: auto;
+    height: 2.5rem;
+}
+
+.left-wrap p {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+/* 글씨 */
+
+.menu-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.sub-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.content-text {
+    font-size: 1.2rem;
+}
+
+.content-text.deliver-state {
+    margin: 1rem 0 2rem;
+}
+
+.content-sub-txt {
+    font-size: 1rem;
+    color: #7e7e7e;
+}
+
+.myinfo {
+	display: grid; 
+	grid-template-columns: 10rem auto;
+	gap: 2rem 1rem;
+	align-items: center;
+}
+
+.myinfo-phone {
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+}
+
+.myinfo-sub-title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #666;
+}
+
+.success-message {
+    color: #10A142;
+    font-size: 1.4rem;
+}
+
+.error-message {
+	color: #E54F53;
+  	font-size: 1.4rem;
+}
+
+.inner {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.inner{
+    -ms-overflow-style: none;
+}
+.inner::-webkit-scrollbar{
+    display:none;
+}
+
+.empty-list {
+    font-size: 1.2rem;
+}

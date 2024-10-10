@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/user/common/layout/myPageLayout}" layout:fragment="Content">
+
+<link rel="stylesheet" href="/user/mypage/orderList/css/orderList.css" />
+
+<div class="content">
+	<div class="myinfo-content">
+		<div class="myinfo-title">주문/배송목록</div>
+		<div class="sub-info-bg">
+			<div class="date-picker-title">주문일</div>
+			<div class="date-picker">
+				<div class="input-date-box">
+					<input type="text" id="startDate" class="placeholder" placeholder="YYYY-MM-DD" /> 
+					<i class="fa-solid fa-calendar-days"></i>
+				</div>
+				<div class="calendar-slash">~</div>
+				<div class="input-date-box">
+					<input type="text" id="endDate" class="placeholder" placeholder="YYYY-MM-DD" /> 
+					<i class="fa-solid fa-calendar-days"></i>
+				</div>
+			</div>
+			<button id="searchBtn" class="default-btn border">검색</button>
+		</div>
+		<div class="order-history-group">
+			<div class="order-history-box-title">
+				<span class="box-title">주문내역</span>
+			</div>
+			<div class="order-history-box">
+				<span class="history-val" id="before-delivery-count"></span> 
+				<span class="history-status">배송전</span>
+			</div>
+			<div class="order-history-box">
+				<span class="history-val" id="in-delivery-count"></span> 
+				<span class="history-status">배송중</span>
+			</div>
+			<div class="order-history-box">
+				<span class="history-val" id="delivered-count"></span> 
+				<span class="history-status">배송완료</span>
+			</div>
+			<div class="order-history-box">
+				<span class="history-val" id="request-complete-count"></span> 
+				<span class="history-status">교환/반품/취소</span>
+			</div>
+		</div>
+		<div class="order-history-table">
+			<div class="order-history-table-header table-header">
+				<div class="history-table-column order-date">주문일</div>
+				<div class="history-table-column order-num">주문번호</div>
+				<div class="history-table-column order-content">주문내역</div>
+				<div class="history-table-column order-price">결제금액</div>
+				<div class="history-table-column order-status">주문상태</div>
+				<div class="history-table-column delivery-status">배송상태</div>
+			</div>
+			
+			<div class="order-history-table-list order-list" th:each="item : ${orderList}">
+				
+				<div class="history-table-item order-date">
+					<span th:text="${#dates.format(item.order_purchase_date, 'yyyy.MM.dd')}"></span>
+				</div>
+				
+				<div class="history-table-item order-num">
+					<a th:href="@{/user/mypage/orderDetail(orderNum=${item.order_num})}" th:text="${item.order_num}"></a>
+				</div>
+				
+				<a th:href="@{/user/mypage/orderDetail(orderNum=${item.order_num})}" class="history-table-item order-content"> 
+					<span class="img-wrap"> 
+						<img class="book-thumbnail" th:src="'/images/books/' + ${item.book_thumbnail_changed != null ? item.book_thumbnail_changed : '/images/books/noimg.png'}" alt="책 이미지">
+					</span> 
+					<span class="book-info"> 
+						<span th:class="${item.order_detail_num > 1} ? 'book-name' : 'single-order'" th:text="${item.book_name}"></span> 
+						<span class="purchase-qty" th:if="${item.order_detail_num > 1}" th:text="'외 ' + ${item.order_detail_num - 1} + '개'"></span>
+					</span>
+				</a>
+				
+				<div class="history-table-item order-price" th:text="${#numbers.formatInteger(item.order_price_total, 0, 'COMMA')} + '원'"></div>
+				
+				<!-- 주문상태 -->
+				<div class="history-table-item order-status">
+			    	<span th:if="${item.order_detail_status == '교환요청' || item.order_detail_status == '반품요청' || item.order_detail_status == '취소요청'}">
+			    		교환/반품/취소
+			    		<span>요청</span>
+			    	</span>
+			    	<span th:if="${item.order_detail_status == '교환완료' || item.order_detail_status == '반품완료' || item.order_detail_status == '주문취소'}">
+			    		교환/반품/취소
+						<span>완료</span>
+			    	</span>
+			    	<span th:if="${item.order_detail_status == '주문완료' || item.order_detail_status == '처리불가'}" th:text="${item.order_detail_status}">
+			    	</span>
+			    
+				</div>
+				
+				
+				<!-- 배송상태 -->
+				<div class="history-table-item delivery-status">
+					<span class="order_delivery_status" th:text="${item.order_detail_status != '주문완료' ? '-' : item.order_delivery_status}"></span>
+					<div class="history-table-item request-button" th:if="${item.order_delivery_status == '배송전' && item.order_detail_status == '주문완료'}">
+						<button class="default-btn border return-cancel-btn" th:data-order-num="${item.order_num}" 
+				        onclick="location.href='/' + 'user/mypage/cancelList?orderNum=' + this.dataset.orderNum">취소</button>
+					</div>
+					<div class="history-table-item request-button" th:if="${item.order_delivery_status == '배송완료' && item.order_detail_status == '주문완료'}">
+						<button class="default-btn border return-cancel-btn" th:data-order-num="${item.order_num}" 
+				        onclick="location.href='/' + 'user/mypage/returnRequest?orderNum=' + this.dataset.orderNum">반품</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="/user/mypage/orderList/js/orderList.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</html>

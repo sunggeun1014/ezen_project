@@ -1,0 +1,441 @@
+.page-title {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.order-info-area {
+	display: flex;
+	height: 80px;
+	line-height: 40px;
+	margin: 25px 0;
+	padding: 20px 0;
+	background-color: #FAF8FE;
+	border-radius: 20px;
+}
+
+.request-date {
+	padding-left: 30px;
+	font-size: 16px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #000000;
+}
+
+.request-date>span {
+    border-right: 1px solid #C0C0C0;
+    margin-right: 20px;
+    padding-right: 20px;
+}
+
+.request-order-num>span {
+	color: #000000;
+	font-weight: 300;
+}
+
+.page-sub-title {
+	display: flex;
+	font-size: 16px;
+	font-weight: 600;
+	background-color: #FAFAFA;
+	padding: 15px 10px;
+	height: 65px;
+	line-height: 35px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+.cancel-book-detail {
+	display: flex;
+	align-items: center;
+	padding: 15px 30px 15px 20px;
+	border-top: 1px solid #C0C0C0;
+}
+
+.book-info {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-left: 5px;
+	margin-right: auto;
+}
+
+.book-name, .book-price {
+	font-size: 16px;
+	font-weight: 600;
+	color: #000000;
+}
+
+.purchase-qty {
+	font-size: 14px;
+	color: #7E7E7E;
+}
+
+.cancel-guide-lines-area {
+	margin: 65px 0;
+}
+
+.guide-lines-title {
+	font-size: 20px;
+	font-weight: bold;
+	color: #000000;
+}
+
+.guide-lines-sub-title {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000000;
+}
+
+.guide-lines-content {
+	font-size: 14px;
+	color: #000000;
+}
+
+.guide-lines-content:before {
+	content: "· ";
+	font-weight: 900;
+	font-size: 18px;
+}
+
+.guide-lines-title-area {
+	margin-bottom: 10px;
+}
+
+.guide-lines-content-area {
+	background-color: #FAFAFA;
+	padding: 30px 20px;
+	margin-top: 10px;
+}
+
+.guide-lines-detail-area:not(:last-child) {
+	margin-bottom: 20px;
+}
+
+.btn-area {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+}
+
+.cancel-btn {
+	width: 200px;
+	height: 50px;
+	background-color: #845EC2;
+	border-radius: 5px;
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.back-btn {
+	width: 200px;
+	height: 50px;
+	background-color: #FFFFFF;
+	border: 1px solid #845EC2;
+	border-radius: 5px;
+	color: #845EC2;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.modal-text>p {
+	line-height: 1;
+}
+
+.check-btn {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.selected-count-area {
+	margin-left: 10px;
+}
+
+.input-count {
+	position: relative;
+}
+
+.input-count>input {
+	width: 80px;
+	height: 30px;
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+	font-size: 14px;
+	padding: 0 25px 0 10px;
+}
+
+.input-count:after {
+	position: absolute;
+	content: "개";
+	transform: translateY(60%);
+	right: 10px;
+	font-size: 14px;
+	color: #666666;
+}
+
+.book-image-area {
+	margin: 0 15px;
+}
+
+.return-count-input-area {
+	display: flex;
+}
+
+.return-count-input-area>span {
+	line-height: 30px;
+	margin-right: 5px;
+	font-size: 14px;
+	color: #000000;
+}
+
+.refund-area {
+	margin: 60px 0 65px 0;
+}
+
+.refund-title-area {
+	border-bottom: 1px solid;
+}
+
+.refund-title {
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #000000;
+}
+
+.refund-info-area {
+	display: flex;
+	padding: 30px 40px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #000000;
+	border-bottom: 1px solid #C0C0C0;
+}
+
+.refund-price-area {
+	width: 50%;
+	display: flex;
+	justify-content: space-between;
+	border-right: 1px solid #C0C0C0;
+	padding-right: 30px;
+}
+
+.cancel-price-area {
+	width: 50%;
+	display: flex;
+	justify-content: space-between;
+	padding-left: 30px;
+}
+
+.cancel-price {
+	display: flex;
+}
+
+.cancel-price .won {
+	font-weight: 400;
+}
+
+.refund-guide-area {
+	background-color: #FAFAFA;
+	padding: 30px 0 30px 20px;
+	margin: 140px 0 120px 0;
+	border-radius: 10px;
+}
+
+.refund-guide-title {
+	font-size: 16px;
+	font-weight: bold;
+	color: #000000;
+	padding-bottom: 20px;
+}
+
+.info-title-area {
+	height: 50px;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 50px;
+    margin-top: 60px;
+	border-bottom: 1px solid;
+}
+
+.detail-info-area {
+    display: flex;
+    gap: 100px;
+    padding: 28px 40px;
+    border-bottom: solid 1px #c0c0c0;
+}
+
+.info-sub-title-area {
+	font-size: 16px;
+	font-weight: 600;
+	color: #000000;
+}
+
+.phone-number-area {
+	margin: 14px 0;
+}
+
+.name-area {
+	display: flex;
+	position: relative;
+	gap: 50px;
+}
+
+.name {
+	line-height: 25px;
+}
+
+.user-info-font {
+	font-size: 16px;
+	color: #000000;
+}
+
+.info-change-modal {
+	position: absolute;
+	right: -500px;
+	z-index: 1000;
+	width: 550px;
+	height: 552px;
+	border: solid 1px #C0C0C0;
+	border-radius: 10px;
+	padding: 25px 20px;
+	background-color: #FFFFFF;
+}
+
+.info-change-title {
+	display: flex;
+	justify-content: space-between;
+	font-size: 20px;
+	font-weight: bold;
+	color: #000000;
+	padding-bottom: 15px;
+	border-bottom: solid 1px #C0C0C0;
+	margin-bottom: 20px;
+}
+
+.info-sub-title {
+	width: 100px;
+	height: 40px;
+	font-size: 16px;
+	color: #000000;
+	font-weight: bold;
+	margin-right: 50px;
+}
+
+.info-input-area {
+	display: flex;
+	line-height: 40px;
+	margin-bottom: 15px;
+}
+
+.info-input-box {
+	width: 350px;
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+	font-size: 16px;
+	padding: 0 10px;
+}
+
+.info-addr-input-box {
+	width: 260px;
+	border: 1px solid #C0C0C0;
+	border-radius: 5px;
+	font-size: 16px;
+	padding: 0 10px;
+}
+
+.info-addr-area {
+	display: flex;
+}
+
+.info-addr-input-area {
+	margin: 0 10px 15px 0;
+}
+
+.common-entranc-title-area {
+	font-size: 18px;
+	font-weight: bold;
+	color: #000000;
+	margin-bottom: 5px;
+}
+
+.common-entranc-content-area {
+	display: flex;
+	height: 30px;
+}
+
+.common-entranc-radio-area {
+	display: flex;
+}
+
+.common-entranc-radio {
+	margin-right: 20px;
+}
+
+.flex-direction {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.common-entranc-radio-name-area {
+	margin-right: 40px;
+	font-size: 16px;
+	color: #000000;
+}
+
+.common-entrance-pw {
+	height: 40px;
+	width: 350px;
+	font-size: 14px;
+}
+
+.common-entrance-pw-area {
+	margin: 10px 0 6px 0;
+}
+
+.common-entrance-precautions-area {
+	font-size: 12px;
+	color: #666666;
+}
+
+.info-change-btn-area {
+	margin-top: 45px;
+	text-align: center;
+}
+
+.close-btn-area {
+	width: 18px;
+	height: 18px;
+	color: #666666;
+}
+
+.close-btn-area {
+	cursor: pointer;
+}
+
+.close-btn {
+	content: url("/user/common/imgs/close-btn.jpg");
+}
+
+.common-entrance-area {
+	margin-top: 14px;
+}
+
+.modal-font-bold {
+	display: block;
+	font-weight: bold;
+}
+
+.modal-font-size {
+	font-size: 14px;
+}
+
+.warning-message {
+	margin: -10px 0 0 150px;
+	font-size: 14px;
+	color: #E54F53;
+}

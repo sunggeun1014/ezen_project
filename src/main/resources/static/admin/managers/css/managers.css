@@ -1,0 +1,21 @@
+/* 리스트 스타일 */
+.manager-list-wrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+.button-wrap-mgr {
+	display:flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 10px;
+}
+
+.pointer-cursor {
+    cursor: pointer;
+}
+
+.select-wrap {
+	width: 120px;
+}

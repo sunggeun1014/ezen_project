@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/admin/common/layout/defaultlayout}"
+    layout:fragment="Content">
+
+	<link rel="stylesheet" href="/admin/common/css/common.css">
+	<link rel="stylesheet" href="/admin/supplier_orders/css/register.css">
+	
+<div>
+	<button class="back-btn" onclick="location.href='/admin/supplierOrders/supplierOrders'">
+		<i class="fa-solid fa-chevron-left"></i>
+		<span>뒤로가기</span>
+	</button>
+	<div class="table-container white-frame">
+		<div>
+			<form id="supplier-form">
+				<div class="search-list-title">
+					<span>발주등록</span>
+				</div>
+				<div class="supplier-info-area">
+					<div class="supplier-title-area">
+						<span class="info-title">ISBN<i class="essential"></i></span>
+					</div>
+					<div class="supplier-input-area">
+						<span><input type="number" id="order_detail_isbn" class="input-size"/></span>
+					</div>
+				</div>
+				<div class="supplier-info-area">
+					<div class="supplier-title-area">
+						<span class="info-title">책제목<i class="essential"></i></span>
+					</div>
+					<div class="supplier-input-area">
+						<span><input type="text" id="order_detail_title" class="input-size"/></span>
+					</div>
+				</div>
+				<div class="supplier-info-area">
+					<div class="supplier-title-area">
+						<span class="info-title">출판사<i class="essential"></i></span>
+					</div>
+					<div class="supplier-input-area">
+						<span><input type="text" id="order_detail_publisher" class="input-size"/></span>
+					</div>
+				</div>
+				<div class="supplier-info-area">
+					<div class="supplier-title-area">
+						<span class="info-title">단가<i class="essential"></i></span>
+					</div>
+					<div class="supplier-input-area">
+						<span><input type="number" placeholder="KRW(원)" id="order_detail_price" /></span>
+					</div>
+					<div class="supplier-title-area info-title-interval">
+						<span class="info-title">수량<i class="essential"></i></span>
+					</div>
+					<div class="supplier-input-area">
+						<span class="qty-info">
+							<input type="number" placeholder="수량" id="order_detail_qty" oninput="qtyHandler(this);" /><i class="qty-text"></i>
+						</span>
+					</div>
+				</div>
+				<div class="supplier-register-btn">
+					<div>
+						<span><button class="default-btn form-btn" onclick="orderAddBtn();">추가</button></span>
+					</div>
+					<div>
+						<span><button class="default-btn cancel form-btn" onclick="resetBtn();">취소</button></span>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="white-frame">
+		<div class="list-info-area">
+			<div>
+				<span id="list-count" class="list-count">총 0건</span>
+			</div>	
+			<div>
+				<span><button id="delete-button" class="form-btn" onclick="orderDeleteBtn()">삭제</button></span>
+			</div>
+		</div>
+		<form id="order-register-list-form">
+			<div class="column-area">
+				<div class="check-column">
+					<input type="checkbox" id="select-all" class="checkbox" onclick="checkboxHandler();">
+					<label for="select-all"></label>
+				</div>
+				<div class="no-column">
+					<span>NO</span>
+				</div>
+				<div class="book-title-column">
+					<span>책제목</span>
+				</div>
+				<div class="isbn-column">
+					<span>ISBN</span>
+				</div>
+				<div class="price-column">
+					<span>가격</span>
+				</div>
+				<div class="qty-column">
+					<span>수량</span>
+				</div>
+				<div class="total-price-column">
+					<span>구매금액</span>
+				</div>
+			</div>
+		</form>
+		<div class="total-purchase-area">
+			<span id="total-purchase-amount" class="total-purchase-amount">총 구매금액: 0원</span>
+		</div>
+		<div class="order-decision-area">
+			<span><button class="default-btn" onclick="orderConfirmBtn();">발주확정</button></span>
+			<span><button class="default-btn cancel" onclick="location.href='/admin/supplierOrders/list'">취소</button></span>
+		</div>
+	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="/admin/supplier_orders/js/register.js"></script>
+</div>
+</html>

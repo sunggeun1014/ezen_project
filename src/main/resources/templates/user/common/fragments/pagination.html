@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="www.thymeleaf.org">
+	<link rel="stylesheet" href="/user/common/css/pagination.css" />
+
+	<div id="page-area" class="page-area" th:if="${page != null}" th:data-current-page="${page.currentPage}" th:data-total-page="${page.totalPages}">
+		<i id="page-arrow-left" class="fa-solid fa-angle-left page-arrow"></i>
+		<span th:each="i : ${#numbers.sequence(page.startPage, page.endPage)}" th:id="'page-link-' + ${i}" class="page-link" th:text="${i}"></span>
+		<i id="page-arrow-right" class="fa-solid fa-angle-right page-arrow"></i>
+	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="/user/common/js/pagination.js"></script>
+</html>

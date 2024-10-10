@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/mobile/common/layout/mobilelayout}"
+      layout:fragment="Content">
+    <link rel="stylesheet" href="/mobile/common/css/container-map.css" />
+    <link rel="stylesheet" href="/mobile/dispatch/css/dispatch.css" />
+    
+<div class="mobile-inner" style="gap: 2.3rem;">
+	<h3 class="menu-title">출고하기</h3>
+    <div class="white-frame home-first-menu">
+        <div th:each="item : ${menuItems}" class="cnt" th:id="${item}" th:value="${item}" th:text="${item}"></div>
+    </div>
+<!-- 출고하기 버튼을 누르면 check box 체크되어있는것들의 isbn을 form으로 보내준다 그리고 그값들을  
+받아 서치한후 리스트 출력 (제목, isbn, 날짜, 수량(내가 입력할수있어야함 그러나 이미 들어있는 갯수를 넘어가면 안됨) 
+완료 버튼 누르면 출고 완료) -->
+	<form id="dispatchForm" action="/mobile/admin/dispatch-items" method="POST">
+        <div class="white-frame" style="margin-bottom: 2.3rem;">
+            <p class="sub-title"><span id="zone-num-display"></span></p>
+            <div class="inner scroll" style="height: 21rem;">
+                <div id="dispatch-list"></div>
+            </div>
+        </div>
+        
+        <button type="button" class="default-btn export" id="dispatchBtn" onclick="location.href='/mobile/admin/stockout-page'">
+            <svg data-slot="icon" fill="none" stroke-width="2" stroke="currentColor" viewBox="-8 -8 40 40"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"></path>
+            </svg>
+            출고하기
+        </button>
+    </form>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/mobile/dispatch/js/dispatch.js"></script>
+</html>

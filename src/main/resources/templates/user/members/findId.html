@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>고래문고</title>
+    <link rel="shortcut icon" th:href="@{/user/common/imgs/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" href="/user/common/css/reset.css">
+    <link rel="stylesheet" href="/user/common/css/common.css"/>
+    <link rel="stylesheet" href="/user/members/css/findId.css"/>
+</head>
+<body>
+
+<div class="findId-frame">
+    <a href="/user/main">
+        <img src="/user/common/imgs/main-logo.svg" alt="메인로고" class="mainlogo"/>
+    </a>
+    <div class="find-container">
+        <div class="find-category">
+            <input type="button" class="findIdBtn-id" value="아이디 찾기" onclick="location.href='/user/members/find_Id';"/>
+            <input type="button" class="findPwBtn-id" value="비밀번호 찾기" onclick="location.href='/user/members/find_Pw';"/>
+        </div>
+        <div class="findId-wrap">
+            <form method="post" action="/user/members/find_Id">
+                <div class="form-item">
+                    <label>이름</label>
+                    <input type="text" id="name" name="name" class="input-box" placeholder="이름을 입력해주세요."/>
+                </div>
+                <div class="form-item">
+                    <label>이메일</label>
+                    <input type="text" id="email" name="email" class="input-box" placeholder="이메일을 입력해주세요."/>
+                </div>
+                <div class="error">
+                   <span id="checkForm" class="check-comment" style="color: red;"
+                         th:if="${errorMessage != null}"
+                         th:text="${errorMessage}">  <!-- errorMessage가 존재하면 표시 -->
+                   </span>
+                </div>
+                <button type="submit" class="default-btn long" id="findIdBtn" disabled>아이디 찾기</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/user/common/js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/user/members/js/findId.js"></script>
+</body>
+</html>

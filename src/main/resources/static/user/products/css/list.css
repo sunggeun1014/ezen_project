@@ -1,0 +1,240 @@
+.product-image {
+	width: 140px;
+	height: 210px;
+	border: 1px solid #f3f3f3;
+	box-shadow: 0 1px 4px rgb(0 0 0 / 0.09);
+}
+
+#product-list-form {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: solid 1px #C0C0C0;
+	padding: 30px 0;
+}
+
+.list-left {
+	display: flex;
+	gap: 24px;
+}
+
+.book-name {
+	font-weight: bold;
+	font-size: 16px;
+	color: #000000;
+	margin-bottom: 30px;
+}
+
+.book-author {
+	margin-bottom: 10px;	
+}
+
+.book-author span:nth-child(1) {
+	font-size: 14px;
+	font-weight: 600;
+	color: #000000;
+}
+
+.book-author span:nth-child(2), .book-publisher  {
+	font-size: 14px;
+	color: #666666;
+	margin-bottom: 30px;
+}
+
+.book-price {
+	font-weight: bold;
+	font-size: 14px;
+	color: #000000;
+	margin-bottom: 30px;
+}
+
+.raing-ico:before {
+	content: url(/user/common/imgs/review-rating-ico.jpg);
+}
+
+.reviews_rating_avg {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000000;
+}
+
+.reviews_rating_cnt {
+	font-size: 14px;
+	color: #7E7E7E;
+}
+
+.product-btn-area {
+    display: flex;
+    flex-direction: column;
+	justify-content: center;
+    gap: 15px;
+}
+
+.product-btn-area > div > button {
+	border-radius: 5px;
+	width: 81px;
+	height: 40px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+
+.purchase-btn {
+	background-color: #845EC2;
+}
+
+.basket-btn {
+	background-color: #7E7E7E;
+	
+}
+
+.check-basket-btn {
+	width: 120px;
+	height: 50px;
+	border-radius: 5px;
+	border: 1px solid #845EC2;
+	background-color: #FFFFFF;
+	color: #845EC2;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between; 
+}
+
+.flex-row {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #C0C0C0;
+}
+
+.order-area {
+	display: flex;
+}
+
+.order-area > span:not(:last-child) {
+	border-right: solid 1px #C0C0C0;
+}
+
+.order-area {
+	font-size: 16px;
+	font-weight: bold;
+	color: #7E7E7E;
+}
+
+.order-area {
+	cursor: pointer;
+}
+
+.order-area > span:first-child {
+	padding-right: 20px;
+}
+
+.order-area > span:last-child {
+	padding-left: 20px;
+}
+
+.order-area > span:not(:first-child):not(:last-child) {
+	padding: 0 20px;
+}
+
+.product-cnt-area {
+	color: #000000;
+	font-weight: bold;	
+}
+
+.product-total-cnt {
+	color: #845EC2;
+}
+
+.search-word-area {
+	font-size: 24px;
+	color: #000000;
+}
+
+.search-word {
+	color: #845EC2;
+}
+
+.re-search-bar {
+	margin-left: auto;
+}
+
+.impossibility-btn {
+	background-color: #7E7E7E;
+	cursor: default;	
+}
+
+.search-condition-area {
+	margin: 25px 0 100px 0;
+}
+
+.search-condition-area > div {
+	padding: 26px 13px;
+}
+
+.search-condition-title {
+	width: 137px;
+	font-size: 16px;
+	color: #000000;
+	line-height: 35px;
+}
+
+.search-condition-flex {
+	display: flex;
+	border-top: solid 1px #C0C0C0; 
+}
+
+.search-condition-flex:last-child {
+	border-bottom: solid 1px #C0C0C0;
+}
+
+.search-condition-content {
+	display: flex;
+	font-size: 16px;
+	color: #FFFFFF;
+	gap: 10px;
+	
+}
+
+.search-condition-content > button {
+	width: 62px;
+	height: 34px;
+	line-height: 34px;
+	background-color: #845EC2;
+	color: white;
+}
+
+.filter-btn-wrap {
+	width: 65%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.condition-title-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.order-by-click {
+	color: #845EC2;
+}
+
+.best-filter-area, .new-products-area {
+	display: flex;
+	padding: 20px 0;
+	border-bottom: 1px solid #eaeaea;
+	border-top: 1px solid #eaeaea;
+	margin: 45px 0 65px 0; 
+}
+
+.best {
+	justify-content: flex-end;
+}
+

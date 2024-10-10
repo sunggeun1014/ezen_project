@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/admin/common/layout/defaultlayout}"
+    layout:fragment="Content">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banner/Popup Insert Page</title>
+
+<link rel="stylesheet" href="/admin/banners/css/banners.css" />
+<link rel="stylesheet" href="/admin/common/css/modal.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+</head>
+<body>
+
+	<div class="form-container white-frame">
+		<div class="header">
+			<h1 class="search-list-title">배너/팝업 등록</h1>
+		</div>
+		<form action="/admin/banners/register" method="POST" enctype="multipart/form-data" class="content">
+			<!-- 배너 정보 입력 폼 -->
+			<div class="banner-info">
+				<div class="insert-subject required">제목</div>
+				<input type="text" name="banner_title"class="insert-input">
+			</div>
+
+			<div class="radio-group">
+				<div class="insert-subject required">유형</div>
+				<div class="radio-wrap">
+					<input type="radio" name="banner_position" value="01" id="position-banner" class="radio" checked> <label for="position-banner">배너</label> 
+					<input type="radio" name="banner_position" value="02" id="position-popup" class="radio"> <label for="position-popup">팝업</label>
+				</div>
+			</div>
+
+			<div class="radio-group">
+				<div class="insert-subject required">노출 여부</div>
+				<div class="radio-wrap">
+					<input type="radio" name="banner_visible" value="01" id="visible" class="radio" checked> <label for="visible">노출</label> 
+					<input type="radio" name="banner_visible" value="02" id="hidden" class="radio"> <label for="hidden">비노출</label>
+				</div>
+			</div>
+
+			<div class="banner-info">
+				<div class="insert-subject required">노출 기간</div>
+				<div class="date-picker">
+						<div class="input-date-box">
+							<input type="text" name="banner_start" id="startDate" class="placeholder" placeholder="YYYY-MM-DD" /> 
+							<i class="fa-solid fa-calendar-days"></i>
+						</div>
+						<div class="calendar-slash">-</div>
+						<div class="input-date-box">
+							<input type="text" name="banner_end" id="endDate" class="placeholder" placeholder="YYYY-MM-DD" /> 
+							<i class="fa-solid fa-calendar-days"></i>
+						</div>
+				</div>
+			</div>	
+					
+			<div class="banner-info image-wrap">
+				<div class="insert-subject required">이미지</div>
+				
+				<div class="img-input-wrap">
+					<label for="input-file" class="input-file-label"> 
+					<i class="fa-solid fa-plus" id="img-in"></i> 
+					<input type="file" name="banner_image" id="input-file" class="input-img-file" accept=".jpg, .jpeg, .png" onchange="previewImage(event)"/>
+					<img id="preview" />
+					</label> 
+				</div>
+				<label>형식 : JPG, JPEG, PNG </label>
+			</div>
+			
+			<div class="button-wrap submit-btns">
+				<button type="submit" id="insert-button" class="default-btn">등록</button>
+				<button type="button" class="default-btn cancel" onclick="location.href='/admin/banners/list'">취소</button>
+			</div>
+		</form>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="/admin/banners/js/bannerInsert.js"></script>
+
+</body>
+</html>

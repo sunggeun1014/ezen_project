@@ -1,0 +1,120 @@
+/* 푸터 */
+footer {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    margin: 0 auto;
+    background-color: #FAFAFA;
+}
+
+footer .footer-inner {
+    width: 1280px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 48px 55px;
+}
+
+footer .footer-logo{
+    width: 280px;
+    height: 45px;
+}
+
+footer .footer-logo img {
+    width: 100%;
+    height: 100%;
+}
+
+footer .footer-middle ul {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 700;
+    gap: 10px;
+}
+
+footer .footer-middle li {
+    position: relative;
+}
+
+footer .footer-middle li::after {
+    position: absolute;
+    content: "";
+    width: 1px;
+    height: 12px;
+    background-color: #C0C0C0;
+    top: 1px;
+    right: -6px;
+}
+
+footer .footer-middle li:last-child::after {
+    content: none;
+}
+
+footer .footer-middle a {
+    color: #666;
+}
+
+footer .footer-middle .company-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #7E7E7E;
+    margin: 20px 0;
+}
+
+footer .footer-middle .company-info p {
+    position: relative;
+}
+
+footer .footer-middle .company-info p::after {
+    position: absolute;
+    content: "";
+    width: 1px;
+    height: 10px;
+    background-color: #c0c0c0;
+    top: 1px;
+    right: -6px;
+}
+
+footer .footer-middle .company-info p:last-child:after {
+    content: none;
+}
+
+footer .footer-middle span {
+    font-size: 12px;
+    font-weight: 600;
+    color: #7E7E7E;
+}
+
+footer .right {
+    font-size: 14px;
+    color: #666;
+}
+
+footer .right p:nth-of-type(2) {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+footer .btn-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+footer .footer-btn {
+    width: 100px;
+    height: 30px;
+    color: #7E7E7E;
+    background-color: #EEE;
+    border-radius: 5px;
+}

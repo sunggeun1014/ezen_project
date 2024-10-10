@@ -1,0 +1,94 @@
+/* 공통 스타일 */
+input {
+	width:270px;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    border-bottom: 1px solid #D8D8D8;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+.search-list-title:first-child {
+    margin-bottom: 30px;
+}
+
+/*#emailDomain + .select-arrow-down {*/
+/*    margin-left: 30px; !* 선택 상자와 화살표 사이에 간격 추가 *!*/
+/*}*/
+
+/*#manager_dept + .select-arrow-down {*/
+/*	margin-left: 30px;*/
+/*}*/
+
+/* 특정 요소 스타일 */
+select#emailUser, select#deptName {
+    width: 150px;
+    margin-left: 20px;
+}
+
+.select-wrap.countryNum {
+    width: 70px;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+span.search-list-subject {
+    margin-left: 30px;
+}
+
+select#deptName{
+	margin-left:50px;
+}
+
+.important::after {
+   content: "*";
+    color: red; 
+    margin-left: 2px;
+    position: absolute; /* 별표의 절대 위치 지정 */
+    transform: translateY(-45%); /* 별표를 더 위쪽으로 이동 */
+}
+
+#userPart1, #userPart2 {
+	width: 60px;
+}
+
+.select-wrap.dept-select {
+	width: 120px;
+}
+
+.overlap{
+	margin-left: 10px;
+}
+
+.check-comment{
+	margin-left: 10px;
+}
+
+.id-reference, .pw-reference {
+    margin-top: 5px; /* input 요소와 간격을 줄 수 있습니다 */
+    font-size: 12px; /* 글자 크기 조정 */
+    color: #666666; /* 글자 색상 조정 */
+}
+
+.pointer-cursor {
+    cursor: pointer;
+}
+
+.emailUser-wrap, .countryNum-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.addr-wrap, .pw-wrap {
+    border-bottom: 0;
+    margin-bottom: 0;
+}

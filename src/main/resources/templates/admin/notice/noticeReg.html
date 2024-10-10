@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/admin/common/layout/defaultlayout}"
+	layout:fragment="Content">
+
+	<link rel="stylesheet" href="/admin/notice/css/noticeReg.css" />
+	<link rel="stylesheet" href="/admin/products/css/products.css">
+
+<div>
+	<div class="white-frame">
+		
+		<h1 class="search-list-title">공지글 등록</h1>
+		
+			<div class="info">
+				<span class="search-list-subject important">제목</span>
+				<div>
+					<input id="notice-title" type="text" placeholder="제목을 입력하세요">
+				</div>
+			</div>
+
+			<div class="info">
+				<span class="search-list-subject important">노출 여부</span>
+				<div class="radio-filter">
+					<input type="radio" id="exposed-status" name="order_status" value="exposed" checked="checked" />
+						<label for="exposed-status">노출</label>
+					<input type="radio" id="nonexposed-status" name="order_status" value="nonexposed" />
+						<label for="nonexposed-status">비노출</label>
+				</div>
+			</div>
+
+			<div class="info">
+				<span class="search-list-subject">노출 기간</span>
+				<div class="filter-wrap date-filter">
+
+					<div class="date-picker">
+						<div class="input-date-box">
+							<input type="text" id="startDate" class="placeholder" placeholder="YYYY-MM-DD" />
+							<i class="fa-solid fa-calendar-days"></i>
+						</div>
+						<div class="calendar-slash">-</div>
+						<div class="input-date-box">
+							<input type="text" id="endDate" class="placeholder" placeholder="YYYY-MM-DD" />
+							<i class="fa-solid fa-calendar-days"></i>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+			<div class="info">
+				<span class="search-list-subject important">내용</span>
+				<div style="position:relative;">
+					<div contenteditable="true" class="editor" id="editor">
+						여기에 텍스트를 입력하거나 이미지를 드래그 앤 드롭하세요...
+					</div>
+					<p class="char-count">
+						<span id="charCount">0</span><span>/1000</span>
+					</p>
+				</div>
+			</div>
+
+			<div class="btn-box">
+				<button id="save-button" class="default-btn">등록</button>
+				<button type="button" class="default-btn cancel" onclick="location.href='/admin/notice/list'">취소</button>
+			</div>
+
+	</div>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="/admin/notice/js/noticeReg.js"></script>
+</div>
+</html>

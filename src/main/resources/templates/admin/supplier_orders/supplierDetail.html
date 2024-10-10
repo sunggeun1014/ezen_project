@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/admin/common/layout/defaultlayout}"
+      layout:fragment="Content">
+
+	<link rel="stylesheet" href="/admin/supplier_orders/css/detail.css">
+<div>
+    <button class="back-btn" onclick="location.href='/admin/supplierOrders/list'">
+        <i class="fa-solid fa-chevron-left"></i>
+        <span>뒤로가기</span>
+    </button>
+    <div class="white-frame">
+        <div class="title-wrap">
+            <span class="search-list-title">발주번호: [[${detail.order_num}]]</span>
+            <span>발주자: [[${detail.manager_name}]]</span>
+        </div>
+        <div class="order-info-area">
+            <div class="order-info">
+                <span th:text="'총 ' + ${#lists.size(detailList)} + '건'"></span>
+            </div>
+            <div class="order-info">
+                <span th:text="'발주날짜: ' + ${#dates.format(detail.order_date, 'yyyy-MM-dd')}"></span>
+            </div>
+        </div>
+        <div class="table-data-container">
+            <div class="table-column-area">
+                <div class="no-column">
+                    <span>NO</span>
+                </div>
+                <div class="book-title-column">
+                    <span>책제목</span>
+                </div>
+                <div class="isbn-column">
+                    <span>ISBN</span>
+                </div>
+                <div class="price-column">
+                    <span>가격</span>
+                </div>
+                <div class="qty-column">
+                    <span>발주수량</span>
+                </div>
+                <div class="qty-column">
+                    <span>처리수량</span>
+                </div>
+                <div class="purchase-column">
+                    <span>구매금액</span>
+                </div>
+            </div>
+            <div>
+                <div class="table-data-area" th:each="info, status : ${detailList}">
+                    <div class="no-data">
+                        <span th:text="${status.count}"></span>
+                    </div>
+                    <div class="book-title-data limit-lines">
+                        <span th:text="${info.order_detail_title}"></span>
+                    </div>
+                    <div class="isbn-data">
+                        <span th:text="${info.order_detail_isbn}"></span>
+                    </div>
+                    <div class="price-data">
+                        <span th:text="${#numbers.formatInteger(info.order_detail_price, 0, 'COMMA')} + '원'"></span>
+                    </div>
+                    <div class="qty-data">
+                        <span th:text="${info.order_detail_qty} + '개'"></span>
+                    </div>
+                    <div class="qty-data">
+                        <span th:text="${info.order_detail_received_qty} + '개'"></span>
+                    </div>
+                    <div class="purchase-data">
+                        <span th:text="${#numbers.formatInteger(info.detail_total_price, 0, 'COMMA')} + '원'"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="total-price-area">
+            <span th:text="'총 구매금액: ' + ${#numbers.formatInteger(detail.order_total_price, 0, 'COMMA')} + '원'"></span>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</div>
+</html>

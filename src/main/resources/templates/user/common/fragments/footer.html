@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="FooterFragment">
+<!-- footer 설정 -->
+<!-- 탑버튼 -->
+<div class="footer-inner">
+    <div class="footer-logo">
+        <img src="/user/common/imgs/footer-logo.svg" alt="푸터로고"/>
+    </div>
+    <div class="footer-middle">
+        <ul>
+            <li><a href="/user/terms-policy">이용약관</a></li>
+            <li><a href="/user/privacy-policy">개인정보처리방침</a></li>
+            <li><a href="/user/youth-policy">청소년보호정책</a></li>
+            <li><a href="/user/email-policy">이메일 무단 수집거부</a></li>
+        </ul>
+        <div class="company-info">
+            <p>(주)웨일북스</p>
+            <p>서울시 노원구 상계로 64</p>
+            <p><strong>사업자등록번호</strong>123-45-67890</p>
+        </div>
+        <span>COPYRIGHT Ⓒ WHALE BOOKS INC. ALL RIGHTS RESERVERD.</span>
+    </div>
+    <div class="right">
+        <p>고객센터</p>
+        <p>02-879-0900</p>
+        <p><strong>운영시간</strong> 평일 09:00 ~ 18:00 / 점심시간 12:30 ~ 13:30</p>
+        <p><strong>대표메일</strong> customer@whalebooks.co.kr</p>
+        <div class="btn-wrap">
+            <button class="footer-btn inquery" onclick="location.href='/user/mypage/inquiries-page'">1:1문의</button>
+            <button class="footer-btn notice" onclick="location.href='/user/mypage/notices-page'">공지사항</button>
+        </div>
+    </div>
+</div>
+</html>

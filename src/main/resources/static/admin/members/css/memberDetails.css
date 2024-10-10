@@ -1,8 +1,8 @@
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 30px;
+  height: 20px;
 }
 
 .switch input {
@@ -13,32 +13,112 @@
 
 .slider {
   position: absolute;
-  cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: #ccc;
   transition: .4s;
-  border-radius: 34px;
+  border-radius: 20px; /* height에 맞춰서 border-radius도 조정 */
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+  height: 14px; /* height의 70%로 설정 */
+  width: 14px; /* height의 70%로 설정 */
+  left: 3px; /* 4px에서 조정 */
+  bottom: 3px; /* 4px에서 조정 */
   background-color: white;
   transition: .4s;
   border-radius: 50%;
 }
 
-input:checked + .slider {
-  background-color: #2196F3;
+input:checked + .slider.naver {
+  background-color: #03CF5D;
+}
+
+input:checked + .slider.kakao {
+  background-color: #FFE102;
 }
 
 input:checked + .slider:before {
-  transform: translateX(26px);
+  transform: translateX(10px); /* 핸들이 움직일 거리 계산: width - height */
+}
+
+input.pw {
+	border: none;
+	padding-left: 0;
+}
+
+.info {
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    gap: 10px; /* 요소 간의 간격을 조절 (선택 사항) */
+    margin-bottom: 30px; /* 아래쪽 간격 (선택 사항) */
+}
+.search-list-subject {
+    margin-right: 10px; /* 텍스트와 입력 필드 사이 간격 */
+    margin-left: 50px;
+}
+
+span.search-list-subject{
+	margin-right: 150px;
+	width: 150px;
+}
+
+.select-wrap.countryNum{
+	width: 70px;
+}
+
+.select-wrap.email-select{
+	width: 120px;
+}
+
+input#address_kakao{
+	width: 355px;
+}
+
+input#emailUser{
+	width: 200px;
+    color: #666;
+}
+
+input:focus#emailUser {
+    color: #000;
+}
+
+input.num{
+	width: 60px;
+}
+
+input {
+	width: 355px
+	
+}
+
+hr {
+	width: 1000px;
+	background-color: black;
+	margin-left: 20px;
+	height: 1px;
+	
+}
+
+.search-list-title {
+	margin-bottom: 50px;
+}
+
+input#customEmailDomain{
+	width: 170px;
+}
+
+.btn{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.pointer-cursor {
+    cursor: pointer;
 }

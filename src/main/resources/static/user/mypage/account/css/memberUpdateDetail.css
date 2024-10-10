@@ -1,0 +1,142 @@
+/* 공통 스타일 */
+input, select {
+	margin-left: 50px;
+}
+
+#userPart1 , #userPart2 {
+	margin-left : 0px;
+	text-align: center;
+}
+
+.text-readonly {
+	margin-left: 50px;
+}
+
+
+.input-short {
+    width: 90px;
+    height: 45px;
+    border: 1px solid #C0C0C0;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+
+.info-items {
+	display: flex;
+	align-items: center;
+}
+
+.info-social {
+	display: flex;
+	column-gap: 35px;
+	margin-left: 50px;
+	align-items : center;
+}
+
+.gray-num {
+	margin-left: 20px;
+	width: 60px;
+}
+
+.info {
+	display: grid;
+	grid-template-columns: 100px 1fr;
+	align-items: center;
+	gap: 10px;
+	border-bottom: 1px solid #D8D8D8;
+	padding: 20px 20px;
+}
+
+.search-list-title:first-child {
+	margin-bottom: 30px;
+}
+
+.error-message {
+	margin-left: 55px;
+	color: red;
+	font-size: 0.9em;
+	display: none;
+}
+
+.select-arrow-down {
+	margin-right: 7px; 
+}
+
+select#emailUser, select#emailDomain {
+	width: 150px;
+	margin-left: 0px;
+	
+}
+
+select#countryNum {
+	padding-left: 15px;
+	width: 80px;
+}
+
+.search-list-subject-symbol {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+span.search-list-subject {
+	margin-left: 0px;
+	width: 106px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 20px; /* height에 맞춰서 border-radius도 조정 */
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px; /* height의 70%로 설정 */
+  width: 14px; /* height의 70%로 설정 */
+  left: 3px; /* 4px에서 조정 */
+  bottom: 3px; /* 4px에서 조정 */
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider.naver {
+  background-color: #03CF5D;
+}
+
+input:checked + .slider.kakao {
+  background-color: #FFE102;
+}
+
+input:checked + .slider:before {
+  transform: translateX(10px); /* 핸들이 움직일 거리 계산: width - height */
+}
+
+.member-list-wrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}

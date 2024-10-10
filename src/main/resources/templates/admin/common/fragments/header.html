@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="HeaderFragment">
+
+<div id="header">
+	<div class="title-wrap">
+		<p class="header-title">whale books 관리자페이지</p>
+		<p class="clock"></p>
+	</div>
+
+	<div class="user-wrap">
+		<div class="user-profile">
+			<div class="profile-img-wrap">
+				<img th:src="@{/images/profiles/{profile}(profile=${session.manager.manager_profile_changed != null ? session.manager.manager_profile_changed : 'default_profile.png'})}" alt="프로필이미지" class="profile-img" onerror="this.onerror=null; this.src='/admin/common/img/profile/default_profile.png';">
+			</div>
+			<div class="text-wrap">
+				<th:block th:switch="${session.manager.manager_dept}">
+				    <p th:case="'01'">물류팀</p>
+				    <p th:case="'02'">운영팀</p>
+				    <p th:case="'03'">인사팀</p>
+				</th:block>
+				<p th:text="${session.manager.manager_name}"></p>
+			</div>            
+		</div>
+		<form action="/admin/logout" id="logoutForm" method="POST" style="display:none;">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> <!-- CSRF 토큰 추가 -->
+		</form>
+		<i class="fa-solid fa-right-from-bracket log-out" onclick="document.getElementById('logoutForm').submit();" style="cursor: pointer;"></i>
+	</div>
+</div>
+</html>
+

@@ -33,16 +33,17 @@
 		</rollingPolicy>
 	</appender>
 	
-	<logger name="jdbc.resultset" level="OFF"/>
-	<logger name="jdbc.audit" level="OFF"/>
-	<logger name="jdbc.connection" level="OFF"/>
-	<logger name="jdbc.sqltiming" level="INFO"/>
-	<logger name="jdbc.resultsettable" level="INFO"/>
+	<!-- Logger -->
+	<logger name="jdbc.connection" level="OFF" appender-ref="CONSOLE" />
+	<logger name="jdbc.audit" level="OFF" appender-ref="CONSOLE" />
+	<logger name="jdbc.resultset" level="OFF" appender-ref="CONSOLE" />
+	<logger name="jdbc.sqlonly" level="INFO" appender-ref="CONSOLE" />
+	<logger name="jdbc.resultsettable" level="INFO" appender-ref="CONSOLE" />
+	<logger name="jdbc.sqltiming" level="OFF" appender-ref="CONSOLE" />
 	
-	<!-- 루트 로거에 Appender 참조 추가 -->
-    <root level="INFO">
-        <appender-ref ref="CONSOLE" />
-        <appender-ref ref="FILE" />
-    </root>
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>	
 	
 </configuration>

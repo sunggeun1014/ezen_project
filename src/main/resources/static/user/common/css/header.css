@@ -1,0 +1,322 @@
+/* 헤더 */
+header {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.header-inner {
+    width: 1280px;
+    padding: 0 55px;
+}
+
+.header-top {
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #F6F6F6;
+}
+
+.header-top-inner {
+    width: 1280px;
+    margin: 0 auto;
+    padding: 13px 55px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+
+.top-menu-wrap {
+    display: flex;
+    gap: 20px;
+}
+
+.top-menu-link {
+    color: #80888A;
+    font-size: 14px;
+}
+
+header .header-center {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 24px 1px 30px;
+}
+
+.logo-searchbar {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+}
+
+.logo-img {
+    height: 55px;
+}
+
+
+.searchbar{
+    position: relative;
+
+}
+
+.searchbar-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+} 
+
+.cart-icon-wrap {
+    position: relative;
+    height: 44px;
+}
+
+.cart-qty {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 2px;
+    position: absolute;
+    top: -2px;
+    right: -8px;
+    border-radius: 20px;
+    background-color: #845EC2;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    line-height: 20px;
+}
+
+.user-icon {
+	font-size: 42px;
+	color: #B0A8B9;
+}
+
+.search-icon {
+    position: absolute; 
+    top: 50%;
+    left: 27px;
+    color: #5F6368;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.search-input {
+    width: 550px;
+    height: 50px;
+    border: 1px solid #C0C0C0;
+    border-radius: 40px;
+    padding-left: 67px;
+    transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+    border: 1px solid #666;
+    outline: none;
+}
+
+/* 카테고리 */
+nav.category-wrap {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 30px;
+	margin-bottom: 15px;
+}
+
+.nav-all-categories {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.nav-category-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-category-item {
+    color: #666666;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+/* 전체 카테고리 모달 창*/
+.all-category-modal {
+    position: absolute;
+    top: 206px;
+    display: none;
+    max-width: 1280px;
+    z-index: 100; /* 모달을 다른 요소들 위에 배치 */
+}
+
+.all-category-modal.visible {
+    display: block;
+}
+
+.category-modal-content {
+    display: flex;
+    background-color: #fff;
+    border: 1px solid #666;
+    width: 1170px;
+    height: 300px;
+    border-radius: 20px;
+    /*position: relative;*/
+}
+
+.modal-category-list {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 100%;
+    padding: 35px 40px;
+    gap: 40px;
+    background-color: #fafafa;
+    border-radius: 20px 0px 0px 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.modal-category-item-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ /* 선택 카테고리 글씨 색깔 */
+.modal-category-item.active {
+    color: #845EC2;
+}
+
+ /* 기본 카테고리 글씨 색깔 */
+ .modal-category-item {
+    color: #666666;
+}
+
+/* 선택된 카테고리 아이콘 표시 */
+.modal-category-icon.active {
+    display: block;
+}
+.modal-category-icon.active .fa-chevron-right  {
+    color: #845EC2;
+    font-size: 16px;
+}
+
+.modal-category-icon {
+    display: none;
+}
+
+
+.modal-categories-wrap {
+    width: 75%;
+    height: 100%;
+    position: relative;
+    border-radius: 0px 20px 20px 0px;
+    overflow: hidden; 
+}
+
+.category-wrap {
+    display: none;
+}
+
+.modal-categories {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 35px 40px 5px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: #fff;
+    transition: opacity 0.3s ease;
+}
+
+.modal-categories.foreign {
+    padding: 35px 40px 135px;
+}
+
+.category-wrap.active {
+    display: block;
+}
+
+.modal-category-detail {
+    color: #7e7e7e;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.modal-category-detail:hover {
+    text-decoration: underline;
+}
+
+/* 고정 헤더*/
+.header-fixed {
+    position: fixed;
+	left: 0;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    padding: 15px 0;
+    background-color: #fff;
+    box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.25);
+    display: none;
+    z-index: 10;
+}
+
+.header-fixed.visible {
+    display: block;
+}
+
+.all-categories-icon {
+    height: 44px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.fixed-item-wrap {
+    width: 1280px;
+    margin: 0 auto;
+    padding: 0 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-fixed-logo-img {
+    height: 28px;
+}
+
+.header-fixed > .searchbar > .search-input {
+    width: 500px;
+}
+
+.header-fixed-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.fixed-modal {
+    position: fixed;
+    top: 80px;
+    z-index: 10; /* 모달이 다른 요소들 위에 있도록 설정 */
+}
+
+.header-fixed-right > a {
+    height: 40px;
+}
+
+.cs-icon {
+    width: 42px;
+}

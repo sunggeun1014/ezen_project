@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/myPageLayout}"
+      layout:fragment="Content">
+      
+      <link rel="stylesheet" href="/user/mypage/account/css/memberUpdate.css"/>
+	  <link rel="stylesheet" href="/user/mypage/account/css/memberUpdateDetail.css" />
+	  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	  <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+	
+<div class="content">
+	<h1 class="middle-font" style="margin-bottom: 40px;">회원정보수정</h1>
+        <div class="info">
+            <span class="search-list-subject">아이디</span>
+            <div style="margin-left: 50px;">
+                <span th:text="${userMembers.member_id}"></span>
+            </div>
+            <input type="hidden" id="memberId" th:value="${userMembers.member_id}" />
+        </div>
+
+        <div class="info">
+            <span class="search-list-subject">새 비밀번호</span>
+            <div>
+                <input type="password" id="input-pw" class="input-long" placeholder="새 비밀번호 입력">
+            </div>
+        </div>
+
+        <div class="info">
+            <span class="search-list-subject">새 비밀번호 확인</span>
+            <div>
+                <input type="password" id="input-pw-check" class="input-long" placeholder="새 비밀번호 확인">
+            </div>
+            <div></div>
+            <span class="error-message" id="pwError" style="display: block;">※ 특수문자, 영문자, 숫자 포함, 최소 8자</span>
+        </div>
+		
+		<div class="info">
+			<span class="search-list-subject">이름</span>
+			<div style="margin-left: 50px;">
+				<span th:text="${userMembers.member_name}"></span>
+			</div>
+		</div>
+           <!-- 이메일 필드 -->
+        <div class="select-wrap info">
+            <span class="search-list-subject">이메일</span>
+            <div class="info-items">
+                <input type="text" id="emailUser" class="input-long" th:value="${emailUser}"/>
+                <span class="search-list-subject-symbol">@</span>
+                <div class="select-box">
+                    <select id="emailDomain" name="emailDomain" class="input-short">
+						<option th:each="emailDomains : ${emailDomainList}"
+								th:value="${emailDomains}"
+								th:text="${emailDomains}"
+								th:selected="${emailDomains} == ${emailDomain}">
+						</option>
+					</select>
+                    <div class="select-arrow-down" id="email"></div>
+                </div>
+            </div>
+            <div></div>
+            <div>
+             	<span class="error-message" id="emailError"></span>
+            </div>
+        </div>
+
+           <!-- 전화번호 필드 -->
+       	<div class="select-wrap info">
+           <span class="search-list-subject">전화번호</span>
+           <div>
+               <div class="info-items">
+                	<div class="select-box">
+                    	<select id="countryNum" name="countryNum" class="input-short">
+			               <option th:each="number : ${countryNums}"
+			               		   th:value="${number}"
+			               		   th:text="${number}"
+			               		   th:selected="${number} == ${countryNum}">
+			               
+			               </option>
+           				</select>
+                    <div class="select-arrow-down" id="phoneNum"></div>
+                	</div>
+	                <span class="search-list-subject-symbol">-</span>
+	                <input type="number" id="userPart1" class="input-short" th:value="${userPart1}" max="9999" step="1"/>
+	                <span class="search-list-subject-symbol">-</span>
+	                <input type="number" id="userPart2" class="input-short" th:value="${userPart2}" max="9999" step="1"/>
+            	</div>
+	            <div>
+	            	<span class="error-message" id="phoneError"></span>
+	            </div>
+           </div>
+            
+        </div>
+
+        <!-- 주소 필드 -->
+        <div class="info">
+            <span class="search-list-subject">주소</span>
+            <div>
+                <input type="text" id="address_kakao" class="input-long" th:value="${userMembers.member_addr}" readonly/>
+            </div>
+        </div>
+
+        <div class="info">
+            <span class="search-list-subject">상세주소</span>
+            <div>
+                <input id="address_detail" type="text" class="input-long" th:value="${userMembers.member_detail_addr}"/>
+            </div>
+            <div></div>
+            <div>
+            	<span class="error-message" id="addressError"></span>
+            </div>
+        </div>
+        
+        <div class="select-wrap info">
+			<span class="search-list-subject">간편로그인 연동</span>
+			<div>
+				<div class="info-social">
+					<div>
+						<span class="search-list-subject">네이버</span>
+						<label class="switch"> 
+							<input id="naverLogin" type="checkbox" th:checked="${userMembers.naver_login_cd != null and !userMembers.naver_login_cd.isEmpty()}" /> 
+							<span class="slider naver"></span>
+						</label>
+						<input type="hidden" id="naver_login_cd" name="naver_login_cd" th:value="${userMembers.naver_login_cd}"/>
+						
+					</div>
+					<div>
+						<span class="search-list-subject">카카오</span>
+						<label class="switch"> 
+							<input id="kakaoLogin" type="checkbox" th:checked="${userMembers.kakao_login_cd != null and !userMembers.kakao_login_cd.isEmpty()}" />
+							<span class="slider kakao"></span>
+						</label>
+						<input type="hidden" id="kakao_login_cd" name="kakao_login_cd" th:value="${userMembers.kakao_login_cd}"/>
+					</div>
+				</div>			
+			</div>
+		</div>
+		<div class="btn-box">
+			<button type="button" class="default-btn" onclick="prepareSubmit()">수정</button>
+			<button type="button" class="default-btn grey" onclick="location.href='/user/mypage/update-page'">취소</button>
+		</div>
+	
+</div>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="/user/mypage/account/js/memberUpdateDetail.js"></script>
+	<script src="/user/mypage/account/js/socialLoginManager.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+</html>

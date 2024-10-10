@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/user/common/layout/mainLayout}" layout:fragment="Content">
+
+<!-- SWIPER 라이브러리 연결-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" href="/user/main/css/main.css" />
+
+<section class="hero">
+	<!-- Slider main container -->
+	<div class="swiper slide-wrap">
+		<div class="swiper-wrapper">
+			<!-- Slides -->
+			<div class="swiper-slide" th:each="banner : ${banners}" th:data-banners-size="${#lists.size(banners)}">
+				<img th:src="@{/images/banners/{banner}(banner=${banner.banner_changed})}" alt="배너" />
+			</div>
+		</div>
+
+		<div class="swiper-pagination pagination-btns">
+			<span class="swiper-pagination-bullet"></span>
+		</div>
+
+	</div>
+</section>
+
+<div class="inner">
+	<section class="section section-best-books section-wrapper">
+		<div class="section-header">
+			<h2 class="section-title" id="best-seller-month">월의 베스트셀러</h2>
+			<p class="section-title-emoji">🏆</p>
+		</div>
+		<div id="best-books-wrapper" class="section-content-books-wrapper">
+
+			<div class="section-content-book" th:each="book : ${bestBooks}">
+				<div class="thumbnail-wrapper">
+					<img th:src="${book.book_thumbnail_changed != null ? '/images/books/' + book.book_thumbnail_changed : '/images/books/noimg.png'}"
+                     alt="썸네일" class="book-thumbnail">
+                    <div class="book-interactive">
+						<div class="book-interactive-info" th:text="${book.book_intro}" th:onclick="redirectToDetailPage(/*[[${book.book_isbn}]]*/)"></div>
+						<div class="book-interactive-cart">
+							<button th:data-isbn="${book.book_isbn}" class="add-cart-button">장바구니</button>
+						</div>
+					</div>
+				</div>
+				<div class="book-info" th:onclick="redirectToDetailPage(/*[[${book.book_isbn}]]*/)">
+					<h3 class="book-title" th:text="${book.book_name}"></h3>
+					<p class="book-author" th:text="${book.book_author}"></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="section section-new-book section-wrapper">
+		<div class="section-header">
+			<h2 class="section-title">화제의 신간</h2>
+			<p class="section-title-emoji">🔥</p>
+		</div>
+		<div id="new-books-wrapper" class="section-content-books-wrapper">
+			<div class="section-content-book" th:each="book : ${newBooks}">
+				<div class="thumbnail-wrapper">
+					<img th:src="${book.book_thumbnail_changed != null ? '/images/books/' + book.book_thumbnail_changed : '/images/books/noimg.png'}"
+                     alt="썸네일" class="book-thumbnail">
+					<div class="book-interactive">
+						<div class="book-interactive-info" th:text="${book.book_intro}" th:onclick="redirectToDetailPage(/*[[${book.book_isbn}]]*/)"></div>
+						<div class="book-interactive-cart">
+							<button th:data-isbn="${book.book_isbn}" class="add-cart-button">장바구니</button>
+						</div>
+					</div>
+				</div>
+				<div class="book-info" th:onclick="redirectToDetailPage(/*[[${book.book_isbn}]]*/)">
+					<h3 class="book-title" th:text="${book.book_name}"></h3>
+					<p class="book-author" th:text="${book.book_author}"></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section section-top-rated section-wrapper">
+		<div class="section-header">
+			<h2 class="section-title">평점이 높은 책</h2>
+			<p class="section-title-emoji">🌟</p>
+		</div>
+		<div id="top-rated-books-wrapper" class="section-content-books-wrapper">
+			<div class="section-content-book" th:each="book : ${topRatedBooks}">
+				<div class="thumbnail-wrapper">
+					<img th:src="${book.book_thumbnail_changed != null ? '/images/books/' + book.book_thumbnail_changed : '/images/books/noimg.png'}"
+                     alt="썸네일" class="book-thumbnail">
+					<div class="book-interactive">
+						<div class="book-interactive-info" th:text="${book.book_intro}" th:onclick="redirectToDetailPage(/*[[${book.book_isbn}]]*/)"></div>
+						<div class="book-interactive-cart">
+							<button th:data-isbn="${book.book_isbn}" class="add-cart-button">장바구니</button>
+						</div>
+					</div>
+				</div>
+				<div class="book-info" th:onclick="redirectToDetailPage(/*[[${book.book_isbn}]]*/)">
+					<h3 class="book-title" th:text="${book.book_name}"></h3>
+					<p class="book-author" th:text="${book.book_author}"></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section section-recommend-books section-wrapper">
+		<div class="section-header">
+			<h2 class="section-title">이런 책은 어떠세요?</h2>
+			<p class="section-title-emoji">👀</p>
+		</div>
+		<div id="recommend-books-wrapper" class="section-content-books-wrapper" >
+			<div class="section-content-book" th:each="book : ${recommendBooks}" > 
+				<div class="thumbnail-wrapper">
+					<img th:src="${book.book_thumbnail_changed != null ? '/images/books/' + book.book_thumbnail_changed : '/images/books/noimg.png'}"
+                     alt="썸네일" class="book-thumbnail">
+					<div class="book-interactive">
+						<div class="book-interactive-info" th:text="${book.book_intro}" th:onclick="redirectToDetailPage(/*[[${book.book_isbn}]]*/)"></div>
+						<div class="book-interactive-cart">
+							<button th:data-isbn="${book.book_isbn}" class="add-cart-button">장바구니</button>
+						</div>
+					</div>
+				</div>
+				 <div class="book-info" th:onclick="redirectToDetailPage(/*[[${book.book_isbn}]]*/)">
+					<h3 class="book-title" th:text="${book.book_name}"></h3>
+					<p class="book-author" th:text="${book.book_author}"></p>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script src="/user/main/js/main.js"></script>
+</html>

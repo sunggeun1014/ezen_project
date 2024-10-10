@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WHALE BOOKS</title>
+    <link rel="shortcut icon" th:href="@{/user/common/imgs/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" href="/user/common/css/reset.css">
+    <link rel="stylesheet" href="/user/members/css/showFindId.css"/>
+</head>
+<body>
+<div class="find-result-container">
+    <a class="logo-wrap" href="/user/main">
+        <img src="/user/common/imgs/main-logo.svg" alt="메인로고" class="mainlogo"/>
+    </a>
+    <div class="showFindId-frame">
+
+        <h3 th:text="${name} + '님의 아이디 입니다.'"></h3>
+
+        <ul>
+            <li th:each="member : ${memberIds}">
+                <div th:text="${member.member_id}">user1234</div>
+                <div th:text="'가입일: ' + ${#dates.format(member.member_date, 'yyyy-MM-dd')}">가입일: 2024.08.08</div>
+            </li>
+        </ul>
+
+        <!-- 비밀번호 찾기, 로그인 버튼 -->
+        <div class="button-group">
+            <button type="button" onclick="window.location.href='/user/members/find_Pw'">비밀번호 찾기</button>
+            <button type="button" onclick="window.location.href='/user/login'">로그인</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

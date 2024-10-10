@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="FooterFragment">
+<nav id="tabbar">
+    <ul class="menu-list">
+        <li class="menu-item">
+            <a href="/mobile/admin/index" class="menu-wrap">
+                <div class="icon-wrap">
+                    <i class="fa-solid fa-house tab-icon"></i>
+                </div>
+                <p>홈</p>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/mobile/admin/warehousing-page" class="menu-wrap">
+                <div class="icon-wrap">
+                    <svg data-slot="icon" class="tab-icon" fill="none" stroke-width="2" stroke="currentColor"
+                         viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
+                    </svg>
+                </div>
+
+                <p>입고</p>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/mobile/admin/dispatch-page" class="menu-wrap">
+                <span class="icon-wrap">
+                <svg data-slot="icon" class="tab-icon" fill="none" stroke-width="2" stroke="currentColor"
+                     viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"></path>
+                </svg>
+                </span>
+                <p>출고</p>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/mobile/admin/delivery-status" class="menu-wrap">
+                <span class="icon-wrap">
+                <i class="fa-solid fa-truck-fast tab-icon"></i>
+                </span>
+                <p>배송</p>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/mobile/admin/myinfo" class="menu-wrap">
+                <div class="icon-wrap">
+                    <i class="fa-solid fa-circle-user tab-icon"></i>
+                </div>
+                <p>내정보</p>
+            </a>
+        </li>
+    </ul>
+</nav>
+</html>

@@ -1,0 +1,144 @@
+.table-container {
+    font-size: 16px;
+    color: #000000;
+}
+
+.request-info-area {
+	color: #000000;
+}
+
+.order-num-area {
+	margin-bottom: 5px;	
+}
+
+.order-info-container {
+	font-size: 16px;
+	color: #000000;
+	padding: 26px 0 10px 0;
+}
+
+.order-info {
+	height: 60px;
+	line-height: 60px;
+	padding-left: 20px;
+	border-bottom: 1px solid #D8D8D8;
+}
+
+.order-info > div {
+	display: flex;
+}
+
+.info-column-area {
+	display: flex;
+}
+
+.info-area-flex {
+	display: flex;
+}
+
+.info-column-area {
+	width: 50%;
+}
+
+.info-column {
+	width: 100px;
+	margin-right: 80px;	
+}
+
+.pay-info {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	margin-top: 10px;
+}
+
+.pay-info > span:first-child {
+	color: #2D2D2D;
+}
+
+.order-person-info {
+	color: #666;
+}
+
+.request-info-area {
+	display: flex;
+	align-items: center;
+	height: 60px;
+	padding: 12px;
+	border-bottom: 1px solid #D8D8D8;
+}
+
+.request-title-area {
+	margin-bottom: 20px;
+}
+
+.detail-total-cnt {
+	font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    line-height: 40px;
+}
+
+.detail-list-area {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 14px;
+}
+
+.request-completion-btn {
+	display: flex; 
+	gap: 8px;
+}
+
+.table-column-area, .table-data-area {
+	height: 50px;
+	display: flex;
+	text-align: center;
+	padding: 17px 8px;
+	border-bottom: solid 1px #D8D8D8;
+	color: #7E7E7E;
+}
+
+.table-column-area {
+	border-top: solid 1px #D8D8D8;
+	background-color: #FAFAFA;
+	font-weight: 700;
+}
+
+.table-column-area > div, .table-column-area > div > span, .table-data-area > div, .table-data-area > div > span {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.checkbox-column, .checkbox-data { width: 3%; }
+.no-column, .no-data { width: 7%; }
+.book-title-column, .book-title-data { width: 21%; }
+.isbn-column, .isbn-data { width: 12%; }
+.price-column, .price-data { width: 10%; }
+.qty-column, .qty-data { width: 7%; }
+
+.book-title-data > span {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.request-qty-column, .request-qty-data { width: 7%; }
+.input-qty-column, .input-qty-data { width: 6%; }
+.complete-qty-column, .complete-qty-data { width: 7%; }
+.input-qty-data > span, .input-qty-data > span > input { width: 100%; text-align: center; padding: 0; }
+
+.purchase-column, .purchase-data { width: 12%; }
+.order-status-column, .order-status-data { width: 8%; }
+
+.total-price-area {
+	text-align: right;
+	padding: 16px;
+	font-size: 18px;
+    font-weight: 700;
+	color: #000000;
+}
+
+.request-text-red { color: red; }
+
+#submit-form { display: none; }

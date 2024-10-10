@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="~{/mobile/common/fragments/config :: ConfigFragment}"></head>
+
+<body>
+<div class="mobile-frame">
+    <div layout:fragment="Content"></div>
+
+    <footer th:insert="~{/mobile/common/fragments/footer :: FooterFragment}"></footer>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="/mobile/common/js/main.js"></script>
+<script src="/user/common/js/pagination.js"></script>
+</body>
+</html>

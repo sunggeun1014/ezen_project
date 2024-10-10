@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/myPageLayout}"
+      layout:fragment="Content">
+	 
+	 <link rel="stylesheet" href="/user/mypage/review/css/review.css"/>
+	 
+<div class="content">
+	<div class="myinfo-content">
+
+		<p class="myinfo-title">리뷰 작성</p>
+	
+		<form action="/user/mypage/save-review" method="post">
+			<input type="hidden" th:name="order_detail_num" th:value="${userBookReviewDTO.order_detail_num}">
+		  	<div class="write-container">
+		   		<div class="write-book-info">
+					<img th:src="@{'/images/books/' + ${userBookReviewDTO.book_isbn} + '.jpg'}" alt="책 이미지">
+					<div class="book-details">
+						<span class="book-title" th:text="${userBookReviewDTO.book_name}"></span>
+						<span class="book-author" th:text="'저자 : ' + ${userBookReviewDTO.book_author}"></span>
+						<span class="book-date" th:text="'구매일 : ' + ${#dates.format(userBookReviewDTO.order_purchase_date, 'yyyy-MM-dd')}"></span>
+					</div>
+		 		</div>
+		    	<div>
+			        <i class="star fas fa-star" data-rating="1"></i>
+			        <i class="star fas fa-star" data-rating="2"></i>
+			        <i class="star fas fa-star" data-rating="3"></i>
+			        <i class="star fas fa-star" data-rating="4"></i>
+			        <i class="star fas fa-star" data-rating="5"></i>
+			        <span class="rating-value" style="display: block; text-align: center; margin-top: 5px">5/5</span>
+		      	</div>
+		   		<input type="hidden" th:name="review_rating" value="5">
+		   	</div>
+		   
+			<div class="write-review-container">
+				<span class="important">리뷰 작성</span>
+				<textarea th:name="review_content" rows="4" cols="50" maxlength="1000" placeholder="내용을 10자 이상 입력해 주세요. 주제와 무관한 리뷰, 악플, 배송문의 등의 글은 임의 삭제될 수 있습니다." required></textarea>
+				<p class="char-count">
+					<span id="charCount">0</span><span>/1000</span>
+				</p>
+			</div>
+		
+		
+			<div class="btn-box">
+				<button type="submit" class="default-btn middle">등록</button>
+				<button type="button" class="default-btn middle border" onclick="location.href='/user/mypage/my-reviews-page'">취소</button>
+			</div>    
+		</form>
+	</div>
+</div>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="/user/mypage/review/js/wrtieReview.js"></script>	
+</html>

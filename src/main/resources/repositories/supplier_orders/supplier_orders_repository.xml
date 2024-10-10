@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SupplierOrders">
+
+	<select id="getList" resultType="supplierOrders" parameterType="condition">
+		SELECT * FROM (SELECT
+		    so.order_num,
+		    CASE
+		        WHEN so.order_status = '01' THEN '입고대기'
+		        WHEN so.order_status = '02' THEN '입고완료'
+		    END AS order_status,
+		    NVL(SUM(sod.order_detail_qty), 0)                          AS order_total_qty,
+		    NVL(SUM(sod.order_detail_price * sod.order_detail_qty), 0) AS order_total_price,
+		    so.order_date,
+		    so.manager_id
+		FROM
+		    supplier_orders        so
+		    LEFT JOIN supplier_order_details sod ON so.order_num = sod.order_num
+		GROUP BY
+		    so.order_num,
+		    so.order_status,
+		    so.order_date,
+		    so.manager_id) rs
+		WHERE 1 = 1
+			<if test="start_date != null and !start_date.equals('')">
+				AND to_char(order_date, 'YYYY-MM-DD') >= #{start_date}
+			</if>
+			<if test="end_date != null and !end_date.equals('')">
+				AND to_char(order_date, 'YYYY-MM-DD') <![CDATA[<=]]> #{end_date}
+			</if>
+			<if test="order_status != null and !order_status.equals('')">
+				<if test="order_status.equals('pending')">
+					AND order_status = '입고대기'
+				</if>
+				<if test="order_status.equals('completion')">
+					AND order_status = '입고완료'
+				</if>
+			</if>
+			<if test="search_conditions != null and !search_conditions.equals('')">
+				<if test="word != null and !word.equals('')">
+					AND order_num LIKE '%' || #{word} || '%'
+				</if>
+			</if>
+	</select>
+	
+	<select id="getDetailList" resultType="supplierOrders" parameterType="Integer">
+		SELECT
+		    sod.order_detail_isbn,
+		    sod.order_detail_title,
+		    sod.order_detail_qty,
+		    sod.order_detail_price,
+		    sod.order_detail_price * sod.order_detail_qty AS detail_total_price,
+		    sod.order_detail_received_qty
+		FROM
+		    supplier_orders        so
+		    INNER JOIN supplier_order_details sod ON so.order_num = sod.order_num
+		WHERE
+		    so.order_num = #{order_num}
+		ORDER BY
+		    order_detail_num ASC
+	</select>
+	
+	<select id="getDetail" resultType="supplierOrders" parameterType="Integer">
+		SELECT
+		    so.order_num,
+		    m.manager_name,
+		    so.order_date,
+		    NVL(SUM(sod.order_detail_qty * sod.order_detail_price), 0) AS order_total_price
+		FROM
+		    supplier_orders        so
+		    LEFT JOIN supplier_order_details sod ON so.order_num = sod.order_num
+		    LEFT JOIN managers               m ON so.manager_id = m.manager_id
+		WHERE
+		    so.order_num = #{order_num}
+		GROUP BY
+		    so.order_num,
+		    m.manager_name,
+		    so.order_date
+	</select>
+	
+	<insert id="orderInsert" parameterType="String">
+		INSERT INTO supplier_orders (
+		    order_num,
+		    order_status,
+		    order_date,
+		    manager_id
+		) VALUES (
+		    supplier_orders_seq.NEXTVAL,
+		    '01',
+		    current_timestamp,
+		    #{manager_id}
+		)
+	</insert>
+	
+	<insert id="orderDetailInsert" parameterType="supplierOrders">
+		INSERT INTO supplier_order_details (
+		    order_detail_num,
+		    order_detail_isbn,
+		    order_detail_title,
+		    order_detail_qty,
+		    order_detail_price,
+		    order_detail_publisher,
+		    order_num
+		) VALUES (
+		    supplier_order_details_seq.NEXTVAL,
+		    #{order_detail_isbn},
+		    #{order_detail_title},
+		    #{order_detail_qty},
+		    #{order_detail_price},
+		    #{order_detail_publisher},
+		    supplier_orders_seq.CURRVAL
+		)
+	</insert>
+</mapper>

@@ -1,0 +1,144 @@
+#order-container {
+    margin: 90px auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 90px;
+}
+
+#pay-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 115px;
+}
+
+#pay-header .order-process {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    color: #7E7E7E;
+}
+
+#pay-header .order-process .order-comp {
+    color: #000;
+    font-weight: 500;
+}
+#pay-header .complete-msg {
+    align-self: center;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.complete-msg p:first-child {
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+.complete-msg p:last-child { color: #7E7E7E; }
+
+#order-info-wrap {
+    width: 830px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.sub-title {
+    font-weight: 700;
+    color: #7E7E7E;
+    margin-bottom: 10px;
+}
+
+.info-subject { font-weight: 700; }
+
+.info-head, .info-content, .order-list {
+    border: 1px solid #c0c0c0;
+    border-radius: 10px;
+    padding: 30px 50px;
+}
+
+.info-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.info-head {
+    border-radius: 10px 10px 0 0;
+}
+
+.info-head.active { border-radius: 10px; }
+.list-wrap.active { display: none; }
+.product-info-arrow.active { transform: rotate(180deg); }
+
+.order-list {
+    border-radius: 0;
+    border-top: 0;
+}
+
+.order-list:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+.product-text, .order-list, .qty-price, .price-wrap, .btn-wrap {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.order-list { gap: 10px; }
+
+.product-text strong {
+    font-size: 18px;
+    font-weight: 700;
+    color: #845EC2;
+}
+
+.product-info-arrow { font-size: 20px; }
+
+.img-wrap {
+    width: 82px;
+    height: 115px;
+}
+
+.img-wrap img {
+    width: 100%;
+    height: 100%;
+}
+
+.qty-price { margin-top: 20px; }
+.qty-price p:first-child {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.price-wrap p:first-child {
+    font-size: 18px;
+    font-weight: 700;
+    color: #845EC2;
+}
+
+.deliver {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.payment-info, .deliver-info {
+    display: grid;
+    grid-template-columns: 200px auto;
+}
+
+.btn-wrap { gap: 10px; }
+
+.default-btn {
+    width: 200px;
+    height: 50px;
+}

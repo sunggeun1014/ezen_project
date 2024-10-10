@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/mainLayout}"
+      layout:fragment="Content">
+
+<link rel="stylesheet" href="/user/products/css/list.css"/>
+
+<div class="inner">
+    <div class="search-word-area" th:if="${!#strings.isEmpty(condition.word)}">
+        <span class="search-word" th:text="'\'' + ${condition.word} + '\''"></span>
+        <span>에 대한 검색결과 내용</span>
+    </div>
+    <form id="search-form" action="/user/products/searchForm" method="GET">
+        <div class="best-filter-area" th:if="${condition.categoryCountryType == 03}">
+            <div class="search-condition-title">종합베스트</div>
+            <div>
+                <div class="filter-text-btn date-click" data-selected-date-btn="01"
+                     th:classappend="${condition.selectedDateCd == '01'} ? 'on' : ''">
+                    <p>주간</p>
+                </div>
+                <div class="filter-text-btn date-click" data-selected-date-btn="02"
+                     th:classappend="${condition.selectedDateCd == '02'} ? 'on' : ''">
+                    <p>월간</p>
+                </div>
+                <div class="filter-text-btn date-click" data-selected-date-btn="03"
+                     th:classappend="${condition.selectedDateCd == '03'} ? 'on' : ''">
+                    <p>연간</p>
+                </div>
+            </div>
+        </div>
+        <div class="new-products-area" th:if="${condition.categoryCountryType == 04}">
+            <div class="search-condition-title">신상품</div>
+            <div>
+                <div class="filter-text-btn on">
+                    <p>새로나온도서</p>
+                </div>
+            </div>
+        </div>
+        <div class="re-search-bar" th:if="${condition.categoryCountryType != 03 and condition.categoryCountryType != 04}">
+            <input type="text" name="word" id="word" class="re-search-input" placeholder="결과 내 재검색" th:value="${condition.word}">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </div>
+        <div class="search-condition-area"
+             th:if="${condition.categoryCountryType != 03 and condition.categoryCountryType != 04}">
+            <div class="search-condition-flex">
+                <div class="search-condition-title">검색조건</div>
+                <div data-radio-id="book-title-radio" class="filter-text-btn condition-click"
+                     th:classappend="${condition.search_conditions == 'book_title' || #strings.isEmpty(condition.search_conditions)} ? ' on' : ''">
+                    <p>책제목</p>
+                    <input type="radio" name="search_conditions" value="book_title" id="book-title-radio"
+                           th:checked="${condition.search_conditions == 'book_title' || #strings.isEmpty(condition.search_conditions)}"
+                           hidden="hidden">
+                </div>
+                <div data-radio-id="book-author-radio" class="filter-text-btn condition-click"
+                     th:classappend="${condition.search_conditions == 'book_author'} ? ' on' : ''">
+                    <p>저자명</p>
+                    <input type="radio" name="search_conditions" value="book_author" id="book-author-radio"
+                           th:checked="${condition.search_conditions == 'book_author'}" hidden="hidden">
+                </div>
+                <div data-radio-id="book-publisher-radio" class="filter-text-btn condition-click"
+                     th:classappend="${condition.search_conditions == 'book_publisher'} ? ' on' : ''">
+                    <p>출판사</p>
+                    <input type="radio" name="search_conditions" value="book_publisher" id="book-publisher-radio"
+                           th:checked="${condition.search_conditions == 'book_publisher'}" hidden="hidden">
+                </div>
+            </div>
+            <div class="search-condition-flex"
+                 th:if="${condition.categoryCountryType == 01 or condition.categoryCountryType == 02}">
+                <div class="search-condition-title condition-title-style">검색분야</div>
+                <div class="filter-btn-wrap">
+                    <div th:each="category : ${categoryList}">
+                        <div class="filter-text-btn search-field-click"
+                             th:data-radio-id="'category-' + ${category.category_num}"
+                             th:classappend="${condition.search_field == #strings.toString(category.category_num)} ? ' on' : ''">
+                            <p th:text="${category.category_name}"></p>
+                            <p th:text="${category.category_cnt}"></p>
+                            <input type="radio" name="search_field" th:value="${category.category_num}"
+                                   th:id="'category-' + ${category.category_num}"
+                                   th:checked="${condition.search_field == #strings.toString(category.category_num)}"
+                                   hidden="hidden">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="selectedDateCd" th:value="${condition.selectedDateCd}"/>
+        <input type="hidden" name="categoryCountryType" th:value="${condition.categoryCountryType}"/>
+        <input type="hidden" name="orderByValue" th:value="${condition.orderByValue}"/>
+    </form>
+    <div class="flex-row"
+         th:classappend="${condition.categoryCountryType == 03 or condition.categoryCountryType == 04} ? 'best' : ''">
+        <div class="flex-column" th:if="${condition.categoryCountryType != 03 and condition.categoryCountryType != 04}">
+            <div class="product-cnt-area">
+                <span>전체</span>
+                <span th:text="${page.totalItems}" class="product-total-cnt"></span>
+                <span>건</span>
+            </div>
+            <div class="order-area">
+                <span data-value="1" th:classappend="${condition.orderByValue == 1} ? 'order-by-click' : ''">판매량</span>
+                <span data-value="2" th:classappend="${condition.orderByValue == 2} ? 'order-by-click' : ''">최근출판</span>
+                <span data-value="3" th:classappend="${condition.orderByValue == 3} ? 'order-by-click' : ''">낮은가격</span>
+                <span data-value="4" th:classappend="${condition.orderByValue == 4} ? 'order-by-click' : ''">높은평점</span>
+                <span data-value="5" th:classappend="${condition.orderByValue == 5} ? 'order-by-click' : ''">리뷰수</span>
+            </div>
+        </div>
+        <div>
+            <button class="check-basket-btn" onclick="basketList();">장바구니담기</button>
+        </div>
+    </div>
+    <div>
+        <div class="product-list-area" th:each="product : ${productList}">
+            <form id="product-list-form">
+                <div class="list-left">
+                    <div class="product-checkbox-area check-btn">
+                        <input type="checkbox" id="check-btn" class="check-box" th:value="${product.book_isbn}">
+                        <label for="check-btn"></label>
+                    </div>
+                    <div class="product-img-area">
+                        <a th:href="'/user/products/detail?book_isbn=' + ${product.book_isbn}">
+                            <img class="product-image"
+                                 th:src="@{/images/books/{image}(image=${product.book_thumbnail_changed != null ? product.book_thumbnail_changed : 'noimg.png'})}"
+                                 alt="책 이미지">
+                        </a>
+                        <input type="hidden" id="book_thumbnail_changed" th:value="${product.book_thumbnail_changed}">
+                    </div>
+                    <div class="product-info-area">
+                        <div class="book-name"><a th:href="'/user/products/detail?book_isbn=' + ${product.book_isbn}"
+                                                  th:text="${product.book_name}"></a></div>
+                        <input type="hidden" id="book_name" th:value="${product.book_name}">
+                        <div class="book-author">
+                            <span th:text="${product.book_author}"></span>
+                            <span>저자(글)</span>
+                        </div>
+                        <div th:text="${product.book_publisher} + ' · ' + ${#dates.format(product.book_publish_date, 'yyyy-MM-dd')}"
+                             class="book-publisher">
+                        </div>
+                        <div th:text="${#numbers.formatInteger(product.book_price, 0, 'COMMA')} + ' 원'"
+                             class="book-price"></div>
+                        <input type="hidden" id="book_price" th:value="${product.book_price}">
+                        <div>
+                            <i class="raing-ico"></i>
+                            <span th:text="${product.reviews_rating_avg}" class="reviews_rating_avg"></span>
+                            <span th:text="'(' + ${product.review_rating_cnt} + ')'" class="reviews_rating_cnt"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-btn-area" th:if="${product.book_state == '01' && product.book_qty > 0}">
+                    <div class="purchase-btn-area">
+                        <button class="purchase-btn btn-default" onclick="buyNowBtn(this);">바로구매</button>
+                    </div>
+                    <div>
+                        <button class="basket-btn btn-default" th:data-value="${product.book_isbn}"
+                                onclick="basket(this);">장바구니
+                        </button>
+                    </div>
+                </div>
+                <div class="product-btn-area" th:if="${product.book_state != '01' || product.book_qty <= 0}">
+                    <div class="purchase-btn-area">
+                        <button class="impossibility-btn">구매불가</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="result-wrap" th:if="${page.totalItems <= 0}">
+            <p>!</p>
+            <span>검색 결과가 없습니다.</span>
+            <span>검색어의 철자가 맞는지 확인 하시고 다시 검색해 주세요</span>
+        </div>
+    </div>
+
+    <div th:include="~{/user/common/fragments/pagination.html}"></div>
+</div>
+<script src="/user/products/js/list.js"></script>
+</html>

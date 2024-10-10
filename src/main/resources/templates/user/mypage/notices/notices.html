@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/myPageLayout}"
+      layout:fragment="Content">
+      <link rel="stylesheet" href="/user/common/css/pagination.css" />
+      <link rel="stylesheet" href="/user/mypage/notices/css/notices.css"/>
+            
+<div class="content">
+	
+	
+    <div class="myinfo-content">
+	    <p class="myinfo-title">공지사항</p>
+	    <div class="sub-info-bg">      
+	        <input type="text" class="input-long" placeholder="검색할 제목을 입력해 주세요." />  
+	        <button class="default-btn">검색</button>
+	    </div>
+		<div class="notice-wrap">
+			<div id="notice-qty" class="notice-qty"></div>
+			<div class="notice-header">
+				<span class="header-no">NO</span>
+				<span class="header-title">공지제목</span>
+				<span class="header-date">날짜</span>
+			</div>
+			<ul id="notices-list"></ul>
+		</div>
+
+	</div>
+	<div id="page-area" class="page-area"></div>
+		
+	    
+		
+</div>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>	
+	<script src="/user/mypage/notices/js/notices.js"></script>
+</html>

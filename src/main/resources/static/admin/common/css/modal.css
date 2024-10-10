@@ -1,0 +1,70 @@
+/* 모달 스타일 추가 */
+.modal {
+   position: fixed;
+   z-index: 1000;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   overflow: auto;
+   background-color: rgba(0, 0, 0, 0.4); /* 블랙 w/ opacity */
+}
+
+.modal-content {
+   display: flex;
+   flex-direction: column;
+   background-color: #fefefe;
+   margin: 15% auto; /* 상하 좌우 가운데 정렬 */
+   border: 0.5px solid #888;
+   padding: 0;
+   width: 300px;
+   height: 155px;
+   border-radius: 8px;
+}
+
+.modal-text {
+	height: 80%;
+	padding: 0 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	line-height: 30px;
+	text-align: center;
+}
+
+.modal-text.error-text {
+   gap: 10px;
+   color: #E54F53;
+   font-weight: 700;
+   font-size: 16px;
+}
+
+.modal-text.error-text i {
+   font-size: 26px;
+}
+
+.modal-footer {
+   display: flex;
+   align-items:center;
+}
+
+.modal-footer .modal-btn {
+   width: 100%;
+   height: 45px;
+   border-top: .5px solid #C0C0C0
+}
+
+.modal-footer .modal-btn.confirm {
+   color: #4777F6;
+   font-size: 16px;
+   font-weight: 700;
+}
+
+.modal-footer .modal-btn.confirm.error {
+   color: #000;
+}
+
+.modal-footer .modal-btn.cancel {
+   border-left: .5px solid #C0C0C0;
+   color: #666;
+}

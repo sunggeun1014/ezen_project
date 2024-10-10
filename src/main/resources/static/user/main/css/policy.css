@@ -1,0 +1,107 @@
+.container_wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.contents_wrap {
+    padding: 20px;
+}
+
+.contents_inner {
+    padding: 40px;
+    background-color: #fff;
+}
+
+.title_size_xxl {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.title_heading {
+    font-weight: bold;
+    color: #1e2b4d;
+    text-align: center;
+}
+
+.terms_wrap {
+    padding: 20px;
+    background-color: #fafafa;
+    border-radius: 6px;
+    border: 1px solid #eee;
+}
+
+.box_policy_global > p {
+	margin-left: 15px;
+}
+
+.box_policy_global {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.box_policy_global blockquote {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    padding-left: 20px;
+    border: 2px solid #dadada;
+    color: #555;
+}
+
+.box_policy_global ol {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.box_policy_global ol li {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.terms_bottom_wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn_ip {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn_ip:hover {
+    background-color: #f0f0f0;
+}
+
+.btn_line_gray {
+    border-color: #aaa;
+    color: #333;
+}
+.scroll {
+	border: 1px solid;
+	padding: 5px;
+}
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container_wrapper {
+        padding: 10px;
+    }
+
+    .contents_inner {
+        padding: 20px;
+    }
+
+    .title_size_xxl {
+        font-size: 2rem;
+    }
+
+    .btn_ip {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}

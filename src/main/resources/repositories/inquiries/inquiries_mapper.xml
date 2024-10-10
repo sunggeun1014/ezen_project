@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.bookproject.admin.inquiries.mapper.InquiriesMapper">
+	
+	<select id="getList" resultType="inquiries">
+	SELECT 
+	    i.inquiry_num, 
+	    i.inquiry_title,
+	    i.member_id,
+	    i.inquiry_write_date,
+	    CASE
+	        WHEN i.inquiry_answer_status = '01' THEN '미완료'
+	        WHEN i.inquiry_answer_status = '02' THEN '처리완료'
+	    END AS inquiry_answer_status, 
+	    CASE
+	        WHEN i.inquiry_type = '01' THEN '상품문의'
+	        WHEN i.inquiry_type = '02' THEN '배송문의'
+	        WHEN i.inquiry_type = '03' THEN '결제문의'
+	        WHEN i.inquiry_type = '04' THEN '취소문의'
+	        WHEN i.inquiry_type = '05' THEN '교환문의'
+	        WHEN i.inquiry_type = '06' THEN '반품문의'
+	        WHEN i.inquiry_type = '07' THEN '기타'
+	    END AS inquiry_type, 
+    	ia.answer_write_date
+	FROM 
+    	inquiries i
+	LEFT JOIN 
+    	inquiries_answer ia ON i.inquiry_num = ia.inquiry_num
+	</select>
+	
+	<select id="getDetailList" resultType="inquiries" parameterType="Integer">
+    WITH RankedInquiries AS (
+        SELECT 
+            r.inquiry_num,
+            r.inquiry_title,
+            r.member_id,
+            r.inquiry_write_date,
+            r.inquiry_content,
+            r.order_num,
+            CASE
+                WHEN r.inquiry_answer_status = '01' THEN '미완료'
+                WHEN r.inquiry_answer_status = '02' THEN '처리완료'
+            END AS inquiry_answer_status,
+            CASE
+                WHEN r.inquiry_type = '01' THEN '상품문의'
+                WHEN r.inquiry_type = '02' THEN '배송문의'
+                WHEN r.inquiry_type = '03' THEN '결제문의'
+                WHEN r.inquiry_type = '04' THEN '취소문의'
+                WHEN r.inquiry_type = '05' THEN '교환문의'
+                WHEN r.inquiry_type = '06' THEN '반품문의'
+                WHEN r.inquiry_type = '07' THEN '기타'
+            END AS inquiry_type,
+            r.inquiries_changed,
+            c.answer_content,
+            od.order_detail_num,
+            od.order_request_qty,
+            ROW_NUMBER() OVER (PARTITION BY r.inquiry_num ORDER BY od.order_detail_num) AS rn
+        FROM
+            inquiries r
+        LEFT OUTER JOIN
+            inquiries_answer c ON r.inquiry_num = c.inquiry_num
+        LEFT OUTER JOIN Customer_Orders o 
+            ON r.order_num = o.order_num 
+            AND r.inquiry_type IN ('04', '05', '06')
+        LEFT OUTER JOIN Customer_Order_Details od 
+            ON o.order_num = od.order_num
+        WHERE r.inquiry_num = #{inquiry_num}
+    )
+    SELECT 
+        inquiry_num,
+        inquiry_title,
+        member_id,
+        inquiry_write_date,
+        inquiry_content,
+        order_num,
+        inquiry_answer_status,
+        inquiry_type,
+        inquiries_changed,
+        answer_content,
+        order_detail_num,
+        order_request_qty
+    FROM 
+        RankedInquiries
+    WHERE rn = 1
+	</select>
+	
+	<update id="updateInquiry" parameterType="inquiries">
+		UPDATE 
+			inquiries_answer
+		SET
+			answer_content = #{answer_content},
+			answer_write_date = CURRENT_TIMESTAMP
+		WHERE 
+			inquiry_num = #{inquiry_num}
+			
+	
+	</update>
+	
+	
+	<insert id="insertInquiry" parameterType="inquiries">
+		INSERT INTO 
+			inquiries_answer 
+			(
+		        inquiry_num, 
+		        answer_content, 
+		        answer_write_date,
+		        manager_id
+	    	) 
+    	VALUES (
+		        #{inquiry_num}, 
+		        #{answer_content}, 
+		        CURRENT_TIMESTAMP,
+		        #{manager_id}
+    		)
+		<!--
+			DB 트리거 설정
+			CREATE OR REPLACE TRIGGER trg_update_inquiries_status
+			AFTER INSERT OR UPDATE ON inquiries_answer
+			FOR EACH ROW
+			BEGIN
+			    // inquiry_num가 존재하는지 확인한 후 업데이트 실행
+			    IF :NEW.inquiry_num IS NOT NULL THEN
+			        UPDATE inquiries
+			        SET inquiry_answer_status = '02'
+			        WHERE inquiries.inquiry_num = :NEW.inquiry_num;
+			    END IF;
+			END; 
+      	-->
+	</insert>
+
+    <select id="getListAtHome" resultType="inquiries">
+        SELECT * FROM (
+        SELECT
+        i.inquiry_num,
+        i.inquiry_title,
+        i.member_id,
+        i.inquiry_write_date,
+        CASE
+        WHEN i.inquiry_answer_status = '01' THEN '미완료'
+        WHEN i.inquiry_answer_status = '02' THEN '처리완료'
+        END AS inquiry_answer_status,
+        CASE
+        WHEN i.inquiry_type = '01' THEN '상품문의'
+        WHEN i.inquiry_type = '02' THEN '배송문의'
+        WHEN i.inquiry_type = '03' THEN '결제문의'
+        WHEN i.inquiry_type = '04' THEN '취소문의'
+        WHEN i.inquiry_type = '05' THEN '교환문의'
+        WHEN i.inquiry_type = '06' THEN '반품문의'
+        WHEN i.inquiry_type = '07' THEN '기타'
+        END AS inquiry_type,
+        ia.answer_write_date
+        FROM
+        inquiries i
+        LEFT JOIN
+        inquiries_answer ia ON i.inquiry_num = ia.inquiry_num
+        ORDER BY i.inquiry_write_date DESC
+        )
+        WHERE ROWNUM &lt;= 5
+    </select>
+</mapper>

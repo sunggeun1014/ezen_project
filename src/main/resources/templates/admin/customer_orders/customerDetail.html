@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/admin/common/layout/defaultlayout}"
+      layout:fragment="Content">
+<link rel="stylesheet" href="/admin/customer_orders/css/detail.css">
+<!-- Bulma CSS -->
+<!--	<link rel="stylesheet" href="/admin/customer_orders/css/detail.css">-->
+
+<div>
+    <button class="back-btn" onclick="location.href='/admin/customerOrders/list'">
+        <i class="fa-solid fa-chevron-left"></i>
+        <span>뒤로가기</span>
+    </button>
+    <div class="table-container white-frame">
+        <div class="order-num-area">
+            <span class="search-list-title" th:text="'주문번호 [' + ${detail.order_num} + ']'"></span>
+        </div>
+        <div class="pay-info">
+            <span th:text="'결제번호: ' + ${detail.paymentId != null ? detail.paymentId : '0'}"></span>
+            <span class="order-person-info">주문자: [[${detail.member_name}]] / [[${detail.member_phoneno}]]</span>
+        </div>
+        <div class="order-info-container">
+            <div class="order-info">
+                <div class="info-area-flex">
+                    <div class="info-column-area">
+                        <div class="info-column">
+                            <span>회원ID</span>
+                        </div>
+                        <span>[[${detail.member_id}]]</span>
+                    </div>
+                    <div class="info-column-area">
+                        <div class="info-column">
+                            <span>이메일</span>
+                        </div>
+                        <span>[[${detail.member_email}]]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="order-info">
+                <div class="info-area-flex">
+                    <div class="info-column-area">
+                        <div class="info-column">
+                            <span>받는사람</span>
+                        </div>
+                        <span th:text="${detail.recipient_name != null ? detail.recipient_name : detail.member_name}"></span>
+                    </div>
+                    <div class="info-column-area">
+                        <div class="info-column">
+                            <span>전화번호</span>
+                        </div>
+                        <span th:text="${detail.recipient_phoneNo != null ? detail.recipient_phoneNo : detail.member_phoneno}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="order-info">
+                <div>
+                    <div class="info-column">
+                        <span>배송지</span>
+                    </div>
+                    <span>[[${detail.order_addr}]] [[${detail.order_addr_detail}]]</span>
+                </div>
+            </div>
+            <div class="order-info">
+                <div>
+                    <div class="info-column">
+                        <span>출입방법</span>
+                    </div>
+                    <span th:text="${detail.common_ent_pw != null ? detail.common_ent_pw : '자유출입가능'}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-container white-frame"
+         th:if="${!#lists.isEmpty(detailList.?[order_detail_status == '교환요청' or order_detail_status == '반품요청' or order_detail_status == '교환완료' or order_detail_status == '반품완료' or order_detail_status == '처리불가'])}">
+        <div>
+            <div class="request-title-area">
+                <span class="search-list-title">반품요청 정보</span>
+            </div>
+            <div>
+                <div class="request-info-area">
+                    <div class="info-column">
+                        <span>보내는사람</span>
+                    </div>
+                    <span th:text="${detail.retrieve_name != null ? detail.retrieve_name : detail.member_name}"></span>
+                </div>
+                <div class="request-info-area">
+                    <div class="info-column">
+                        <span>전화번호</span>
+                    </div>
+                    <span th:text="${detail.recipient_phoneNo != null ? detail.recipient_phoneNo : detail.member_phoneno}"></span>
+                </div>
+                <div class="request-info-area">
+                    <div class="info-column">
+                        <span>회수지</span>
+                    </div>
+                    <span>[[${detail.retrieve_addr}]] [[${detail.retrieve_addr_detail}]]</span>
+                </div>
+                <div class="request-info-area">
+                    <div class="info-column">
+                        <span>출입방법</span>
+                    </div>
+                    <span th:text="${detail.retrieve_common_cnt_pw != null ? detail.retrieve_common_cnt_pw : '자유출입가능'}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="white-frame">
+        <div>
+            <div class="detail-list-area">
+                <div>
+                    <span class="detail-total-cnt" th:text="'총 ' + ${#lists.size(detailList)} + '건'"></span>
+                </div>
+                <div class="request-completion-btn">
+                    <div class="select-wrap">
+                        <select id="request-select-area" class="select">
+                            <option value="05">취소완료</option>
+                            <option value="06">교환완료</option>
+                            <option value="07">반품완료</option>
+                            <option value="08">처리불가</option>
+                        </select>
+                        <div class="select-arrow-down"></div>
+                    </div>
+                    <span>
+						<button class="default-btn" onclick="requestCompletionBtn();">완료</button>
+					</span>
+                </div>
+            </div>
+        </div>
+        <div class="table-data-container">
+            <div class="table-column-area">
+                <div class="checkbox-column">
+					<span>
+						<input type="checkbox" id="select-all" class="checkbox">
+						<label for="select-all"></label>
+					</span>
+                </div>
+                <div class="no-column"><span>상세번호</span></div>
+                <div class="book-title-column"><span>책제목</span></div>
+                <div class="isbn-column"><span>ISBN</span></div>
+                <div class="price-column"><span>가격</span></div>
+                <div class="qty-column"><span>주문수량</span></div>
+                <div class="request-qty-column">요청수량</div>
+                <div class="complete-qty-column">처리완료</div>
+                <div class="input-qty-column">처리수량</div>
+                <div class="purchase-column"><span>구매금액</span></div>
+                <div class="order-status-column"><span>주문상태</span></div>
+            </div>
+            <form id="table-form">
+                <div class="table-data-area" th:each="info, status : ${detailList}">
+                    <div class="checkbox-data">
+						<span>
+							<input type="checkbox" id="select-row" class="row-checkbox">
+							<label for="select-row"></label>
+							<input type="hidden" name="order_detail_num" th:value="${info.order_detail_num}"/>
+						</span>
+                    </div>
+                    <div class="no-data">
+                        <span th:text="${info.order_detail_num}"></span>
+                    </div>
+                    <div class="book-title-data">
+                        <span th:text="${info.book_name}"></span>
+                        <input type="hidden" name="book_name" th:value="${info.book_name}"/>
+                    </div>
+                    <div class="isbn-data">
+                        <span th:text="${info.book_isbn}"></span>
+                        <input type="hidden" name="book_isbn" th:value="${info.book_isbn}"/>
+                    </div>
+                    <div class="price-data">
+                        <span th:text="${#numbers.formatInteger(info.order_detail_price, 0, 'COMMA')} + '원'"></span>
+                    </div>
+                    <div class="qty-data">
+                        <span th:text="${info.order_detail_qty} + '개'"></span>
+                        <input type="hidden" name="order_detail_qty" th:value="${info.order_detail_qty}"/>
+                    </div>
+                    <div class="request-qty-data">
+                        <span th:text="${info.order_detail_qty <= 0 ? '-' : info.order_request_qty + '개'}"></span>
+                        <input type="hidden" name="order_request_qty" th:value="${info.order_request_qty}"/>
+                    </div>
+                    <div class="complete-qty-data">
+                        <span th:text="${info.order_complete_qty <= 0 ? '-' : info.order_complete_qty + '개'}"></span>
+                    </div>
+                    <div class="input-qty-data">
+                        <span><input type="number" name="input_qty" oninput="inputNumberMax(this);"
+                                     th:data-detail_qty="${info.order_detail_qty}"
+                                     th:value="${info.order_request_qty - info.order_complete_qty > 0 ? info.order_request_qty - info.order_complete_qty : 0}"/></span>
+                    </div>
+                    <div class="purchase-data">
+                        <span th:text="${#numbers.formatInteger(info.order_price_sum, 0, 'COMMA')} + '원'"></span>
+                    </div>
+                    <div class="order-status-data request-text-red"
+                         th:if="${info.order_detail_status eq '취소요청' or info.order_detail_status eq '교환요청' or info.order_detail_status eq '반품요청'}">
+                        <div>
+                            <span th:text="${info.order_detail_status}"></span>
+                            <input type="hidden" name="order_detail_status" th:value="${info.order_detail_status}"/>
+                        </div>
+                    </div>
+                    <div class="order-status-data"
+                         th:if="${info.order_detail_status ne '취소요청' and info.order_detail_status ne '교환요청' and info.order_detail_status ne '반품요청'}">
+                        <div>
+                            <span th:text="${info.order_detail_status}"></span>
+                            <input type="hidden" name="order_detail_status" th:value="${info.order_detail_status}"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="total-price-area">
+                <span th:text="'총 금액: ' + ${#numbers.formatInteger(detail.order_price_total, 0, 'COMMA')} + '원'"></span>
+            </div>
+        </div>
+    </div>
+
+    <form id="submit-form">
+        <input type="hidden" name="order_selected_status"/>
+        <input type="hidden" name="order_num" th:value="${detail.order_num}"/>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/admin/customer_orders/js/detail.js"></script>
+</div>
+</html>

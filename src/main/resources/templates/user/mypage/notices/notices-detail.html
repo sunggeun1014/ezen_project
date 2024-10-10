@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/myPageLayout}"
+      layout:fragment="Content">
+    <link rel="stylesheet" href="/user/mypage/notices/css/notices-detail.css"/>
+
+<div class="content">
+    <div class="myinfo-content">
+    
+        <h3 class="title" th:text="${notice.notice_title}"></h3>
+
+        <div class="date" th:text="${#dates.format(notice.notice_write_date, 'yyyy-MM-dd')}"></div>
+
+        <div class="notice-content">
+            <div th:utext="${notice.notice_content}"></div>
+        </div>
+
+        <div class="next">
+            <a th:if="${nextNotice != null}" 
+               th:href="@{/user/mypage/notices-detail(noticeNum=${nextNotice.notice_num}, prevNoticeNum=${notice.notice_num}, nextNoticeNum=${nextNotice.notice_num}, keyword=${keyword != null ? keyword : ''})}"
+               class="notice-link">
+                <span style="margin-right: 50px;">다음글</span> 
+                <span>
+                    <img src="/user/common/imgs/Vectorup.png" alt="위 화살표" style="margin-right: 50px;"/>
+                </span>
+                <span>[[${nextNotice.notice_title}]]</span>
+            </a>
+            <span th:if="${nextNotice == null}">다음글 없음</span>
+        </div>
+        
+        <div class="previous">
+            <a th:if="${prevNotice != null}" 
+               th:href="@{/user/mypage/notices-detail(noticeNum=${prevNotice.notice_num}, prevNoticeNum=${prevNotice.notice_num}, nextNoticeNum=${notice.notice_num}, keyword=${keyword != null ? keyword : ''})}"
+               class="notice-link">
+                <span style="margin-right: 50px;">이전글</span> 
+                <span>
+                    <img src="/user/common/imgs/Vectordown.png" alt="아래 화살표" style="margin-right: 50px;"/>
+                </span>
+                <span>[[${prevNotice.notice_title}]]</span>
+            </a>
+            <span th:if="${prevNotice == null}">이전글 없음</span>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+</html>

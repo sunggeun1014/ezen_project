@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/myPageLayout}"
+      layout:fragment="Content">
+
+	<link rel="stylesheet" href="/user/mypage/purchase_cancel/css/cancelList.css">
+<div>
+	<div class="page-title">
+		<span>취소신청</span>
+	</div>
+	<div class="order-info-area">
+		<div class="request-date">
+			<span th:if="${!#lists.isEmpty(cancelList)}" th:text="${#dates.format(cancelList[0].order_purchase_date, 'yyyy.MM.dd')}"></span>
+		</div>
+		<div class="request-order-num">
+			<span th:if="${!#lists.isEmpty(cancelList)}" th:text="'주문번호 ' + ${cancelList[0].order_num}"></span>
+		</div>
+	</div>
+	<div class="page-sub-title">
+		<span>주문상품</span>
+	</div>
+	<div th:each="detail : ${cancelList}">
+		<div class="cancel-book-detail">
+			<div>
+				<a th:href="'/user/products/detail?book_isbn=' + ${detail.book_isbn}"><img th:src="'/images/books/' + ${detail.book_thumbnail_changed != null ? detail.book_thumbnail_changed : 'noimg.png'}" alt="책 이미지" width="80" height="114"></a>
+			</div>
+			<div class="book-info">
+				<input type="hidden" name="order_num" th:value="${detail.order_num}">
+				<input type="hidden" name="order_detail_num" th:value="${detail.order_detail_num}">
+				<input type="hidden" name="order_detail_qty" th:value="${detail.order_detail_qty}">
+				
+				<div>
+					<a th:href="'/user/products/detail?book_isbn=' + ${detail.book_isbn}"><span class="book-name" th:text="${detail.book_name}"></span></a>
+				</div>
+				<div>
+					<span class="purchase-qty" th:text="'수량: ' + ${detail.order_detail_qty} + '개'"></span>
+				</div>
+			</div>
+			<div>
+				<span class="book-price" th:text="${#numbers.formatInteger(detail.order_detail_price * detail.order_detail_qty, 0, 'COMMA')}"></span><span class="won">원</span>
+			</div>		
+		</div>
+	</div>
+	<div class="cancel-guide-lines-area">
+		<div>
+			<div class="guide-lines-title-area">
+				<span class="guide-lines-title">취소안내사항</span>
+			</div>
+			<div>
+				<span class="guide-lines-content">결제수단 환불이 기본이며, 부득이하게 결제수단 환불이 불가한 경우 입력하신 계좌정보로 환불됩니다.</span>
+			</div>
+			<div>
+				<span class="guide-lines-content">입력하신 계좌정보가 부정확한 경우 환불이 어렵습니다. 계좌정보를 정확히 입력해 주세요.</span>
+			</div>
+		</div>
+		<div class="guide-lines-content-area">
+			<div class="guide-lines-detail-area">
+				<div>
+					<span class="guide-lines-sub-title">안내 사항을 확인해 주세요.</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">환불예상금액과 실제 환불되는 금액이 다를 수 있습니다.</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">부분취소 발생시 취소금권의 순서에 따라 환불 됩니다. 부분반품 발생시 할당된 금권으로 환불 됩니다.</span> 
+				</div>
+			</div>
+			<div class="guide-lines-detail-area content-center-margin">
+				<div>
+					<span class="guide-lines-sub-title">상품별 환불안내</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">신용카드,계좌이체의 경우 결제취소됩니다.</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">카드이용 후 취소요청 시 카드사 정책에 따라 환불기간 소요될 수 있습니다.</span> 
+				</div>
+			</div>
+			<div class="guide-lines-detail-area">
+				<div>
+					<span class="guide-lines-sub-title">신용카드/체크카드(간편결제,법인카드 포함)</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">카드사 취소 처리 되는 시점에 카드사에서 취소 문자 전송됩니다. (단, 카드사 문자 신청한 경우만 전송됨)</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">카드 승인 취소 내역은 해당 카드사에서 확인 가능합니다.</span> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="btn-area">
+		<button class="cancel-btn" onclick="orderCancelBtn();">취소신청</button>
+		<button class="back-btn" onclick="location.href='/user/mypage/orderList'">이전으로</button>
+	</div>
+</div>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="/user/mypage/purchase_cancel/js/cancelList.js"></script>
+</html>

@@ -1,0 +1,63 @@
+	<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="~{/user/common/fragments/config :: ConfigFragment}"></head>
+
+<body>
+<header th:insert="~{/user/common/fragments/header :: HeaderFragment}"></header>
+<div class="inner">
+    <div id="myprofile-wrap">
+        <nav class="side-menu">
+            <div class="user-profile-wrap">
+                <div class="img-wrap">
+                    <img src="" alt="" class="user-img"/>
+<!--                    <i class="fa-solid fa-circle-user"></i>-->
+                </div>
+                <p class="user-name" th:text="${session.member != null ? session.member.member_name : '게스트'}"></p>
+            </div>
+            <ul class="menu-list">
+                <li class="menu-item">
+                    쇼핑내역
+                    <ul class="sub-menu">
+                        <li class="sub-menu-list"><a href="/user/mypage/orderList">주문/배송목록</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    내정보
+                    <ul class="sub-menu">
+                        <li class="sub-menu-list"><a href="/user/mypage/update-page">회원정보수정</a></li>
+                        <li class="sub-menu-list"><a href="/user/mypage/delete-page">회원탈퇴</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    내리뷰
+                    <ul class="sub-menu">
+                        <li class="sub-menu-list"><a href="/user/mypage/my-reviews-page">리뷰목록</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    고객센터
+                    <ul class="sub-menu">
+                        <li class="sub-menu-list"><a href="/user/mypage/notices-page">공지사항</a></li>
+                        <li class="sub-menu-list"><a href="/user/mypage/inquiries-page">1:1문의</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="myinfo-content" layout:fragment="Content"></div>
+    </div>
+</div>
+<!-- 탑버튼 -->
+<div id="top-btn">
+    <i class="fa-solid fa-arrow-up"></i>
+</div>
+<footer th:insert="~{/user/common/fragments/footer :: FooterFragment}"></footer>
+
+<script src="/user/common/js/myPage.js"></script>
+<script src="/user/common/js/main.js"></script>
+<script src="/user/common/js/header.js"></script>
+
+</body>
+</html>

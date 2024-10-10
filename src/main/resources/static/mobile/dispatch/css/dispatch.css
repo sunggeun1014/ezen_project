@@ -1,0 +1,19 @@
+.checkBox {
+	width: 2rem;
+}
+
+.inventoryQty {
+    text-align: end;
+}
+
+.content-dispatch-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 체크박스와 텍스트를 수직 중앙 정렬 */
+    border-bottom: 1px solid #D8D8D8;
+    padding: 1.5rem 1rem;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px; /* 체크박스와 텍스트 사이에 여백 */
+}

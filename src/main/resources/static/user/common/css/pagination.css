@@ -1,0 +1,39 @@
+.page-area {
+	display: flex;
+	margin-top: 30px;
+	justify-content: center;
+	text-align: center;
+	gap: 10px;
+}
+
+.page-link {
+	width: 20px;
+	height: 20px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 3px;
+	border-radius: 10px;
+	cursor: pointer;
+	background-color: white;
+	
+}
+
+.page-arrow {
+	font-size: 10px;
+	width: 20px;
+	height: 20px;
+	line-height: 10px;
+	border: solid 1px #C0C0C0;
+	padding: 4px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.link-on {
+	color: #FFFFFF;
+	background-color: #7E7E7E;
+}
+
+.arrow-disabled {
+	cursor: default;
+}

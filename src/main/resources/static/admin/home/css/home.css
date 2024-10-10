@@ -1,0 +1,145 @@
+/* 대시보드 헤더 */
+.dashboard-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-wrap {
+    width: 271px;
+    height: 112px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 30px 25px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.txt-wrap > p:nth-child(1) {
+    font-size: 16px;
+}
+
+.txt-wrap > p:nth-child(2) {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.info-wrap .fa-solid {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 32px;
+}
+
+.info-wrap:nth-child(1) .fa-solid {
+    background-color: #FFF4E8;
+    color: #F29425;
+}
+
+.info-wrap:nth-child(2) .fa-solid {
+    background-color: #E8F5FF;
+    color: #248CD8;
+}
+
+.info-wrap:nth-child(3) .fa-solid {
+    background-color: #F9EFFF;
+    color: #A601FF;
+}
+
+.info-wrap:nth-child(4) .fa-solid {
+    background-color: #ECFFF2;
+    color: #10A142;
+}
+
+/* 대시보드 주문상태 */
+.dashboard-status {
+    margin-bottom: 20px;
+}
+
+.status-info-wrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.status-info {
+    text-align: center;
+}
+
+.img-wrap {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.status-info.order .img-wrap {
+    background-color: #EFFAF4;
+}
+
+.status-info.deliver .img-wrap {
+    background-color: #EFF7FA;
+}
+
+.status-info.complete .img-wrap {
+    background-color: #EBECF0;
+}
+
+.status-info p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.status-info a {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.status-info a:hover {
+    text-decoration: underline;
+}
+
+.status-info.order a {
+    color: #35C27D;
+}
+
+.status-info.deliver a {
+    color: #35A9C2;
+}
+
+.status-info.complete a {
+    color: #000;
+}
+
+/* 테이블 목록 */
+.tables-wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.search-list-title {
+    margin-bottom: 20px;
+}
+
+.text-color-blue.table-center {
+    color: #4777F6;
+}
+
+.text-eclipse {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,386 @@
+.footer-wrap {
+	position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.mobile-inner {
+	display: flex;
+    flex-direction: column;
+}
+
+.mobile-frame {
+	position: relative;
+	width: 36rem;
+	height: 67rem;
+	padding: 1.5rem;
+	background-color: #FFFFFF;
+}
+
+.scroll {
+	overflow: auto;
+}
+
+.elipsis {
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.content-list {
+	height: 4rem;
+    display: grid;
+    grid-template-columns: 22rem 1fr;
+    margin-top: 2rem;
+    border-bottom: 1px solid #D8D8D8;
+    align-items: center;
+}
+.content-text-wrap {
+	display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+/* 로그인 */
+#login-container {
+    width: 100%;
+    padding: 0 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-wrap {
+    margin: 10rem 0;
+    width: 23rem;
+    height: 4rem;
+}
+
+.logo-wrap img {
+    width: 100%;
+    height: 100%;
+}
+
+.sign-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: .5rem;
+}
+
+.sign-wrap label {
+    font-size: 1.8rem;
+}
+
+.sign-wrap input {
+    width: 100%;
+    height: 6rem;
+    border: 1px solid #C0C0C0;
+    border-radius: 1rem;
+    padding: 1rem 1rem;
+    font-size: 1.4rem;
+}
+
+.sign-wrap:nth-child(2) {
+    margin-top: 2rem;
+}
+
+/* 아이디 비번 틀렸을 때 */
+.sign-wrap .error-message {
+  color: #E54F53;
+  font-size: 1.4rem;
+}
+
+.sign-wrap #mob-id,
+.sign-wrap #mob-pw {
+  border: 1px solid #E54F53;
+}
+
+#login-btn {
+    height: 6rem;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 5rem;
+}
+
+/* 하단 탭바 */
+
+.menu-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: .5rem;
+}
+
+.menu-item p {
+    font-size: 1.4rem;
+    color: #666;
+}
+
+.tab-icon {
+    color: #666;
+}
+
+.tab-icon {
+    font-size: 2.9rem;
+}
+
+.icon-wrap svg {
+    height: 3rem;
+}
+
+.tab-icon.on {
+    color: #4777F6;
+}
+
+.menu-item p.on {
+    color: #4777F6;
+}
+
+/* 버튼 */
+/* 뒤로가기 (입고하기 등등) */
+.back-btn {
+    width: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.back-btn .fa-chevron-left {
+    width: auto;
+    font-size: 1.8rem;
+    color: #666;
+}
+
+/* 파란버튼 (입고하기 등등) */
+.default-btn {
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    border: none;
+    border-radius: 1rem;
+    background-color: #4777F6;
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.default-btn svg {
+    width: auto;
+    height: 100%;
+}
+
+.default-btn.cancel {
+    border: 1px solid #C0C0C0;
+    background-color: #fff;
+    color: #666;
+}
+
+/* 인풋박스들 */
+
+/* 검색창 */
+.search-input-box {
+    position: relative;
+    height: 4rem;
+}
+
+#search-input {
+    height: 100%;
+    padding: 1rem 6rem 1rem 5rem;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    font-size: 1.4rem;
+}
+
+.search-input-box .fa-magnifying-glass {
+    position: absolute;
+    width: auto;
+    top: 1rem;
+    left: 1.5rem;
+    font-size: 2rem;
+    color: #666;
+}
+
+.search-input-box .fa-barcode {
+    position: absolute;
+    width: auto;
+    top: 0.4rem;
+    right: 1rem;
+    font-size: 2.5rem;
+    border: 1px solid #C0C0C0;
+    border-radius: .5rem;
+    padding: .3rem;
+}
+
+.search-input-box::after {
+    position: absolute;
+    content: "";
+    top: .5rem;
+    right: 5.4rem;
+    width: .1rem;
+    height: 3rem;
+    background-color: #C0C0C0;
+}
+
+/* 수량입력창 */
+.input-qty-container {
+    position: relative;
+    width: 12rem;
+}
+
+.input-qty {
+    width: 100%;
+    height: 4rem;
+    padding: 0 1rem;
+    border: none;
+    border-radius: .5rem;
+    border: 1px solid #C0C0C0;
+    font-size: 1.4rem;
+}
+
+.input-qty-container::after {
+    position: absolute;
+    content: '개';
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    font-size: 16px;
+    color: #666;
+}
+
+/* 인풋 넘버에 화살표 없애기 */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox  */
+input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: none;
+}
+
+/* 전화번호 셀렉박스 */
+select {
+    height: 3rem;
+    padding: 0 .5rem;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: .5rem;
+    border: 1px solid #C0C0C0;
+}
+
+select::-ms-expand {
+    display : none ;
+}
+
+.select-wrap-und {
+    position: relative;
+    width: 5rem;
+}
+
+.fa-sort {
+    position: absolute;
+    top: 50%;
+    left: 36px;
+    transform: translateY(-50%);
+}
+
+/* 나머지 전화번호 */
+.phone-num {
+    width: 5rem;
+    height: 3rem;
+    border: 1px solid #C0C0C0;
+    border-radius: .5rem;
+    font-size: 1.4rem;
+    padding: 0 .8rem
+}
+
+/* 프레임 */
+.white-frame {
+    width: 100%;
+    padding: 1.5rem 1rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* 홈 입출고 메뉴 버튼 */
+.home-first-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.enter-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.enter-menu i {
+    width: auto;
+    font-size: 1.8rem;
+    color: #666;
+}
+
+.left-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+}
+
+.left-wrap svg {
+    width: auto;
+    height: 2.5rem;
+}
+
+.left-wrap p {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+/* 글씨 */
+
+.menu-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.sub-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.content-text {
+    font-size: 1.2rem;
+}
+
+.content-sub-txt {
+    font-size: 1rem;
+    color: #7e7e7e;
+}

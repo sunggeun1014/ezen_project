@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{/mobile/common/layout/mobilelayout}"
+	  layout:fragment="Content">
+	  
+<div class="mobile-inner" style="gap: 3rem"> 
+	<h3 class="menu-title">홈</h3>
+	<div class="white-frame home-first-menu">
+	    <p class="sub-title">입/출고</p>
+	    
+	    <div class="enter-menu">
+	    	<a href="/mobile/admin/warehousing-page">
+		        <div class="left-wrap">
+		            <svg data-slot="icon" fill="none" stroke-width="2" stroke="currentColor" viewBox="-5 -5 35 35" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+		                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
+		            </svg>
+		            <p>입고하기</p>
+			        <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
+		        </div>
+	    	</a>
+	    </div>
+	    
+	    <div class="enter-menu">
+		    <a href="/mobile/admin/dispatch-page">
+			    <div class="left-wrap">
+			        <svg data-slot="icon" fill="none" stroke-width="2" stroke="currentColor" viewBox="-5 -5 35 35" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+			            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"></path>
+			        </svg>
+			        <p>출고하기</p>
+			        <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
+			    </div>
+			</a>
+	    </div>
+	</div>
+	
+	<div class="white-frame">
+		<p class="sub-title">배송요청</p>
+		<div class="inner" style="height: auto">
+			<div class="empty-list" th:if="${page == null}">요청 내역이 없습니다</div>
+			<div class="content-list" th:each="item : ${list}">
+				<div class="content-text-wrap">
+					<a class="content-text" style="text-decoration: underline;" th:href="@{/mobile/admin/delivery-detail(requestNum=${item.request_num})}">요청번호: <span th:text="${item.request_num}"></span></a>
+					<p class="content-sub-txt">요청날짜: <span th:text="${#dates.format(item.request_date, 'yyyy-MM-dd')}"></span></p>
+				</div>
+				<div style="text-align: end;">
+					<p class="content-text">총 <span th:text="${item.total_order_qty} + 권"></span></p>
+				</div>
+			</div>
+
+			<div id="page-area" class="page-area" th:if="${page != null}" th:data-current-page="${page.currentPage}" th:data-total-page="${page.totalPages}">
+				<i id="page-arrow-left" class="fa-solid fa-angle-left page-arrow"></i>
+				<span th:each="i : ${#numbers.sequence(page.startPage, page.endPage)}" th:id="'page-link-' + ${i}" class="page-link" th:text="${i}"></span>
+				<i id="page-arrow-right" class="fa-solid fa-angle-right page-arrow"></i>
+			</div>
+		</div>
+	</div>
+	
+</div>
+</html>

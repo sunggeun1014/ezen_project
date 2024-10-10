@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:fragment="HeaderFragment">
+<!-- header 설정 -->
+
+<div class="header-top">
+    <div class="header-top-inner">
+    	<input type="hidden" id="member-login-user-id" th:if="${session.member != null}" th:value="${session.member.member_id}"></th:block>
+        <div id="loginMenu" class="top-menu-wrap">
+            <a href="/user/login" class="top-menu-link">로그인</a>
+            <a href="/user/cart/list" class="top-menu-link">장바구니</a>
+            <a href="/user/mypage/inquiries-page" class="top-menu-link">1:1문의</a>
+        </div>
+        <div id="userMenu" class="top-menu-wrap" style="display: none;">
+            <a href="/user/logout" class="top-menu-link">로그아웃</a>
+            <a href="/user/mypage/orderList" class="top-menu-link">마이페이지</a>
+            <a href="/user/cart/list" class="top-menu-link">장바구니</a>
+            <a href="/user/mypage/inquiries-page" class="top-menu-link">1:1문의</a>
+        </div>
+    </div>
+</div>
+<!-- 메인 헤더 -->
+<div class="header-inner">
+    <div class="header-center">
+        <div class="logo-searchbar">
+            <a href="/user/main"> <img src="/user/common/imgs/web-header-logo.svg" alt="로고" class="logo-img">
+            </a>
+            <div class="searchbar">
+                <input type="text" id="searchKeyword" name="searchKeyword" class="search-input"
+                       th:value="${condition != null ? condition.word : ''}"> 
+                       <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            </div>
+        </div>
+
+        <div class="searchbar-right">
+            <a href="/user/cart/list" id="cartBtn" class="cart-icon-wrap"> <img
+                    src="/user/common/imgs/web-cart-icon.svg" alt="장바구니" class="cart-icon">
+                <div class="cart-qty">
+                    <p></p>
+                </div>
+            </a> <a href="/user/mypage/orderList"> <i class="fa-solid fa-circle-user user-icon"></i>
+        </a>
+        </div>
+    </div>
+    <!-- 카테고리 -->
+    <nav class="category-wrap">
+        <div class="nav-all-categories-wrap">
+            <div class="nav-all-categories">
+                <img src="/user/common/imgs/category-list-button.svg" alt="카테고리목록" class="all-categories-icon">
+            </div>
+            <div class="category-modal"></div>
+        </div>
+
+        <ul class="nav-category-list">
+            <li><a href="/user/products/searchForm?categoryCountryType=01" class="nav-category-item">국내도서</a></li>
+            <li><a href="/user/products/searchForm?categoryCountryType=02" class="nav-category-item">외국도서</a></li>
+            <li><a href="/user/products/searchForm?categoryCountryType=03&orderByValue=1&selectedDateCd=01"
+                   class="nav-category-item">베스트</a></li>
+            <li><a href="/user/products/searchForm?categoryCountryType=04&orderByValue=2"
+                   class="nav-category-item">신상품</a></li>
+        </ul>
+    </nav>
+
+    <!-- 스크롤 시 고정되는 헤더 -->
+    <div class="header-fixed">
+        <div class="fixed-item-wrap">
+			<div class="header-left">
+				<div class="nav-all-categories">
+					<img src="/user/common/imgs/category-list-button.svg" alt="카테고리목록" class="all-categories-icon">
+				</div>
+				<a href="/user/main">
+					<img src="/user/common/imgs/web-fixed-header-logo.svg" alt="로고" class="header-fixed-logo-img">
+				</a>
+				<div class="searchbar">
+					<input type="text" name="searchKeyword" class="search-input"> <i
+						class="fa-solid fa-magnifying-glass search-icon"></i>
+				</div>
+			</div>
+            <div class="header-fixed-right">
+                <a href="/user/cart/list" id="cartBtn" class="cart-icon-wrap">
+                    <img src="/user/common/imgs/web-cart-icon.svg" alt="장바구니" class="cart-icon">
+                    <div class="cart-qty">
+                        <p></p>
+                    </div>
+                </a>
+                <a href="/user/mypage/orderList"> <i class="fa-solid fa-circle-user user-icon"></i></a>
+                <a href="/user/mypage/inquiries-page"> <img src="/user/common/imgs/web-cs-icon.svg" alt="고객센터" class="cs-icon"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 전체 카테고리 모달-->
+    <div id="categoryModal" class="all-category-modal">
+        <div class="category-modal-content">
+            <div class="modal-category-list">
+                <div class="modal-category-item-wrap">
+                    <a href="" class="modal-category-item active">국내도서</a>
+                    <div class="modal-category-icon">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="modal-category-item-wrap">
+                    <a href="" class="modal-category-item">외국도서</a>
+                    <div class="modal-category-icon">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-categories-wrap">
+                <div class="category-wrap" id="modal-categories-kor">
+                    <div class="modal-categories">
+                        <a href="/user/products/searchForm?search_field=1&categoryCountryType=1" class="modal-category-detail">소설</a> <a href="/user/products/searchForm?search_field=2&categoryCountryType=1" class="modal-category-detail">요리</a> <a
+                            href="/user/products/searchForm?search_field=3&categoryCountryType=1" class="modal-category-detail">건강</a> <a href="/user/products/searchForm?search_field=4&categoryCountryType=1" class="modal-category-detail">인문</a> <a
+                            href="/user/products/searchForm?search_field=5&categoryCountryType=1" class="modal-category-detail">경제/경영</a> <a href="/user/products/searchForm?search_field=7&categoryCountryType=1"
+                                                                                                                                             class="modal-category-detail">역사/문화</a> <a
+                            href="/user/products/searchForm?search_field=8&categoryCountryType=1" class="modal-category-detail">중/고등참고서</a> <a href="/user/products/searchForm?search_field=9&categoryCountryType=1"
+                                                                                                                                               class="modal-category-detail">청소년</a> <a
+                            href="/user/products/searchForm?search_field=10&categoryCountryType=1" class="modal-category-detail">기술/공학</a> <a href="/user/products/searchForm?search_field=11&categoryCountryType=1" class="modal-category-detail">과학</a>
+                        <a href="/user/products/searchForm?search_field=12&categoryCountryType=1" class="modal-category-detail">여행</a> <a href="/user/products/searchForm?search_field=17&categoryCountryType=1" class="modal-category-detail">자기계발</a>
+                    </div>
+                </div>
+                <div class="category-wrap" id="modal-categories-foreign">
+                    <div class="modal-categories foreign">
+                        <a href="/user/products/searchForm?search_field=6&categoryCountryType=2" class="modal-category-detail">경제/경영</a> <a href="/user/products/searchForm?search_field=13&categoryCountryType=2" class="modal-category-detail">문학</a>
+                        <a href="/user/products/searchForm?search_field=14&categoryCountryType=2" class="modal-category-detail">생활/요리/건강</a> <a href="/user/products/searchForm?search_field=15&categoryCountryType=2" class="modal-category-detail">어린이/ELT</a>
+                        <a href="/user/products/searchForm?search_field=16&categoryCountryType=2" class="modal-category-detail">과학기술</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</html>

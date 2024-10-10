@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/admin/common/layout/defaultlayout}"
+      layout:fragment="Content" xmlns:display="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>상품추가하기</title>
+    <link rel="stylesheet" href="/admin/products/css/edit-product.css">
+</head>
+<body>
+<div class="filter-container white-frame">
+    <h3 class="search-list-title">상품등록</h3>
+    <div class="book-search">
+        <p class="search-list-subject">책검색</p>
+        <div class="search-container">
+            <input type="text" id="search-keyword" class="search-input"
+                   placeholder="책 제목 또는 ISBN을 입력하세요"/>
+            <button id="searchButton">
+                <span class="material-symbols-outlined">search</span>
+            </button>
+        </div>
+    </div>
+
+    <form action="/admin/products/register" id="add-form" method="post" enctype="multipart/form-data">
+        <div class="product-info">
+            <p class="search-list-subject">ISBN
+                <span class="important">*</span>
+            </p>
+            <input type="text" name="book_isbn" id="book_isbn">
+        </div>
+        <div class="product-info">
+            <p class="search-list-subject">책제목
+                <span class="important">*</span>
+            </p>
+            <input type="text" name="book_name" id="book_name" class="input-text-box">
+        </div>
+        <div class="product-info">
+            <p class="search-list-subject">출판사
+                <span class="important">*</span>
+            </p>
+            <input type="text" name="book_publisher" id="book_publisher" class="input-text-box">
+        </div>
+        <div class="product-info">
+            <p class="search-list-subject">저자
+                <span class="important">*</span>
+            </p>
+            <input type="text" name="book_author" class="input-text-box" id="book_author">
+        </div>
+        <div class="product-info">
+            <p class="search-list-subject">발행날짜
+                <span class="important">*</span>
+            </p>
+            <div class="date-picker">
+                <div class="input-date-box">
+                    <input type="text" maxlength="8" name="book_publish_date" id="singleDate" class="placeholder input-date"
+                           placeholder="YYYY-MM-DD"/>
+
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+            </div>
+        </div>
+        <div class="product-info">
+            <p class="search-list-subject">카테고리
+                <span class="important">*</span>
+            </p>
+            <div class="filter-wrap">
+                <div class="radio-filter">
+                    <input type="radio" name="book_country_type" id="domestic" value="01" checked/>
+                    <label for="domestic">국내</label>
+
+                    <input type="radio" name="book_country_type" id="overseas" value="02"/>
+                    <label for="overseas">국외</label>
+                </div>
+                <div class="select-wrap select-lists">
+                	<select id="national" class="select-lists" name="book_category">
+			            <option class="default" value="" disabled selected>선택해주세요</option>
+			            <option th:each="val : ${book_category}" th:if="${val.category_country_type == '01'}" 
+			                    th:value="${val?.category_name}" th:text="${val?.category_name}" ></option>
+			        </select>
+			        
+			        <select id="foreign" class="select-lists" name="book_category" style="display: none;">
+			            <option class="default" value="">선택해주세요</option>
+			            <option th:each="val : ${book_category}" th:if="${val.category_country_type == '02'}" 
+			                    th:value="${val?.category_name}" th:text="${val?.category_name}" ></option>
+			        </select>
+                    <div class="select-arrow-down"></div>
+                </div>
+            </div>
+        </div>
+        <div class="product-info">
+            <div class="book-price">
+                <p class="search-list-subject">판매가
+                    <span class="important">*</span>
+                </p>
+                <input type="text"
+                       max="10"
+                       class="input-price"
+                       id="book-price"
+                       name="book_price"
+                       pattern="[0-9]+"
+                />
+            </div>
+            <div class="book-qty">
+                <p class="search-list-subject">수량
+                    <span class="important">*</span>
+                </p>
+                <div class="input-qty-container">
+                    <input type="number" name="book_qty" id="book-qty" class="input-qty" placeholder="수량"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-info">
+            <p class="search-list-subject">상품상태
+                <span class="important">*</span>
+            </p>
+            <div class="filter-wrap radio-filter">
+                <input type="radio" name="book_state" id="onsale" value="01" checked/>
+                <label for="onsale">판매중</label>
+                <input type="radio" name="book_state" id="stopsale" value="02"/>
+                <label for="stopsale">판매중지</label>
+            </div>
+        </div>
+
+        <div class="product-info thumbnail-wrap">
+            <p class="search-list-subject">이미지
+                <span class="important">*</span>
+            </p>
+            <div class="file-container">
+                <p>형식 : JPG, JPEG, PNG</p>
+                <div class="img-input-wrap">
+                    <label for="input-file" class="input-file-label">
+                        <img src=""
+                             alt="책썸네일"
+                             id="preview"
+                            style="display: none;"/>
+                        <i class="fa-solid fa-plus"></i>
+                    </label>
+                    <input type="file" name="thumbnail_img_file" id="input-file" class="input-img-file" accept="image/jpeg, image/png, image/jpg" />
+                </div>
+            </div>
+        </div>
+
+        <div class="product-info book-info">
+            <p class="search-list-subject">책소개
+                <span class="important">*</span>
+            </p>
+
+            <div class="intro-text-wrap">
+                <textarea name="book_intro" id="book_intro" cols="30" rows="10" class="custom-textarea" oninput="textLengthCheck(this, 4000);"></textarea>
+                <div class="content-length-area">
+                    <div id="current-length">0</div>
+                    <div>/</div>
+                    <div id="max-length">4000</div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="button-wrap">
+        <button class="default-btn" id="add-btn" form="add-form">등록</button>
+        <button class="default-btn cancel" onclick="location.href='/admin/products/list'">취소</button>
+    </div>
+</div>
+
+<div id="search-book-modal">
+    <div class="modal-content-box">
+        <button id="close-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <table id="inventory" class="table table-center" style="width: 100%">
+            <thead class="table-head">
+            <tr class="table-column-head">
+                <th class="table-column-head-txt">NO</th>
+                <th class="table-column-head-txt">ISBN</th>
+                <th class="table-column-head-txt">책제목</th>
+                <th class="table-column-head-txt">수량</th>
+                <th class="table-column-head-txt">구역번호</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<!-- datatalbes -->
+<script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.1.4/js/dataTables.bulma.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script src="/admin/products/js/add-product.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.bookproject.admin.managers.mapper.AdminMgrMapper">
+	
+	<select id="getManagersList" resultType="manager">	
+		SELECT
+			manager_id,
+			manager_name,
+			manager_phoneNo,
+			manager_email,
+			manager_addr,
+			manager_dept,
+			manager_join_date			
+		FROM 
+			managers
+			
+	</select>
+	
+	<select id="getManagerDetails" parameterType="String" resultType="manager">
+	
+		SELECT
+			manager_id,
+			manager_name,
+			manager_phoneNo,
+			manager_email,
+			manager_profile_original,
+			manager_profile_changed,
+			manager_addr,
+			manager_detail_addr,
+			manager_dept
+		FROM 
+			managers
+		WHERE manager_id = #{managerId}
+			
+	</select>	
+    
+    <update id="updateManagerDept" parameterType="java.util.List">
+        UPDATE Managers
+        SET 
+        manager_dept = #{dept}        
+        WHERE manager_id = #{managerId}
+        
+    </update>
+    
+    <insert id="addManager" parameterType="manager">
+	    INSERT INTO managers (
+	        manager_id,
+	        manager_pw,
+	        manager_name,
+	        manager_phoneNo,
+	        manager_email,
+	        manager_profile_original,
+	        manager_profile_changed,
+	        manager_addr,
+	        manager_detail_addr,
+	        manager_dept,
+	        manager_join_date
+	    ) VALUES (
+	        #{manager_id},
+	        #{manager_pw},
+	        #{manager_name},
+	        #{manager_phoneNo},
+	        #{manager_email},
+	        <if test="manager_profile_original != null">
+	            #{manager_profile_original}
+	        </if>
+	        <if test="manager_profile_original == null">
+	            ''
+	        </if>,
+	        <if test="manager_profile_changed != null">
+	            #{manager_profile_changed}
+	        </if>
+	        <if test="manager_profile_changed == null">
+	            ''
+	        </if>,
+	        #{manager_addr},
+	        #{manager_detail_addr},
+	        #{manager_dept},
+	        #{manager_join_date}
+	    )
+	</insert>
+
+	
+	<!-- 동적 업데이트 쿼리 -->
+    <update id="updateManager" parameterType="manager">
+    	UPDATE managers
+    <set>
+        <trim suffixOverrides=",">
+            <if test="manager_pw != null and !manager_pw.equals('')">
+                manager_pw = #{manager_pw},
+            </if>
+            <if test="manager_phoneNo != null and !manager_phoneNo.equals('')">
+                manager_phoneNo = #{manager_phoneNo},
+            </if>
+            <if test="manager_email != null and !manager_email.equals('')">
+                manager_email = #{manager_email},
+            </if>
+            <if test="manager_profile_original != null and !manager_profile_original.equals('')">
+            	manager_profile_original = #{manager_profile_original},
+            </if>
+            <if test="manager_profile_changed != null and !manager_profile_changed.equals('')">
+                manager_profile_changed = #{manager_profile_changed},
+            </if>
+            <if test="manager_addr != null and !manager_addr.equals('')">
+                manager_addr = #{manager_addr},
+            </if>
+            <if test="manager_detail_addr != null and !manager_detail_addr('')">
+            	manager_detail_addr = #{manager_detail_addr}
+            </if>
+        </trim>
+    </set>
+	    WHERE manager_id = #{manager_id}
+	</update>
+
+	<select id="findById" parameterType="String" resultType="manager">
+    	SELECT * FROM Managers WHERE manager_id = #{managerId}
+	</select>
+	
+</mapper>

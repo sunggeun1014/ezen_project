@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/user/members/css/findPw-modifyPw.css" />
+<link rel="stylesheet" href="/user/common/css/common.css" />
+<link rel="stylesheet" href="/user/common/css/modal.css" />
+
+
+
+</head>
+<body>
+	<a href="/user/main">
+	    <img src="/user/common/imgs/main-logo.svg" alt="메인로고" class="mainlogo" />
+	</a>    
+	<div class="showFindPw-frame">
+        
+        <h3>인증 되었습니다.<br>새로운 비밀번호를 입력해 주세요.</h3>
+        
+        <form id="modifyPwForm">
+        	<div>
+				<label>새 비밀번호</label>
+				<div class="form-item pw">
+					<input type="password" id="pw" name="member_pw" placeholder="새로운 비밀번호를 입력해 주세요." />
+					<input type="hidden" id="id" name="member_id" th:value="${session.member_id}" />
+				</div>	
+				<label>새 비밀번호 확인</label>
+				<div class="form-item confirm-pw">
+					<input type="password" id="confirm-pw" placeholder="새로운 비밀번호를 한 번 더 입력해 주세요." />
+				</div>	
+			</div>
+			<div class="password-modify-comment">⚠비밀번호 : 특수문자, 영문자, 숫자 포함, 최소 8자</div>
+	        
+	
+	        <!-- 비밀번호 찾기, 로그인 버튼 -->
+	        <div class="button-group">
+	            <button id="submitBtn" type="submit" class="default-btn long" disabled>확인</button>
+	        
+<!-- 	            <button id="loginBtn" type="button" class="default-btn long"onclick="window.location.href='/user/login'">로그인</button> -->
+	        </div>
+        </form>
+    </div>
+   	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	     
+   	<script src="/user/common/js/main.js"></script>   	
+    <script src="/user/members/js/findPw-modifyPw.js"></script>
+</body>
+</html>

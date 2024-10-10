@@ -1,0 +1,183 @@
+.search-list-title, .info-title {
+	color: #000000;
+}
+
+.supplier-title-area {
+	width: 100px;
+	line-height: 40px;
+}
+ 
+.supplier-info-area {
+	display: flex;
+	padding: 8px;
+	border-bottom: solid 1px #D8D8D8;
+}
+
+.qty-info {
+	position: relative;
+}
+
+.qty-text::before {
+	position: absolute;
+	content: "개";
+	top: 50%;
+	transform: translateY(-50%);
+	right: 10px;
+}
+
+.info-title-interval {
+	margin-left: 150px;
+}
+
+.supplier-register-btn {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	padding-top: 30px;
+	padding-bottom: 10px;
+}
+
+.input-size {
+	width: 300px;
+}
+
+/* 모달 스타일 */
+.modal-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* 다른 요소보다 위에 표시 */
+}
+
+.modal-content-area {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 */
+}
+
+.modal-message-area {
+    margin-bottom: 20px;
+}
+
+.modal-message {
+    font-size: 16px;
+    color: #333;
+}
+
+.modal-btn-area {
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal-check-btn,
+.modal-close-btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100px;
+    text-align: center;
+}
+
+.modal-check-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-close-btn {
+    background-color: #ccc;
+    color: #333;
+}
+
+.modal-check-btn:hover {
+    background-color: #0056b3;
+}
+
+.modal-close-btn:hover {
+    background-color: #999;
+}
+
+.list-info-area {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.list-count {
+	font-weight: 700;
+    font-size: 16px;
+    color: #000000;
+    line-height: 40px;
+}
+
+.column-area {
+	display: flex;
+	padding: 10px 0;
+	border-top: 1px solid #D8D8D8;
+	border-bottom: 1px solid #D8D8D8;
+	background-color: #FAFAFA;
+	color: #7E7E7E;
+	font-weight: 700;
+}
+
+.column-area > div {
+	line-height: 30px;
+}
+
+.row-data-area {
+	display: flex;
+	padding: 10px 0;
+	border-bottom: 1px solid #D8D8D8;
+	color: #7E7E7E;
+}
+
+.row-data-area > div {
+	line-height: 30px;
+}
+
+#order-register-list-form {
+	text-align: center;
+}
+
+.check-column, .check-data {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 수직 정렬 */
+}
+
+.check-data > span {
+	display: flex;
+	align-items: center; /* 수직 정렬 */
+}
+
+.check-column, .check-data { width: 5%; }
+.no-column, .no-data { width: 5%; }
+.book-title-column, .book-title-data { width: 30%; }
+.isbn-column, .isbn-data { width: 20%; }
+.price-column, .price-data { width: 12%; }
+.qty-column, .qty-data { width: 12%; }
+.total-price-column, .total-price-data { width: 16%; }
+
+.total-purchase-area {
+	display: flex;
+	float: right;
+	color: #000000;
+	font-size: 18px;
+    font-weight: 700;
+    padding: 20px;
+}
+
+.order-decision-area {
+	display: flex;
+	margin-top: 100px;
+	gap: 20px;
+	justify-content: center; 
+}

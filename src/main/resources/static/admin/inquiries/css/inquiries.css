@@ -1,0 +1,34 @@
+.search-list-title {
+	margin-bottom: 20px;
+}
+
+.filter-info {
+	display: flex;
+	align-items: center;
+	height: 60px;
+	border-bottom: 1px solid #c0c0c0;
+	padding-left: 20px;
+}
+
+.filter-wrap, .radio-filter, .date-picker {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.radio-filter { gap: 5px; }
+
+.table-title-wrap {
+	margin-bottom: 10px;
+}
+
+.inquiries-list-wrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.disabled {
+	pointer-events: none;
+}

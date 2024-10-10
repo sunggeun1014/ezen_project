@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/admin/common/layout/defaultlayout}"
+    layout:fragment="Content">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="/admin/common/css/modal.css" />
+	<link rel="stylesheet" href="/admin/products/css/products.css"/>
+	<link rel="stylesheet" href="/admin/managers/css/managers.css"/>
+<div>
+	<div class="filter-container white-frame">
+		<h3 class="search-list-title">매니저 목록 조회</h3>
+		<div class="filter-info">
+			<p class="search-list-subject">가입일</p>
+			<div class="filter-wrap date-filter">
+				<div class="date-picker">
+					<div class="input-date-box">
+						<input type="text" id="startDate" class="placeholder startDate"
+							placeholder="YYYY-MM-DD" />
+							<i class="fa-solid fa-calendar-days"></i>
+					</div>
+					<div class="calendar-slash">-</div>
+					<div class="input-date-box">
+						<input type="text" id="endDate" class="placeholder endDate"
+							placeholder="YYYY-MM-DD" />
+						<i class="fa-solid fa-calendar-days"></i>
+					</div>
+				</div>
+				<div class="date-options date-pick-btn">
+					<button class="date-option today today-btn date-btn" onclick="setDateOption(0, this)">오늘</button>
+					<button class="date-option week-btn date-btn" onclick="setDateOption(7, this)">1주일</button>
+					<button class="date-option month-btn date-btn" onclick="setDateOption(30, this)">1개월</button>
+					<button class="date-option year-btn date-btn" onclick="setDateOption(365, this)">1년</button>
+				</div>
+			</div>			
+		</div>
+
+		<div class="filter-info">
+			<p class="search-list-subject">검색어</p>
+			<div class="filter-wrap search-bar">					
+				<div class="select-wrap">
+					<select id="searchColumn" class="select">
+						<option value="3">ID</option>
+						<option value="2">이름</option>
+					</select>	
+					<div class="select-arrow-down"></div>
+				</div>
+			
+				<div class="search-container">
+					<input type="text" id="searchKeyword" class="search-input" placeholder="조회할 값을 입력" />
+					<button id="searchButton">
+						<span class="material-symbols-outlined">search</span>
+					</button>
+				</div>
+				<button id="reset-button" onclick="resetFilters()">초기화</button>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 이곳에 내가 받을 값들의 컬럼을 적어준다 -->
+	<div class="table-container white-frame">
+		<div class="manager-list-wrap">
+			<h3 id="total-row" class="table-data-cnt-txt"></h3>
+			
+			<div class="button-wrap-mgr">
+				<div class="select-wrap">
+					<select id="searchDept" class="select">
+						<option value="01">물류팀</option>
+						<option value="02">운영팀</option>
+						<option value="03">인사팀</option>
+					</select>
+					<div class="select-arrow-down"></div>
+				</div>
+				<button id="change-button" class="default-btn cancel">변경</button>
+				<button id="commit-button" class="default-btn"
+					onclick="location.href='/admin/managers/register'">등록</button>
+			</div>	
+		</div>
+		
+		<table id="manager" class="table table-center" style="width: 100%">
+			<thead class="table-head">
+				<tr class="table-column-head">
+					<th>
+						<input type="checkbox" id="select-all">
+						<label for="select-all"></label>
+					</th>
+					<th class="table-column-head-txt">NO</th>
+					<th class="table-column-head-txt">이름</th>
+					<th class="table-column-head-txt">아이디</th>
+					<th class="table-column-head-txt">이메일</th>
+					<th class="table-column-head-txt">부서명</th>
+					<th class="table-column-head-txt">전화번호</th>
+					<th class="table-column-head-txt">주소</th>
+					<th class="table-column-head-txt">가입날짜</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+	
+
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
+	<script src="https://cdn.datatables.net/2.1.4/js/dataTables.bulma.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="/admin/managers/js/managers.js"></script>
+</div>
+</html>

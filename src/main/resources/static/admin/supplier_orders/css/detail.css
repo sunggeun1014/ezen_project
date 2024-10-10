@@ -1,0 +1,149 @@
+.order-info-area {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 45px;
+	margin-bottom: 5px;	
+}
+
+.title-wrap {
+	display: flex;
+	flex-direction: column;
+}
+
+.search-list-title {
+	margin-bottom: 5px;
+}
+
+.order-info {
+	font-size: 16px;
+    font-weight: 700;
+    line-height: 40px;
+}
+
+.total-price-area {
+	color: #000000;
+	font-size: 20px;
+	font-weight: 700;
+	margin-top: 35px;
+	text-align: right;
+}
+
+.table-data-container {
+	text-align: center;
+}
+
+.table-column-area {
+	display: flex;
+	text-align: center;
+	padding: 17px 8px;
+	border-top: solid 1px #D8D8D8;
+	border-bottom: solid 1px #D8D8D8;
+	background-color: #FAFAFA;
+	font-weight: 700;
+	color: #7E7E7E;
+}
+
+.table-data-area {
+	display: flex;
+	text-align: center;
+	padding: 17px 8px;
+	border-bottom: solid 1px #D8D8D8;
+	color: #7E7E7E;
+}
+
+.no-column, .no-data { width: 5%; }
+.book-title-column, .book-title-data { width: 35%; }
+.isbn-column, .isbn-data { width: 20%; }
+.price-column, .price-data { width: 12%; }
+.qty-column, .qty-data { width: 12%; }
+.purchase-column, .purchase-data { width: 16%; }
+
+.modal-area {
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content-area {
+	border: solid 1px black;
+	width: 20%;
+	height: 20%;
+	background-color: red;
+}
+
+/* 모달 스타일 */
+.modal-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* 다른 요소보다 위에 표시 */
+}
+
+.modal-content-area {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 */
+}
+
+.modal-message-area {
+    margin-bottom: 20px;
+}
+
+.modal-message {
+    font-size: 16px;
+    color: #333;
+}
+
+.modal-btn-area {
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal-check-btn,
+.modal-close-btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100px;
+    text-align: center;
+}
+
+.modal-check-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-close-btn {
+    background-color: #ccc;
+    color: #333;
+}
+
+.modal-check-btn:hover {
+    background-color: #0056b3;
+}
+
+.modal-close-btn:hover {
+    background-color: #999;
+}
+
+.limit-lines {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

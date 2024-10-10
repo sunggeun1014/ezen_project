@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/admin/common/layout/defaultlayout}"
+	layout:fragment="Content">
+
+<head>
+    <link rel="stylesheet" href="/admin/notice/css/noticeReg.css" />
+    <link rel="stylesheet" href="/admin/products/css/products.css" />
+</head>
+
+<div>
+	<div class="white-frame">
+		
+		<h1 class="search-list-title">공지글 수정</h1>
+			<input type="hidden" id="notice_num" name="notice_num" th:value="${notice.notice_num}" />
+			<div class="info">
+				<span class="search-list-subject important">제목</span>
+				<div>
+					<input id="notice-title" name="notice_title" type="text" placeholder="제목을 입력하세요" th:value="${notice.notice_title}" />
+				</div>
+			</div>
+
+			<div class="info">
+				<span class="search-list-subject important">노출 여부</span>
+				<div class="radio-filter">
+					<input type="radio" id="exposed-status" name="order_status" value="exposed" th:checked="${notice.notice_visible == '01'}" />
+					<label for="exposed-status">노출</label>
+
+					<input type="radio" id="nonexposed-status" name="order_status" value="nonexposed" th:checked="${notice.notice_visible == '02'}" />
+					<label for="nonexposed-status">비노출</label>
+				</div>
+			</div>
+
+			<div class="info">
+				<span class="search-list-subject important">노출 기간</span>
+				<div class="filter-wrap date-filter">
+
+					<div class="date-picker">
+						<div class="input-date-box">
+							<input type="text" id="startDate" name="notice_start_date" class="placeholder" placeholder="YYYY-MM-DD" th:value="${#dates.format(notice.notice_start_date, 'yyyy-MM-dd')}" />
+							<i class="fa-solid fa-calendar-days"></i>
+						</div>
+						<div class="calendar-slash">-</div>
+						<div class="input-date-box">
+							<input type="text" id="endDate" name="notice_end_date" class="placeholder" placeholder="YYYY-MM-DD" th:value="${#dates.format(notice.notice_end_date, 'yyyy-MM-dd')}" />
+							<i class="fa-solid fa-calendar-days"></i>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+			<div class="info">
+				<span class="search-list-subject important">내용</span>
+				<div style="position:relative;">
+					<div contenteditable="true" class="editor" id="editor" th:utext="${notice.notice_content}"></div>
+					<p class="char-count">
+						<span id="charCount">0</span><span>/1000</span>
+					</p>
+				</div>
+			</div>
+
+			<div class="btn-box">
+				<button id="save-button" class="default-btn">수정</button>
+				<button type="button" class="default-btn cancel" onclick="location.href='/admin/notice/list'">취소</button>
+			</div>
+
+
+	</div>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="/admin/notice/js/noticeReg.js"></script>
+</div>
+</html>

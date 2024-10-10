@@ -1,0 +1,441 @@
+#book-detail-container {
+    padding: 90px 145px 0;
+}
+
+/* 상단 수량, 가격정보 */
+#book-info-wrap {
+    display: grid;
+    grid-template-columns: 400px 400px;
+    justify-content: space-between;
+    margin-bottom: 150px;
+}
+
+.book-img-wrap {
+    width: 380px;
+    height: 572px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.book-img-wrap img {
+    width: 100%;
+    height: 100%;
+}
+
+.book-info-text {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.book-title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.author-name {
+    font-weight: 700;
+    margin-bottom: 5px
+}
+
+.publish-wrap {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 14px;
+    color: #7E7E7E;
+}
+
+.publish {
+    position: relative;
+}
+
+.publish::after {
+    position: absolute;
+    content: "•";
+    top: 3px;
+    right: -10px;
+    font-size: 10px;
+}
+
+.publish-review-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.review-avg-wrap {
+    width: 164px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+    border: .5px solid #C0C0C0;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.review-avg-wrap:hover .rating-count {
+    text-decoration: underline;
+}
+
+.star-avg {
+    color: #845EC2;
+    font-weight: 700;
+}
+
+.total-review-cnt {
+    font-size: 14px;
+    color: #7E7E7E;
+}
+
+.rating-count {
+    color: #000;
+}
+
+.price-wrap {
+    display: flex;
+    align-items: flex-end;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.book-price {
+    font-weight: 700;
+}
+
+.deliver-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: .5px solid #C0C0C0;
+    border-bottom: .5px solid #C0C0C0;
+    padding: 20px 0;
+}
+
+.deliver-info p:first-child {
+    font-weight: 700;
+}
+
+.select-order {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.price-wrap.total {
+    font-size: 24px;
+}
+
+.total-price {
+    font-weight: 700;
+}
+
+.order-btn-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.default-btn {
+    width: 120px;
+    height: 50px;
+}
+
+.default-btn.grey {
+    align-self: flex-end;
+    cursor: default;
+}
+
+.default-btn.grey:hover {
+    background-color: #7E7E7E;
+}
+
+.sold-out {
+    font-size: 18px;
+    font-weight: 700;
+    color: #E54F53;
+}
+
+/* 책 기본정보들 */
+.book-default-info {
+    margin-bottom: 50px;
+    padding-bottom: 35px;
+    border-bottom: 1px solid #C0C0C0;
+}
+
+.info-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 35px;
+}
+
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.default-info-wrap {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 180px 1fr;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.info-subtitle {
+    font-weight: 700;
+}
+
+.book-category, .book-author-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.book-category p:first-child::after {
+    content: ">";
+    padding-left: 15px;
+}
+
+.book-intro {
+    margin-top: 30px;
+    padding: 0 20px;
+    line-height: 30px;
+}
+
+.review-info {
+    margin-bottom: 130px;
+}
+
+.review-chart-wrap {
+    width: 100%;
+    padding: 30px 50px;
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #FAFAFA;
+    border: 1px solid #C0C0C0;
+    border-radius: 10px;
+}
+.user-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.user-score p {
+    font-weight: 700;
+}
+
+.user-score .score-avg {
+    color: #845EC2;
+}
+
+.user-score .slash {
+    color: #CCCCCC;
+}
+.user-score .full-score {
+    color: #7E7E7E;
+}
+
+.rating-bar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px;
+}
+
+.rating-cnt-star {
+    display: grid;
+    grid-template-columns: 1fr 1fr 50px;
+    align-items: center;
+    justify-items: center;
+    gap: 45px;
+}
+
+.user-score-avg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.all-reviews {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    /*margin-bottom: 20px;*/
+    border-bottom: 1px solid #C0C0C0;
+}
+
+.all-reviews p {
+    position: absolute;
+    bottom: -1px;
+    width: max-content;
+    height: 100%;
+    padding: 10px;
+    border-bottom: 2px solid #000;
+    font-weight: 700;
+}
+
+.review-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    height: 155px;
+    padding: 10px 20px;
+    border-bottom: 1px solid #C0C0C0;
+    overflow: hidden;
+    transition: height .3s ease;
+}
+
+.review-text {
+    line-height: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.review-content.expanded {
+    height: auto;
+}
+
+.review-content.expanded .review-text {
+    display: block;
+}
+
+.toggle-wrap {
+    width: 80px;
+    cursor: pointer;
+}
+
+.fa-chevron-down {
+    font-size: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1.5px solid #c0c0c0;
+    padding: 2px;
+    text-align: center;
+}
+.toggle-btn {
+    background-color: #fff;
+}
+.toggle-wrap:hover .toggle-btn { text-decoration: underline; }
+
+.review-content.expanded .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.user-star-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rating-bar {
+    position: relative;
+    width: 145px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #D8D8D8;
+}
+
+.rating-bar-inner {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #845EC2;
+}
+
+.content-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.user-wrap {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 12px;
+    color: #c0c0c0;
+    margin-bottom: 20px;
+}
+
+.user-wrap .reviewer-id { position: relative; }
+
+.user-wrap .reviewer-id::after {
+    position: absolute;
+    content: "ㅣ";
+    top: 1px;
+    right: -12px;
+    font-size: 10px;
+}
+
+/* 채워진 별 색상 */
+.fa-solid.fa-star {
+    color: #845EC2; /* 채워진 별 색상 */
+}
+
+/* 빈 별 색상 */
+.fa-regular.fa-star {
+    color: #B0A8B9;
+}
+
+/* 교환반품 안내 */
+#refund-info-container {
+    margin-bottom: 20px;
+}
+
+.refund-btn-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-header {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #000;
+}
+
+.info-header .info-title {
+    margin-bottom: 0;
+}
+
+.refund-info-list {
+    padding: 30px 0;
+    border-bottom: 1px solid #C0C0C0;
+}
+
+.refund-info-title {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.warning-info-box {
+    width: 100%;
+    border-radius: 10px;
+    padding: 30px 0 30px 30px;
+    background-color: #FAFAFA;
+    color: #7E7E7E;
+}
+
+.number {
+    border: 1px solid #000;
+}

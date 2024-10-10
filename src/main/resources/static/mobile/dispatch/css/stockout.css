@@ -1,0 +1,41 @@
+/* 전체 content-wrap을 flexbox로 설정 */
+.content-wrap {
+    display: flex;
+    justify-content: space-between; /* 왼쪽과 오른쪽을 양쪽에 배치 */
+    align-items: center; /* 왼쪽은 위쪽에 맞추어 정렬 */
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* 항목 간의 구분선 */
+}
+
+/* 왼쪽 영역 */
+.left-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* 높이를 전체로 채움 */
+}
+
+/* 왼쪽 상단의 제목과 ISBN */
+.top-left {
+    text-align: left;
+}
+
+/* 왼쪽 하단의 등록 날짜 */
+.bottom-left {
+    text-align: left;
+    margin-top: auto; /* 하단에 배치되도록 설정 */
+}
+
+.content-sub-text {
+	color: #7E7E7E;
+}
+
+.right-content {
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+}

@@ -1,0 +1,212 @@
+#myprofile-wrap {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 80px;
+    margin-top: 90px;
+}
+
+/* 내정보 사이드 메뉴 */
+#myprofile-wrap .user-profile-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    height: 153px;
+    background-color: #845EC2;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.user-profile-wrap .img-wrap {
+    width: 48px;
+    height: 48px;
+    border: 1px solid #6c6c6c;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.user-profile-wrap .user-img {
+    width: 100%;
+    height: 100%;
+}
+
+#myprofile-wrap .fa-circle-user {
+    font-size: 48px;
+    background-color: #fff;
+    border-radius: 100%;
+    color: #B0A8B9;
+}
+
+.menu-item {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 38px;
+}
+
+.sub-menu-list a {
+    font-size: 16px;
+    font-weight: 400;
+    color: #666;
+}
+
+.sub-menu-list a.on,
+.sub-menu-list a:hover {
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.myinfo-content {
+	display: grid;
+	row-gap: 30px;
+	
+}
+/* 내정보 헤드 폰트 */
+.myinfo-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* 내정보에 들어가는 연보라색 포인트 배경 */
+.sub-info-bg {
+    border-radius: 20px;
+    padding: 20px 30px;
+    background-color: #FAF8FE;
+}
+
+/* input-date */
+.input-date-box {
+	width: 200px;
+	position: relative;
+}
+
+.date-picker {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+}
+
+.placeholder {
+	width: 100%;
+}
+
+.date-picker-plus {
+	display: flex;
+	align-items: center;
+	gap: 10px;	
+}
+
+.fa-calendar-days {
+	position: absolute;
+	font-size: 19px;
+	top: 50%;
+	right: 20px;
+	transform: translateY(-50%);
+}
+
+.icon-question {
+ 	display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('/user/common/imgs/question-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.icon-arrow-on {
+ 	display: inline-block;
+    width: 14px;
+    height: 16px;
+    color: #666666;
+    background-image: url('/user/common/imgs/arrow=on.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.icon-arrow-off {
+ 	display: inline-block;
+    width: 14px;
+    height: 16px;
+    color: #666666;
+    background-image: url('/user/common/imgs/arrow=off.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.icon-answer-arrow {
+	display: inline-block;
+	width: 16px;
+	height: 14px;
+	color: #7E7E7E;
+	background-image: url('/user/common/imgs/answer-arrow.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.important::after {
+	content: "*";
+	color: red;
+	font-weight: bold;
+	margin-left: 2px;
+	position: absolute;
+	transform: translateY(-45%);
+}
+
+.fa-solid {
+	color: #666666;
+}
+
+.flatpickr-input {
+	width: 200px;
+	height: 40px;
+	border: 1px solid #C0C0C0;
+	padding: 12px;
+	border-radius: 5px;
+}
+
+.btn-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	margin-top: 30px;
+}
+
+.select-box {
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+select {
+	padding-right: 30px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+.select-arrow-down {
+	position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+    pointer-events: none; 
+    transform: translateY(-50%); 
+}
+
+textarea , select {
+	font-family: 'SUIT', sans-serif;
+}

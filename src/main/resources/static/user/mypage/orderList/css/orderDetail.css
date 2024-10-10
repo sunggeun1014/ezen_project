@@ -1,0 +1,187 @@
+.sub-info-bg {
+	display: flex;
+	align-items: center;
+	height: 80px;
+}
+
+.order-purchase-date {
+	border-right: 1px solid #c0c0c0;
+	font-weight: 700;
+	margin-right: 20px;
+	padding-right: 20px;
+}
+
+.order-num-wrap {
+	display: flex;
+	font-weight: 300;
+	gap: 7px;
+}
+
+.container {
+	gap: 60px;
+	display: flex;
+	flex-direction: column;
+}
+
+.box-title-wrapper {
+	justify-content: space-between;
+	align-items: center;
+	display: flex;
+	height: 65px;
+	flex-direction: row;
+	padding: 0 20px 0 10px;
+	border-top: 1px solid #000000;
+}
+
+.box-title {
+	display: flex;
+	font-size: 16px;
+	gap: 5px;
+}
+
+.return-btn, .cancel-btn {
+	width: 60px;
+	height: 30px;
+	font-weight: 400;
+	font-size: 14px;
+	border-radius: 5px;
+}
+
+.return-cancel-btn {
+	width: 65px;
+	height: 30px;
+	font-weight: 400;
+	font-size: 14px;
+	border-radius: 5px;
+}
+
+.order-items {
+	display: flex;
+	padding: 15px 30px 15px 40px;
+	border-top: 1px solid #c0c0c0;
+	justify-content: space-between;
+}
+
+.book-thumbnail {
+	width: 80px;
+	height: 114px;
+}
+
+.book-info {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.book-name-qty {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	font-weight: 600;
+}
+
+.purchase-qty {
+	color: #7e7e7e;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+.order-price-status {
+	display: flex;
+	align-items: center;
+	gap: 50px;
+}
+
+.order-status-wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	align-items: center;
+	width: 65px;
+}
+
+.order-status {
+	color: #845EC2;
+	font-weight: 600;
+}
+
+.delivery-info-title, .payment-info-title, .income-deduction-title {
+	gap: 60px;
+	display: flex;
+	flex-direction: column;
+	font-size: 20px;
+	font-weight: 600;
+	height: 50px;
+	border-bottom: 1px solid;
+	line-height: 50px;
+}
+
+.delivery-info-wrap {
+	display: flex;
+	gap: 100px;
+	padding: 28px 40px;
+	border-bottom: solid 1px #c0c0c0;
+}
+
+.recipient-info-wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	font-weight: 300;
+}
+
+.payment-info-wrap {
+	height: 80px;
+	border-bottom: 1px solid #c0c0c0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0 20px;
+}
+
+.order-price-wrap {
+	border-right: 1px solid #c0c0c0;
+}
+
+.order-price-wrap, .payment-price-wrap {
+	padding: 0 20px;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.box-title, .delivery-info-detail, .price-title, .order-price,
+	.payment-price {
+	font-weight: 600;
+}
+
+.price-wrap {
+	display: flex;
+}
+
+.income-deduction-wrap {
+	justify-content: space-between;
+	height: 80px;
+	border-bottom: 1px solid #c0c0c0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0 40px;
+}
+
+.order-list-btn {
+	width: 200px;
+	height: 50px;
+	border-radius: 5px;
+	margin-top: 35px;
+}
+
+.btn-area {
+	text-align: center;
+}
+
+.product-request-btn-area {
+	display: flex;
+	gap: 10px;
+}

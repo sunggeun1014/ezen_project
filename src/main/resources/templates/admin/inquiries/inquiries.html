@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/admin/common/layout/defaultlayout}"
+    layout:fragment="Content">
+
+	<link rel="stylesheet" href="/admin/common/css/modal.css">
+	<link rel="stylesheet" href="/admin/inquiries/css/inquiries.css">
+	
+<div>
+	<div class="filter-container white-frame">
+		<h3 class="search-list-title">1:1 문의 조회</h3>	
+		<div class="filter-info">
+			<p class="search-list-subject">작성일</p>
+			<div class="filter-wrap date-filter">				
+				<div class="date-picker">
+					<div class="input-date-box">
+						<input type="text" id="startDate" class="placeholder" placeholder="YYYY-MM-DD" />
+						<i class="fa-solid fa-calendar-days"></i>
+					</div>
+					<div class="calendar-slash">-</div>
+					<div class="input-date-box">
+						<input type="text" id="endDate" class="placeholder" placeholder="YYYY-MM-DD" />
+						<i class="fa-solid fa-calendar-days"></i>
+					</div>
+				</div>
+				<div class="date-options date-pick-btn">
+					<button class="date-option today today-btn date-btn" onclick="setToday()">오늘</button>
+					<button class="date-option week-btn date-btn" onclick="setDateRange(7)">1주일</button>
+					<button class="date-option month-btn date-btn" onclick="setDateRange(30)">1개월</button>
+					<button class="date-option year-btn date-btn" onclick="setDateRange(365)">1년</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="filter-info">
+			<p class="search-list-subject">처리 상태</p>
+			<div class="filter-wrap">
+				<div class="select-wrap">
+					<select id="searchColumn2" class="select">
+						<option value="전체문의">전체문의</option>
+						<option value="상품문의">상품문의</option>
+						<option value="배송문의">배송문의</option>
+						<option value="결제문의">결제문의</option>
+						<option value="반품문의">반품문의</option>
+						<option value="기타">기타</option>
+					</select>
+					<div class="select-arrow-down"></div>
+				</div>
+				<div class="radio-filter">
+					<input type="radio" id="order-status-all" name="order_status" value="" checked="checked"/>
+					<label for="order-status-all">전체</label>
+					<input type="radio" id="order-status-change" name="order_status" value="request"/>
+					<label for="order-status-change">미답변</label>
+					<input type="radio" id="order-status-completion" name="order_status" value="completion"/>
+					<label for="order-status-completion">처리완료</label>			
+				</div>
+			</div>
+		</div>
+			
+	    <div class="filter-info">
+	        <p class="search-list-subject">검색어</p>		
+	        <div class="filter-wrap search-bar">
+				<div class="select-wrap">
+					<select id="searchColumn" class="select">
+						<option value="3">회원ID</option>
+					</select>
+					<div class="select-arrow-down"></div>
+				</div>
+				<div class="search-container">
+		               <input type="text" id="searchKeyword" class="search-input" placeholder="검색할 내용 입력"/>
+		               <button id="searchButton">
+		                   <span class="material-symbols-outlined">search</span>
+		               </button>
+	            </div>
+				<button id="reset-button" onclick="resetFilters()">초기화</button>			
+			</div>
+		</div>
+	</div>
+
+	<div class="table-container white-frame">
+		<div class="inquiries-list-wrap">	
+			<h3 id="total-row" class="table-data-cnt-txt" ></h3>
+		</div>	
+		
+		<table id="inquiries" class="table table-center" style="width: 100%">
+			<thead class="table-head">
+				<tr class="table-column-head">
+					<th class="table-column-head-txt">NO</th>
+					<th class="table-column-head-txt">문의 제목</th>
+					<th class="table-column-head-txt">문의 분류</th>
+					<th class="table-column-head-txt">회원ID</th>
+					<th class="table-column-head-txt">작성일</th>
+					<th class="table-column-head-txt">답변일</th>
+					<th class="table-column-head-txt">처리상태</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+	<script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="//cdn.datatables.net/2.1.5/js/dataTables.min.js"></script>
+	<script src="//cdn.datatables.net/2.1.5/js/dataTables.bulma.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="/admin/inquiries/js/inquiries.js"></script>
+</div>
+
+</html>

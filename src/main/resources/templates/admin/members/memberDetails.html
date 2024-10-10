@@ -1,78 +1,105 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Member Details</title>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/admin/common/layout/defaultlayout}"
+    layout:fragment="Content">
 <link rel="stylesheet" href="/admin/members/css/memberDetails.css" />
-</head>
-<body>
-	<h1>Member Details</h1>
-	<p>
-		Member ID: <span th:text="${member_details.member_id}"></span>
-	</p>
-	<p>
-		Member Name: <span th:text="${member_details.member_name}"></span>
-	</p>
-	<p>
-		Member Password: <input type="password" th:value="${member_details.member_pw}" readonly>
-	</p>
-	<p>
-		Member Date: <span th:text="${member_details.member_date}"></span>
-	</p>
-	<p>
-		네이버 연동여부: <label class="switch"> <input type="checkbox" th:checked="${member_details.naver_login_cd != null and !member_details.naver_login_cd.isEmpty()}"
-			disabled /> <span class="slider"></span>
-		</label>
-	</p>
-	<p>
-		카카오 연동여부: <label class="switch"> <input type="checkbox"
-			th:checked="${member_details.kakao_login_cd != null and !member_details.kakao_login_cd.isEmpty()}"
-			disabled /> <span class="slider"></span>
-		</label>
-	</p>
+<div>
+	<div class="white-frame">
+	<h1 class="search-list-title">회원정보수정</h1>
+	<hr>
+	<div class="info">
+		<span class="search-list-subject">아이디</span>
+		<span th:text="${member_details.member_id}"></span>
+	</div>
+	<div class="info">
+		<span class="search-list-subject">비밀번호</span> 
+		<input type="password" class="pw" value="password" readonly>
+	</div>
+	<div class="info">
+		<span class="search-list-subject">이름</span> 
+		<span th:text="${member_details.member_name}"></span>
+	</div>
+
+	<div class="info">
+	<span class="search-list-subject">간편로그인 연동</span>
+	<span class="search-list-subject-naver">네이버</span>
+	<label class="switch"> 
+	<input id="toggle-btn" type="checkbox" th:checked="${member_details.naver_login_cd != null and !member_details.naver_login_cd.isEmpty()}"
+		disabled /> <span class="slider naver"></span>
+	</label>
+
+	<span class="search-list-subject-kakao">카카오</span>
+	<label class="switch"> <input type="checkbox"
+		th:checked="${member_details.kakao_login_cd != null and !member_details.kakao_login_cd.isEmpty()}"
+		disabled /> <span class="slider kakao"></span>
+	</label>
+	</div>
+	
 	<hr>
 
 	<!-- 이메일 입력 영역 -->
-	<form th:action="@{./update}" method="POST">
+
+	<form th:action="@{/admin/members/update}" method="POST" onsubmit="return validateForm()">
 		<input type="hidden" name="member_id" th:value="${member_details.member_id}" />
-		<p>
-			Member Email: 
-			<input type="text" id="emailUser" name="emailUser" th:value="${emailUser}" /> 
-			@ 				
-			<select id="emailDomain" name="emailDomain" th:value="${emailDomain}">
-				<option value="naver.com" th:selected="${emailDomain == 'naver.com'}">naver.com</option>
-				<option value="gmail.com" th:selected="${emailDomain == 'gmail.com'}">gmail.com</option>
-				<option value="daum.net" th:selected="${emailDomain == 'daum.net'}">daum.net</option>
-				<option value="yahoo.com" th:selected="${emailDomain == 'yahoo.com'}">yahoo.com</option>
-			</select>
-		</p>
-
-		<p>
-			Phone Number: 
-			<select id="countryNum" name="countryNum" th:value="${countryNum}">
-				<option value="010" th:selected="${countryNum == '010'}">010</option>
-				<option value="011" th:selected="${countryNum == '011'}">011</option>
-				<option value="016" th:selected="${countryNum == '016'}">016</option>
-				<option value="017" th:selected="${countryNum == '017'}">017</option>
-				<option value="018" th:selected="${countryNum == '018'}">018</option>
-				<option value="019" th:selected="${countryNum == '019'}">019</option>
-			</select>
-			-
-			<input type="number" id="userPart1" name="userPart1" min="0" max="9999" th:value="${userPart1}" title="4자리 숫자를 입력해주세요" required oninput="limitLength(this, 4)" />
-		  	- 
-		  	<input type="number" id="userPart2" name="userPart2" min="0" max="9999" th:value="${userPart2}" title="4자리 숫자를 입력해주세요" required oninput="limitLength(this, 4)" />
-		</p>
 		
-		<p>
-			Member Addr: <input type="text" id="address_kakao" name="member_addr" th:value="${member_details.member_addr}" readonly />
-		</p>
-		
-		<p>
-			Member Detail Addr: <input type="text" name="member_detail_addr" th:value="${member_details.member_detail_addr}" />
-		</p>
+		<div class="info">
+			<span class="search-list-subject">이메일</span>
+			<input type="text" id="emailUser" name="emailUser" th:value="${emailUser}" class="gray-text" onclick="this.value='';" /> 
+			<span class="search-list-subject-symbol">@</span>
+			<div class="select-wrap email-select">
+				<select id="emailDomain" name="emailDomain" th:value="${emailDomain}"  onchange="toggleCustomDomain()">
+					<option value="naver.com" th:selected="${emailDomain == 'naver.com'}">naver.com</option>
+					<option value="gmail.com" th:selected="${emailDomain == 'gmail.com'}">gmail.com</option>
+					<option value="daum.net" th:selected="${emailDomain == 'daum.net'}">daum.net</option>
+					<option value="yahoo.com" th:selected="${emailDomain == 'yahoo.com'}">yahoo.com</option>
+					<option value="custom">직접 입력</option>
+				</select>
+				<div class="select-arrow-down" id="email"></div>
+			</div>
+		</div>
+		<input type="text" id="customEmailDomain" name="customEmailDomain" style="display:none;" placeholder="이메일 도메인 입력" />
 
-		<button type="submit">수정 요청</button>
+		<div class="info">
+			<span class="search-list-subject">전화번호</span>
+			<div class="select-wrap countryNum">
+				<select id="countryNum" name="countryNum" th:value="${countryNum}">
+					<option value="010" th:selected="${countryNum == '010'}">010</option>
+					<option value="011" th:selected="${countryNum == '011'}">011</option>
+					<option value="016" th:selected="${countryNum == '016'}">016</option>
+					<option value="017" th:selected="${countryNum == '017'}">017</option>
+					<option value="018" th:selected="${countryNum == '018'}">018</option>
+					<option value="019" th:selected="${countryNum == '019'}">019</option>
+				</select>
+				<div class="select-arrow-down" id="phoneNum"></div>
+			</div>
+			<span class="search-list-subject-symbol">-</span>
+			
+			<input type="number" id="userPart1" class="num gray-text" name="userPart1" min="0" max="9999" th:value="${userPart1}" title="4자리 숫자를 입력해주세요" required oninput="limitLength(this, 4)" onclick="this.value='';" />
+		  	<span class="search-list-subject-symbol">-</span>
+		  	
+		  	<input type="number" id="userPart2" class="num gray-text" name="userPart2" min="0" max="9999" th:value="${userPart2}" title="4자리 숫자를 입력해주세요" required oninput="limitLength(this, 4)" onclick="this.value='';" />	  	
+		</div>
+		
+		
+		<div class="info">
+			<span class="search-list-subject">주소</span>
+			<input type="text" id="address_kakao" name="member_addr" th:value="${member_details.member_addr}" class="gray-text pointer-cursor" readonly />
+		</div>
+		
+		<div class="info">
+			<span class="search-list-subject">상세주소</span>
+			<input type="text" name="member_detail_addr" th:value="${member_details.member_detail_addr}" onclick="this.value='';" class="gray-text" />
+		</div>
+		<div class="btn">
+			<button type="submit" class="default-btn" style="margin-right: 20px;">수정</button>
+			<button class="default-btn cancel" onclick="location.href='/admin/members/list'">
+			      <span>뒤로가기</span>
+			</button>
+		</div>
 	</form>
+	
 
 	<script src="/admin/members/js/memberDetails.js"></script>
 	<script
@@ -84,11 +111,11 @@
 	        new daum.Postcode({
 	            oncomplete: function(data) { //선택시 입력값 세팅
 	                document.getElementById("address_kakao").value = data.address; // 주소 넣기
-	                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+	                document.querySelector("input[name=member_detail_addr]").focus(); //상세입력 포커싱
 	            }
 	        }).open();
 	    });
 	}
 	</script>
-</body>
+</div>
 </html>

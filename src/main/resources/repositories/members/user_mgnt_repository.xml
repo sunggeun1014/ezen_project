@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.bookproject.user.members.mapper.UserMgntMapper">
+	
+	<select id="getAll" resultType="member">
+		SELECT
+			member_id,
+			member_pw,
+			member_name,
+			member_email,
+			member_phoneNo,
+			member_addr,
+			member_detail_addr,
+			member_date
+		FROM 
+			members
+			
+	</select>
+	<select id="getDetail" parameterType="String" resultType="member">
+		SELECT
+			member_id,
+			member_pw,
+			member_name,
+			member_email,
+			member_phoneNo,
+			member_addr,
+			member_detail_addr,
+			member_date,
+			naver_login_cd,
+			kakao_login_cd
+		FROM 
+			members
+		WHERE member_id = #{member_id}
+			
+	</select>
+	
+	<update id="updateMemberDetails" parameterType="member">
+        UPDATE members
+        SET 
+        member_email = #{member_email},
+        member_phoneNo = #{member_phoneNo},
+        member_addr = #{member_addr},
+        member_detail_addr = #{member_detail_addr}
+        WHERE member_id = #{member_id}
+    </update>
+    
+	<select id="findById" parameterType="String" resultType="int">
+	    SELECT COUNT(*)
+	    FROM members 
+	    WHERE member_id = #{member_id}
+	</select>
+	
+	<select id="findByKakaoId" parameterType="String" resultType="int">
+	    SELECT COUNT(*)
+	    FROM members 
+	    WHERE kakao_login_cd = #{kakao_login_cd}
+	</select>
+	
+	<select id="findByNaverId" parameterType="String" resultType="int">
+	    SELECT COUNT(*)
+	    FROM members 
+	    WHERE naver_login_cd = #{naver_login_cd}
+	</select>
+	
+	<select id="getBasketCount" resultType="Integer" parameterType="String">
+	    SELECT 
+	        COALESCE(COUNT(*), 0)
+	    FROM 
+	        orders_cart
+	    WHERE 
+	        member_id = #{member_id}
+    </select>
+    
+</mapper>

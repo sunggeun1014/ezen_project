@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/user/common/layout/mainLayout}" layout:fragment="Content">
+
+<link rel="stylesheet" href="/user/customer_order/css/cart.css">
+
+<div class="inner">
+	<section class="order-cart-container">
+		<div class="order-cart-header">
+			<h2 class="cart-header-title">장바구니</h2>
+			<ul class="cart-header-breadcrumb">
+				<li class="order-step is-active">장바구니 
+					<img alt="arrow-active" src="/user/customer_order/img/arrow-right=on.svg">
+				</li>
+				<li class="order-step">결제하기 
+					<img alt="arrow" src="/user/customer_order/img/arrow-right=off.svg">
+				</li>
+				<li class="order-step">주문완료</li>
+			</ul>
+		</div>
+	</section>
+
+	<div class="cart-content">
+		<div class="container">
+			<div class="cart-table">
+				<div class="table-header table-columns-area">
+					<div class="check-btn">
+						<input type="checkbox" id="select-all" class="check-box"> <label for=""></label>
+					</div>
+					<div class="table-column info">상품정보</div>
+					<div class="table-column price-qty">주문금액/수량</div>
+					<div class="table-column delivery-date">배송일정</div>
+				</div>
+
+				<div class="cart-table-data-wrapper cart-items">
+					<div th:each="item : ${cartItems}" class="cart-table-data cart-item">
+						<div class="check-btn">
+							<input type="checkbox" class="check-box item-checkbox" th:data-cart-num="${item.cart_num}"
+								   th:data-isbn="${item.book_isbn}" th:data-price="${item.book_price}"
+								   th:data-thumbnail="${item.book_thumbnail_changed}" th:data-name="${item.book_name}">
+								<label for=""></label>
+						</div>
+						<div class="product-info" th:data-isbn="${item.book_isbn}" >
+							<img class="product-img" th:src="@{/images/books/{image}(image=${item.book_thumbnail_changed})}" alt="책 이미지" />
+							<div class="product-title-price">
+								<p class="book-title" th:text="${item.book_name}"></p>
+								<div class="price-wrap">
+									<p th:text="${#numbers.formatInteger(item.book_price, 0, 'COMMA')}" class="book-price"></p>
+									<p>원</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="price-qty">
+							<div class="price-wrap">
+								<p class="total-price" th:data-price="${item.book_price}"></p>
+								<p>원</p>
+							</div>
+
+							<div class="reduce-qty">
+								<i class="fa-solid fa-minus"></i> 
+								<input type="number" max="999" id="" class="input-qty" th:value="${item.getCart_purchase_qty()}" />
+								<i class="fa-solid fa-plus"></i>
+							</div>
+						</div>
+						<div class="delivery-date">
+							<p class="delivery-date-text"></p>
+							<p>도착 예정</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="cart-control">
+					<button class="default-btn control-btns delete-product-btn">삭제</button>
+					<button class="default-btn control-btns back-btn">쇼핑 계속하기</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="aside">
+			<div class="aside-box">
+				<div class="aside-box-content box-content-info">
+					<div class="content-item">
+						<span class="item-title" >상품 금액</span>
+						<div class="total-price-wrap">
+							<p class="total-products-price"></p>
+							<p>원</p>
+						</div>
+					</div>
+					<div class="content-item">
+						<span class="item-title">상품 수</span>
+						<div class="total-qty-wrap">
+							<p class="total-qty"></p>
+							<p>개</p>
+						</div>
+						
+					</div>
+					<div class="content-item">
+						<span class="item-title">배송비</span>
+						<p>0원</p>
+					</div>
+				</div>
+				<div class="aside-box-content box-content-total">
+					<div class="total-title">
+						<span>결제 예정 금액</span>
+					</div>
+					<div class="expected-payment-amount-wrap">
+						<p class="expected-payment-amount"></p>
+						<p>원</p>
+					</div>
+				</div>
+				<button class="default-btn order-btn">주문하기</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/user/common/js/btn-event.js"></script>
+<script src="/user/customer_order/js/cart.js"></script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/myPageLayout}"
+      layout:fragment="Content">
+	
+	  <link rel="stylesheet" href="/user/mypage/account/css/memberUpdate.css" />
+	  <link rel="stylesheet" href="/user/mypage/common/css/eyeIcon.css"/>
+	  <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<div class="content">
+	<span class="middle-font">회원탈퇴</span>
+		<div class="pw-box">
+			<form action="/user/mypage/delete-check-pw" method="POST">
+				<div class="pw-checkbox">
+					<div class="pw-checkbox-span">
+						<span class="big-font">비밀번호 확인</span>
+						<span class="default-font">안전한 개인정보보호를 위해 비밀번호를 입력해주세요.</span>
+					</div>
+					<div class="pw-checkbox-input">
+						<span class="middle-font">비밀번호</span>
+						
+						<div class="eye-container">
+							<input type="password" class="input-long input-pw" th:name="member_pw" placeholder="비밀번호를 입력하세요.">
+							<i class="fa fa-eye fa-lg"></i>
+							<i class="fa fa-eye-slash fa-lg"></i>
+						</div>
+						
+						<button type="submit" class="default-btn">확인</button>				
+					</div>
+				</div>
+			</form>
+		</div>
+</div>
+		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+		<script src="/user/mypage/common/js/eye.js"></script>
+</html>

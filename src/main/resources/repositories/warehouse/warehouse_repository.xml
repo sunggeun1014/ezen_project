@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.bookproject.admin.warehouse.mapper.WarehouseMapper">
+	
+	<select id="getWarehouseList" resultType="warehouse">	
+		SELECT
+			inv_isbn,
+			inv_title,
+			inv_qty,
+			inv_registration_date,
+			zone_num
+		FROM 
+			inventory			
+	</select>
+	
+	<select id="getStockDetails" parameterType="String" resultType="warehouse">
+		SELECT
+			inv_isbn,
+			inv_title,
+			inv_qty,
+			zone_num
+		FROM 
+			inventory
+		WHERE inv_isbn = #{invIsbn}			
+	</select>
+	
+	<select id="getZoneNumList" parameterType="String" resultType="warehouse">
+		SELECT
+			zone_num
+		FROM 
+			warehouse					
+	</select>
+	
+	<update id="updateStockDetails" parameterType="warehouse">
+        UPDATE inventory
+        SET 
+        inv_title = #{inv_title},
+        inv_qty = #{inv_qty},
+        zone_num = #{zone_num}
+        WHERE inv_isbn = #{inv_isbn}
+    </update>
+	
+	<update id="invQtyUpdate" parameterType="warehouse">
+		UPDATE inventory
+		SET
+			inv_qty = inv_qty - #{inv_qty}
+		WHERE
+			inv_isbn = #{inv_isbn}
+	</update>
+	
+	<select id="getOneZoneNum" parameterType="String" resultType="String">
+		SELECT 
+			zone_num 
+		FROM 
+			inventory 
+		WHERE inv_isbn = #{isbn}
+	</select>
+	
+</mapper>

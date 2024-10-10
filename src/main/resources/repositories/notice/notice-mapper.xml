@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.bookproject.admin.notice.mapper.NoticeMapper">
+    <select id="getList" resultType="notice">
+	SELECT
+		notice_num,
+		notice_title,
+		notice_visible,
+		notice_write_date,
+		notice_start_date,
+		notice_end_date
+	FROM
+		notices		
+    </select>
+    
+    <select id="getDetailList" resultType="notice" parameterType="Long">
+    SELECT
+    	notice_num,
+    	notice_title,
+    	notice_visible,
+    	notice_write_date,
+    	notice_content,
+    	notice_start_date,
+    	notice_end_date,
+    	manager_id
+    FROM
+    	notices 
+    WHERE
+    	notice_num = #{noticeNum}
+    
+    </select>
+    
+    <delete id="deleteNoticesByNums" parameterType="List">
+    DELETE FROM
+    	notices
+    WHERE
+    	notice_num
+    IN
+    	<foreach item="num" collection="list" open="(" separator="," close=")">
+    		#{num, jdbcType=BIGINT}
+    	</foreach>
+    
+    </delete>
+    
+    <insert id="insertNotice" useGeneratedKeys="true" keyProperty="notice_num" keyColumn="notice_num">
+        INSERT INTO 
+        	Notices 
+        (
+        	notice_num, 
+        	notice_title, 
+        	notice_content, 
+        	manager_id, 
+        	notice_visible, 
+        	notice_write_date, 
+        	notice_start_date, 
+        	notice_end_date
+        )
+        VALUES 
+        (
+        	NOTICES_SEQ.NEXTVAL,
+        	#{notice_title},
+        	#{notice_content},
+        	#{manager_id},
+        	#{notice_visible},
+        	CURRENT_TIMESTAMP, 
+        	#{notice_start_date}, 
+        	#{notice_end_date}
+        )
+    </insert>
+    
+    <insert id="insertNoticeDetail">
+        INSERT INTO 
+        	Notices_detail 
+        (
+        	notice_detail_num,
+        	notice_detail_original,
+        	notice_detail_changed,
+        	notice_num
+        )
+        VALUES 
+        (
+        	NOTICES_DETAIL_SEQ.NEXTVAL,
+        	#{notice_detail_original},
+        	#{notice_detail_changed},
+        	#{notice_num}
+        )
+    </insert>
+    
+    <update id="updateNotice" parameterType="notice">
+        UPDATE 
+        	notices
+        SET
+            notice_title = #{notice_title},
+            notice_content = #{notice_content},
+            notice_start_date = #{notice_start_date},
+            notice_end_date = #{notice_end_date},
+            notice_visible = #{notice_visible},
+            manager_id = #{manager_id}
+        WHERE
+        	notice_num = #{notice_num}
+    </update>
+    
+    <insert id="updateNoticeDetail" parameterType="notice">
+    INSERT INTO 
+    	notices_detail 
+    (
+    	notice_detail_num,
+        notice_detail_original,
+        notice_detail_changed,
+        notice_num
+    ) 
+    VALUES 
+    (
+    	NOTICES_DETAIL_SEQ.NEXTVAL,
+        #{notice_detail_original},
+        #{notice_detail_changed},
+        #{notice_num}
+    )
+	</insert>
+</mapper>

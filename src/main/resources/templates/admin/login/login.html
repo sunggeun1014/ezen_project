@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>로그인 화면</title>
+<link rel="stylesheet" href="/admin/common/css/reset.css">
+<link rel="stylesheet" href="/admin/common/css/common.css" />
+<link rel="stylesheet" href="/admin/login/css/login.css" />
+
+</head>
+<body>    
+    <div class="inner">
+        <div class="white-frame">
+            <div class="logo-wrap">
+                <img src="/admin/common/img/login-로고.png" alt="로고" />
+            </div>
+            
+            <form th:action="@{/admin/loginProc}" method="POST" class="login-form">
+
+                <div th:if="${param.accessError}" class="error-message">
+                    <p th:text="${param.accessError}"></p>
+                </div>
+
+                <div class="frame">
+                    <div class="input-container" id="usernameContainer" 
+                         th:classappend="${param.usernameError} ? 'error-border' : ''">
+                        <input id="id" class="id" type="text" th:name="username" 
+                               placeholder="아이디" required />
+                    </div>
+                    
+                    <div th:if="${param.usernameError}" class="error-message">
+                        <p th:text="${param.usernameError}"></p>
+                    </div>
+                </div>
+                
+                <br>
+                
+                <div class="frame">
+                    <div class="input-container" id="passwordContainer" 
+                         th:classappend="${param.passwordError} ? 'error-border' : ''">
+                        <input id="password" class="password" type="password" th:name="password" 
+                               placeholder="비밀번호" required />
+                    </div>
+                    
+                    <div th:if="${param.passwordError}" class="error-message">
+                        <p th:text="${param.passwordError}"></p>
+                    </div>
+                </div>
+                
+                <br>
+                
+                <button type="submit" class="default-btn">로그인</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/admin/login/js/login.js"></script>
+</body>
+</html>

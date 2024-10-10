@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/admin/common/layout/defaultlayout}"
+      layout:fragment="Content">
+<link rel="stylesheet" href="/admin/managers/css/managerReg.css"/>
+<link rel="stylesheet" href="/admin/common/css/modal.css"/>
+
+<div>
+    <div class="white-frame">
+        <form action="/admin/managers/join" method="POST" id="joinForm" enctype="multipart/form-data">
+            <h1 class="search-list-title">매니저 정보 등록</h1>
+
+            <div class="info">
+                <span class="search-list-subject important">아이디</span>
+                <div class="id-area">
+                    <input type="text" id="manager_id" name="manager_id" placeholder="아이디를 입력해주세요">
+                    <div class="id-reference" style="color: red;">※ 영문자와 숫자, 최소 5자</div>
+                </div>
+                <span id="idCheckForm" class="check-comment"
+                      style="color: red; display: none;">아이디 양식과 일치하지 않습니다.</span>
+                <span id="idCheckResult" class="check-comment"
+                      style="color: red; display: none;">이미 사용 중인 아이디입니다.</span>
+                <span id="idCheckSuccess" class="check-comment"
+                      style="color: green; display: none;">사용 가능한 아이디입니다.</span>
+            </div>
+
+            <div class="info pw-wrap">
+                <span class="search-list-subject important">비밀번호</span>
+                <div class="pw-area">
+                    <input type="password" class="pw" name="manager_pw" id="manager_pw" placeholder="비밀번호를 입력해주세요">
+                    <div class="pw-reference" style="color: red;">※ 특수문자, 영문자, 숫자 포함, 최소 8자</div>
+                </div>
+            </div>
+
+            <div class="info">
+                <span class="search-list-subject important">비밀번호 확인</span>
+                <input type="password" class="pw" name="manager_pw_check" id="manager_pw_check"
+                       placeholder="비밀번호를 한번더 입력해주세요">
+                <span id="pwCheckForm" class="check-comment"
+                      style="color: red; display: none;">비밀번호 양식과 일치하지 않습니다.</span>
+                <span id="pwCheckResult" class="check-comment"
+                      style="color: red; display: none;">비밀번호가 일치하지 않습니다.</span>
+                <span id="pwCheckSuccess" class="check-comment" style="color: green; display: none;">비밀번호가 일치합니다.</span>
+            </div>
+
+            <div class="info">
+                <span class="search-list-subject important">이름</span>
+                <input type="text" id="manager_name" name="manager_name" placeholder="이름을 입력해주세요">
+            </div>
+
+            <div class="info">
+                <span class="search-list-subject important">이메일</span>
+                <div class="emailUser-wrap">
+                    <input type="text" id="emailUser" name="emailUser" placeholder="이메일을 입력해주세요">
+
+                    <span class="search-list-subject-symbol">@</span>
+                    <div class="select-wrap emailDomain">
+                        <select id="emailDomain" name="emailDomain" onchange="toggleCustomDomain()">
+                            <option value="" disabled selected>도메인 선택</option>
+                            <option th:each="emailDomain : ${emailDomainList}"
+                                    th:value="${emailDomain}"
+                                    th:text="${emailDomain}">
+                            </option>
+                        </select>
+                        <div class="select-arrow-down" id="email"></div>
+                    </div>
+                    <input type="text" id="customEmailDomain" name="customEmailDomain" style="display:none;"
+                           placeholder="이메일 도메인 입력"/>
+                </div>
+
+            </div>
+
+            <div class="info">
+                <span class="search-list-subject important">전화번호</span>
+
+                <div class="countryNum-wrap">
+                    <div class="select-wrap countryNum">
+                        <select id="countryNum" name="countryNum">
+                            <option value="010">010</option>
+                            <option value="011">011</option>
+                            <option value="016">016</option>
+                            <option value="017">017</option>
+                            <option value="018">018</option>
+                            <option value="019">019</option>
+                        </select>
+                        <div class="select-arrow-down" id="phoneNum"></div>
+                    </div>
+                    <span class="search-list-subject-symbol">-</span>
+
+                    <input type="number" id="userPart1" class="num gray-text" name="userPart1" min="0" max="9999"
+                           title="4자리 숫자를 입력해주세요" required oninput="limitLength(this, 4)"
+                           placeholder="1234" step="1"/>
+                    <span class="search-list-subject-symbol">-</span>
+
+                    <input type="number" id="userPart2" class="num gray-text" name="userPart2" min="0" max="9999"
+                           title="4자리 숫자를 입력해주세요" required oninput="limitLength(this, 4)"
+                           placeholder="1234" step="1"/>
+                </div>
+            </div>
+
+
+            <div class="info addr-wrap">
+                <span class="search-list-subject important">주소</span>
+                <input type="text" id="address_kakao" name="manager_addr" class="gray-text pointer-cursor" readonly/>
+            </div>
+            <div class="info">
+                <span class="search-list-subject">상세주소</span>
+                <input type="text" id="manager_detail_addr" name="manager_detail_addr" onclick="this.value='';"
+                       class="gray-text"/>
+            </div>
+
+            <div class="info">
+                <span class="search-list-subject important">부서명</span>
+                <div class="select-wrap dept-select">
+                    <select id="manager_dept" name="manager_dept" class="dept-select">
+                        <option value="" disabled selected>부서 선택</option>
+                        <option value="01">물류팀</option>
+                        <option value="02">운영팀</option>
+                        <option value="03">인사팀</option>
+
+                    </select>
+                    <div class="select-arrow-down" id="dept"></div>
+                </div>
+
+            </div>
+
+            <div class="info">
+                <span class="search-list-subject">프로필</span>
+
+                <div class="img-input-wrap">
+                    <label for="input-file" class="input-file-label">
+                        <i class="fa-solid fa-plus" id="img-in"></i>
+                        <input type="file" name="profileImage" id="input-file" class="input-img-file"
+                               accept=".jpg, .jpeg, .png" onchange="previewImage(event)"/>
+                        <img id="preview"/>
+                    </label>
+                </div>
+                <label>형식 : JPG, JPEG, PNG / 권장 사이즈 500px * 500px</label>
+            </div>
+            <input type="hidden" id="errorCode" value="/*[[${errorCode}]]*/"/>
+
+            <div class="btn">
+                <button type="submit" id="reg-button" class="default-btn" style="margin-right: 20px;">등록</button>
+                <button class="default-btn cancel" onclick="location.href='/admin/managers/list'">
+                    <span>뒤로가기</span>
+                </button>
+            </div>
+        </form>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="/admin/members/js/memberDetails.js"></script>
+    <script src="/admin/managers/js/managerReg.js"></script>
+    <script
+            src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+</div>
+</html>

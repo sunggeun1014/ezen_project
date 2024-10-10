@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/mobile/common/layout/mobilelayout}"
+      layout:fragment="Content">
+    <link rel="stylesheet" href="/mobile/common/css/container-map.css" />
+    <link rel="stylesheet" href="/mobile/dispatch/css/dispatch.css" />
+    
+<div class="mobile-inner" style="gap: 2.3rem;"> 
+    <button class="back-btn menu-title" onclick="location.href='/mobile/admin/dispatch-page'">
+        <i class="fa-solid fa-chevron-left"></i>
+        출고하기
+    </button>
+    
+    <div class="search-input-box">
+	    <input type="text" name="order_num" id="search-input" placeholder="조회할 배송요청번호 입력">
+	    <i id="search-btn" class="fa-solid fa-magnifying-glass fa-flip-horizontal" aria-hidden="true" style="cursor: pointer;"></i>
+	    <i class="fa-solid fa-barcode" aria-hidden="true"></i>
+	</div>
+	
+    <div class="white-frame">
+		<p class="sub-title"><span id="order-num-display"></span></p>
+        <div class="inner scroll" style="height: 31rem">
+            <div id="dispatch-list"></div>
+        </div>
+    </div>
+    
+    <button id="stockIn" class="default-btn export">완료</button>
+</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="/mobile/dispatch/js/stockout.js"></script>
+</html>

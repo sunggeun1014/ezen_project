@@ -1,0 +1,94 @@
+/* 공통 스타일 */
+input:focus, select:focus {
+	border: 1px solid #666666;
+}
+
+label:not(.input-file-label) {
+	margin-left: 20px;
+}
+
+.input-pw {
+	width: 300px;
+	height: 40px;
+}
+
+.info-items {
+	display: flex;
+	align-items: center;
+}
+
+.gray-text {
+	width: 300px;
+}
+
+.gray-num {
+	margin-left: 20px;
+	width: 60px;
+}
+
+.info {
+	display: flex;
+	align-items: center;
+	gap: 10px 60px;
+	border-bottom: 1px solid #D8D8D8;
+	padding: 20px 20px;
+}
+
+.info.addr-wrap, .info.pw-wrap {
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+
+.search-list-title:first-child {
+	margin-bottom: 30px;
+}
+
+.important::after {
+	content: "*";
+	color: red;
+	font-weight: bold;
+	margin-left: 2px;
+	position: absolute; /* 별표의 절대 위치 지정 */
+	transform: translateY(-45%); /* 별표를 더 위쪽으로 이동 */
+}
+
+.error-message {
+	color: red;
+	font-size: 0.9em;
+	margin-top: 5px;
+	display: none;
+}
+
+/* 특정 요소 스타일 */
+select#emailUser, select#deptName, .select-wrap.emailDomain {
+	width: 150px;
+	margin-left: 20px;
+}
+
+.select-wrap.countryNum {
+	width: 70px;
+}
+
+.btn {
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+.search-list-subject-symbol {
+	margin-left: 20px;
+}
+
+.btn-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	margin-top: 30px;
+}
+
+#address_kakao {
+	cursor: pointer;
+}

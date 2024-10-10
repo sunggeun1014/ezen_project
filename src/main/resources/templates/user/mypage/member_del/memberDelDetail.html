@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/myPageLayout}"
+      layout:fragment="Content">
+
+	<link rel="stylesheet" href="/user/mypage/account/css/memberUpdate.css" />
+	
+<div class="content"> 
+	<div class="container-gap">
+		<div class="text-group">
+			<span class="middle-font">회원탈퇴</span>
+		</div>
+		<div class="info-box">
+			<span style="font-size: 16px; font-weight: 600;">회원 탈퇴 시 유의사항</span>
+			<ul>
+				<li>회원탈퇴시 모든 <b>회원정보</b>와 <b>구매내역</b>이 자동으로 삭제 처리되며, 복구가 불가능합니다.</li>
+				<li>자동 삭제 항목(복구 불가능): 회원정보, 상품구매 등의 모든 내역</li>
+				<li>회원 아이디에 대해서는 서비스 이용의 혼선 방지, 법령에서 규정하는 회원 거래 정보의 보존 기간 동안의 보관 의무의 이행, 기타 안정적인 서비스 제공을 위하여 필요한 정보이므로 탈퇴 후 동일 아이디로의 재가입은 허용되지 않습니다.</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="text-group">
+		<span class="middle-font">탈퇴사유</span>
+		<span style="color: #7E7E7E;">홈페이지를 이용하면서 느꼈던 불편사항을 선택해주세요</span>
+	</div>
+	
+	<div class="radio-container content-gap">
+		<div class="span-radio">
+		    <span class="default-font bold">상품</span>
+		    <div class="radio-group">
+		        <label><input type="radio" name="product">찾는 상품 없음</label>
+		        <label><input type="radio" name="product">상품정보 부족</label>
+		        <label><input type="radio" name="product">상품품질 불만</label>
+		        <label><input type="radio" name="product">가격 불만</label>
+		    </div>
+		</div>
+		<div class="span-radio">
+		    <span class="default-font bold">서비스</span>
+		    <div class="radio-group">
+		        <label><input type="radio" name="service">배송 불만</label>
+		        <label><input type="radio" name="service">사이트 이용 불편</label>
+		        <label><input type="radio" name="service">결제 불편</label>
+		        <label><input type="radio" name="service">반품/교환/환불 불만</label>
+		        <label><input type="radio" name="service">불친절</label>
+		    </div>
+		</div>
+		<div class="span-radio" style="border: none">
+		    <span class="default-font bold">시스템/기타</span>
+		    <div class="radio-group">
+		        <label><input type="radio" name="system">상품검색 불편</label>
+		        <label><input type="radio" name="system">개인정보/보안 우려</label>
+		    </div>	
+		</div>
+	</div>
+	
+	<div class="info-box">
+		<div class="radio-group" style="margin-bottom: 20px;">
+			<input type="checkbox" class="check-box" id="check-btn1">
+			<label for="check-btn1"></label>
+			<label for="check-btn1">회원탈퇴 안내사항을 확인했으며 탈퇴에 동의합니다.</label>
+			<span class="green">(필수)</span>
+		</div>
+		<div class="radio-group">
+			<input type="checkbox" class="check-box" id="check-btn2">
+			<label for="check-btn2"></label>
+			<label for="check-btn2">모든 금권 혜택 자동 소멸에 동의합니다.</label>
+			<span class="green">(필수)</span>
+		</div>
+	</div>
+	<div class="btn-box">
+		<button type="button" id="delete-btn" class="delete-btn-on" disabled>탈퇴</button>
+		<button type="button" class="default-btn grey" onclick="location.href='/user/mypage/delete-page'">취소</button>
+	</div>
+</div>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="/user/mypage/account/js/memberDelDetail.js"></script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/mobile/common/layout/mobilelayout}"
+      layout:fragment="Content">
+
+<style>
+    .text-delivery-before {
+        color: #4777F6;
+    }
+
+    .text-delivery-in-progress {
+        color: #F69E47;
+    }
+
+    .text-delivery-complete {
+        color: #10A142;
+    }
+
+    .text-unknown-status {
+        color: #E54F53;
+    }
+</style>
+
+<div class="mobile-inner" style="gap: 23px;">
+    <h3 class="menu-title">배송상황</h3>
+
+    <div class="white-frame">
+        <div class="inner" style="height: auto;">
+            <div class="empty-list" th:if="${page == null}">
+                내역이 없습니다
+            </div>
+            <div class="content-list deliver-state" th:each="item : ${list}">
+                <div class="content-text-wrap top">
+                    <div class="deliver-info">
+                        <p class="content-text" th:text="'주문번호: ' + ${item.order_num}"></p>
+                        <p class="content-text" th:text="'받는분:' + ${item.recipient_name}"></p>
+                    </div>
+                    <div style="text-align: end">
+                        <p class="content-text">
+					<span style="font-weight: 700;"
+                          th:classappend="${item.order_delivery_status == '01' ? 'text-delivery-before' :
+                          				   (item.order_delivery_status == '02' ? 'text-delivery-in-progress' :
+                          				   (item.order_delivery_status == '03' ? 'text-delivery-complete' : 'text-unknown-status'))}"
+                          th:text="${item.order_delivery_status == '01' ? '배송전' :
+						  			(item.order_delivery_status == '02' ? '배송중' :
+						  			(item.order_delivery_status == '03' ? '배송완료' : '상태 알 수 없음'))}"></span>
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <p class="content-text deliver-state">
+                        <span th:text="${item.order_addr}"></span>
+                        <span th:text="${item.order_addr_detail}"></span>
+                    </p>
+                </div>
+                <p class="content-sub-txt"
+                   th:text="'주문날짜: ' + ${item.order_modify_date != null ? #dates.format(item.order_modify_date, 'yyyy-MM-dd hh:mm') : #dates.format(item.order_purchase_date, 'yyyy-MM-dd hh:mm')}"></p>
+            </div>
+
+            <div id="page-area" class="page-area" th:if="${page != null}" th:data-current-page="${page.currentPage}"
+                 th:data-total-page="${page.totalPages}">
+                <i id="page-arrow-left" class="fa-solid fa-angle-left page-arrow"></i>
+                <span th:each="i : ${#numbers.sequence(page.startPage, page.endPage)}" th:id="'page-link-' + ${i}"
+                      class="page-link" th:text="${i}"></span>
+                <i id="page-arrow-right" class="fa-solid fa-angle-right page-arrow"></i>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

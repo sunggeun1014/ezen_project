@@ -1,0 +1,17 @@
+.notice-list-wrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.button-wrap-notice {
+	display:flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 10px;
+}
+
+#delete-button {
+	width: 80px;
+}

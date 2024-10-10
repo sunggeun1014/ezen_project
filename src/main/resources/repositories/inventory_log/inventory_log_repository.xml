@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InventoryLog">
+	
+	<select id="getList" resultType="inventoryLog" parameterType="condition">
+		SELECT
+		    log_transaction_num,
+		    manager_id,
+		    CASE
+		        WHEN log_transaction_status = '01' THEN '입고'
+		        WHEN log_transaction_status = '02' THEN '출고'
+		        WHEN log_transaction_status = '03' THEN '반품입고'
+		        WHEN log_transaction_status = '04' THEN '교환출고'
+		    END AS log_transaction_status,
+		    log_operation_date
+		FROM
+		    inventory_log	
+		WHERE 1 = 1
+			<if test="start_date != null and !start_date.equals('')">
+				AND to_char(log_operation_date, 'YYYY-MM-DD') >= #{start_date}
+			</if>
+			<if test="end_date != null and !end_date.equals('')">
+				AND to_char(log_operation_date, 'YYYY-MM-DD') <![CDATA[<=]]> #{end_date}
+			</if>
+			<if test="search_conditions != null and !search_conditions.equals('')">
+				<if test="word != null and !word.equals('')">
+					AND log_transaction_num LIKE '%' || #{word} || '%'
+				</if>
+			</if>
+	</select>
+	
+	<insert id="requestInsert" parameterType="java.util.HashMap">
+		INSERT INTO inventory_log (
+		    log_transaction_num,
+		    manager_id,
+		    log_transaction_status,
+		    log_operation_date
+		) VALUES (
+		    inventory_log_seq.NEXTVAL,
+		    #{manager_id},
+		    #{log_transaction_status},
+		    current_timestamp
+		)
+	</insert>
+	
+	<insert id="requestDetailInsert" parameterType="java.util.HashMap">
+		 INSERT INTO inventory_log_details (
+		    log_detail_num,
+		    log_detail_isbn,
+		    log_detail_title,
+		    zone_num,
+		    log_detail_qty,
+		    log_transaction_num
+		) VALUES (
+		    inventory_log_details_seq.NEXTVAL,
+		    #{isbn},
+		    #{bookTitle},
+		    #{zoenNum},
+		    #{inputQty},
+		    inventory_log_seq.CURRVAL
+		)
+	</insert>
+	
+	<select id="getDetail" resultType="inventoryLog" parameterType="Integer">
+		SELECT
+		    il.log_transaction_num,
+		    m.manager_name,
+		    il.log_transaction_status,
+		    il.log_operation_date,
+		    il.order_num,
+		    NVL(SUM(ild.log_detail_qty), 0) AS log_detail_qty
+		FROM
+		    inventory_log         il
+		    LEFT JOIN managers              m ON il.manager_id = m.manager_id
+		    LEFT JOIN inventory_log_details ild ON il.log_transaction_num = ild.log_transaction_num
+		WHERE
+		    il.log_transaction_num = #{log_transaction_num}
+		GROUP BY
+		    il.log_transaction_num,
+		    m.manager_name,
+		    il.log_transaction_status,
+		    il.log_operation_date,
+		    il.order_num
+	</select>
+	
+	<select id="getDetailList" resultType="inventoryLog" parameterType="Integer">
+		SELECT
+		    log_detail_isbn,
+		    log_detail_title,
+		    zone_num,
+		    log_detail_qty
+		FROM
+		    inventory_log_details
+		WHERE
+		    log_transaction_num = #{log_transaction_num}
+	</select>
+
+
+	<select id="getListAtHome" resultType="inventoryLog">
+		SELECT * FROM (
+		SELECT
+		log_transaction_num,
+		manager_id,
+		CASE
+		WHEN log_transaction_status = '01' THEN '입고'
+		WHEN log_transaction_status = '02' THEN '출고'
+		WHEN log_transaction_status = '03' THEN '반품입고'
+		WHEN log_transaction_status = '04' THEN '교환출고'
+		END AS log_transaction_status,
+		log_operation_date
+		FROM
+		inventory_log
+		ORDER BY log_operation_date DESC
+		) WHERE ROWNUM &lt;= 5
+	</select>
+
+</mapper>

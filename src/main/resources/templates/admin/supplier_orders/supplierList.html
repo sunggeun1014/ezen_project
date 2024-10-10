@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/admin/common/layout/defaultlayout}"
+    layout:fragment="Content">
+	
+	<link rel="stylesheet" href="/admin/products/css/products.css"/>
+	<link rel="stylesheet" href="/admin/supplier_orders/css/list.css"/>
+	
+<div>
+	<div class="filter-container white-frame">
+		<h3 class="search-list-title">발주내역</h3>
+		
+			<div class="filter-info">
+				<p class="search-list-subject">발주일</p>
+				<div class="filter-wrap date-filter">
+					<div class="date-picker">
+						<div class="input-date-box">
+							<input type="text" id="startDate" class="placeholder startDate"
+								placeholder="YYYY-MM-DD" />
+								<i class="fa-solid fa-calendar-days"></i>
+						</div>
+						<div class="calendar-slash">-</div>
+						<div class="input-date-box">
+							<input type="text" id="endDate" class="placeholder endDate"
+								placeholder="YYYY-MM-DD" />
+							<i class="fa-solid fa-calendar-days"></i>
+						</div>
+					</div>
+					<div class="date-options date-pick-btn">
+						<button class="date-option today today-btn date-btn" onclick="setDateOption(0, this)">오늘</button>
+						<button class="date-option week-btn date-btn" onclick="setDateOption(7, this)">1주일</button>
+						<button class="date-option month-btn date-btn" onclick="setDateOption(30, this)">1개월</button>
+						<button class="date-option year-btn date-btn" onclick="setDateOption(365, this)">1년</button>
+					</div>
+				</div>
+			</div>
+			<div class="filter-info">
+				<p class="search-list-subject">발주상태</p>
+				<div class="filter-wrap radio-filter">
+					<input type="radio" id="order-status-all" name="order_status" value="" checked="checked"/>
+					<label for="order-status-all">전체</label>
+					<input type="radio" id="order-status-pending" name="order_status" value="pending"/>
+					<label for="order-status-pending">입고대기</label>
+					<input type="radio" id="order-status-completion" name="order_status" value="completion"/>
+					<label for="order-status-completion">입고완료</label>
+				</div>
+			</div>
+			<div class="filter-info">
+				<p class="search-list-subject">검색어</p>
+				<div class="filter-wrap search-bar">					
+				
+					<div class="select-wrap">				
+						<select id="searchColumn" class="select">
+							<option value="order_num">발주번호</option>
+						</select>
+						<div class="select-arrow-down"></div>
+					</div>
+					
+				    <div class="search-container">
+	      				<input type="number" name="word" id="word" class="searchKeyword search-input" placeholder="조회할 발주번호 입력" />
+	      				<button id="searchButton"><span class="material-symbols-outlined">search</span></button>	
+	    			</div>
+					<button id="reset-button" onclick="resetBtn();">초기화</button>
+				</div>
+			</div>
+		</div>
+	
+	<div class="table-container white-frame">
+		<div class="supplier-orders-list-wrap">
+			<h3 id="data-count" class="table-data-cnt-txt"></h3>			
+			<button id="request-button" class="default-btn" onclick="location.href='/admin/supplierOrders/register'" style="float: right;">등록</button>
+		</div>	
+		<form id="table-form">
+			<table id="supplier-orders-table" class="table table-center" style="width: 100%">
+				<thead class="table-head">
+					<tr class="table-column-head">
+						<th class="table-column-head-txt">NO</th>
+						<th class="table-column-head-txt">발주번호</th>
+						<th class="table-column-head-txt">발주상태</th>
+						<th class="table-column-head-txt">총 수량</th>
+						<th class="table-column-head-txt">총 가격</th>
+						<th class="table-column-head-txt">발주날짜</th>
+						<th class="table-column-head-txt">발주자</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</form>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="/admin/supplier_orders/js/list.js"></script>
+	<!-- DataTables JS -->
+	<script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
+	<!-- DataTables with Bulma integration JS -->
+	<script src="https://cdn.datatables.net/2.1.4/js/dataTables.bulma.js"></script>
+</div>
+</html>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CustomerOrders">
+
+	<select id="getList" resultType="customerOrders" parameterType="condition">
+		SELECT * FROM (SELECT
+		    co.order_num,
+		    co.member_id,
+		    m.member_name,
+		    CASE
+		    WHEN co.order_delivery_status = '01' THEN
+		    '배송전'
+		    WHEN co.order_delivery_status = '02' THEN
+		    '배송중'
+		    WHEN co.order_delivery_status = '03' THEN
+		    '배송완료'
+		    END                         AS order_delivery_status,
+		    CASE
+		    WHEN co.order_payment_status = '01' THEN
+		    '결제완료'
+		    WHEN co.order_payment_status = '02' THEN
+		    '환불완료'
+		    END                         AS order_payment_status,
+		    CASE
+		    WHEN EXISTS (
+		        SELECT
+		            1
+		        FROM
+		            customer_order_details internal_cod
+		        WHERE
+		            internal_cod.order_num = co.order_num
+		            AND internal_cod.order_detail_status IN ( '02', '03', '04' )
+		    ) THEN
+		    '변경요청'
+		    WHEN EXISTS (
+		        SELECT
+		            1
+		        FROM
+		            customer_order_details internal_cod
+		        WHERE
+		            internal_cod.order_num = co.order_num
+		            AND internal_cod.order_detail_status IN ( '05', '06', '07', '08' )
+		    ) THEN
+		    '처리완료'
+		    ELSE
+		    '주문완료'
+		    END                         AS order_status,
+		    co.order_purchase_date,
+		    co.order_modify_date,
+		    SUM(cod.order_detail_price * cod.order_detail_qty) AS total_order_price
+		FROM
+		    customer_orders        co
+		    LEFT JOIN members                m ON co.member_id = m.member_id
+		    LEFT JOIN customer_order_details cod ON cod.order_num = co.order_num
+		GROUP BY
+		    co.order_num,
+		    co.member_id,
+		    m.member_name,
+		    co.order_delivery_status,
+		    co.order_payment_status,
+		    co.order_purchase_date,
+		    co.order_modify_date) rs 
+		WHERE 1 = 1
+		    <if test="date_column != null and !date_column.equals('') and date_column.equals('purchase')">
+				<if test="start_date != null and !start_date.equals('')">
+					AND to_char(order_purchase_date, 'YYYY-MM-DD') >= #{start_date}
+				</if>
+				<if test="end_date != null and !end_date.equals('')">
+					AND to_char(order_purchase_date, 'YYYY-MM-DD') <![CDATA[<=]]> #{end_date}
+				</if>
+			</if>
+			<if test="date_column != null and !date_column.equals('') and date_column.equals('reuqest')">
+				<if test="start_date != null and !start_date.equals('')">
+					AND to_char(order_modify_date, 'YYYY-MM-DD') >= #{start_date} AND order_purchase_date != order_modify_date 
+				</if>
+				<if test="end_date != null and !end_date.equals('')">
+					AND to_char(order_modify_date, 'YYYY-MM-DD') <![CDATA[<=]]> #{end_date} AND order_purchase_date != order_modify_date
+				</if>
+			</if>
+			<if test="order_status != null and !order_status.equals('')">
+				<if test="order_status.equals('request')">
+					AND order_status = '변경요청' 
+				</if>
+				<if test="order_status.equals('completion')">
+					AND order_status = '처리완료' 
+				</if>
+			</if>
+			<if test="order_delivery_status != null and !order_delivery_status.equals('')">
+				<if test="order_delivery_status.equals('before')">
+					AND order_delivery_status = '배송전'
+				</if>
+				<if test="order_delivery_status.equals('inTransit')">
+					AND order_delivery_status = '배송중'
+				</if>
+				<if test="order_delivery_status.equals('completion')">
+					AND order_delivery_status = '배송완료'
+				</if>
+			</if>
+			<if test="search_conditions != null and !search_conditions.equals('')">
+				<if test="word != null and !word.equals('')">
+					AND order_num LIKE '%' || #{word} || '%'
+				</if>
+			</if>
+	</select>
+	
+	<insert id="deliveryRequestSave" parameterType="String">
+		INSERT
+		    INTO delivery_request (
+		        request_num,
+		        manager_id
+		    ) VALUES(
+		    	delivery_request_seq.nextval,
+		    	#{manager_id}
+		    )
+	</insert>
+	
+	<insert id="deliveryDetailSave" parameterType="Integer">
+		INSERT
+		    INTO delivery_request_detail (
+		        request_detail_num,
+		        request_num,
+		        order_num
+		    ) VALUES(
+		    	delivery_request_detail_seq.nextval,
+		    	delivery_request_seq.currval,
+		    	#{order_num}
+		    )
+	</insert>
+	
+	<select id="getDetail" resultType="customerOrders" parameterType="Integer">
+		SELECT
+		    co.order_num,
+		    co.member_id,
+		    co.order_addr,
+		    co.order_addr_detail,
+			co.recipient_name,
+			co.recipient_phoneNo,
+		    co.common_ent_pw,
+		    co.retrieve_addr,
+		    co.retrieve_addr_detail,
+			co.retrieve_name,
+			co.retrieve_phoneNo,
+			co.retrieve_common_cnt_pw,
+			co.paymentId,
+		    m.member_name,
+		    m.member_email,
+		    m.member_phoneno,
+		    NVL(SUM(cod.order_detail_price * cod.order_detail_qty), 0) AS order_price_total
+		FROM
+		    customer_orders        co
+		    LEFT JOIN members                m ON co.member_id = m.member_id
+		    LEFT JOIN customer_order_details cod ON co.order_num = cod.order_num
+		WHERE
+		    co.order_num = #{order_num}
+		GROUP BY
+		    co.order_num,
+		    co.member_id,
+		    co.order_addr,
+		    co.order_addr_detail,
+			co.recipient_name,
+			co.recipient_phoneNo,
+		    co.common_ent_pw,
+		    co.retrieve_addr,
+		    co.retrieve_addr_detail,
+			co.retrieve_name,
+			co.retrieve_phoneNo,
+			co.retrieve_common_cnt_pw,
+			co.paymentId,
+		    m.member_name,
+		    m.member_email,
+		    m.member_phoneno
+	</select>
+	
+	<select id="getDetailList" resultType="customerOrders" parameterType="Integer">
+		SELECT
+			cod.order_detail_num,
+		    b.book_name,
+		    cod.book_isbn,
+		    cod.order_detail_price,
+		    cod.order_detail_qty,
+		    cod.order_detail_price * cod.order_detail_qty AS order_price_sum,
+		    cod.order_request_qty,
+		    cod.order_complete_qty,
+	    	CASE
+		        WHEN cod.order_detail_status = '01' THEN
+		            '주문완료'
+		        WHEN cod.order_detail_status = '02' THEN
+		            '취소요청'
+		        WHEN cod.order_detail_status = '03' THEN
+		            '교환요청'
+		        WHEN cod.order_detail_status = '04' THEN
+		            '반품요청'
+		        WHEN cod.order_detail_status = '05' THEN
+		            '취소완료'
+		        WHEN cod.order_detail_status = '06' THEN
+		            '교환완료'
+		        WHEN cod.order_detail_status = '07' THEN
+		            '반품완료'
+		        WHEN cod.order_detail_status = '08' THEN
+		            '처리불가'
+		    END AS order_detail_status
+		FROM
+		         customer_orders co
+		    LEFT JOIN customer_order_details cod ON co.order_num = cod.order_num
+		    LEFT JOIN books                  b ON cod.book_isbn = b.book_isbn
+		WHERE cod.order_num = #{order_num}
+	</select>
+	
+	<update id="orderStatusUpdate" parameterType="java.util.HashMap">
+		UPDATE customer_order_details SET
+    		order_detail_status = #{order_detail_status},
+    		order_complete_qty = order_complete_qty + #{input_qty}
+    	where
+    		order_detail_num = #{order_detail_num}
+	</update>
+
+	<update id="orderPaymentUpdate" parameterType="Integer">
+		UPDATE customer_orders
+		SET
+		    order_payment_status = '02'
+		WHERE
+		    order_num = #{order_num}
+	</update>
+
+</mapper>

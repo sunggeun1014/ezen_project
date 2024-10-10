@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/admin/common/layout/defaultlayout}"
+    layout:fragment="Content">
+
+	<!-- DatePicker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	<link rel="stylesheet" href="/admin/inventory_log/css/list.css">
+
+	<div class="filter-container white-frame">
+		<div class="header">
+			<h1 class="search-list-title">발주내역</h1>
+		</div>
+		<div class="content">
+			<div class="search-filter">
+				<div class="filter-group">
+					<span class="search-list-subject">조회기간</span>
+					<div class="date-picker">
+						<div class="input-date-box">
+							<input type="text" id="startDate" class="placeholder startDate"
+								   placeholder="YYYY-MM-DD" />
+							<i class="fa-solid fa-calendar-days"></i>
+						</div>
+						<div class="calendar-slash">-</div>
+						<div class="input-date-box">
+							<input type="text" id="endDate" class="placeholder endDate"
+								   placeholder="YYYY-MM-DD" />
+							<i class="fa-solid fa-calendar-days"></i>
+						</div>
+					</div>
+					<div class="date-options date-pick-btn">
+						<button class="date-option today today-btn date-btn" onclick="setDateOption(0, this)">오늘</button>
+						<button class="date-option week-btn date-btn" onclick="setDateOption(7, this)">1주일</button>
+						<button class="date-option month-btn date-btn" onclick="setDateOption(30, this)">1개월</button>
+						<button class="date-option year-btn date-btn" onclick="setDateOption(365, this)">1년</button>
+					</div>
+				</div>
+			</div>
+			<div class="search-bar-group">
+				<div class="search-list-subject">검색어</div>
+				<div class="select-wrap">
+					<select id="searchColumn" class="select">
+						<option value="log_transaction_num">입출고번호</option>
+					</select>
+					<div class="select-arrow-down"></div>
+				</div>
+
+				<div class="search-container">
+					<input type="number" name="word" id="word" class="searchKeyword search-input" placeholder="조회할 입출고번호 입력" />
+					<button id="searchButton"><span class="material-symbols-outlined">search</span></button>
+				</div>
+				<button id="reset-button" onclick="resetBtn();">초기화</button>
+			</div>
+		</div>
+	</div>
+	
+	<div class="table-container white-frame">
+		<div class="data-count-area">
+			<span id="data-count" class="data-count"></span>
+		</div>
+		<form id="table-form">
+			<table id="inventoryLog-orders-table" class="table is-striped" style="width: 100%">
+				<thead>
+					<tr>
+						<th>NO</th>
+						<th>입출고번호</th>
+						<th>입출고상태</th>
+						<th>작업날짜</th>
+						<th>작업자</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</form>
+	</div>    
+    
+   	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="/admin/inventory_log/js/list.js"></script>
+	<!-- DataTables JS -->
+	<script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
+	<!-- DataTables with Bulma integration JS -->
+	<script src="https://cdn.datatables.net/2.1.4/js/dataTables.bulma.js"></script>
+<div>
+
+</div>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>모바일</title>
+
+    <link rel="stylesheet" href="/mobile/common/css/reset.css"/>
+    <link rel="stylesheet" href="/mobile/common/css/sample.css"/>
+    <!-- 폰트어썸 -->
+    <script src="https://kit.fontawesome.com/302ba19bbe.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="login-container">
+    <div class="logo-wrap">
+        <img src="/mobile/common/img/mobile-logo.svg" alt="로고" class="logo-img"/>
+    </div>
+    <form action="" id="login-form">
+        <div class="sign-wrap">
+            <label for="mob-id">아이디</label>
+            <input type="text" name="" id="mob-id"/>
+            <p class="error-message">존재하지 않는 아이디 입니다.</p>
+        </div>
+        <div class="sign-wrap">
+            <label for="mob-pw">비밀번호</label>
+            <input type="password" name="" id="mob-pw"/>
+            <p class="error-message">비밀번호가 틀렸습니다</p>
+        </div>
+        <button type="submit" id="login-btn" class="default-btn">로그인</button>
+    </form>
+</div>
+
+<nav id="tabbar">
+    <ul class="menu-list">
+        <li class="menu-item">
+            <div class="icon-wrap">
+                <i class="fa-solid fa-house tab-icon"></i>
+            </div>
+            <p>홈</p>
+        </li>
+        <li class="menu-item">
+            <div class="icon-wrap">
+                <svg data-slot="icon" class="tab-icon" fill="none" stroke-width="2" stroke="currentColor"
+                     viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
+                </svg>
+            </div>
+            <p>입고</p>
+        </li>
+        <li class="menu-item">
+            <div class="icon-wrap">
+                <svg data-slot="icon" class="tab-icon" fill="none" stroke-width="2" stroke="currentColor"
+                     viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"></path>
+                </svg>
+            </div>
+            <p>출고</p>
+        </li>
+        <li class="menu-item">
+            <div class="icon-wrap">
+                <i class="fa-solid fa-truck-fast tab-icon"></i>
+            </div>
+            <p>배송</p>
+        </li>
+        <li class="menu-item">
+            <div class="icon-wrap">
+                <i class="fa-solid fa-circle-user tab-icon"></i>
+            </div>
+            <p>내정보</p>
+        </li>
+    </ul>
+</nav>
+
+<!-- 버튼 -->
+<button class="back-btn">
+    <i class="fa-solid fa-chevron-left"></i>
+    입고하기
+</button>
+
+<button class="default-btn export">
+    <svg data-slot="icon" fill="none" stroke-width="2" stroke="currentColor" viewBox="-8 -8 40 40"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"></path>
+    </svg>
+    출고하기
+</button>
+
+<button class="default-btn">
+    <svg data-slot="icon" fill="none" stroke-width="2" stroke="currentColor" viewBox="-5 -5 35 35"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
+    </svg>
+    입고하기
+</button>
+
+<button class="default-btn">완료</button>
+
+<button class="default-btn edit">수정</button>
+
+<button class="default-btn cancel">취소</button>
+
+<!-- input, select 박스들 -->
+
+<!-- 검색창 -->
+<div class="search-input-box">
+    <input type="text" name="" id="search-input" placeholder="조회할 ISBN입력"/>
+    <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i>
+    <i class="fa-solid fa-barcode"></i>
+</div>
+
+<!-- 수량입력 -->
+<div class="input-qty-container">
+    <input type="number" name="" id="" class="input-qty" placeholder="수량"/>
+</div>
+
+<!-- 전화번호 셀렉 -->
+<div class="select-wrap-und">
+    <select name="" id="">
+        <option value="">010</option>
+        <option value="">011</option>
+        <option value="">017</option>
+    </select>
+    <i class="fa-solid fa-sort"></i>
+</div>
+
+<input type="number" name="" id="" min="1" max="4" class="phone-num"/>
+
+<!-- 프레임 -->
+<div class="white-frame">dfefef</div>
+
+<!-- 홈 입출고 버튼 -->
+<div class="white-frame home-first-menu">
+    <p class="sub-title">입/출고</p>
+    <div class="enter-menu">
+        <div class="left-wrap">
+            <svg data-slot="icon" fill="none" stroke-width="2" stroke="currentColor" viewBox="-5 -5 35 35"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
+            </svg>
+            <p>입고하기</p>
+        </div>
+        <i class="fa-solid fa-angle-right"></i>
+    </div>
+    <div class="enter-menu">
+        <div class="left-wrap">
+            <svg data-slot="icon" fill="none" stroke-width="2" stroke="currentColor" viewBox="-5 -5 35 35"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"></path>
+            </svg>
+            <p>출고하기</p>
+        </div>
+        <i class="fa-solid fa-angle-right"></i>
+    </div>
+</div>
+
+<!-- 글씨 -->
+<!-- 메뉴 타이틀 (맨 위에 나오는거) -->
+<h3 class="menu-title">홈</h3>
+
+<!-- 서브타이틀 -->
+<p class="sub-title">배송요청</p>
+
+<!-- 내용 글씨들 -->
+<p class="content-text">당신이 누군가를 죽였다</p>
+<p class="content-sub-txt">등록날짜: 2024-01-01</p>
+
+<script src="/mobile/common/js/main.js"></script>
+</body>
+</html>

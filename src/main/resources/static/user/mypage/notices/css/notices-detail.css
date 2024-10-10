@@ -1,0 +1,33 @@
+.title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.date {
+	font-size: 14px;
+	color: #666666;
+	margin-bottom: 20px;
+}
+
+.notice-content {
+	border-top: 1px solid #C0C0C0;
+	border-bottom: 1px solid #C0C0C0;
+	padding: 20px 20px 20px 20px;
+	min-height: 500px;
+	
+}
+.myinfo-content {
+	row-gap: 0px;
+}
+
+.next, .previous {
+    display: inline-flex;
+    border-bottom: 1px solid #C0C0C0;
+    padding: 10px 10px 10px 10px;
+    font-size: 14px;
+    height: 50px;
+    align-items: center;
+    flex-direction: row;
+}
+

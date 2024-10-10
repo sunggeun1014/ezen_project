@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/myPageLayout}"
+      layout:fragment="Content">
+
+	<link rel="stylesheet" href="/user/mypage/purchase_cancel/css/returnDetail.css">
+<div>
+	<div class="page-title">
+		<span>반품상세</span>
+	</div>
+	<div class="order-info-area">
+		<div class="request-date">
+			<span th:if="${!#lists.isEmpty(cancelList)}" th:text="${#dates.format(cancelList[0].order_purchase_date, 'yyyy.MM.dd')}"></span>
+		</div>
+		<div class="request-order-num">
+			<span th:if="${!#lists.isEmpty(cancelList)}" th:text="'주문번호 ' + ${cancelList[0].order_num}"></span>
+		</div>
+	</div>
+	
+	<div class="return-request-box">
+		<div class="page-sub-title">
+			<span>반품요청 내역</span>
+		</div>
+		<div th:each="detail : ${cancelList}" th:if="${detail.request_status == '반품요청'}">
+			<div class="cancel-book-detail">
+				<div>
+					<a th:href="'/user/products/detail?book_isbn=' + ${detail.book_isbn}"><img th:src="'/images/books/' + ${detail.book_thumbnail_changed != null ? detail.book_thumbnail_changed : 'noimg.png'}" alt="책 이미지" width="80" height="114"></a>
+				</div>
+				<div class="book-info">
+					<div>
+						<a th:href="'/user/products/detail?book_isbn=' + ${detail.book_isbn}"><span class="book-name" th:text="${detail.book_name}"></span></a>
+					</div>
+					<div>
+						<span class="purchase-qty" th:text="'수량: ' + ${detail.request_complete_qty} + '개'" th:if="${detail.request_status == '반품요청'}"></span>
+						<span class="purchase-qty" th:text="'수량: ' + ${detail.request_complete_qty} + '개'" th:if="${detail.request_status != '반품요청'}"></span>
+					</div>
+				</div>
+				<div class="book-price-area">
+					<span class="book-price" th:if="${detail.request_status == '반품요청'}" th:text="${#numbers.formatInteger(detail.order_detail_price * detail.request_complete_qty, 0, 'COMMA')}"></span>
+					<span class="book-price" th:if="${detail.request_status != '반품요청'}" th:text="${#numbers.formatInteger(detail.order_detail_price * detail.request_complete_qty, 0, 'COMMA')}"></span>
+					<span>원</span>
+				</div>	
+				<div class="order_status_area">
+					<span class="order_status" th:text="${detail.request_status}"></span>
+				</div>	
+			</div>
+		</div>
+	</div>
+		
+	<div class="return-complete-box" id="returnCompleteBox">
+		<div class="page-sub-title" id="returnCompleteTitle" style="display: none;">
+			<span>반품완료 내역</span>
+		</div>
+		<div th:each="detail : ${cancelList}" th:if="${detail.request_status == '반품완료'}" class="return-complete-item">
+			<div class="cancel-book-detail">
+				<div>
+					<a th:href="'/user/products/detail?book_isbn=' + ${detail.book_isbn}"><img th:src="'/images/books/' + ${detail.book_thumbnail_changed != null ? detail.book_thumbnail_changed : 'noimg.png'}" alt="책 이미지" width="80" height="114"></a>
+				</div>
+				<div class="book-info">
+					<div>
+						<a th:href="'/user/products/detail?book_isbn=' + ${detail.book_isbn}"><span class="book-name" th:text="${detail.book_name}"></span></a>
+					</div>
+					<div>
+						<span class="purchase-qty" th:text="'수량: ' + ${detail.request_complete_qty} + '개'" th:if="${detail.request_status == '반품요청'}"></span>
+						<span class="purchase-qty" th:text="'수량: ' + ${detail.request_complete_qty} + '개'" th:if="${detail.request_status != '반품요청'}"></span>
+					</div>
+				</div>
+				<div class="book-price-area">
+					<span class="book-price" th:if="${detail.request_status == '반품요청'}" th:text="${#numbers.formatInteger(detail.order_detail_price * detail.request_complete_qty, 0, 'COMMA')}"></span>
+					<span class="book-price" th:if="${detail.request_status != '반품요청'}" th:text="${#numbers.formatInteger(detail.order_detail_price * detail.request_complete_qty, 0, 'COMMA')}"></span>
+					<span>원</span>
+				</div>	
+				<div class="order_status_area">
+					<span class="order_status" th:text="${detail.request_status}"></span>
+				</div>	
+			</div>
+		</div>
+	</div>
+		
+	<div>
+		<div class="info-title-area">
+			<span>회수지 정보</span>
+		</div>
+		<div class="detail-info-area">
+			<div>
+				<div class="info-sub-title-area">
+					<span>기본정보</span>
+				</div>
+			</div>
+			<div class="user-info">
+				<div>
+					<div class="name-area">
+						<span id="refund-name" class="name user-info-font" th:text="${refund.retrieve_name != null ? refund.retrieve_name : refund.recipient_name}"></span>
+					</div>
+				</div>
+				<div class="phone-number-area">
+					<span class="user-info-font" id="refund-phoneNo" th:text="${refund.retrieve_phoneNo != null ? refund.retrieve_phoneNo : refund.recipient_phoneno}"></span>
+				</div>
+				<div>
+					<span class="user-info-font" id="refund-addr" th:text="${refund.retrieve_addr != null ? (refund.retrieve_addr + (refund.retrieve_addr_detail != null ? ' ' + refund.retrieve_addr_detail : '')) : (refund.order_addr + (refund.order_addr_detail != null ? ' ' + refund.order_addr_detail : ''))}"></span>
+				</div>
+				<div class="common-entrance-area">
+					<span class="user-info-font" id="refund-commonent-pw" th:text="${refund.retrieve_common_cnt_pw != null ? refund.retrieve_common_cnt_pw : '자유출입 가능'}"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="refund-area">
+		<div class="refund-title-area">
+			<span class="refund-title">환불정보</span>
+		</div>
+		<div class="refund-info-area">
+			<div class="refund-price-area">
+				<span>반품금액</span>
+				<div class="cancel-price">
+					<span th:text="${#numbers.formatInteger(refund.cancellationAmount, 0, 'COMMA')}"></span><span class="won">원</span>	
+				</div>				
+			</div>
+			<div class="cancel-price-area">
+				<span>환불금액</span>
+				<div class="cancel-price">
+					<span th:text="${#numbers.formatInteger(refund.refundAmount, 0, 'COMMA')}"></span><span class="won">원</span>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<div class="cancel-guide-lines-area">
+		<div class="guide-lines-content-area">
+			<div class="guide-lines-detail-area">
+				<div>
+					<span class="guide-lines-sub-title">안내 사항을 확인해 주세요.</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">환불예상금액과 실제 환불되는 금액이 다를 수 있습니다.</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">부분취소 발생시 취소금권의 순서에 따라 환불 됩니다. 부분반품 발생시 할당된 금권으로 환불 됩니다.</span> 
+				</div>
+			</div>
+			<div class="guide-lines-detail-area">
+				<div>
+					<span class="guide-lines-sub-title">상품별 환불안내</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">신용카드,계좌이체의 경우 결제취소됩니다.</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">카드이용 후 취소요청 시 카드사 정책에 따라 환불기간 소요될 수 있습니다.</span> 
+				</div>
+			</div>
+			<div class="guide-lines-detail-area">
+				<div>
+					<span class="guide-lines-sub-title">결제수단별 환불안내</span>
+				</div>
+			</div>
+			<div class="guide-lines-detail-area">
+				<div>
+					<span class="guide-lines-sub-title">전체취소란?</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">여러 개의 상품을 한번에 결제 후 모든 상품을 한번에 취소(품절,반품)하는 경우로 결제한 전체금액이 취소됩니다.</span>
+				</div>
+			</div>
+			<div class="guide-lines-detail-area">
+				<div>
+					<span class="guide-lines-sub-title">부분취소란?</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">여러 개의 상품을 한번에 결제 후 일부 상품만을 취소(품절,반품)하는 경우로 결제 금액중 일부금액이 취소됩니다.</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">상품A + 상품B를 한번에 결제 후 각각 1개씩 취소하여 결제한 전체금액이 취소된 경우도 부분 취소에 해당됩니다.</span>
+				</div>
+			</div>
+			<div class="guide-lines-detail-area">
+				<div>
+					<span class="guide-lines-sub-title">신용카드/체크카드(간편결제,법인카드 포함)</span>
+				</div>
+			</div>
+			<div class="guide-lines-detail-area">
+				<div>
+					<span class="guide-lines-sub-title">전체취소</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">카드사 매입전은 결제일에 취소, 카드사 매입후는 약 3일~2주(주말, 공휴일 제외)후 취소 됩니다.</span>
+				</div>
+			</div>
+			<div class="guide-lines-detail-area">
+				<div>
+					<span class="guide-lines-sub-title">부분취소</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">카드사 매입후 취소로 처리되며, 카드사에 따라 약 3일~2주(주말,공휴일제외)후 취소 됩니다.<br>&emsp;(결제일 당일 부분취소한 경우 결제 당일 취소 불가하며, 약 3일~2주 (주말, 공휴일 제외)후 취소됨)</span>
+				</div>
+			</div>
+			<div>
+				<div>
+					<span class="guide-lines-content">카드사 취소 처리 되는 시점에 카드사에서 취소 문자 전송됩니다. (단, 카드사 문자 신청한 경우만 전송됨)</span>
+				</div>
+				<div>
+					<span class="guide-lines-content">카드 승인 취소 내역은 해당 카드사에서 확인 가능합니다.</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="btn-area">
+		<button class="cancel-btn" onclick="location.href='/user/mypage/orderList'">주문/배송 목록</button>
+	</div>
+</div>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="/user/mypage/purchase_cancel/js/returnDetail.js"></script>
+</html>

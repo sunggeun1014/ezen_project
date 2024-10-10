@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/admin/common/layout/defaultlayout}"
+      layout:fragment="Content">
+	  <link rel="stylesheet" href="/admin/reviews/css/reviews.css"/>
+	  <link rel="stylesheet" href="/admin/inquiries/css/inquiriesDetails.css"/>
+
+
+
+	<button class="back-btn" onclick="location.href='/admin/inquiries/list'">
+	    <i class="fa-solid fa-chevron-left"></i>
+	    <span>뒤로가기</span>
+	</button>
+	
+<div class="inquiries-container" style="padding-bottom: 30px;" th:with="status = ${inquiries.inquiry_answer_status}">
+	<div class="white-frame">
+	
+		<div class="text-title">
+	        <span th:text="'문의번호 : ' + ${inquiries.inquiry_num}"></span>
+	    </div>
+	    
+	    <div class="text-group">
+	        <span class="search-list-subject">제목</span>
+	        <span th:text="${inquiries.inquiry_title}"></span>
+	    </div>
+	    
+	    <div class="text-group">
+	        <span class="search-list-subject">작성자</span>
+	        <span th:text="${inquiries.member_id}"></span>
+	    </div>
+	    
+	    <div class="text-group">
+	        <span class="search-list-subject">작성날짜</span>
+	        <span th:text="${#dates.format(inquiries.inquiry_write_date, 'YYYY-MM-dd HH:mm')}"></span>
+	    </div>
+	    
+		<div class="text-group">
+			<span class="search-list-subject">문의 분류</span> 
+			<span th:text="${inquiries.inquiry_type}"></span>
+		</div>
+		
+		<div class="text-group">
+			<span class="search-list-subject">내용</span> 
+			<span th:text="${inquiries.inquiry_content}"></span>
+		</div>
+		
+		<div class="text-group" th:style="${inquiries.inquiries_changed == null ? 'display:none;' : ''}">
+			<span class="search-list-subject">파일첨부</span>
+			<div class="img-input-wrap">
+				<label id="download-label" for="input-file" class="input-file-label">
+					<a id="download-link" th:href="${inquiries.inquiries_changed != null ? '/admin/download?img=' + inquiries.inquiries_changed : '#'}"
+	           				   			  th:style="${inquiries.inquiries_changed == null ? 'pointer-events:none;' : ''}">
+						<img alt="사진" id="book-image" th:src="${inquiries.inquiries_changed != null ? '/images/inquiries/' + inquiries.inquiries_changed : '/user/common/imgs/book-default-img.png'}"
+													   onerror="this.onerror=null;
+													   			this.src='/user/common/imgs/book-default-img.png'; 
+													   			this.style.cursor='not-allowed'; 
+													   			var link = document.getElementById('download-link');
+												                link.setAttribute('href', '#');
+												                link.style.cursor='not-allowed';">
+					</a>
+				</label>
+			</div>
+		</div>
+		
+		<div class="text-group">
+			<span class="search-list-subject">답변여부</span> 
+			<span th:text="${status}" th:style="'color: ' + (${status == '처리완료'} ? '#10A142' : (${status == '미완료'} ? '#F69E47' : ''))"></span>
+		</div>
+		
+		<div class="text-group"	th:if="${inquiries.inquiry_type == '취소문의' or 
+							           inquiries.inquiry_type == '교환문의' or 
+							           inquiries.inquiry_type == '반품문의'}">
+		     <span class="search-list-subject">주문 번호</span>
+		     <div>
+		         <span th:text="${inquiries.order_num}"></span>
+		     </div>
+		     <span class="search-list-subject">주문 상세번호</span>
+		     <div>
+		         <span th:text="${inquiries.order_detail_num}"></span>
+		     </div>
+		     <span class="search-list-subject">요청 수량</span>
+		     <div>
+		         <span th:text="${inquiries.order_request_qty}"></span>
+		     </div>
+	    </div>
+	
+	
+		<form th:action="@{${status == '처리완료' ? '/admin/inquiries/update' : '/admin/inquiries/insert'}}" th:object="${inquiries}" method="POST">
+			<div class="answer-area">
+				<div class="text-group" style="border-bottom: none; padding: 0;">
+					<span class="search-list-subject">답변내용</span> 
+					
+					<input type="hidden" th:field="*{inquiry_num}">
+					<div style="position:relative;">
+						<textarea id="inquiryContent" th:field="*{answer_content}"
+							th:attr="placeholder=${status == '미완료' ? '내용을 입력하세요' : ''}"
+							th:utext="${status == '처리완료' ? status : ''}"
+							maxlength="1000"
+							oninput="textLengthCheck(this, 1000);">
+	            		</textarea>
+						<div class="content-length-area" style="margin: 10px 10px 0 0;">
+				         	<div id="current-length">0</div>
+				         	<div>/</div>
+				         	<div id="max-length">1000</div>
+				     	</div>
+					</div>
+				</div>
+				<div class="btn-box">
+					<button type="submit" class="default-btn" th:text="${inquiries.inquiry_answer_status == '처리완료' ? '수정' : '등록'}"></button>
+					<button type="button" class="default-btn cancel" onclick="location.href='/admin/inquiries/list'">취소</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+   	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="/admin/inquiries/js/inquiriesDetails.js"></script>
+</html>

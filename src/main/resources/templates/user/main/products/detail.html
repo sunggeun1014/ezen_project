@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/mainLayout}"
+      layout:fragment="Content">
+
+<link rel="stylesheet" href="/user/products/css/detail.css">
+
+<div class="inner">
+    <div id="book-detail-container">
+        <!-- 수량, 가격정보 -->
+        <section id="book-info-wrap">
+            <div class="book-img-wrap">
+                <img th:src="${bookDetail.book_thumbnail_changed != null ? '/images/books/' + bookDetail.book_thumbnail_changed : '/images/books/noimg.png'}"
+                     alt="책사진">
+            </div>
+            <div class="book-info-text">
+                <p class="book-title">[[${bookDetail.book_name}]]</p>
+                <div class="publish-review-wrap">
+                    <div class="publish-info-wrap">
+                        <p class="author-name" th:text="${bookDetail.book_author + ' 저'}"></p>
+                        <div class="publish-wrap">
+                            <p class="publish">[[${bookDetail.book_publisher}]]</p>
+                            <p class="publish-date"
+                               th:text="${#dates.format(bookDetail.book_publish_date, 'yyyy-MM-dd')}"></p>
+                        </div>
+                    </div>
+                    <div class="review-avg-wrap">
+                        <p class="star-avg">[[${bookDetail.reviews_rating_avg}]]</p>
+                        <div class="star-wrap">
+                            <i class="fa-star"
+                               th:classappend="${bookDetail.reviews_rating_avg >= 1 ? 'fa-solid' : 'fa-regular'}"></i>
+                            <i class="fa-star"
+                               th:classappend="${bookDetail.reviews_rating_avg >= 2 ? 'fa-solid' : 'fa-regular'}"></i>
+                            <i class="fa-star"
+                               th:classappend="${bookDetail.reviews_rating_avg >= 3 ? 'fa-solid' : 'fa-regular'}"></i>
+                            <i class="fa-star"
+                               th:classappend="${bookDetail.reviews_rating_avg >= 4 ? 'fa-solid' : 'fa-regular'}"></i>
+                            <i class="fa-star"
+                               th:classappend="${bookDetail.reviews_rating_avg >= 5 ? 'fa-solid' : 'fa-regular'}"></i>
+                        </div>
+                        <p class="total-review-cnt">(
+                            <span class="rating-count" th:text="${bookDetail.review_rating_cnt}"></span>개의 리뷰)
+                        </p>
+                    </div>
+                </div>
+                <div class="price-deliver">
+                    <div class="price-wrap">
+                        <p class="book-price"
+                           th:text="${#numbers.formatInteger(bookDetail.book_price, 0, 'COMMA')}"></p>
+                        <p class="currency">원</p>
+                    </div>
+                    <div class="deliver-info">
+                        <p>배송안내</p>
+                        <p>무료배송</p>
+                    </div>
+                </div>
+                <div class="select-order" th:if="${bookDetail.book_state == '01'}">
+                    <div class="reduce-qty">
+                        <i class="fa-solid fa-minus" id="decrease"></i>
+                        <input type="number" max="999" id="" class="input-qty" value="1"/>
+                        <i class="fa-solid fa-plus" id="increase"></i>
+                    </div>
+                    <div class="price-wrap total">
+                        <p class="total-price" th:data-price="${bookDetail.book_price}" oninput="bookTotalPrice(this);"></p>
+                        <p>원</p>
+                    </div>
+                </div>
+                <p class="sold-out" th:if="${bookDetail.book_state == '02'}">구매가 불가능한 상품입니다.</p>
+
+                <form id="add-form" th:if="${bookDetail.book_state == '01'}">
+                    <input type="hidden" name="book_isbn" id="book_isbn" th:value="${bookDetail.book_isbn}">
+                    <input type="hidden" name="book_name" id="book_name" th:value="${bookDetail.book_name}">
+                    <input type="hidden" name="book_thumbnail_changed" id="book_thumbnail_changed"
+                           th:value="${bookDetail.book_thumbnail_changed}">
+                    <input type="hidden" name="cart_purchase_qty" id="cart_purchase_qty">
+                    <input type="hidden" name="book_price" id="book_price" th:value="${bookDetail.book_price}">
+                    <div class="order-btn-wrap">
+                        <button class="default-btn border" id="cart-btn" data-action="cart"
+                                th:data-memberid="${member_id}">장바구니
+                        </button>
+                        <button class="default-btn" id="buy-now-btn" data-action="buyNow"
+                                th:data-memberid="${member_id}">바로구매
+                        </button>
+                    </div>
+                </form>
+                <button class="default-btn grey" th:if="${bookDetail.book_state == '02'}" disabled>구매불가</button>
+            </div>
+        </section>
+
+        <!-- 책 기본 정보 -->
+        <section id="dep2">
+            <div class="book-default-info">
+                <p class="info-title">기본 정보</p>
+                <div class="info-list">
+                    <div class="default-info-wrap">
+                        <p class="info-subtitle">ISBN</p>
+                        <p class="info-text">[[${bookDetail.book_isbn}]]</p>
+                    </div>
+                    <div class="default-info-wrap">
+                        <p class="info-subtitle">발행(출시)일자</p>
+                        <p class="info-text" th:text="${#dates.format(bookDetail.book_publish_date, 'yyyy-MM-dd')}"></p>
+                    </div>
+                    <div class="default-info-wrap">
+                        <p class="info-subtitle">출판사</p>
+                        <p class="info-text">[[${bookDetail.book_publisher}]]</p>
+                    </div>
+                </div>
+            </div>
+            <div class="book-default-info">
+                <p class="info-title">책 소개</p>
+                <div class="default-info-wrap">
+                    <p class="info-subtitle">이 책이 속한 분야</p>
+                    <div class="book-category">
+                        <p class="info-text" th:text="${bookDetail.book_country_type == '01' ? '국내' : '국외'}"></p>
+                        <p class="info-text">[[${bookDetail.book_category}]]</p>
+                    </div>
+                </div>
+                <p class="book-intro">
+                    [[${bookDetail.book_intro}]]
+                </p>
+            </div>
+            <div class="book-default-info">
+                <p class="info-title">저자소개</p>
+                <div class="default-info-wrap">
+                    <div class="authour-img">
+                        <img src="/user/products/img/author-icon.svg" alt="저자이미지">
+                    </div>
+                    <div class="book-author-wrap">
+                        <p class="info-subtitle">저자</p>
+                        <p class="info-text">[[${bookDetail.book_author}]]</p>
+                    </div>
+                </div>
+            </div>
+            <div class="review-info">
+                <p class="info-title" th:text="'도서리뷰(' + ${bookDetail.review_rating_cnt} + ')'"></p>
+                <div class="review-detail">
+                    <div class="review-chart-wrap">
+                        <div class="user-score">
+                            <p>사용자 총점</p>
+                            <div class="star-wrap">
+                                <i class="fa-star"
+                                   th:classappend="${bookDetail.reviews_rating_avg >= 1 ? 'fa-solid' : 'fa-regular'}"></i>
+                                <i class="fa-star"
+                                   th:classappend="${bookDetail.reviews_rating_avg >= 2 ? 'fa-solid' : 'fa-regular'}"></i>
+                                <i class="fa-star"
+                                   th:classappend="${bookDetail.reviews_rating_avg >= 3 ? 'fa-solid' : 'fa-regular'}"></i>
+                                <i class="fa-star"
+                                   th:classappend="${bookDetail.reviews_rating_avg >= 4 ? 'fa-solid' : 'fa-regular'}"></i>
+                                <i class="fa-star"
+                                   th:classappend="${bookDetail.reviews_rating_avg >= 5 ? 'fa-solid' : 'fa-regular'}"></i>
+                            </div>
+                            <div class="user-score-avg">
+                                <p class="score-avg" th:text="${bookDetail.reviews_rating_avg}"></p>
+                                <p class="slash">/</p>
+                                <p class="full-score">5</p>
+                            </div>
+                        </div>
+                        <div class="rating-bar-container">
+                            <th:block th:each="reviewpercent : ${reviewPercent}">
+                                <div class="rating-cnt-star">
+                                    <div class="rating-star">
+                                        <!-- 역순으로 별의 클래스를 설정 -->
+                                        <th:block th:each="i : ${#numbers.sequence(1, 5)}">
+                                            <i class="fa-star"
+                                               th:classappend="${i <= reviewpercent.review_rating ? 'fa-solid' : 'fa-regular'}"></i>
+                                        </th:block>
+                                    </div>
+                                    <div class="rating-bar" th:classappend="'s' + ${reviewpercent.review_rating}"
+                                         th:data-percent="${reviewpercent.review_percentage}">
+                                        <p class="rating-bar-inner"></p>
+                                    </div>
+                                    <p th:text="${reviewpercent.review_percentage}"></p>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                    <div class="review-list">
+                        <div class="all-reviews">
+                            <p>전체리뷰</p>
+                        </div>
+                        <div class="result-wrap" th:if="${bookDetail.review_rating_cnt == 0}">
+                            <p>!</p>
+                            <span>등록된 리뷰가 없습니다</span>
+                        </div>
+                        <div class="review-content" th:each="reviewList: ${reviewList}">
+                            <div class="content-top">
+                                <div class="content-head">
+                                    <div class="user-wrap">
+                                        <p class="reviewer-id" th:data-reviewerid="${reviewList.member_id}"></p>
+                                        <p th:text="${#dates.format(reviewList.review_write_date, 'yyyy-MM-dd')}"></p>
+                                    </div>
+                                    <div class="user-star-wrap">
+                                        <i class="fa-star"
+                                           th:classappend="${reviewList.review_rating >= 1 ? 'fa-solid' : 'fa-regular'}"></i>
+                                        <i class="fa-star"
+                                           th:classappend="${reviewList.review_rating >= 2 ? 'fa-solid' : 'fa-regular'}"></i>
+                                        <i class="fa-star"
+                                           th:classappend="${reviewList.review_rating >= 3 ? 'fa-solid' : 'fa-regular'}"></i>
+                                        <i class="fa-star"
+                                           th:classappend="${reviewList.review_rating >= 4 ? 'fa-solid' : 'fa-regular'}"></i>
+                                        <i class="fa-star"
+                                           th:classappend="${reviewList.review_rating >= 5 ? 'fa-solid' : 'fa-regular'}"></i>
+                                    </div>
+                                </div>
+                                <p class="review-text">[[${reviewList.review_content}]]</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <button class="toggle-btn">펼치기</button>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div th:include="~{/user/common/fragments/pagination.html}"></div>
+            </div>
+        </section>
+
+        <!-- 교환 반품 안내-->
+        <section id="refund-info-container">
+            <div class="info-header">
+                <p class="info-title">교환/반품/품절 안내</p>
+                <div class="refund-btn-wrap">
+                    <button class="default-btn border" id="refund-btn" th:data-memberid="${member_id}">반품신청</button>
+                    <button class="default-btn" id="inquiry-btn" th:data-memberid="${member_id}">1:1문의</button>
+                </div>
+            </div>
+            <div class="refund-info-list">
+                <p class="refund-info-title">반품/교환방법</p>
+                <p class="refund-info-content">마이페이지 > 내정보 > 주문/배송목록 > 반품신청, [1:1 상담 > 반품/교환/환불] 또는 고객센터 (1234-1234)</p>
+                <p class="refund-info-content">• 교환은 1:1문의로 가능</p>
+            </div>
+            <div class="refund-info-list">
+                <p class="refund-info-title">반품/교환가능 기간</p>
+                <p class="refund-info-content">반품: 변심 반품의 경우 수령 후 7일 이내</p>
+                <p class="refund-info-content">교환: 상품의 결함 및 계약 내용과 다를 경우 문제점 발견 후 30일 이내</p>
+            </div>
+            <div class="refund-info-list">
+                <p class="refund-info-title">반품/교환 불가 사유</p>
+                <p class="refund-info-content">1) 소비자의 책임 있는 사유로 상품 등이 손실 또는 훼손된 경우</p>
+                <p class="refund-info-content">(단지 확인을 위한 포장 훼손은 제외)</p>
+                <p class="refund-info-content">2) 소비자의 사용, 포장 개봉에 의해 상품 등의 가치가 현저히 감소한 경우</p>
+                <p class="refund-info-content">예) 화장품, 식품, 가전제품(악세서리 포함) 등</p>
+                <p class="refund-info-content">3) 복제가 가능한 상품 등의 포장을 훼손한 경우</p>
+                <p class="refund-info-content">예) 음반/DVD/비디오, 소프트웨어, 만화책, 잡지, 영상 화보집</p>
+                <p class="refund-info-content">4) 소비자의 요청에 따라 개별적으로 주문 제작되는 상품의 경우 ((1)해외주문도서)</p>
+                <p class="refund-info-content">5) 디지털 컨텐츠인 ebook, 오디오북 등을 1회이상 ‘다운로드’를 받았거나 '바로보기'로 열람한 경우</p>
+                <p class="refund-info-content">6) 시간의 경과에 의해 재판매가 곤란한 정도로 가치가 현저히 감소한 경우</p>
+                <p class="refund-info-content">7) 전자상거래 등에서의 소비자보호에 관한 법률이 정하는 소비자 청약철회 제한 내용에 해당되는 경우</p>
+                <p class="refund-info-content">8) 세트상품 일부만 반품 불가 (필요시 세트상품 반품 후 낱권 재구매)</p>
+            </div>
+            <div class="refund-info-list">
+                <p class="refund-info-title">상품품절</p>
+                <p class="refund-info-content">공급사(출판사) 재고 사정에 의해 품절/지연될 수 있으며, 품절 시 관련 사항에 대해서는 이메일과 문자로 안내드리겠습니다.</p>
+            </div>
+            <div class="refund-info-list">
+                <p class="refund-info-title">소비자 피해보상 환불 지연에 따른 배상</p>
+                <p class="refund-info-content">1) 상품의 불량에 의한 교환, A/S, 환불, 품질보증 및 피해보상 등에 관한 사항은 소비자분쟁 해결 기준 (공정거래위원회
+                    고시)에 준하여 처리됨</p>
+                <p class="refund-info-content">2) 대금 환불 및 환불지연에 따른 배상금 지급 조건, 절차 등은 전자상거래 등에서의 소비자 보호에 관한 법률에 따라 처리함</p>
+            </div>
+        </section>
+
+        <div class="warning-info-box">
+            <p>• 상품 설명에 반품/교환 관련한 안내가 있는 경우 그 내용을 우선으로 합니다. (업체 사정에 따라 달라질 수 있습니다.)</p>
+        </div>
+    </div>
+</div>
+
+<script src="/user/common/js/btn-event.js"></script>
+<script src="/user/products/js/detail.js"></script>
+</html>

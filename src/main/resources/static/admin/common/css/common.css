@@ -1,262 +1,270 @@
 /* bulma 설정 바꾸는거 */
-table.dataTable.is-striped > tbody > tr:nth-child(2n) > *,
-.pagination-link, .pagination-next, .pagination-previous {
-	box-shadow: none;
+table.dataTable.is-striped > tbody > tr:nth-child(2n) > *, .pagination-link,
+.pagination-next, .pagination-previous {
+    box-shadow: none;
 }
 
-
-.blue-btn, .back-btn, .toggle-btn label, .date-btn {
-	cursor: pointer;
+.default-btn, .back-btn, .toggle-btn label, .date-btn {
+    cursor: pointer;
 }
 
 .default-btn {
-	width: 80px;
-	height: 40px;
-	border: none;
-	border-radius: 5px;
-	background-color: #4777F6;
-	color: #fff;
-	font-size: 16px;
-	font-weight: 700;
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4777F6;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
 }
 
-.default-btn.cancle {
-	background-color: #fff;
-	border: 2px solid #c0c0c0;
-	color: #666666;
+.default-btn.cancel {
+    background-color: #fff;
+    border: 2px solid #c0c0c0;
+    color: #666666;
 }
 
 #delete-button {
-	width: 80px;
-	height: 40px;
-	background-color: #fff;
-	border-radius: 5px;
-	border: 2px solid #E54F53;
-	color: #E54F53;
-	font-size: 16px;
-	font-weight: 700;
+    width: 80px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 2px solid #E54F53;
+    color: #E54F53;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 .back-btn {
-	margin-bottom: 20px;
-	display: flex;
-	align-items: center;
-	gap: 20px;
-	border: none;
-	color: #666666;
-	font-size: 16px;
-	font-weight: 700;
-	background-color: transparent;
-	display: flex;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: none;
+    color: #666666;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: transparent;
 }
 
 /* 토글버튼 */
 input#toggle-btn[type=checkbox] {
-	display: none;
+    display: none;
 }
 
-input#toggle-btn[type=checkbox]+label {
-	display: inline-block;
-	position: relative;
-	width: 35px;
-	height: 20px;
-	border-radius: 100px;
-	background-color: #ccc;
+input#toggle-btn[type=checkbox] + label {
+    display: inlne-block;
+    position: relative;
+    width: 35px;
+    height: 20px;
+    border-radius: 100px;
+    background-color: #ccc;
 }
 
-input#toggle-btn[type=checkbox]+label::before {
-	content: '';
-	position: absolute;
-	top: 2px;
-	left: 2px;
-	width: 16px;
-	height: 16px;
-	border-radius: 50%;
-	background-color: #fff;
-	box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 3px 8px
-		rgba(0, 0, 0, 0.15), 0px 3px 1px rgba(0, 0, 0, 0.06);
+input#toggle-btn[type=checkbox] + label::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 3px 8px rgba(0, 0, 0, 0.15), 0px 3px 1px rgba(0, 0, 0, 0.06);
 }
 
-input#toggle-btn[type=checkbox]:checked+label {
-	background-color: #4777F6;
+input#toggle-btn[type=checkbox]:checked + label {
+    background-color: #4777F6;
 }
 
-input#toggle-btn[type=checkbox]:checked+label::before {
-	content: '';
-	transform: translate(15px, 0);
+input#toggle-btn[type=checkbox]:checked + label::before {
+    content: '';
+    transform: translate(15px, 0);
 }
 
 /* date-pick-btn */
 .date-pick-btn {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .date-btn {
-	border: 1px solid #c0c0c0;
-	width: 55px;
-	height: 40px;
-	background-color: #fff;
-	color: #666666;
-	font-size: 14px;
-	font-weight: 400;
+    border: 1px solid #c0c0c0;
+    width: 55px;
+    height: 40px;
+    background-color: #fff;
+    color: #666666;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .today-btn {
-	border-radius: 5px 0 0 5px;
-	border-right: 0;
+    border-radius: 5px 0 0 5px;
+    border-right: 0;
 }
 
 .week-btn, .month-btn {
-	border-right: 0;
+    border-right: 0;
 }
 
 .year-btn {
-	border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
 }
 
 /* 클릭 됐을 때 */
 .date-btn.active {
-	border: none;
-	background-color: #4777F6;
-	color: #fff;
-	font-weight: 700;
+    border: none;
+    background-color: #4777F6;
+    color: #fff;
+    font-weight: 700;
 }
 
 /* 체크박스 */
 input[type=checkbox] {
-	opacity: 0;
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
-input[type=checkbox]+label {
-	display: inline-block;
-	background-image: url(/admin/common/img/check-box=off.svg);
-	background-repeat: no-repeat;
-	background-position: 0;
-	background-size: 20px;
-	color: transparent;
-	width: 20px;
-	height: 20px;
+input[type=checkbox] + label {
+    display: inline-block;
+    background-image: url(/admin/common/img/check-box=off.svg);
+    background-repeat: no-repeat;
+    background-position: 0;
+    background-size: 20px;
+    color: transparent;
+    width: 20px;
+    height: 20px;
 }
 
-input[type=checkbox]:checked+label {
-	background-image: url(/admin/common/img/check-box=on.svg);
+input[type=checkbox]:checked + label {
+    background-image: url(/admin/common/img/check-box=on.svg);
 }
 
 /* 판매중/중지 버튼 */
 .status-btn-wrap {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 130px;
-	height: 40px;
-	background-color: #EBECF0;
-	border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    height: 40px;
+    background-color: #EBECF0;
+    border-radius: 5px;
 }
 
 .status-btn {
-	width: 60px;
-	height: 35px;
-	border-radius: 5px;
-	border: none;
-	font-size: 12px;
-	font-weight: 600;
-	color: #666666;
-	background-color: transparent;
+    width: 60px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666666;
+    background-color: transparent;
 }
 
 /* on off로 상태 바뀌게 하기 */
 .status-btn.on {
-	background-color: #fff;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	color: #000;
+    background-color: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #000;
 }
 
-/* .status-btn.off {
-  background-color: #fff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  color: #E54F53;
-} */
+.status-btn.off {
+    background-color: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #E54F53;
+}
 
 /* 라디오 */
 
 /* 기본스타일을 없애고, 버튼모양을 구현한다. */
 input[type='radio'] {
-	-webkit-appearance: none; /* 웹킷 브라우저에서 기본 스타일 제거 */
-	-moz-appearance: none; /* 모질라 브라우저에서 기본 스타일 제거 */
-	appearance: none; /* 기본 브라우저에서 기본 스타일 제거 */
-	width: 16px;
-	height: 16px;
-	border: 2px solid #c0c0c0; /* 체크되지 않았을 때의 테두리 색상 */
-	border-radius: 50%;
-	outline: none; /* focus 시에 나타나는 기본 스타일 제거 */
-	cursor: pointer;
+    -webkit-appearance: none; /* 웹킷 브라우저에서 기본 스타일 제거 */
+    -moz-appearance: none; /* 모질라 브라우저에서 기본 스타일 제거 */
+    appearance: none; /* 기본 브라우저에서 기본 스타일 제거 */
+    width: 16px;
+    height: 16px;
+    border: 2px solid #c0c0c0; /* 체크되지 않았을 때의 테두리 색상 */
+    border-radius: 50%;
+    outline: none; /* focus 시에 나타나는 기본 스타일 제거 */
+    cursor: pointer;
 }
 
 /* 체크될 시에, 변화되는 스타일 설정 */
 input[type='radio']:checked {
-	/* background-color: #22d3ee; 체크 시 내부 원으로 표시될 색상 */
-	border: 5px solid #4777F6; /* 테두리가 아닌, 테두리와 원 사이의 색상 */
+    /* background-color: #22d3ee; 체크 시 내부 원으로 표시될 색상 */
+    border: 5px solid #4777F6; /* 테두리가 아닌, 테두리와 원 사이의 색상 */
 
-	/* 얘가 테두리가 됨 */
-	/* box-shadow: 0 0 0 1.6px #4777F6; */
-	/* 그림자로 테두리를 직접 만들어야 함 (퍼지는 정도를 0으로 주면 테두리처럼 보입니다.)
+    /* 얘가 테두리가 됨 */
+    /* box-shadow: 0 0 0 1.6px #4777F6; */
+    /* 그림자로 테두리를 직접 만들어야 함 (퍼지는 정도를 0으로 주면 테두리처럼 보입니다.)
   그림자가 없으면 그냥 설정한 색상이 꽉 찬 원으로만 나옵니다. */
 }
 
-input:focus {
-	outline: none;
-	box-shadow: none;
+input:focus, input[type=text]:focus, input[type="number"]:focus, select:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #666;
 }
 
-input[type=text], input[type="number"], select {
-	height: 40px;
-	border: 1px solid #c0c0c0;
-	border-radius: 5px;
-	padding-left: 10px;
-	font-size: 16px;
-	background-color: #fff;
+input[type=text], input[type="number"], input[type="password"], select {
+    height: 40px;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+    padding: 3px 9px;
+    font-size: 16px;
+    background-color: #fff;
 }
 
 /* input-date */
 .input-date-box {
-	width: 200px;
-	position: relative;
+    width: 200px;
+    position: relative;
+}
+
+.date-picker {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.placeholder {
+    width: 100%;
 }
 
 .fa-calendar-days {
-	position: absolute;
-	font-size: 19px;
-	top: 50%;
-	right: 20px;
-	transform: translateY(-50%);
+    position: absolute;
+    font-size: 19px;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
 }
 
 /* 서치바 */
 .search-container {
-	position: relative;
-	width: 300px;
+    position: relative;
+    width: 300px;
 }
 
 .search-input {
-	width: 100%;
-	padding-right: 40px; /* 아이콘들어갈자리 */
+    width: 100%;
+    padding-right: 40px; /* 아이콘들어갈자리 */
 }
 
 .search-input:focus {
-	border: 1px solid #666;
+    border: 1px solid #666;
 }
 
 #searchButton {
-	height: 24px; position : absolute;
-	top: 50%;
-	right: 10px;
-	transform: translateY(-50%);
-	position: absolute;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
 }
 
 /*
@@ -272,153 +280,262 @@ input[type=text], input[type="number"], select {
   pointer-events: none; 아이콘 클릭 방지
 }
 */
+
 .select-wrap {
-	position: relative;
+    width: 140px;
+    position: relative;
 }
 
 select {
-	width: 140px;
-	padding: 0 10px;
-	appearance: none;
-	-webkit-appearance: none;
+    width: 100%;
+    padding: 0 25px 0 10px;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 select::-ms-expand {
-	display: none;
+    display: none;
 }
 
 .select-arrow-down {
-	position: absolute;
-	top: 50%;
-	left: 110px;
-	transform: translateY(-50%);
-	background: url(/admin/common/img/select-arrow.svg) no-repeat center;
-	width: 10px;
-	height: 6px;
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 20px);
+    transform: translateY(-50%);
+    background: url(/admin/common/img/select-arrow.svg) no-repeat center;
+    width: 10px;
+    height: 6px;
 }
 
 .select-wrap-und {
-	position: relative;
+    position: relative;
 }
 
 .select-wrap-und select {
-	width: 80px;
+    width: 80px;
 }
 
 .select-arrow-updown {
-	position: absolute;
-	top: 50%;
-	left: 55px;
-	transform: translateY(-50%);
-	background: url(/admin/common/img/arrow-upanddown.png) no-repeat center;
-	width: 12px;
-	height: 19px;
+    position: absolute;
+    top: 50%;
+    left: 55px;
+    transform: translateY(-50%);
+    background: url(/admin/common/img/arrow-upanddown.png) no-repeat center;
+    width: 12px;
+    height: 19px;
 }
 
 .input-qty-container {
-	position: relative;
-	width: 120px;
+    position: relative;
+    width: 120px;
 }
 
 .input-qty {
-	width: 100%;
+    width: 100%;
 }
 
 .input-qty-container::after {
-	position: absolute;
-	content: '개';
-	top: 50%;
-	transform: translateY(-50%);
-	right: 10px;
-	font-size: 16px;
-	color: #666;
+    position: absolute;
+    content: '개';
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    font-size: 16px;
+    color: #666;
 }
 
 /* 인풋 넘버에 화살표 없애기 */
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox  */
 input[type='number'] {
-	-moz-appearance: textfield;
-	appearance: none;
+    -moz-appearance: textfield;
+    appearance: none;
 }
 
 /* 이미지 파일 */
 .img-input-wrap {
-	position: relative;
-	width: 80px;
-	height: 100px;
+    position: relative;
+    width: 80px;
+    height: 100px;
 }
 
 .input-file-label {
-	display: block;
-	width: 100%;
-	height: 100%;
-	background-color: #EBECF0;
-	border: 1px solid #7E7E7E;
-	border-radius: 5px;
-	text-align: center;
-	line-height: 100px;
-	font-size: 24px;
-	color: #666;
-	overflow: hidden;
-	cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #EBECF0;
+    border: 1px solid #7E7E7E;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 24px;
+    color: #666;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .input-file-label img {
-	object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .input-img-file {
-	display: none;
+    display: none;
 }
 
 /* 초기화 버튼 */
 #reset-button {
-	font-size: 16px;
-	font-weight: 700;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 /* 흰색프레임 */
 .white-frame {
-	width: 100%;
-	background-color: #fff;
-	border-radius: 20px;
-	padding: 20px 25px;
-}
-
-.filter-container {
-	margin-bottom: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 25px 25px 30px;
+    background-color: #fff;
+    border-radius: 20px;
 }
 
 /* 폰트스타일 */
 .search-list-title {
-	font-size: 18px;
-	font-weight: 700;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .search-list-subject {
-	width: 100px;
-	font-size: 16px;
+    width: 100px;
 }
 
 .table-data-cnt-txt {
-	font-size: 16px;
-	font-weight: 700;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 .table-column-head-txt {
-	font-size: 16px;
-	font-weight: 700;
-	color: #7E7E7E;
+    font-size: 16px;
+    font-weight: 700;
+    color: #7E7E7E;
 }
 
 .table-data-txt {
-	font-size: 14px;
-	color: #7E7E7E;
+    font-size: 14px;
+    color: #7E7E7E;
+}
+
+/* Center the DataTable pagination controls */
+#reviews_wrapper > .dt-paging {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#member_wrapper > .dt-paging {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#notice_wrapper > .dt-paging {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.essential {
+    position: relative;
+}
+
+.essential::before {
+    position: absolute;
+    content: "*";
+    color: red;
+    top: -17px;
+    left: 1px;
+}
+
+/* 테이블 체크 했을 때 배경색 바뀜 */
+.selected-row {
+    background-color: #FAFAFA;
+}
+
+.dt-column-title {
+    color: #7E7E7E;
+}
+
+/* 불마 테이블 변경 */
+.pagination-list {
+    justify-content: center;
+}
+
+/* 페이지네이션 버튼 */
+.dt-paging {
+    margin-top: 45px;
+}
+
+.pagination-link.is-current, .pagination-link.is-selected {
+    background-color: #4777F6;
+    border: none;
+}
+
+.pagination-link:hover, .pagination-next:hover, .pagination-previous:hover {
+    border: 1px solid #c0c0c0;
+}
+
+.table tbody tr:last-child td, .table tbody tr:last-child th {
+    border-bottom: 1px solid #D8D8D8;
+}
+
+.table thead {
+    height: 50px;
+    background-color: #FAFAFA;
+    color: #7E7E7E;
+}
+
+.table td, .table thead th {
+    border-width: 1px 0 1px 0;
+    border-style: solid;
+    border-color: #D8D8D8;
+    vertical-align: middle;
+    color: #7E7E7E;
+}
+
+table td:not([align]), table th:not([align]) {
+    text-align: center;
+}
+
+.table th:not([align]) {
+    text-align: center;
+}
+
+/* 테이블 로우 사이즈, 글자 정렬 */
+.table td {
+    height: 50px;
+    vertical-align: middle;
+}
+
+.table td > a {
+    color: #7E7E7E;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.dt-empty {
+    text-align: center !important;
+}
+
+.content-length-area {
+    display: flex;
+    gap: 3px;
+    justify-content: flex-end;
+    margin: -10px 10px 0 0;
 }

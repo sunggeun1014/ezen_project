@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{/mobile/common/layout/mobilelayout}"
+	  layout:fragment="Content">
+
+<div class="mobile-inner" style="gap: 23px;">
+	<button class="back-btn menu-title" onclick="location.href='/mobile/admin/index'">
+		<i class="fa-solid fa-chevron-left"></i>
+		배송요청내역
+	</button>
+
+	<div class="white-frame">
+		<p class="sub-title">요청번호:<span th:text="${requestNum}"></span></p>
+		<div class="inner">
+			<div class="content-list" style="grid-template-columns: 1fr 1fr; height: 8rem;" th:each="item : ${list}">
+				<div class="content-text-wrap">
+					<span class="content-text" th:text="'ISBN: ' + ${item.book_isbn}"></span>
+					<span class="content-text" th:text="'주문번호: ' + ${item.order_num}"></span>
+					<p class="content-sub-txt elipsis"><span th:text="'책제목:' + ${item.book_name}"></span></p>
+				</div>
+				<div style="text-align: end">
+					<p class="content-text"><span th:text="${item.order_detail_qty} + 권"></span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	const titleText = document.querySelectorAll(".content-sub-txt.elipsis");
+
+	titleText.forEach(text => {
+		const content = text.textContent;
+		text.textContent = content.length > 20 ? content.substring(0, 15) + "..." : content;
+	});
+
+</script>
+</html>

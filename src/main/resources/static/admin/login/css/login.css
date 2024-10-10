@@ -1,0 +1,96 @@
+.inner {
+    max-width: 1440px;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: #EBECF0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.white-frame {
+    width: 690px;
+    height: 660px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.logo-wrap img {
+    max-width: 100%;
+    height: auto;    
+    margin-top: 80px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+}
+
+#id, #password {
+	border: none; /* 기본 테두리 제거 */
+	border-bottom: 2px solid #C0C0C0; /* 아래쪽 테두리만 남김 */
+	outline: none; /* 포커스 시 생길 수 있는 테두리 제거 */
+	width: 460px;
+	height: 60px;
+	padding: 10px;
+	margin: 10px 0;
+	background-color: white; /* 배경색 지정 */
+	font-size: 16px; /* 텍스트 크기 */
+	border-radius: 0; /* 모서리 둥글게 처리하지 않음 */
+}
+
+.default-btn {
+	width: 460px;
+	height: 60px;
+    margin-top: 50px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.default-btn:hover {
+    background-color: #0056b3;
+}
+
+
+#id, #password{
+	border: none;
+	margin-left: 10px;
+}
+
+.error-border {
+    border-bottom: 1px solid #E54F53 !important;
+}
+.error-message {
+	margin-left: 20px;
+    color: #E54F53;
+    font-size: 12px;
+}
+
+.frame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 460px;
+    height: 60px;
+    border-bottom: 2px solid #ddd; /* 기본 밑줄 색상 */
+}
+
+input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 5px 0;
+    font-size: 14px;
+}

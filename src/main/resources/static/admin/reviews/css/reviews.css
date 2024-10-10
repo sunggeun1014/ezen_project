@@ -1,89 +1,61 @@
-table.dataTable tbody tr {
-    background-color: white !important;
-}
-.container {
-   display: flex;
-   flex-direction: column;
-   height: 100%; /* 전체 높이 */
+.search-list-title {
+    margin-bottom: 20px;
 }
 
-.filter_container {
-   background: #FFFFFF;
-   border-radius: 20px;
-   padding: 20px 26px;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   
+.filter-info {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px solid #c0c0c0;
+    padding-left: 20px;
 }
 
-.table-container {
-   margin-top : 20px;
-   height: 70%; /* 화면의 하단 70% */
-   background: #FFFFFF;
-   border-radius: 20px;
-   padding: 20px;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   overflow-y: auto; /* 테이블 내용이 넘칠 경우 스크롤 */
-}
-
-.header h1 {
-   font-weight: 700;
-   font-size: 18px;
-   line-height: 24px;
-   color: #000000;
-   margin-bottom: 20px;
-}
-
-.content {
-   display: flex;
-   flex-direction: column;
-   gap: 12px;
-}
-
-.search-filter, .search-bar-group {
-   display: flex;
-   flex-direction: column;
-   gap: 10px;
-}
-
-.filter-group, .search-bar-group {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   gap: 10px;
-   border-bottom: 1px solid #D8D8D8;
-   padding-bottom: 8px;
-}
-
-.label {
-   font-size: 16px;
-   line-height: 24px;
-   color: #000000;
-   margin-left: 40px;
-   margin-right: 60px;
+.filter-wrap {
+    display: flex;
+    gap: 10px;
 }
 
 .date-picker {
-   display: flex;
-   flex-direction: row;
-   gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-title-wrap {
+    margin-bottom: 10px;
+}
+
+.header h1 {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.label {
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    margin-left: 40px;
+    margin-right: 60px;
 }
 
 .input-box {
-   display: flex;
-   align-items: center;
-   width: 210px;
-   height: 40px;
-   padding: 0 10px;
-   background: #FFFFFF;
-   border: 1px solid #C0C0C0;
-   border-radius: 5px;
-}
-
-.input-box .placeholder {
-   border: none;
-   height: 30px;
-   font-size: 14px;
-   color: #CCCCCC;
+    display: flex;
+    align-items: center;
+    width: 210px;
+    height: 40px;
+    padding: 0 10px;
+    background: #FFFFFF;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
 }
 
 /*
@@ -95,36 +67,30 @@ table.dataTable tbody tr {
 }
 */
 
-
-.search-bar {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   width: 300px;
-   height: 40px;
-   padding: 0 10px;
-   background: #FFFFFF;
-   border: 1px solid #C0C0C0;
-   border-radius: 5px;
+/* 두 줄로 안넘어가게 */
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .input-group {
-   display: flex;
-   justify-content: space-between;
-   width: 100%;
-   align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
 }
 
 .input-group input {
-   border: none;
-   outline: none;
-   width: 100%;
-   font-size: 16px;
-   color: #000000;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: #000000;
 }
 
 .calendar-slash {
-   margin-top: 8px;
+    margin-top: 8px;
 }
 
 #reset-button {
@@ -132,68 +98,128 @@ table.dataTable tbody tr {
 }
 
 .stars {
-	font-size: 20px; /* 별 크기 조정 */
-	color: #4777F6;
+    font-size: 20px; /* 별 크기 조정 */
+    color: #4777F6;
 }
 
 .empty-stars {
-	font-size: 20px; /* 빈 별 크기 조정 */
-	color: lightgray; /* 빈 별 색상 */
+    font-size: 20px; /* 빈 별 크기 조정 */
+    color: lightgray; /* 빈 별 색상 */
+}
+
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
 }
 
 #reviews td, #reviews th {
-	text-align: center; /* 텍스트 가운데 정렬 */
-	vertical-align: middle; /* 수직 가운데 정렬 */
+    text-align: center;
+    vertical-align: middle;
 }
 
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
-}
-/* 모달 스타일 추가 */
-.modal {
-	display: none; /* 초기에는 숨김 */
-	position: fixed;
-	z-index: 1000;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.4); /* 블랙 w/ opacity */
+#inquiries td, #inquiries th {
+    text-align: center;
+    vertical-align: middle;
 }
 
-.modal-content {
-	background-color: #fefefe;
-	margin: 15% auto; /* 상하 좌우 가운데 정렬 */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 30%;
-	border-radius: 8px;
-}
-
-.modal-footer {
-	display: flex;
-	justify-content: flex-end;
-	padding-top: 10px;
-}
-
-.modal-footer .button {
-	margin-left: 5px;
+#notice td, #notice th {
+    text-align: center;
+    vertical-align: middle;
 }
 
 /* Center the DataTable pagination controls */
-#reviews_wrapper>.dt-paging {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+#reviews_wrapper > .dt-paging {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#member_wrapper>.dt-paging {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+#member_wrapper > .dt-paging {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#inquiries_wrapper > .dt-paging {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* reviewDetails.html */
+.text-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 50px;
+
+}
+
+.text-group {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #C0C0C0;
+    padding: 20px 20px;
+}
+
+.table-total-row {
+    margin-bottom: 20px;
+}
+
+table td:not([align]) {
+    text-align: center !important;
+}
+
+.btn-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+/* 공지사항 노출비노출 */
+.status-btn-wrap {
+    margin-left: 74px;
+}
+
+.selected-row {
+    background-color: #FAFAFA;
+}
+
+/* 테이블 짝수줄 배경 삭제 */
+.table.is-striped tbody tr:not(.is-selected):nth-child(2n) {
+    background-color: transparent;
+}
+
+.review-list-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.button-wrap-review {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.review-content {
+    line-height: 26px;
+}
+
+.char-count {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.char-count span {
+	display: inline-block;
 }

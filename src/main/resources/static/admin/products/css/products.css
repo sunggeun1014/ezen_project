@@ -1,0 +1,59 @@
+.search-list-title {
+    margin-bottom: 20px;
+}
+.filter-info {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px solid #c0c0c0;
+    padding-left: 20px;
+}
+
+.filter-wrap {
+    display: flex;
+    gap: 10px;
+}
+
+.date-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-title-wrap {
+    margin-bottom: 10px;
+}
+
+.table-title-wrap, .button-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-wrap {
+    gap: 10px;
+}
+
+/*#delete-button {*/
+/*    width: 110px;*/
+/*}*/
+
+.book-isbn-link  {
+    display: block;
+    text-decoration: underline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*.table-center td, .table-center th {*/
+/*    text-align: center;*/
+/*    vertical-align: middle;*/
+/*}*/

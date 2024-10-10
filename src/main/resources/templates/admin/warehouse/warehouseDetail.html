@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/admin/common/layout/defaultlayout}"
+    layout:fragment="Content">
+    
+<link rel="stylesheet" href="/admin/products/css/products.css"/>
+<link rel="stylesheet" href="/admin/warehouse/css/warehouseDetails.css" />
+<link rel="stylesheet" href="/admin/common/css/modal.css" />
+
+<div>
+	<div class="white-frame">
+		<form th:action="@{/admin/warehouse/update}" method="POST" id="updateFrom">
+			<h1 class="search-list-title">재고수정</h1>
+			
+			<div class="info">
+				    <span class="search-list-subject">ISBN</span>
+				<div class="id-area">
+					<input type="text" id="inv_isbn" name="inv_isbn" th:value="${stockDetails.inv_isbn}" readonly>			    
+	       		</div>			   
+			</div>
+			
+			<div class="info">
+				<span class="search-list-subject important">책제목</span> 
+					<input type="text" id="inv_title" name="inv_title" th:value="${stockDetails.inv_title}">			
+			</div>
+			
+			<div class="info">
+			    <span class="search-list-subject important">구역번호</span>
+			    <div class="select-wrap zone_num">
+			        <select id="zone_num" name="zone_num">
+			            <!-- zoneNumList의 각 ZoneNumDTO에서 zone_num 필드 접근 -->
+			            <option th:each="zoneDTO : ${zoneNumList}"
+			                    th:value="${zoneDTO.zone_num}"
+			                    th:selected="${zoneDTO.zone_num == stockDetails.zone_num}"
+			                    th:text="${zoneDTO.zone_num}">
+			            </option>
+			        </select>
+			        <div class="select-arrow-down"></div>
+			    </div>
+			</div>
+			
+			<div class="info">
+			    <span class="search-list-subject important">수량</span>
+			    <div class="input-with-unit">
+			        <input type="number" id="inv_qty" name="inv_qty" class="input-qty" th:value="${stockDetails.inv_qty}">
+			        <span class="unit">개</span>
+			    </div>
+			</div>
+			
+			<div class="button-wrap-warehouseDetails">
+				<button type="submit" id="reg-button" class="default-btn" >수정</button>
+				<button type="button" class="default-btn cancel" onclick="location.href='/admin/warehouse/list'" >
+				      <span>뒤로가기</span>
+				</button>
+			</div>
+			
+		</form>
+		
+		
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<script src=/admin/warehouse/js/warehouseDetails.js></script>
+	
+	
+</div>
+</html>

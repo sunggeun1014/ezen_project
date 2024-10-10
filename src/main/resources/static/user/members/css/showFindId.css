@@ -1,0 +1,87 @@
+.find-result-container {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.logo-wrap {
+    display: block;
+    margin: 100px 0 90px;
+}
+
+.showFindId-frame {
+    width: 360px;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-content: center;
+}
+
+/* h3 왼쪽 정렬 및 border-bottom 추가 */
+h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: left; /* 왼쪽 정렬 */
+    border-bottom: 1px solid #d9d9d9; /* 아래 경계선 추가 */
+    padding-bottom: 20px; /* 경계선과 텍스트 사이의 여백 */
+    font-weight: 600;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+/* id와 가입일 왼쪽 정렬 */
+li div:first-child {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+    text-align: left; /* 왼쪽 정렬 */
+}
+
+li div:nth-child(2) {
+    font-size: 14px;
+    color: #999;
+    text-align: left; /* 왼쪽 정렬 */
+    margin-bottom: 15px;
+    
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    width: 170px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+button:first-of-type {
+    background-color: #845EC2;
+    color: white;
+    border: none;
+}
+
+button:last-of-type {
+    background-color: white;
+    color: #845EC2;
+    border: 1px solid #845EC2;
+}
+
+button:hover {
+    opacity: 0.9;
+}

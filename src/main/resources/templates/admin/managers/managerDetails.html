@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/admin/common/layout/defaultlayout}"
+      layout:fragment="Content">
+<link rel="stylesheet" href="/admin/managers/css/managerDetails.css"/>
+
+<button class="back-btn" onclick="location.href='/admin/managers/list'">
+    <i class="fa-solid fa-chevron-left"></i>
+    <span>뒤로가기</span>
+</button>
+<div class="white-frame">
+    <h1 class="search-list-title">매니저 정보 조회</h1>
+
+    <div class="info">
+        <span class="search-list-subject">아이디</span>
+        <span class="search-list-subject value" th:text="${manager_details.manager_id}"></span>
+    </div>
+
+    <div class="info">
+        <span class="search-list-subject">이름</span>
+        <span class="search-list-subject value" th:text="${manager_details.manager_name}"></span>
+    </div>
+
+    <div class="info">
+        <span class="search-list-subject">이메일</span>
+        <span class="search-list-subject value" th:text="${manager_details.manager_email}"></span>
+
+
+    </div>
+
+    <div class="info">
+        <span class="search-list-subject">전화번호</span>
+        <span class="search-list-subject value" th:text="${manager_details.manager_phoneNo}"></span>
+    </div>
+
+    <div class="info addr-info">
+        <div class="addr">
+		    <span class="search-list-subject">주소</span>
+		    <span class="search-list-subject value" 
+		          th:text="${manager_details.manager_addr} + ' ' + (${manager_details.manager_detail_addr} ?: '')"></span>
+		</div>
+
+    </div>
+
+    <div class="info">
+        <span class="search-list-subject">부서명</span>
+        <span class="search-list-subject value" th:switch="${manager_details.manager_dept}">
+			    <span th:case="'01'">물류팀</span>
+			    <span th:case="'02'">운영팀</span>
+			    <span th:case="'03'">인사팀</span>
+			</span>
+    </div>
+
+
+    <div class="info profile">
+        <span class="search-list-subject">프로필</span>
+        <div class="img-input-wrap">
+            <img th:src="@{/images/profiles/{profile}(profile=${session.manager.manager_profile_changed != null ? session.manager.manager_profile_changed : 'default_profile.png'})}" alt="프로필이미지" class="profile-img" onerror="this.onerror=null; this.src='/admin/common/img/profile/default_profile.png';">
+        </div>
+    </div>
+</div>
+
+<script src="/admin/members/js/memberDetails.js"></script>
+
+</html>

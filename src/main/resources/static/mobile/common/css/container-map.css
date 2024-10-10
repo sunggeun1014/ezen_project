@@ -1,0 +1,26 @@
+.white-frame.home-first-menu {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    gap: 10px;
+}
+
+.cnt {
+    width: 5rem;
+    height: 5rem;
+    background-color: #E3E2D9;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 800;
+    line-height: 5rem;
+    color: #222222;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #695146;
+    color: white; /* 원하는 배경색 */
+}

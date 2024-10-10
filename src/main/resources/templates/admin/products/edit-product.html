@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/admin/common/layout/defaultlayout}"
+    layout:fragment="Content">
+<head>
+    <meta charset="UTF-8">
+    <title>상품정보</title>
+    <link rel="stylesheet" href="/admin/products/css/edit-product.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+<div class="filter-container white-frame">
+    <h3 class="search-list-title" th:text="'상품상세 ' + '[' + ${product_detail.book_isbn} + ']'"></h3>
+
+    <form action="/admin/products/editProduct" id="edit-form" method="post" enctype="multipart/form-data">
+        <div class="product-info">
+            <p class="search-list-subject">ISBN
+                <span class="important">*</span>
+            </p>
+            <input type="text" name="book_isbn"
+                   id="book_isbn"
+                   th:value="${product_detail != null ? product_detail.getBook_isbn() : ''}" readonly
+                   style="border: none">
+        </div>
+        <div class="product-info">
+            <p class="search-list-subject">책제목
+                <span class="important">*</span>
+            </p>
+            <input type="text" name="book_name" id="book_name" class="input-text-box"
+                   th:value="${product_detail != null ? product_detail.book_name : ''}">
+        </div>
+        <div class="product-info">
+            <p class="search-list-subject">출판사
+                <span class="important">*</span>
+            </p>
+            <input type="text" name="book_publisher" id="book_publisher" class="input-text-box"
+                   th:value="${product_detail != null ? product_detail.book_publisher : ''}">
+        </div>
+        <div class="product-info">
+            <p class="search-list-subject">저자
+                <span class="important">*</span>
+            </p>
+            <input type="text" name="book_author" id="book_author" class="input-text-box"
+                   th:value="${product_detail != null ? product_detail.book_author : ''}">
+        </div>
+        <div class="product-info">
+            <p class="search-list-subject">발행날짜
+                <span class="important">*</span>
+            </p>
+            <div class="date-picker">
+                <div class="input-date-box">
+                    <input type="text" name="book_publish_date" id="singleDate" class="placeholder input-date"
+                           placeholder="YYYY-MM-DD"
+                           th:value="${product_detail != null ? #dates.format(product_detail.book_publish_date, 'yyyy-MM-dd') : ''}"/>
+
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+            </div>
+        </div>
+        <div class="product-info">
+            <p class="search-list-subject">카테고리
+                <span class="important">*</span>
+            </p>
+            <div class="filter-wrap">
+			    <div class="radio-filter">
+			        <input type="radio" name="book_country_type" id="domestic" th:value="'01'"
+			               th:checked="${product_detail != null and product_detail.book_country_type == '01'}"/>
+			        <label for="domestic">국내</label>
+			
+			        <input type="radio" name="book_country_type" id="overseas" th:value="'02'"
+			               th:checked="${product_detail != null and product_detail.book_country_type == '02'}"/>
+			        <label for="overseas">국외</label>
+			    </div>
+			    <div class="select-wrap select-lists">
+			        <select id="national" class="select-lists" name="book_category" th:style="${product_detail == null or product_detail.book_country_type != '01' ? 'display: none;' : ''}">
+			            <option class="default" value="" disabled>선택해주세요</option>
+			            <option th:each="val : ${book_category}" th:if="${val.category_country_type == '01'}" 
+			                    th:value="${val?.category_name}" th:text="${val?.category_name}" 
+			                    th:selected="${product_detail.book_country_type == '01' and val.category_name == product_detail.book_category}"></option>
+			        </select>
+			        
+			        <select id="foreign" class="select-lists" name="book_category" th:style="${product_detail == null or product_detail.book_country_type != '02' ? 'display: none;' : ''}">
+			            <option class="default" value="">선택해주세요</option>
+			            <option th:each="val : ${book_category}" th:if="${val.category_country_type == '02'}" 
+			                    th:value="${val?.category_name}" th:text="${val?.category_name}" 
+			                    th:selected="${product_detail.book_country_type == '02' and val.category_name == product_detail.book_category}"></option>
+			        </select>
+			        <div class="select-arrow-down"></div>
+			    </div>
+			</div>
+        </div>
+        <div class="product-info">
+            <div class="book-price">
+                <p class="search-list-subject">판매가
+                    <span class="important">*</span>
+                </p>
+                <input type="text"
+                       max="10"
+                       class="input-price"
+                       name="book_price"
+                       id="book-price"
+                       th:value="${product_detail != null ? #numbers.formatDecimal(product_detail.book_price, 0, 'COMMA', 0, 'POINT') : ''}"
+                       onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                       th:attr="data-original-value=${product_detail != null ? product_detail.book_price : ''}"
+                />
+            </div>
+            <div class="book-qty">
+                <p class="search-list-subject">수량
+                    <span class="important">*</span>
+                </p>
+                <div class="input-qty-container">
+                    <input type="number" name="book_qty" id="book-qty" class="input-qty" placeholder="수량"
+                           th:value="${product_detail != null ? product_detail.book_qty : ''}"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-info">
+            <p class="search-list-subject">상품상태
+                <span class="important">*</span>
+            </p>
+            <div class="filter-wrap radio-filter">
+                <input type="radio" name="book_state" id="onsale" value="01"
+                       th:checked="${product_detail != null and product_detail.book_state == '01'}"/>
+                <label for="onsale">판매중</label>
+                <input type="radio" name="book_state" id="stopsale" value="02"
+                       th:checked="${product_detail != null and product_detail.book_state == '02'}"/>
+                <label for="stopsale">판매중지</label>
+            </div>
+        </div>
+
+        <div class="product-info thumbnail-wrap">
+            <p class="search-list-subject">이미지
+                <span class="important">*</span>
+            </p>
+            <!-- /admin/common/img/products/{products} -->
+            <div class="file-container">
+                <p>형식 : JPG, JPEG, PNG</p>
+                <div class="img-input-wrap">
+                    <label for="input-file" class="input-file-label">
+                        <i class="fa-solid fa-plus"
+                           th:if="${product_detail.book_thumbnail_changed == null or product_detail.book_thumbnail_changed.isEmpty()}"></i>
+                        <img th:if="${product_detail.book_thumbnail_changed != null and !product_detail.book_thumbnail_changed.isEmpty()}"
+                             th:src="@{/images/books/{products}/(products=${product_detail.book_thumbnail_changed != null ? product_detail.book_thumbnail_changed : 'noimg.png'})}"
+                             alt="책썸네일"
+                             id="preview" onerror="this.onerror=null; this.src='/admin/common/img/products/noimg.png';" />
+                    </label>
+                    <input type="file" name="thumbnail_img_file" id="input-file" class="input-img-file" accept="image/jpeg, image/png, image/jpg" />
+                </div>
+            </div>
+        </div>
+
+        <div class="product-info book-info">
+            <p class="search-list-subject">책소개
+                <span class="important">*</span>
+            </p>
+            <div class="intro-text-wrap">
+            <textarea name="book_intro" id="book_intro" cols="30" rows="10" class="custom-textarea"
+                      th:text="${product_detail != null ? product_detail.book_intro : ''}" oninput="textLengthCheck(this, 4000);"></textarea>
+                <div class="content-length-area">
+                    <div id="current-length">0</div>
+                    <div>/</div>
+                    <div id="max-length">4000</div>
+                </div>
+            </div>
+
+        </div>
+        <th:block th:unless="${product_detail.book_deleted == '01'}">
+            <input type="hidden" name="book_deleted" th:value="'01'">
+        </th:block>
+    </form>
+
+    <div class="button-wrap">
+        <button class="default-btn" form="edit-form">수정</button>
+        <button class="default-btn cancel" onclick="location.href='/admin/products/list'">
+            취소
+        </button>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script src="/admin/products/js/edit-product.js"></script>
+
+</body>
+</html>

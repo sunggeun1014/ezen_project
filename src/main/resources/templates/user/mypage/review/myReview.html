@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/myPageLayout}"
+      layout:fragment="Content">
+
+      <link rel="stylesheet" href="/user/common/css/pagination.css" />
+      <link rel="stylesheet" href="/user/mypage/review/css/review.css"/>
+      
+<div class="content">
+	
+	<div class="myinfo-content">
+	    
+	    <p class="myinfo-title">내 리뷰</p>
+	    
+	    <div class="sub-info-bg">
+      		<div class="date-picker">
+				<div class="input-date-box">
+					<input type="text" id="startDate" class="placeholder" placeholder="YYYY-MM-DD" />
+					<i class="fa-solid fa-calendar-days"></i>
+				</div>
+				<div class="calendar-slash">~</div>
+				<div class="input-date-box">
+					<input type="text" id="endDate" class="placeholder" placeholder="YYYY-MM-DD" />
+					<i class="fa-solid fa-calendar-days"></i>
+				</div>
+				<button id="searchBtn" class="default-btn border">검색</button>
+			</div>
+	    </div>
+
+    	<div class="tab-btns-wrap">
+	        <button class="tab-btn active">리뷰를 기다리는 도서</button>
+	        <button class="tab-btn">내가 작성한 리뷰</button>
+    	</div>
+    	
+		<div class="result-wrap">
+		  <p>!</p>
+		  <span>검색결과가 없습니다</span>
+		</div>
+	    
+	    <!-- 리스트 뽑아올 곳 -->
+		<div id="book-list"></div>
+		
+		<div id="page-area" class="page-area"></div>
+	</div>	    
+</div>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="/user/mypage/review/js/myReview.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</html>

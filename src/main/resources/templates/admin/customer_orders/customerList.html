@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/admin/common/layout/defaultlayout}"
+    layout:fragment="Content">
+
+	<link rel="stylesheet" href="/admin/products/css/products.css"/>
+	<link rel="stylesheet" href="/admin/customer_orders/css/list.css"/>
+	
+<div>
+	<div class="filter-container white-frame">
+		<h3 class="search-list-title">주문내역조회</h3>	
+		<div class="filter-info">
+			<p class="search-list-subject">날짜검색</p>
+			<div class="select-wrap">
+				<select id="dateColumn" class="select">
+					<option id="select-purchase" value="purchase">구매날짜</option>
+					<option value="reuqest">요청날짜</option>
+				</select>
+				<div class="select-arrow-down"></div>
+			</div>
+			<div class="date-picker">
+				<div class="input-date-box">
+					<input type="text" id="startDate" class="placeholder startDate"
+						placeholder="YYYY-MM-DD" />
+						<i class="fa-solid fa-calendar-days"></i>
+				</div>
+				<div class="calendar-slash">-</div>
+				<div class="input-date-box">
+					<input type="text" id="endDate" class="placeholder endDate"
+						placeholder="YYYY-MM-DD" />
+					<i class="fa-solid fa-calendar-days"></i>
+				</div>
+			</div>
+			<div class="date-pick-btn">
+				<button class="today-btn date-btn" onclick="setDateOption(0, this)">오늘</button>
+				<button class="week-btn date-btn" onclick="setDateOption(7, this)">1주일</button>
+				<button class="month-btn date-btn" onclick="setDateOption(30, this)">1개월</button>
+				<button class="year-btn date-btn" onclick="setDateOption(365, this)">1년</button>
+			</div>
+		</div>
+		<div class="filter-info">
+			<p class="search-list-subject">주문상태</p>
+			<div class="filter-wrap radio-filter">
+				<input type="radio" id="order-status-all" name="order_status" value="" checked="checked"/>
+				<label for="order-status-all">전체</label>
+				<input type="radio" id="order-status-change" name="order_status" value="request"/>
+				<label for="order-status-change">변경요청</label>
+				<input type="radio" id="order-status-completion" name="order_status" value="completion"/>
+				<label for="order-status-completion">처리완료</label>
+			</div>
+		</div>
+
+		<div class="filter-info">
+			<p class="search-list-subject">배송상태</p>
+			<div class="filter-wrap radio-filter">
+				<input type="radio" id="delivery-status-all" name="order_delivery_status" value="" checked="checked"/>
+				<label for="delivery-status-all">전체</label>
+				<input type="radio" id="delivery-status-before" name="order_delivery_status" value="before"/>
+				<label for="delivery-status-before">배송전</label>
+				<input type="radio" id="delivery-status-inTransit" name="order_delivery_status" value="inTransit"/>
+				<label for="delivery-status-inTransit">배송중</label>
+				<input type="radio" id="delivery-status-completion" name="order_delivery_status" value="completion"/>
+				<label for="delivery-status-completion">배송완료</label>
+			</div>
+		</div>
+
+		<div class="filter-info">
+			<p class="search-list-subject">검색어</p>
+			<div class="filter-wrap search-bar">
+				<div class="select-wrap">
+					<select id="searchColumn" >
+						<option value="order_num">주문번호</option>
+					</select>
+					<div class="select-arrow-down"></div>
+				</div>
+			
+			    <div class="search-container">
+	     				<input type="number" name="word" id="word" class="searchKeyword search-input" placeholder="조회할 주문번호 입력" />
+	     				<button id="searchButton"><span class="material-symbols-outlined">search</span></button>	
+	   			</div>
+				<button id="reset-button" onclick="resetBtn();">초기화</button>
+			</div>
+		</div>
+	</div>
+	
+	<div class="table-container white-frame">
+		
+		<div class="customer-orders-list-wrap">
+			<h3 id="data-count" class="table-data-cnt-txt"></h3>
+			<button id="request-button" class="default-btn" onclick="delivery_request();" style="float: right;">배송요청</button>
+		</div>
+		<form id="table-form">
+			<table id="customer-orders-table" class="table table-center" style="width: 100%">
+				<thead class="table-head">
+					<tr class="table-column-head">
+						<th>
+							<input type="checkbox" id="select-all" class="checkbox">
+							<label for="select-all"></label>
+						</th>
+						<th class="table-column-head-txt">NO</th>
+						<th class="table-column-head-txt">주문번호</th>
+						<th class="table-column-head-txt">주문자ID</th>
+						<th class="table-column-head-txt">이름</th>
+						<th class="table-column-head-txt">총구매금액</th>
+						<th class="table-column-head-txt">구매날짜</th>
+						<th class="table-column-head-txt">배송상태</th>
+						<th class="table-column-head-txt">결제상태</th>
+						<th class="table-column-head-txt">주문상태</th>
+						<th class="table-column-head-txt">요청날짜</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</form>
+	</div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="/admin/customer_orders/js/list.js"></script>
+	<!-- DataTables JS -->
+	<script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
+	<!-- DataTables with Bulma integration JS -->
+	<script src="https://cdn.datatables.net/2.1.4/js/dataTables.bulma.js"></script>
+</div>
+</html>

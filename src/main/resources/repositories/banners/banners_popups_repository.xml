@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Banners">
+	
+	<select id="getAll" resultType="banners">
+		SELECT
+			banner_num,
+			banner_title,
+			CASE
+            	WHEN banner_position = '01' THEN '배너'
+            	WHEN banner_position = '02' THEN '팝업'
+        	END AS banner_position,
+			banner_start,
+			banner_end,
+			CASE
+            	WHEN banner_visible = '01' THEN '노출'
+            	WHEN banner_visible = '02' THEN '비노출'
+	        END AS banner_visible,
+			banner_date
+		FROM 
+			banners_popups
+	</select>
+	
+	<select id="getDetail" parameterType="Integer" resultType="banners">
+		SELECT
+			banner_num,
+			banner_title,
+			banner_position,
+			banner_start,
+			banner_end,
+			banner_original,
+			banner_changed,
+			banner_visible,
+			banner_date
+		FROM 
+			banners_popups
+		WHERE 
+			banner_num = #{banner_num}
+	</select>
+	<insert id="insertBanner" parameterType="banners">
+		INSERT INTO	banners_popups (
+				banner_num,
+				banner_title,
+				banner_position,
+				banner_visible,
+				banner_start,
+				banner_end,
+				banner_original,
+				banner_changed,
+				banner_date)
+		VALUES (
+				banners_popups_seq.nextval,
+				#{banner_title},
+				#{banner_position},
+				#{banner_visible},
+				#{banner_start},
+				#{banner_end},
+				#{banner_original},
+				#{banner_changed},
+				CURRENT_TIMESTAMP)		
+	</insert>
+
+	<update id="updateBanner" parameterType="banners">
+		UPDATE 
+			banners_popups
+		SET
+			banner_title = #{banner_title},
+			banner_position = #{banner_position},
+			banner_visible = #{banner_visible},
+			banner_start = #{banner_start},
+			banner_end = #{banner_end},
+			banner_original = #{banner_original},
+			banner_changed = #{banner_changed}
+		WHERE 
+			banner_num = #{banner_num}
+	</update>
+	
+	<delete id="deleteBanner" parameterType="Integer">
+		DELETE FROM
+			banners_popups
+		WHERE 
+			banner_num = #{banner_num}
+	</delete>
+
+</mapper>

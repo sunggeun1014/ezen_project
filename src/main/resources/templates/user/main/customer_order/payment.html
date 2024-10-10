@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/mainLayout}"
+      layout:fragment="Content">
+
+<link rel="stylesheet" href="/user/customer_order/css/order.css">
+
+<div id="member-check" th:data-member="${memberDTO != null ? true : false}"></div>
+<div class="inner" th:if="${memberDTO != null}">
+    <!-- 상단 제목 -->
+    <section id="pay-header">
+        <h3 class="header-title">주문/결제</h3>
+        <div class="order-process">
+            <p>장바구니</p>
+            <img src="/user/customer_order/img/arrow-right=off.svg" alt="화살표">
+            <p class="bold">결제하기</p>
+            <img src="/user/customer_order/img/arrow-right=on.svg" alt="화살표">
+            <p>주문완료</p>
+        </div>
+    </section>
+    <div id="payment-section">
+        <!-- 배송지정보 -->
+        <section id="deliver-info">
+            <div class="addr-info">
+                <p class="sub-title">배송지 정보</p>
+                <div class="user-info">
+                    <p id="deliver-name">[[${memberDTO.member_name}]]</p>
+                    <input type="hidden" name="member_id" id="member_id" th:value="${memberDTO.member_id}">
+                    <p id="deliver-number">[[${memberDTO.member_phoneNo}]]</p>
+                    <div class="addr-wrap">
+                        <div class="addr-text">
+                            <p id="deliver-addr">[[${memberDTO.member_addr}]]</p>
+                            <p id="deliver-addr-detail">[[${memberDTO.member_detail_addr}]]</p>
+                        </div>
+                        <button class="default-btn border" id="edit-btn">변경</button>
+                    </div>
+                </div>
+            </div>
+            <div class="select-enter-way">
+                <p class="sub-title">공동현관 출입방법</p>
+                <div class="door-info">
+                    <div class="radio-wrap">
+                        <div class="common-door">
+                            <input type="radio" name="door-way" id="door-pw" checked>
+                            <label for="door-pw">공동현관 비밀번호</label>
+                        </div>
+                        <div class="free-door">
+                            <input type="radio" name="door-way" id="door-free">
+                            <label for="door-free">자유출입 가능</label>
+                        </div>
+                    </div>
+                    <div class="input-wrap">
+                        <input type="text" name="common_ent_pw" id="common_ent_pw"
+                               placeholder="정확한 공동현관 출입번호(비밀번호)를 입력해주세요.">
+                        <p class="error-message"></p>
+                        <p>※ 공동현관 출입방법 정보가 정확하지 않을 경우, 새벽배송 시 공동현관 앞에 배송되거나 반송될 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 주소변경모달 -->
+            <div id="edit-addr-modal">
+                <div class="modal-head">
+                    <h3>배송지 수정</h3>
+                    <i class="fa-solid fa-xmark" id="close-btn"></i>
+                </div>
+                <div class="addr-edit-wrap">
+                    <div class="edit-input person-name">
+                        <p class="edit-subtitle">받는 분</p>
+                        <input type="text" name="recipient_name" id="edit-name" placeholder="이름" th:value="${memberDTO.member_name}">
+                    </div>
+                    <div class="edit-input phone-number">
+                        <p class="edit-subtitle">전화번호</p>
+                        <input type="text" name="recipient_phoneno" id="edit-number" placeholder="전화번호"
+                               th:value="${memberDTO.member_phoneNo}"
+                               oninput="hyphenTel(this)">
+                    </div>
+                    <div class="edit-input change-addr">
+                        <p class="edit-subtitle">주소</p>
+                        <div class="search-addr">
+                            <div class="addr-top">
+                                <div class="addr-input-box">
+                                    <input type="text" name="order_addr" id="edit-addr"
+                                           th:value="${memberDTO.member_addr}">
+                                </div>
+                                <button type="button" class="default-btn" id="search-btn">검색</button>
+                            </div>
+                            <input type="text" name="order_addr_detail" id="edit-addr-detail"
+                                   th:value="${memberDTO.member_detail_addr}">
+                            <p class="edit-error"></p>
+                        </div>
+                    </div>
+                    <button class="default-btn" id="confirm-btn">확인</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 결제 정보 -->
+        <section id="pay-info">
+            <div class="top">
+                <div class="price-wrap">
+                    <p>상품금액</p>
+                    <div class="price">
+                        <p th:text="${totalPrice != null ? #numbers.formatInteger(totalPrice, 0, 'COMMA') : 0}"></p>
+                        <p>원</p>
+                    </div>
+                </div>
+                <div class="deliver-fee">
+                    <p>배송비</p>
+                    <p>무료</p>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="total-wrap">
+                    <p>최종 결제 금액</p>
+                    <div class="price">
+                        <p th:text="${totalPrice != null ? #numbers.formatInteger(totalPrice, 0, 'COMMA') : 0}"></p>
+                        <p>원</p>
+                    </div>
+                </div>
+                <button class="default-btn" id="pay-btn" th:disabled="${combinedItems == null}">
+                    결제하기
+                </button>
+            </div>
+        </section>
+
+        <!-- 상품정보 -->
+        <section id="product-info">
+            <div class="product-head">
+                <div class="left">
+                    <p class="product-name">주문상품</p>
+                    <div class="total-cnt">
+                        <p>총</p>
+                        <p class="book-cnt" th:text="${itemsCnt != null ? itemsCnt : 0}"></p>
+                        <p>개</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-angle-down product-info-arrow"></i>
+            </div>
+            <div class="list-wrap">
+                <div class="result-wrap" th:if="${combinedItems == null}">
+                    <p>!</p>
+                    <span>상품이 없습니다</span>
+                </div>
+                <div class="product-list" th:each="item : ${combinedItems}">
+                    <input type="hidden" name="cart_num" class="cart_num" th:value="${item.cart_num}">
+                    <input type="hidden" name="order_name" id="order_name"
+                           th:data-order-name="${itemsCnt == 1 ? combinedItems[0].book_name : combinedItems[0].book_name + ' 외 ' + (itemsCnt - 1) + '권'}">
+                    <input type="hidden" name="book_isbn" class="order-book-isbn" th:data-isbn="${item.book_isbn}">
+                    <div class="list-left">
+                        <div class="img-wrap">
+                            <img th:src="${item.book_thumbnail_changed != null ? '/images/books/' + item.book_thumbnail_changed : '/images/books/noimg.png'}"
+                                 alt="책사진">
+                        </div>
+                        <p class="book-name" th:text="${item.book_name}"></p>
+                    </div>
+                    <div class="list-right">
+                        <div class="books-cnt">
+                            <p th:text="${item.cart_purchase_qty}"></p>
+                            <input type="hidden" name="order_detail_qty" class="order_detail_qty" th:value="${item.cart_purchase_qty}">
+                            <p>개</p>
+                        </div>
+                        <div class="book-price">
+                            <p th:text="${#numbers.formatInteger(item.book_price * item.cart_purchase_qty, 0, 'COMMA')}"></p>
+                            <input type="hidden" name="order_detail_price" class="order_detail_price" th:value="${item.book_price}">
+                            <p>원</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 결제 동의 -->
+        <section id="pay-agree">
+            <h3>위 주문내용을 확인하였으며, 결제에 동의합니다.</h3>
+            <div class="agree-title">
+                <p>주문 상품 정보 동의</p>
+                <i class="fa-solid fa-angle-down agree-arrow"></i>
+            </div>
+            <div class="agree-content">
+                <div class="agree-inner">
+                    <div class="agree-text">
+                        주문할 상품의 상품명, 가격, 배송정보 등을 최종 확인하였으며, 구매에 동의하십니까? (전자상거래법 제 8조 2항)
+                    </div>
+                </div>
+            </div>
+            <div class="agree-title">
+                <p>개인정보 수집 및 이용동의</p>
+                <i class="fa-solid fa-angle-down agree-arrow"></i>
+            </div>
+            <div class="agree-content">
+                <div class="agree-inner">
+                    <div class="agree-text">
+                        <strong>수집하는 개인정보의 항목</strong> <br>
+                        <br>
+                        ① 고래문고는 구매, 원활한 고객상담, 각종 서비스의 제공을 위해 주문 이용 시 아래와 같은 개인정보를 수집하고 있습니다.<br>
+                        <br>
+                        o 필수수집항목 : 이름, 휴대폰번호, 이메일, 수신자정보(성명,주소,휴대폰번호,이메일), 개인통관고유부호(해외직구상품구매시)<br>
+                        o 수집목적 : 상품배송, 선물하기 서비스 제공, 배송지 관리<br>
+                        o 보유 및 이용기간 : 회원 탈퇴시 까지(단, 관계 법령에 따름)<br>
+                        ② 서비스 이용과정이나 사업처리 과정에서 아래와 같은 정보들이 자동으로 생성되어 수집될 수 있습니다.<br>
+                        <br>
+                        - IP Address, 쿠키, 방문 일시, OS종류, 브라우져 종류 서비스 이용 기록, 불량 이용 기록<br>
+                        <br>
+                        ③ 부가 서비스 및 맞춤식 서비스 이용 또는 이벤트 응모 과정에서 해당 서비스의 이용자에 한해서만 아래와 같은 정보들이 수집될 수 있습니다.<br>
+                        - 개인정보 추가 수집에 대해 동의를 받는 경우<br>
+                        <br>
+                        ④ 결제 과정에서 아래와 같은 정보들이 수집될 수 있습니다.<br>
+                        <br>
+                        - 신용카드 결제 시 : 카드사명, 카드번호 등<br>
+                        <br>
+                        개인정보의 수집 및 이용목적<br>
+                        <br>
+                        “고래문고"는 수집한 개인정보를 다음의 목적을 위해 활용합니다. 이용자가 제공한 모든 정보는 하기 목적에 필요한 용도 이외로는 사용되지 않으며, 이용 목적이 변경될 시에는
+                        사전동의를 구할 것입니다.<br>
+                        <br>
+                        ① 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산<br>
+                        - 컨텐츠 제공, 특정 맞춤 서비스 제공, 물품배송 또는 청구서 등 발송, 금융거래 본인 인증 및 금융 서비스, 구매 및 요금 결제, 요금추심 등<br>
+                        <br>
+                        <br>
+                        개인정보 보유 및 이용기간<br>
+                        <br>
+                        이용자의 개인정보는 원칙적으로 회원탈퇴 시 지체없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다.<br>
+                        <br>
+                        ① 회사 내부 방침에 의한 정보보유 사유<br>
+                        - 보존 항목 : 아이디(ID), 회원번호<br>
+                        - 보존 근거 : 서비스 이용의 혼선 방지<br>
+                        - 보존 기간 : 영구<br>
+                        <br>
+                        ② 관계 법령에 의한 정보보유 사유<br>
+                        '‘상법’, ‘전자상거래 등에서의 소비자보호에 관한 법률’ 등 관계 법령의 규정에 의하여 보존할 필요가 있는 경우 관계 법령에서 정한 일정한 기간 동안 개인정보를 보관합니다. 이
+                        경우 회사는 보관하는 정보를 그 보관의 목적으로만 이용하며 보존 기간은 아래와 같습니다.<br>
+                        <br>
+                        1. 계약 또는 청약철회 등에 관한 기록<br>
+                        - 보존 근거 : 전자상거래 등에서의 소비자보호에 관한 법률<br>
+                        - 보존 기간 : 5년<br>
+                        2. 대금결제 및 재화 등의 공급에 관한 기록<br>
+                        - 보존 근거 : 전자상거래 등에서의 소비자보호에 관한 법률<br>
+                        - 보존 기간 : 5년<br>
+                        3. 소비자의 불만 또는 분쟁처리에 관한 기록<br>
+                        - 보존 근거 : 전자상거래 등에서의 소비자보호에 관한 법률<br>
+                        - 보존 기간 : 3년<br>
+                        4. 웹사이트 방문기록<br>
+                        - 보존 근거 : 통신비밀보호법<br>
+                        - 보존 기간 : 3개월
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- 결제api -->
+<!--<script src="https://cdn.iamport.kr/v1/iamport.js"></script>-->
+<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+
+
+<!-- 카카오주소   -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/user/customer_order/js/order.js"></script>
+</html>

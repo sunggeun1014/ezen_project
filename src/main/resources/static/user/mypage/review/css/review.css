@@ -1,0 +1,249 @@
+.write-container {
+     width: 100%;
+     margin: 0 auto;
+     border-top: 1px solid #C0C0C0;
+     padding: 20px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+
+.write-book-info {
+     display: flex;
+     align-items: center;
+}
+
+.write-book-info img {
+    width: 82px;
+    height: 115px;
+    margin-right: 20px;
+    background-color: #f4f4f4; /* 이미지가 없으므로 배경색 설정 */
+}
+
+.book-wrap {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.book-info {
+    display: flex;
+    border-top: 1px solid #C0C0C0;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.book-info img {
+    width: 82px;
+    height: 115px;
+    margin-right: 20px;
+    background-color: #f4f4f4;
+}
+
+.book-details span {
+    display: block;
+    margin-bottom: 11px;
+}
+
+.book-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.book-author {
+	color: #7E7E7E;
+	font-size: 14px;
+}
+
+.book-date {
+	font-size: 14px;
+	color: #000000;
+}
+
+.far {
+	color: #845EC2;
+}
+.fas {
+	color: #845EC2;
+}
+.write-review-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    padding: 20px;
+    position: relative;
+}
+
+.write-review-container span {
+    display: block;
+    color: #333;
+    font-size: 16px;
+}
+
+.write-review-container textarea {
+	position: relative;
+    width: 95%;
+    height: 200px;
+    padding: 10px 10px 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+}
+
+.write-review-container textarea:focus {
+    outline: none;
+    border: 1px solid #666;
+}
+
+.middle {
+	width: 180px;
+}
+
+
+.char-count {
+	position: absolute;
+	bottom: 30px;
+	right: 50px;
+}
+
+.char-count span {
+	display: inline-block;
+    color: #666;
+}
+
+
+.review-container {
+	border-top: 1px solid #C0C0C0;
+    width: 100%;
+    padding: 20px;
+}
+
+.book-info-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.book-info-wrapper img {
+    width: 82px;
+    height: 115px;
+    margin-right: 20px;
+    background-color: #f4f4f4;
+}
+
+.review-box {
+    background-color: #FAFAFA;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.review-stars {
+    display: flex;
+    align-items: center;
+    color: #845EC2;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.empty-stars {
+    color: #845EC2;
+}
+
+.review-date {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+.review-content {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+.review-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top : 15px;
+    border-top : 1px solid #CCCCCC;
+}
+
+.review-actions button {
+    background: none;
+    border: none;
+    color: #666666;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+}
+
+.review-actions button:hover {
+     text-decoration: underline;
+}
+
+.btn-spacebetween {
+	margin: 0 10px;
+	color: C0C0C0;
+}
+
+.modal-head {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #c0c0c0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.edit-modal-content {
+   display: flex;
+   flex-direction: column;
+   background-color: #fefefe;
+   margin: 15% auto;
+   border: 0.5px solid #888;
+   padding: 0;
+   width: 500px;
+   border-radius: 8px;
+   overflow: hidden;
+}
+
+
+.modal-stars {
+   display: flex;
+   color: #845EC2;
+   margin: 10px 0;
+}
+
+.modal-stars .star {
+   font-size: 18px; 
+   margin: 0 5px;
+   cursor: pointer;
+}
+
+.modal-textarea {
+   width: 95%; 
+   height: 150px; 
+   margin: 0 auto 20px;
+   border-color: #CCCCCC;
+   border-radius: 10px;
+   padding: 10px;
+   font-size: 14px;
+   color: #666666;
+   resize: none;
+}
+
+.edit-modal-item {
+	padding: 20px;
+}
+
+.tab-btns-wrap {
+	margin-bottom: 20px;
+}
+
+.result-wrap {
+    border-top: 1px solid #c0c0c0;
+}

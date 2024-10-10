@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Products">
+
+    <select id="findByCondition" resultType="products">
+        SELECT
+        rownum,
+        b.book_isbn,
+        b.book_name,
+        b.book_price,
+        b.book_publisher,
+        b.book_author,
+        b.book_country_type,
+        b.book_category,
+        b.book_state,
+        b.book_register_date
+        FROM (
+        SELECT
+        book_isbn,
+        book_name,
+        book_price,
+        book_publisher,
+        book_author,
+        book_country_type,
+        book_category,
+        book_state,
+        book_register_date
+        FROM
+        books
+        WHERE
+        book_deleted = '01'
+        <if test="book_state != null and book_state != ''">
+            AND book_state = #{book_state}
+        </if>
+        <if test="start_date != null">
+            AND book_register_date >= #{start_date}
+        </if>
+        <if test="end_date != null">
+            AND book_register_date <![CDATA[<=]]> #{end_date}
+        </if>
+        <if test="search_conditions != null and search_conditions != '' and word != null and word != ''">
+            <choose>
+                <when test="search_conditions == 'book_isbn'">
+                    AND book_isbn LIKE CONCAT('%', #{word}, '%')
+                </when>
+                <when test="search_conditions == 'book_name'">
+                    AND book_name LIKE CONCAT('%', #{word}, '%')
+                </when>
+            </choose>
+        </if>
+        ORDER BY book_register_date DESC
+        ) b
+    </select>
+
+
+    <select id="getDetail" parameterType="String" resultType="products">
+        SELECT
+        book_isbn,
+        book_name,
+        book_price,
+        book_publisher,
+        book_author,
+        book_qty,
+        book_intro,
+        book_country_type,
+        book_category,
+        book_state,
+        book_thumbnail_original,
+        book_thumbnail_changed,
+        book_publish_date,
+        book_register_date
+        FROM
+        books
+        WHERE
+        book_isbn = #{book_isbn}
+    </select>
+
+    <select id="existsByIsbn" resultType="String" parameterType="products">
+        SELECT
+        book_isbn
+        FROM books
+        WHERE book_isbn = #{book_isbn}
+    </select>
+
+    <select id="deleteState" resultType="String" parameterType="products">
+        SELECT
+        book_deleted
+        FROM books
+        WHERE book_isbn = #{book_isbn}
+    </select>
+
+    <insert id="insertBookInfo" parameterType="products">
+        INSERT INTO
+        books (
+        book_isbn,
+        book_name,
+        book_price,
+        book_publisher,
+        book_author,
+        book_qty,
+        book_intro,
+        book_country_type,
+        book_category,
+        book_state,
+        book_thumbnail_original,
+        book_thumbnail_changed,
+        book_publish_date
+        ) VALUES (
+        #{book_isbn, jdbcType=VARCHAR},
+        #{book_name, jdbcType=VARCHAR},
+        #{book_price, jdbcType=NUMERIC},
+        #{book_publisher, jdbcType=VARCHAR},
+        #{book_author, jdbcType=VARCHAR},
+        #{book_qty, jdbcType=INTEGER},
+        #{book_intro, jdbcType=VARCHAR},
+        #{book_country_type, jdbcType=VARCHAR},
+        #{book_category, jdbcType=VARCHAR},
+        #{book_state, jdbcType=VARCHAR},
+        #{book_thumbnail_original, jdbcType=VARCHAR},
+        #{book_thumbnail_changed, jdbcType=VARCHAR},
+        #{book_publish_date, jdbcType=DATE}
+        )
+    </insert>
+
+
+    <update id="updateBookInfo" parameterType="products">
+        UPDATE
+        books
+        SET
+        book_name = #{book_name, jdbcType=VARCHAR},
+        book_price = #{book_price},
+        book_publisher = #{book_publisher},
+        book_author = #{book_author},
+        book_qty = #{book_qty, jdbcType=INTEGER},
+        book_intro = #{book_intro},
+        book_country_type = #{book_country_type, jdbcType=CHAR},
+        book_category = #{book_category},
+        book_state = #{book_state},
+        book_publish_date = #{book_publish_date},
+        book_thumbnail_original = #{book_thumbnail_original, jdbcType=VARCHAR},
+        book_thumbnail_changed = #{book_thumbnail_changed, jdbcType=VARCHAR},
+        book_deleted = #{book_deleted, jdbcType=CHAR}
+        WHERE
+        book_isbn = #{book_isbn}
+    </update>
+
+    <!-- 밖에서 버튼 클릭으로 상태 바꿀지..? -->
+    <update id="updateBookState" parameterType="products">
+        UPDATE
+        books
+        SET
+        book_state = #{book_state}
+        WHERE
+        book_isbn = #{book_isbn}
+    </update>
+
+    <update id="deleteBook" parameterType="java.util.HashMap">
+        UPDATE
+        books
+        SET
+        book_deleted = #{book_deleted}
+        WHERE
+        book_isbn = #{book_isbn}
+    </update>
+
+</mapper>

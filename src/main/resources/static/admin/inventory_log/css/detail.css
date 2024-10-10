@@ -1,0 +1,49 @@
+.table-column-area, .table-data-area {
+	display: flex;
+	text-align: center;
+	padding: 8px 8px;
+	border-bottom: solid 1px #D8D8D8;
+	line-height: 33px;
+	color: #7E7E7E;
+}
+
+.table-column-area {
+	border-top: solid 1px #D8D8D8;
+	background-color: #FAFAFA;
+	font-weight: 700;
+}
+
+.date-font {
+	font-weight: 700;
+	font-size: 16px;
+}
+
+.total-cnt-area {
+    text-align: right;
+    padding: 32px 16px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.table-data-info-area {
+	display: flex;
+	margin-top:68px;
+    justify-content: space-between;
+    padding: 20px 0 15px 0;
+}
+
+.no-column, .no-data { width: 6%; }
+.isbn-column, .isbn-data { width: 20%; }
+.book-title-column, .book-title-data { width: 40%; }
+.qty-column, .qty-data { width: 14%; }
+.zone-num-column, .zone-num-data { width: 20%; }
+
+
+.limit-lines {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/user/common/layout/myPageLayout}"
+      layout:fragment="Content">
+
+	<link rel="stylesheet" href="/user/mypage/purchase_cancel/css/cancelCompletion.css">
+<div>
+	<div class="page-title">
+		<span>취소상세</span>
+	</div>
+	<div class="order-info-area">
+		<div class="request-date">
+			<span th:if="${!#lists.isEmpty(cancelList)}" th:text="${#dates.format(cancelList[0].order_purchase_date, 'yyyy.MM.dd')}"></span>
+		</div>
+		<div class="request-order-num">
+			<span th:if="${!#lists.isEmpty(cancelList)}" th:text="'주문번호 ' + ${cancelList[0].order_num}"></span>
+		</div>
+	</div>
+	
+	<div class="cancel-request-box">
+		<div class="page-sub-title">
+			<span>취소요청 내역</span>
+		</div>
+		<div th:each="detail : ${cancelList}" th:if="${detail.request_status == '취소요청'}">
+		
+			<div class="cancel-book-detail">
+				<div>
+					<a th:href="'/user/products/detail?book_isbn=' + ${detail.book_isbn}"><img th:src="'/images/books/' + ${detail.book_thumbnail_changed != null ? detail.book_thumbnail_changed : 'noimg.png'}" alt="책 이미지" width="80" height="114"></a>
+				</div>
+				<div class="book-info">
+					<div>
+						<a th:href="'/user/products/detail?book_isbn=' + ${detail.book_isbn}"><span class="book-name" th:text="${detail.book_name}"></span></a>
+					</div>
+					<div>
+						<span class="purchase-qty" th:text="'수량: ' + ${detail.request_complete_qty} + '개'"></span>
+					</div>
+				</div>
+				<div>
+					<span class="book-price" th:text="${#numbers.formatInteger(detail.order_detail_price * detail.request_complete_qty, 0, 'COMMA')}"></span><span>원</span>
+				</div>	
+				<div>
+					<span class="order_status" th:text="${detail.request_status}"></span>
+				</div>	
+			</div>
+		</div>
+		</div>
+	
+	<div class="cancel-complete-box" id="cancelCompleteBox">
+		<div class="page-sub-title" id="cancelCompleteTitle" style="display: none;">
+			<span>취소완료 내역</span>
+		</div>
+		<div th:each="detail : ${cancelList}" th:if="${detail.request_status == '취소완료'}" class="cancel-complete-item">
+			<div class="cancel-book-detail">
+				<div>
+					<a th:href="'/user/products/detail?book_isbn=' + ${detail.book_isbn}"><img th:src="'/images/books/' + ${detail.book_thumbnail_changed != null ? detail.book_thumbnail_changed : 'noimg.png'}" alt="책 이미지" width="80" height="114"></a>
+				</div>
+				<div class="book-info">
+					<div>
+						<a th:href="'/user/products/detail?book_isbn=' + ${detail.book_isbn}"><span class="book-name" th:text="${detail.book_name}"></span></a>
+					</div>
+					<div>
+						<span class="purchase-qty" th:text="'수량: ' + ${detail.request_complete_qty} + '개'"></span>
+					</div>
+				</div>
+				<div>
+					<span class="book-price" th:text="${#numbers.formatInteger(detail.order_detail_price * detail.request_complete_qty, 0, 'COMMA')}"></span><span>원</span>
+				</div>	
+				<div>
+					<span class="order_status" th:text="${detail.request_status}"></span>
+				</div>	
+			</div>
+		</div>
+	</div>
+	
+	<div class="refund-area">
+		<div class="refund-title-area">
+			<span class="refund-title">환불정보</span>
+		</div>
+		<div class="refund-info-area">
+			<div class="refund-price-area">
+				<span>취소금액</span>
+				<div class="cancel-price">
+					<span th:text="${#numbers.formatInteger(refund.cancellationAmount, 0, 'COMMA')}"></span><span class="won">원</span>
+				</div>
+			</div>
+			<div class="cancel-price-area">
+				<span>환불금액</span>
+				<div class="cancel-price">
+					<span th:text="${#numbers.formatInteger(refund.refundAmount, 0, 'COMMA')}"></span><span class="won">원</span>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<div class="btn-area">
+		<button class="cancel-btn" onclick="location.href='/user/mypage/orderList'">주문/배송 목록</button>
+	</div>
+	<div class="refund-guide-area">
+		<div class="refund-guide-title">
+			<span>환불안내</span>
+		</div>
+		<div>
+			<span class="guide-lines-content">주문건의 전체취소/품절/반품 발생시 상품에 사용된 금권 모두 환불됩니다.</span>
+		</div>
+		<div>
+			<span class="guide-lines-content">주문건의 부분취소/품절/반품 발생시 상품에 사용된 금권을 제외한 나머지 금액이 환불됩니다.</span>
+		</div>
+		<div>
+			<span class="guide-lines-content">상품취소 시 취소수수료가 부과될 경우 환불될 금액에서 차감 후 나머지 금액을 환불 해 드립니다.</span>
+		</div>
+		<div>
+			<span class="guide-lines-content">신용카드,계좌이체,휴대폰(당월승인에 한함)의 경우 결제취소됩니다.</span>
+		</div>
+		<div>
+			<span class="guide-lines-content">카드이용 후 취소요청 시 카드사 정책에 따라 환불기간 소요될 수 있습니다.</span>
+		</div>
+	</div>
+</div>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="/user/mypage/purchase_cancel/js/cancelCompletion.js"></script>
+</html>
